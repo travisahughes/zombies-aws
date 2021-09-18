@@ -2,7 +2,6 @@
 import { css } from '@emotion/react'
 import Header from './Components/Header'
 import Mint from './Components/Mint'
-import './App.css';
 import Roadmap from './Components/Roadmap'
 import Info from './Components/Info'
 
@@ -11,8 +10,8 @@ const greeterAddress = "your-contract-address"
 
 function App() {
   const appStyles = css`
-    background-color: #282c34;
-    color: white;
+    background-color: #000000;
+    color: #FFFFFF;
   `
 
   return (

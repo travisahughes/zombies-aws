@@ -4,7 +4,7 @@ import { css } from '@emotion/react'
 
 let Roadmap = props => {
     const roadmap = css`
-        background-color: #282c34;
+        background-color: #000000;
         display: flex;
         flex-direction: column;
         justify-content: center;

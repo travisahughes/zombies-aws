@@ -11,7 +11,7 @@ let Mint = props => {
     const mint = css`
         color: white;
 
-        background-color: #282c34;
+        background-color: #000000;
         display: flex;
         justify-content: center;
         color: white;

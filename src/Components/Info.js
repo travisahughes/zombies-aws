@@ -4,7 +4,7 @@ import { css } from '@emotion/react'
 
 let Info = props => {
     const info = css`
-        background-color: #282c34;
+        background-color: #000000;
         display: flex;
         flex-direction: column;
         justify-content: center;
