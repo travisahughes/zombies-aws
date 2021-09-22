@@ -1,12 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import grungebg from '../assets/grunge.png'
-import zombie1 from '../assets/zombie1.png'
-import zombie2 from '../assets/zombie2.png'
-import zombie3 from '../assets/zombie3.png'
-import zombie4 from '../assets/zombie4.png'
-import zombie5 from '../assets/zombie5.png'
-
 
 let Info = props => {
     const info = css`
@@ -15,11 +9,15 @@ let Info = props => {
         background-repeat: no-repeat;
         color: white;
         padding: 0px 30px;
-        width: 100%;
+        margin: 60px 100px 20px 100px;
 
         p {
             font-weight: 700;
             font-size: 24px;
+        }
+
+        .clear {
+            clear: both;
         }
 
     `
@@ -46,6 +44,7 @@ let Info = props => {
             width: 300px;
             font-size: 14px;
             color: #999999;
+            padding-right: 10px;
 
             h2 {
                 font-weight: 700;
@@ -53,15 +52,6 @@ let Info = props => {
                 color: #FFFFFF;
                 margin: 20px 5px 10px 0;
             }
-        }
-    `
-    const imageRow = css`
-        clear: both;
-        width: 100%;
-        text-align: center;
-        
-        .zombie {
-            margin: 0 20px;
         }
     `
 
@@ -89,13 +79,7 @@ let Info = props => {
                     Genesis Zombies to be held for giveaways, promotional purposes, the team and mods
                 </div>
             </div>
-            <div css={imageRow}>
-                <img className="zombie" src={zombie1} alt="zombie!" />
-                <img className="zombie" src={zombie2} alt="zombie!" />
-                <img className="zombie" src={zombie3} alt="zombie!" />
-                <img className="zombie" src={zombie4} alt="zombie!" />
-                <img className="zombie" src={zombie5} alt="zombie!" />
-            </div>
+            <div className="clear"></div>
        </div>
     );
 }

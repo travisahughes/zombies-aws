@@ -1,16 +1,23 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
+import spacemono from './assets/fonts/SpaceMono-Regular.ttf'
 import headerimg from './assets/bg.jpg'
 import Info from './Components/Info'
+import Gallery from './Components/Gallery'
 import Mission from './Components/Mission'
-import Roadmap from './Components/Roadmap'
 import Hero from './Components/Hero'
+import Footer from './Components/Footer'
 
 // Update with the contract address logged out to the CLI when it was deployed 
 const greeterAddress = "your-contract-address"
 
 function App() {
   const appStyles = css`
+    @font-face {
+      font-family: spacemono;
+      src: url(${spacemono});
+    }
+    font-family: spacemono;
     background-color: #000000;
     color: #FFFFFF;
   `
@@ -33,6 +40,9 @@ function App() {
           <Info />
         </div>
         <div className='content-section'>
+          <Gallery />
+        </div>
+        <div className='content-section'>
           <Mission />
         </div>
         <div className='content-section'>
@@ -45,7 +55,7 @@ function App() {
           FAQ
         </div>
         <div className='content-section'>
-          Social Links
+          <Footer />
         </div>
       </div>
     </div>

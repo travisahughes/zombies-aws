@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import discordLogo from '../assets/icons/discord.png';
-import discordLogoSvg from '../assets/icons/discord.svg';
 import twitterLogo from '../assets/icons/twitter.png';
 import openseaLogo from '../assets/icons/opensea.png';
 import etherscanLogo from '../assets/icons/etherscan.png';
@@ -10,7 +9,7 @@ import etherscanLogo from '../assets/icons/etherscan.png';
 let Header = props => {
     const header = css`
         height: 64px;
-        width: 90%;
+        width: 75%;
         display: flex;
         justify-content: space-between;
         color: white;
