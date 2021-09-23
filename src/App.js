@@ -1,11 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import spacemono from './assets/fonts/SpaceMono-Regular.ttf'
+import teko from './assets/fonts/Teko-Regular.ttf'
 import headerimg from './assets/bg.jpg'
+import Hero from './Components/Hero'
 import Info from './Components/Info'
 import Gallery from './Components/Gallery'
 import Mission from './Components/Mission'
-import Hero from './Components/Hero'
+import Team from './Components/Team'
+import HowTo from './Components/HowTo'
 import Footer from './Components/Footer'
 
 // Update with the contract address logged out to the CLI when it was deployed 
@@ -17,9 +20,31 @@ function App() {
       font-family: spacemono;
       src: url(${spacemono});
     }
+
+    @font-face {
+      font-family: teko;
+      src: url(${teko});
+    }
+
     font-family: spacemono;
     background-color: #000000;
     color: #FFFFFF;
+
+    .common-padding {
+      margin: 60px auto 20px auto;
+      padding: 0 20px;
+      max-width: 1220px;
+        
+      @media (max-width: 960px) {
+          max-width: 940px;
+          margin: 60px auto 20px auto;
+      }
+      @media (max-width: 640px) {
+        max-width: 620px;
+        margin: 60px auto 20px auto;
+      }
+   }
+
   `
 
   const herobg = css`
@@ -46,10 +71,10 @@ function App() {
           <Mission />
         </div>
         <div className='content-section'>
-          Roadmap
+          <HowTo />
         </div>
         <div className='content-section'>
-          Team bios
+          <Team />
         </div>
         <div className='content-section'>
           FAQ

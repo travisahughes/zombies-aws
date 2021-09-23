@@ -14,12 +14,18 @@ let Footer = props => {
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        background-color: #171717;
+        background-color: #000000;
         color: #B1B1B1;
         font-size: 14px;
 
         #footer-text {
             padding: 180px 0 0 0;
+            @media (max-width: 960px) {
+                padding: 150px 0 0 0;
+            }
+            @media (max-width: 640px) {
+                padding: 100px 0 0 0;
+            }
 
             img {
                 padding-top: 15px;
@@ -30,6 +36,12 @@ let Footer = props => {
             position: absolute;
             bottom: 100px;
             left: 0;
+            @media (max-width: 960px) {
+                bottom: 100px;
+            }
+            @media (max-width: 640px) {
+                bottom: 120px;
+            }
 
             #footer-links-left {
                 float: left;
@@ -41,11 +53,19 @@ let Footer = props => {
                 background-repeat: no-repeat;
                 background-size: cover;
                 color: #FFFFFF;
+                
+                @media (max-width: 640px) {
+                    width: 300px;
+                    font-size: 10px;
+                }
             }
 
             #footer-links-right {
                 float: left;
                 padding: 15px 0 15px 10px;
+                @media (max-width: 640px) {
+                    font-size: 10px;
+                }
 
                 a {
                     color: white;

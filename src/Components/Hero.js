@@ -1,24 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import teko from '../assets/fonts/Teko-Regular.ttf'
 import textmask from '../assets/textmask.png'
 import Nav from'./Nav'
 
 
 let Hero = props => {
     const hero = css`
-        @font-face {
-            font-family: teko;
-            src: url(${teko});
-        }
-        
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         color: white;
-        padding: 0px 30px;
-        
 
         p {
             font-weight: 700;
@@ -26,12 +18,20 @@ let Hero = props => {
         }
 
         #header {
-            width: 920px;
+            width: 753px;
             margin-top: 290px;
             flex-direction: column;
             display: flex;
             align-items: center;
-            justify-content: center;    
+            justify-content: center;
+            @media (max-width: 960px) {
+                margin-top: 150px;
+                width: 640px;
+            }
+            @media (max-width: 640px) {
+                margin-top: 100px;
+                width: 360px;
+            }
         }
 
         #top-text {
@@ -40,15 +40,32 @@ let Hero = props => {
             align-self: flex-start;
             font-weight: 400;
             font-size: 40px;
+            @media (max-width: 960px) {
+                width: 350px;
+                font-size: 30px;
+            }
+            @media (max-width: 640px) {
+                width: 250px;
+                font-size: 24px;
+            }
         }
 
         #main-text {
             font-family: teko;
-            width: 730px;
+            width: 630px;
             align-self: flex-end;
             font-weight: 400;
             font-size: 116px;
             margin-top: -35px;
+            @media (max-width: 960px) {
+                width: 550px;
+                font-size: 96px;
+            }
+            @media (max-width: 640px) {
+                width: 285px;
+                font-size: 48px;
+                margin-top: -10px;
+            }
 
             #zombies {
                 color: pink;
@@ -56,11 +73,20 @@ let Hero = props => {
         }
 
         #sub-text {
-            width: 730px;
+            width: 630px;
             align-self: flex-end;
             font-weight: 400;
             font-size: 18px;
             margin-top: -35px;
+            @media (max-width: 960px) {
+                width: 550px;
+                font-size: 14px;
+            }
+            @media (max-width: 640px) {
+                width: 285px;
+                font-size: 10px;
+                margin-top: -10px;
+            }
         }
 
         .clip-text {
@@ -68,6 +94,12 @@ let Hero = props => {
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-image: url(${textmask});
+            @media (max-width: 960px) {
+                font-size: 96px;
+            }
+            @media (max-width: 640px) {
+                font-size: 48px;
+            }
         }
     `
 

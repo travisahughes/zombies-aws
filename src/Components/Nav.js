@@ -8,17 +8,15 @@ import etherscanLogo from '../assets/icons/etherscan.png';
 
 let Header = props => {
     const header = css`
+        width: 100%;
         height: 64px;
-        width: 75%;
-        display: flex;
-        justify-content: space-between;
         color: white;
-        padding: 20px 0;
+        padding: 0 0;
         font-size: 14px;
+        
 
         .header-left {
-            flex: 1 1 auto;
-            text-align: left;
+            float: left;
             padding-top: 7px;
 
             a {
@@ -28,8 +26,15 @@ let Header = props => {
         }
 
         .header-right {
-            flex: 1 1 auto;
-            justify-content: flex-end;
+            background-color: #000000;
+            float: right;
+            padding-left: 50px;
+            @media (max-width: 960px) {
+                padding-left: 10px;
+            } 
+            @media (max-width: 640px) {
+                display: none;
+            }  
         }
     `
 
@@ -77,6 +82,12 @@ let Header = props => {
             }
         }
 
+        li.text {
+            @media (max-width: 960px) {
+                display: none;
+            }  
+        }
+
         li#twitter {
             padding-top: 5px;
         }
@@ -101,11 +112,11 @@ let Header = props => {
             </div>
             <div className="header-right">
                 <ul css={navmenu}>
-                    <li ><a href="#mission">Mission & Goals</a></li>
-                    <li ><a href="#roadmap">Roadmap</a></li>
-                    <li ><a href="#howto">How to Mint</a></li>
-                    <li ><a href="#team">Team</a></li>
-                    <li ><a href="#faq">FAQ</a></li>
+                    <li className="text"><a href="#mission">Mission & Goals</a></li>
+                    <li className="text"><a href="#roadmap">Roadmap</a></li>
+                    <li className="text"><a href="#howto">How to Mint</a></li>
+                    <li className="text"><a href="#team">Team</a></li>
+                    <li className="text"><a href="#faq">FAQ</a></li>
                     <li className="icon" id="discord"><a href="https://www.discord.com" target="_blank" rel="noreferrer"><img alt="discord" src={discordLogo} /></a></li>
                     <li className="icon" id="twitter"><a href="https://www.twitter.com/nicefunzombies" target="_blank" rel="noreferrer"><img alt="twitter" src={twitterLogo} /></a></li>
                     <li className="icon" id="opensea"><a href="https://www.opensea.io" target="_blank" rel="noreferrer"><img alt="opensea" src={openseaLogo} /></a></li>

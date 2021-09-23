@@ -5,11 +5,9 @@ import grungebg from '../assets/grunge.png'
 let Info = props => {
     const info = css`
         background-image: url(${grungebg});
-        background-position: 130px 10px;
+        background-position: 60px 10px;
         background-repeat: no-repeat;
         color: white;
-        padding: 0px 30px;
-        margin: 60px 100px 20px 100px;
 
         p {
             font-weight: 700;
@@ -23,28 +21,33 @@ let Info = props => {
     `
     const topText = css`
         font-size: 18px;
-        width: 750px;
-        padding: 150px 0 0 60px;
+        max-width: 750px;
+        padding: 150px 0 0 0;
     `
     
     const bottomText = css`
-        width: 700px;
-        float: right;
+        float: left;
         text-align: left;
-        padding: 50px 60px 50px 0;
+        padding: 250px 0 50px 0;
         
         h1 {
-            font-weight: 700;
+            font-family: teko;
+            font-weight: 400;
             font-size: 45px;
             margin: 10px 0;
         }
 
         .mint-numbers {
             float: left;
-            width: 300px;
+            width: 380px;
             font-size: 14px;
             color: #999999;
             padding-right: 10px;
+            text-align: center;
+
+            @media (max-width: 960px) {
+                width: 300px;
+            }
 
             h2 {
                 font-weight: 700;
@@ -56,7 +59,7 @@ let Info = props => {
     `
 
     return (
-        <div css={info}>
+        <div className="common-padding" css={info}>
             <div css={topText}>
                 Nice Fun Zombies (NFZs) is an art collection of 6,666 initial mint (and 10k total) unique zombie characters on the Ethereum blockchain (ERC-721). Art is inspired by horror and zombie lore, movies, shows, comics, our favorite NFT projects, and more.
             </div>
