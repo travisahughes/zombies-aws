@@ -1,12 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import spacemono from './assets/fonts/SpaceMono-Regular.ttf'
+import overpassmono from './assets/fonts/OverpassMono-Regular.ttf'
 import teko from './assets/fonts/Teko-Regular.ttf'
 import headerimg from './assets/bg.jpg'
 import Hero from './Components/Hero'
 import Info from './Components/Info'
 import Gallery from './Components/Gallery'
 import Mission from './Components/Mission'
+import Roadmap from './Components/Roadmap'
 import Team from './Components/Team'
 import HowTo from './Components/HowTo'
 import Footer from './Components/Footer'
@@ -22,25 +24,32 @@ function App() {
     }
 
     @font-face {
+      font-family: overpassmono;
+      src: url(${overpassmono});
+    }
+
+    @font-face {
       font-family: teko;
       src: url(${teko});
     }
 
-    font-family: spacemono;
+    font-family: overpassmono;
     background-color: #000000;
     color: #FFFFFF;
 
     .common-padding {
       margin: 60px auto 20px auto;
       padding: 0 20px;
-      max-width: 1220px;
+      max-width: 1310px;
         
       @media (max-width: 960px) {
           max-width: 940px;
+          padding: 0 20px;
           margin: 60px auto 20px auto;
       }
       @media (max-width: 640px) {
         max-width: 620px;
+        padding: 0 10px;
         margin: 60px auto 20px auto;
       }
    }
@@ -69,6 +78,9 @@ function App() {
         </div>
         <div className='content-section'>
           <Mission />
+        </div>
+        <div className='content-section'>
+          <Roadmap />
         </div>
         <div className='content-section'>
           <HowTo />

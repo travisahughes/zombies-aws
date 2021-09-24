@@ -1,6 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import grungebg from '../assets/grunge.png'
+import discord from '../assets/icons/discord.png'
+import twitter from '../assets/icons/twitter.png'
 
 let Info = props => {
     const info = css`
@@ -8,6 +10,10 @@ let Info = props => {
         background-position: 60px 10px;
         background-repeat: no-repeat;
         color: white;
+
+        .green-highlight {
+            color: #AFF038;
+        }
 
         p {
             font-weight: 700;
@@ -21,8 +27,70 @@ let Info = props => {
     `
     const topText = css`
         font-size: 18px;
-        max-width: 750px;
         padding: 150px 0 0 0;
+        display: block;
+
+        .description {
+            float: left;
+            width: 800px;
+            height: 210px;
+            @media (max-width: 960px) {
+                width: 600px;
+            }
+            @media (max-width: 640px) {
+                width: 380px;
+            }
+        }
+
+        #links {
+            float: right;
+            width: 320px;
+            text-align: center;
+            margin-top: -20px;
+
+            .link {
+                height: 35px;
+                border: 3px solid;
+                padding: 10px 0;
+                margin-top: 15px;
+
+                .image {
+                    width: 32px;
+                    padding-top: 10px;
+                }
+            }
+
+            #discord {
+                border-color: #AB19EF;
+
+                #discord-text {
+                    text-align: left;
+                    background-image: url(${discord});
+                    background-repeat: no-repeat;
+                    margin: 0 auto;
+                    padding: 4px 0 0 50px;
+                    width: 120px;
+                }
+            }
+
+            #twitter {
+                border-color: #50E6FF;
+
+                #twitter-text {
+                    text-align: left;
+                    background-image: url(${twitter});
+                    background-repeat: no-repeat;
+                    margin: 7px auto 0;
+                    padding: 2px 0 0 50px;
+                    width: 120px;
+                }
+            }
+
+            a {
+                text-decoration: none;
+                color: white;
+            }
+        }
     `
     
     const bottomText = css`
@@ -37,12 +105,18 @@ let Info = props => {
             margin: 10px 0;
         }
 
+        a {
+            color: #50E6FF;
+        }
+
         .mint-numbers {
             float: left;
             width: 380px;
             font-size: 14px;
+            background-color: #151515;
             color: #999999;
-            padding-right: 10px;
+            padding: 10px 10px 10px 10px;
+            margin: 0 25px 25px 0;
             text-align: center;
 
             @media (max-width: 960px) {
@@ -61,25 +135,40 @@ let Info = props => {
     return (
         <div className="common-padding" css={info}>
             <div css={topText}>
-                Nice Fun Zombies (NFZs) is an art collection of 6,666 initial mint (and 10k total) unique zombie characters on the Ethereum blockchain (ERC-721). Art is inspired by horror and zombie lore, movies, shows, comics, our favorite NFT projects, and more.
+                <div className="description">
+                    <span className="green-highlight">Nice Fun Zombies</span> (NFZs) is an art collection of 6,666 initial mint (and 10k total) unique zombie characters on the Ethereum blockchain (ERC-721). Art is inspired by horror and zombie lore, movies, shows, comics, our favorite NFT projects, and more.
+                </div>
+                <div id="links">
+                    Join the Horde!
+                    <a href="https://www.discord.com" target="_blank">
+                        <div className="link" id="discord">
+                            <div id="discord-text">On Discord</div>
+                        </div>
+                    </a>
+                    <a href="https://www.twitter.com/nicefunzombies" target="_blank">
+                        <div className="link" id="twitter">
+                            <div id="twitter-text">On Twitter</div>
+                        </div>
+                    </a>
+                </div>
             </div>
-            <div css={bottomText}>
-                <h1>MINT - COMING SOON</h1>
+            <div id="mint" css={bottomText}>
+                <h1>MINT - <span className="green-highlight">COMING SOON</span></h1>
+                <div className="mint-numbers">
+                    <h2>8,000</h2>
+                    <span className="green-highlight">Available at Launch</span>
+                </div>
                 <div className="mint-numbers">
                     <h2>6,666</h2>
-                    Available at Launch
+                    <span className="green-highlight">Available at for Public Mint</span>
                 </div>
                 <div className="mint-numbers">
                     <h2>666</h2>
-                    Available for Pre-sale
+                    <span className="green-highlight">Available for Pre-sale</span>
                 </div>
                 <div className="mint-numbers">
                     <h2>2,000</h2>
-                    To be available in the future for Zombie holders - Holding a Genesis Zombie gets you the best chance to get one of these in the future! See details below
-                </div>
-                <div className="mint-numbers">
-                    <h2>668</h2>
-                    Genesis Zombies to be held for giveaways, promotional purposes, the team and mods
+                    To be available in the future <span className="green-highlight">EXCLUSIVELY for Nice Fun Zombie holders</span> via <a href="#roadmap">Hunting!!</a> (see Roadmap)
                 </div>
             </div>
             <div className="clear"></div>

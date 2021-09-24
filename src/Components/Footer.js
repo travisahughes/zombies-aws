@@ -5,6 +5,9 @@ import footerhighlight from '../assets/footer_highlight.png'
 import discord from '../assets/icons/discord.png'
 
 let Footer = props => {
+    const date = new Date()
+    const year = date.getFullYear()
+    
     const footer = css`
         text-align: center;
         position: relative;
@@ -52,7 +55,7 @@ let Footer = props => {
                 background-position: center;
                 background-repeat: no-repeat;
                 background-size: cover;
-                color: #FFFFFF;
+                color: #AFF038;
                 
                 @media (max-width: 640px) {
                     width: 300px;
@@ -90,7 +93,7 @@ let Footer = props => {
             </div>
             <div id="footer-links">
                 <div id="footer-links-left">
-                    NICE FUN ZOMBIES 2021 - ALL RIGHTS RESERVED
+                    NICE FUN ZOMBIES {year} - ALL RIGHTS RESERVED
                 </div>
                 <div id="footer-links-right">
                     <a href="#terms">TERMS</a> |

@@ -11,6 +11,9 @@ let Hero = props => {
         justify-content: center;
         align-items: center;
         color: white;
+        @media (max-width: 640px) {
+            margin-top: 64px;
+        }
 
         p {
             font-weight: 700;
@@ -18,6 +21,7 @@ let Hero = props => {
         }
 
         #header {
+            z-index: 10;
             width: 753px;
             margin-top: 290px;
             flex-direction: column;

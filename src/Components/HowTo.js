@@ -22,14 +22,14 @@ let HowTo = props => {
         h2 {
             font-size: 14px;
             font-weight: 700;
-            color: #C4C4C4;
+            color: #AFF038;
             margin-bottom: 0;
         }
     `
 
     const steps = css`
         display: grid;
-        grid-template-columns: repeat(auto-fill,minmax(400px, 1fr));
+        grid-template-columns: repeat(auto-fill,minmax(416px, 1fr));
         font-size: 14px;
         color: #FFFFFF;
         @media (max-width: 960px) {
@@ -37,15 +37,27 @@ let HowTo = props => {
         }
         
         .step-item {
-            padding: 145px 60px 20px 0;
+            padding: 145px 20px 20px 20px;
+            margin-right: 25px;
             color: #B1B1B1;
-            background-position: 45% 0;
+            background-color: #151515;
+            border-radius: 8px;
+            background-position: 45% 20px;
             @media (max-width: 960px) {
                 background-position: 35% 0;
             }
 
+            h2 {
+                font-size: 14px;
+                font-weight: 700;
+                color: #AFF038;
+                margin-bottom: 0;
+            }
+
             h3 {
+                font-size: 20px;
                 color: #FFFFFF;
+                margin-top: 10px;
             }
 
             a {
@@ -80,19 +92,22 @@ let HowTo = props => {
             <h1>HOW TO MINT</h1>
             <div css={steps}>
                 <div className="step-item" id="step-1">
-                    <h3>Step 1: Get some ETH</h3>
-                    <p>ETH can be purchased on any centralized exchange such as Binance or Coinbase.&nbsp; 
+                    <h2>Step 1</h2>
+                    <h3>Get some Ethereum</h3>
+                    <p>You can buy ETH on Binance, Coinbase, or any centralized exchange.&nbsp; 
                         <a href="https://www.coinbase.com" target="_blank">Learn more</a>
                     </p>
                 </div>
                 <div className="step-item" id="step-2">
-                    <h3>Step 2: Set up Metamask and transfer ETH</h3>
-                    <p>transfer the ETH purchased on your exchange to the Metamask wallet. The simplest way to do so can be viewed for Binance here and Coinbase here.</p>
-                    <p>Set up Metamask or another non-custodial wallet to hold ETH and mint your Zombie.</p>
+                    <h2>Step 2</h2>
+                    <h3>Connect Metamask and mint your Nice Fun Zombie!</h3>
+                    <p>Set up Metamask or another non-custodial wallet. Transfer the ETH to your Metamask wallet.</p>
+                    <p>Learn more about <a href="https://www.coinbase.com" target="_blank">Binance</a> or <a href="https://www.coinbase.com" target="_blank">Coinbase</a></p>
                 </div>
                 <div className="step-item" id="step-3">
-                    <h3>Step  3: Connect Metamask to our site and mint on the release date</h3>
-                    <p>On release day, connect your Metamask to our website via the Chrome extension (or the Metamask app on mobile). We recommend using the Chrome Extension as this provides for the smoothest user experience. Go to the Mint section on our website and press ‘mint’ to find your Nice Fun Zombie.</p>
+                    <h2>Step 3</h2>
+                    <h3>Connect Metamask and mint your Nice Fun Zombie!</h3>
+                    <p>On release day, connect your wallet to our website via Metamask’s Chrome or Firefox extension or mobile app. Go to the <a href="#mint">Mint</a> section on our website and press ‘mint’ to discover your Nice Fun Zombie.</p>
                 </div>
             </div>
        </div>
