@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import grungewhite from '../assets/grunge_white.png'
-import goals1 from '../assets/goals1.png'
 
 let Roadmap = props => {
     const roadmap = css`
@@ -182,7 +181,7 @@ let Roadmap = props => {
             </div>
             <div css={clear}></div>
             <div css={footer}>
-                MORE DETAILS OF OUR ROADMAP FOUND ON <a href="https://www.discord.com" target="_blank">DISCORD</a>
+                MORE DETAILS OF OUR ROADMAP FOUND ON <a href="https://discord.gg/nTN9T6sS" target="_blank" rel="noreferrer">DISCORD</a>
             </div>
        </div>
     );

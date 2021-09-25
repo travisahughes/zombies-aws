@@ -11,6 +11,7 @@ import Mission from './Components/Mission'
 import Roadmap from './Components/Roadmap'
 import Team from './Components/Team'
 import HowTo from './Components/HowTo'
+import Faq from './Components/Faq'
 import Footer from './Components/Footer'
 
 // Update with the contract address logged out to the CLI when it was deployed 
@@ -89,7 +90,7 @@ function App() {
           <Team />
         </div>
         <div className='content-section'>
-          FAQ
+          <Faq />
         </div>
         <div className='content-section'>
           <Footer />

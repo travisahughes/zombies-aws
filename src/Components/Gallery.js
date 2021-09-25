@@ -5,37 +5,45 @@ import zombie2 from '../assets/gallery/zombie2.png'
 import zombie3 from '../assets/gallery/zombie3.png'
 import zombie4 from '../assets/gallery/zombie4.png'
 import zombie5 from '../assets/gallery/zombie5.png'
+import zombie6 from '../assets/gallery/zombie6.png'
+import zombie7 from '../assets/gallery/zombie7.png'
+import zombie8 from '../assets/gallery/zombie8.png'
 
 
 let Gallery = props => {
     const gallery = css`
         background-color: #151515;
         color: white;
-        padding: 30px 190px;
-        @media (max-width: 960px) {
-            padding: 30px 80px 20px 80px;
-        }
-        @media (max-width: 640px) {
-            padding: 30px 40px 20px 40px;
-        }
+        padding: 30px 0;
 
         p {
             font-weight: 700;
             font-size: 24px;
         }
 
+        @keyframes sliding {
+            0% {
+                transform: translateX(0);
+            }
+  
+            100% {
+                transform: translateX(calc(-240px * 8));
+            }
+        }
     `
 
     const imageRow = css`
-        clear: both;
-        display: grid;
-        grid-template-columns: repeat(auto-fill,minmax(225px, 1fr));
-        
-        .zombie {
-            padding: 10px;
-            
+        width: 100%;
+        overflow-x: hidden;
+
+        #overflow {
+            width: calc(225px * 8);
+            display: flex;
+
             img {
+                padding: 10px;
                 width: 225px;
+                animation: sliding 90s linear infinite;
             }
         }
     `
@@ -43,26 +51,25 @@ let Gallery = props => {
     return (
         <div css={gallery}>
             <div css={imageRow}>
-                <div className="zombie">
-                    <img className="zombiex" src={zombie1} alt="zombie!" />
+                <div id="overflow">
+                    <img className="zombie" src={zombie1} alt="zombie!" />
+                    <img className="zombie" src={zombie2} alt="zombie!" />
+                    <img className="zombie" src={zombie3} alt="zombie!" />
+                    <img className="zombie" src={zombie4} alt="zombie!" />
+                    <img className="zombie" src={zombie5} alt="zombie!" />
+                    <img className="zombie" src={zombie6} alt="zombie!" />
+                    <img className="zombie" src={zombie7} alt="zombie!" />
+                    <img className="zombie" src={zombie8} alt="zombie!" />
+
+                    <img className="zombie" src={zombie1} alt="zombie!" />
+                    <img className="zombie" src={zombie2} alt="zombie!" />
+                    <img className="zombie" src={zombie3} alt="zombie!" />
+                    <img className="zombie" src={zombie4} alt="zombie!" />
+                    <img className="zombie" src={zombie5} alt="zombie!" />
+                    <img className="zombie" src={zombie6} alt="zombie!" />
+                    <img className="zombie" src={zombie7} alt="zombie!" />
+                    <img className="zombie" src={zombie8} alt="zombie!" />
                 </div>
-                <div className="zombie">
-                    <img className="zombiex" src={zombie2} alt="zombie!" />
-                </div>
-                <div className="zombie">
-                    <img className="zombiex" src={zombie3} alt="zombie!" />
-                </div>
-                <div className="zombie">
-                    <img className="zombiex" src={zombie4} alt="zombie!" />
-                </div>
-                <div className="zombie">
-                    <img className="zombixe" src={zombie5} alt="zombie!" />
-                </div>
-                
-                
-                
-                
-                
             </div>
        </div>
     );

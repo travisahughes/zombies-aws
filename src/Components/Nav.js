@@ -80,6 +80,7 @@ let Header = props => {
             font-size: 24px;
             font-weight: 400;
             width: 130px;
+            margin: 4px 0 0 15px;
             @media (max-width: 640px) {
                 position: absolute;
                 top: 15px;
@@ -206,7 +207,6 @@ let Header = props => {
 
     const toggleMenu = () => {
         const updatedToggle = !toggleState;
-        console.log('zzz updatedToggle', updatedToggle)
         setToggleState(updatedToggle);
     }
 
@@ -223,9 +223,9 @@ let Header = props => {
                     <li className="text"><a href="#howto"onClick={toggleMenu}>How to Mint</a></li>
                     <li className="text"><a href="#team"onClick={toggleMenu}>Team</a></li>
                     <li className="text"><a href="#faq"onClick={toggleMenu}>FAQ</a></li>
-                    <li className="icon" id="discord"><a href="https://www.discord.com" target="_blank" rel="noreferrer"onClick={toggleMenu}><img alt="discord" src={discordLogo} /></a></li>
+                    <li className="icon" id="discord"><a href="https://discord.gg/nTN9T6sS" target="_blank" rel="noreferrer"onClick={toggleMenu}><img alt="discord" src={discordLogo} /></a></li>
                     <li className="icon" id="twitter"><a href="https://www.twitter.com/nicefunzombies" target="_blank" rel="noreferrer"onClick={toggleMenu}><img alt="twitter" src={twitterLogo} /></a></li>
-                    <li className="icon" id="opensea"><a href="https://www.opensea.io" target="_blank" rel="noreferrer"onClick={toggleMenu}><img alt="opensea" src={openseaLogo} /></a></li>
+                    <li className="icon" id="opensea"><a href="https://opensea.io/collection/nicefunzombies" target="_blank" rel="noreferrer"onClick={toggleMenu}><img alt="opensea" src={openseaLogo} /></a></li>
                     <li className="icon" id="etherscan"><a href="https://www.etherscan.com" target="_blank" rel="noreferrer"onClick={toggleMenu}><img alt="etherscan" src={etherscanLogo} /></a></li>
                 </ul>
             </div>

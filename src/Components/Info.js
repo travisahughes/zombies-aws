@@ -47,6 +47,10 @@ let Info = props => {
             width: 320px;
             text-align: center;
             margin-top: -20px;
+            @media (max-width: 640px) {
+                float: left;
+                margin: 70px auto 0;
+            }
 
             .link {
                 height: 35px;
@@ -127,8 +131,27 @@ let Info = props => {
                 font-weight: 700;
                 font-size: 36px;
                 color: #FFFFFF;
-                margin: 20px 5px 10px 0;
+                margin: 10px 5px 10px 0;
             }
+
+            p {
+                font-size: 14px;
+                margin-top: 0;
+            }
+
+            #discord {
+                margin-bottom: 6px;
+            }
+
+            img {
+                width: 45px;
+            }
+        }
+
+        .mint-numbers.no-bg {
+            background: none;
+            text-align: left;
+            padding: 0;
         }
     `
 
@@ -140,12 +163,12 @@ let Info = props => {
                 </div>
                 <div id="links">
                     Join the Horde!
-                    <a href="https://www.discord.com" target="_blank">
+                    <a href="https://discord.gg/nTN9T6sS" target="_blank" rel="noreferrer">
                         <div className="link" id="discord">
                             <div id="discord-text">On Discord</div>
                         </div>
                     </a>
-                    <a href="https://www.twitter.com/nicefunzombies" target="_blank">
+                    <a href="https://www.twitter.com/nicefunzombies" target="_blank" rel="noreferrer">
                         <div className="link" id="twitter">
                             <div id="twitter-text">On Twitter</div>
                         </div>
@@ -155,20 +178,27 @@ let Info = props => {
             <div id="mint" css={bottomText}>
                 <h1>MINT - <span className="green-highlight">COMING SOON</span></h1>
                 <div className="mint-numbers">
+                    <h2>10,000</h2>
+                    <span className="green-highlight">Total</span>
+                </div>
+                <div className="mint-numbers">
                     <h2>8,000</h2>
                     <span className="green-highlight">Available at Launch</span>
                 </div>
                 <div className="mint-numbers">
-                    <h2>6,666</h2>
-                    <span className="green-highlight">Available at for Public Mint</span>
+                    <h2>.06 ETH</h2>
+                    <span className="green-highlight">Price</span>
                 </div>
                 <div className="mint-numbers">
-                    <h2>666</h2>
-                    <span className="green-highlight">Available for Pre-sale</span>
+                    <h2 id="discord"><img src={discord} alt="discord" /></h2>
+                    <span className="green-highlight">Want Pre-Sale Access? Join our Discord!</span>
                 </div>
                 <div className="mint-numbers">
                     <h2>2,000</h2>
-                    To be available in the future <span className="green-highlight">EXCLUSIVELY for Nice Fun Zombie holders</span> via <a href="#roadmap">Hunting!!</a> (see Roadmap)
+                    <span className="green-highlight">Reserved</span>
+                </div>
+                <div className="mint-numbers no-bg">
+                    <p>Reserved NFZs will be available in the future <span className="green-highlight">EXCLUSIVELY for Nice Fun Zombie holders</span> via <a href="#roadmap">Hunting!!</a> (see Roadmap). Holding a Genesis Zombie gets you the best chance to get one of these in the future! See details below</p>
                 </div>
             </div>
             <div className="clear"></div>

@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import grungewhite from '../assets/grunge_white.png'
-import goals1 from '../assets/goals1.png'
 
 let Mission = props => {
     const mission = css`
@@ -98,17 +97,6 @@ let Mission = props => {
             }
         }
     `
-
-    const footer = css`
-        text-align: center;
-        color: #B1B1B1;
-        margin: 50px 0;
-        font-size: 14px;
-
-        #footer-white {
-            color: #FFFFFF;
-        }
-    `
     
     const clear = css`
         clear: both;
@@ -148,10 +136,6 @@ let Mission = props => {
                 </div>
             </div>
             <div css={clear}></div>
-            <div css={footer}>
-                We have many creative ideas for how our universe will expand and evolve.<br />
-                <span id="footer-white">Like NFTs, we’re only at the beginning.</span>
-            </div>
        </div>
     );
 }

@@ -3,7 +3,6 @@ import { css } from '@emotion/react'
 import step1 from '../assets/steps/step1.png'
 import step2 from '../assets/steps/step2.png'
 import step3 from '../assets/steps/step3.png'
-import step4 from '../assets/steps/step4.png'
 
 let HowTo = props => {
     const howto = css`
@@ -81,10 +80,6 @@ let HowTo = props => {
             background-repeat: no-repeat;
         }
     `
-    
-    const clear = css`
-        clear: both;
-    `
 
     return (
         <div className="common-padding" id="howto" css={howto}>
@@ -95,14 +90,14 @@ let HowTo = props => {
                     <h2>Step 1</h2>
                     <h3>Get some Ethereum</h3>
                     <p>You can buy ETH on Binance, Coinbase, or any centralized exchange.&nbsp; 
-                        <a href="https://www.coinbase.com" target="_blank">Learn more</a>
+                        <a href="https://www.coinbase.com" target="_blank" rel="noreferrer">Learn more</a>
                     </p>
                 </div>
                 <div className="step-item" id="step-2">
                     <h2>Step 2</h2>
                     <h3>Connect Metamask and mint your Nice Fun Zombie!</h3>
                     <p>Set up Metamask or another non-custodial wallet. Transfer the ETH to your Metamask wallet.</p>
-                    <p>Learn more about <a href="https://www.coinbase.com" target="_blank">Binance</a> or <a href="https://www.coinbase.com" target="_blank">Coinbase</a></p>
+                    <p>Learn more about <a href="https://www.coinbase.com" target="_blank" rel="noreferrer">Binance</a> or <a href="https://www.coinbase.com" target="_blank" rel="noreferrer">Coinbase</a></p>
                 </div>
                 <div className="step-item" id="step-3">
                     <h2>Step 3</h2>

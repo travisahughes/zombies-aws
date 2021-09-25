@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import footerbg from '../assets/bg_footer.jpg'
-import footerhighlight from '../assets/footer_highlight.png'
+import footerleft from '../assets/footer_left.png'
+import footerright from '../assets/footer_right.png'
 import discord from '../assets/icons/discord.png'
 
 let Footer = props => {
@@ -13,15 +13,25 @@ let Footer = props => {
         position: relative;
         height: 500px;
         width: 100%;
-        background-image: url("${footerbg}");
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
         background-color: #000000;
         color: #B1B1B1;
         font-size: 14px;
 
+        #footerleft {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 0;
+        }
+        #footerright {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
+        }
+
         #footer-text {
+            z-index: 10;
             padding: 180px 0 0 0;
             @media (max-width: 960px) {
                 padding: 150px 0 0 0;
@@ -36,6 +46,7 @@ let Footer = props => {
         }
 
         #footer-links {
+            z-index: 10;
             position: absolute;
             bottom: 100px;
             left: 0;
@@ -51,10 +62,6 @@ let Footer = props => {
                 width: 440px;
                 text-align: right;
                 padding: 15px 10px 15px;
-                background-image: url(${footerhighlight});
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: cover;
                 color: #AFF038;
                 
                 @media (max-width: 640px) {
@@ -71,8 +78,8 @@ let Footer = props => {
                 }
 
                 a {
-                    color: white;
-                    text-decoration: none;
+                    color: #50E6FF;
+                    text-decoration: underline;
                     padding-left: 10px;
 
                     &:hover, &:active {
@@ -86,8 +93,8 @@ let Footer = props => {
     return (
         <div id="footer" css={footer}>
             <div id="footer-text">
-                Join the horde on DISCORD to get your zombie<br />
-                <a href="https://www.discord.com" target="_blank" rel="noreferrer">
+                Join the horde on DISCORD to get your Nice Fun Zombie<br />
+                <a href="https://discord.gg/nTN9T6sS" target="_blank" rel="noreferrer">
                     <img src={discord} alt="discord" />
                 </a>
             </div>
@@ -101,6 +108,9 @@ let Footer = props => {
                     <a href="#contact">CONTACT</a>
                 </div>
             </div>
+
+            <img id="footerleft" src={footerleft} alt="zombie" />
+            <img id="footerright" src={footerright} alt="zombie" />
        </div>
     );
 }
