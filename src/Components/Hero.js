@@ -33,7 +33,7 @@ let Hero = props => {
                 width: 640px;
             }
             @media (max-width: 640px) {
-                margin-top: 100px;
+                margin-top: 310px;
                 width: 360px;
             }
         }
@@ -49,8 +49,11 @@ let Hero = props => {
                 font-size: 30px;
             }
             @media (max-width: 640px) {
-                width: 250px;
+                width: 300px;
+                padding-left: 20px;
                 font-size: 24px;
+                font-weight: 500;
+                align-self: center;
             }
         }
 
@@ -66,13 +69,11 @@ let Hero = props => {
                 font-size: 96px;
             }
             @media (max-width: 640px) {
-                width: 285px;
+                width: 300px;
+                align-self: center;
                 font-size: 48px;
+                font-weight: 500;
                 margin-top: -10px;
-            }
-
-            #zombies {
-                color: pink;
             }
         }
 
@@ -87,9 +88,11 @@ let Hero = props => {
                 font-size: 14px;
             }
             @media (max-width: 640px) {
-                width: 285px;
-                font-size: 10px;
-                margin-top: -10px;
+                width: 300px;
+                align-self: center;
+                font-size: 14px;
+                margin-top: 10px;
+                text-align: center;
             }
         }
 
@@ -103,6 +106,10 @@ let Hero = props => {
             }
             @media (max-width: 640px) {
                 font-size: 48px;
+                -webkit-background-clip: unset;
+                -webkit-text-fill-color: white;
+                background-image: none;
+                color: #FFFFFF;
             }
         }
     `

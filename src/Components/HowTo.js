@@ -45,6 +45,9 @@ let HowTo = props => {
             @media (max-width: 960px) {
                 background-position: 35% 0;
             }
+            @media (max-width: 960px) {
+                background-position: 50% 10px;
+            }
 
             h2 {
                 font-size: 14px;

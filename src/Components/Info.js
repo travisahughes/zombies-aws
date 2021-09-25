@@ -29,6 +29,9 @@ let Info = props => {
         font-size: 18px;
         padding: 150px 0 0 0;
         display: block;
+        @media (max-width: 640px) {
+            padding: 80px 0 0 0;
+        }
 
         .description {
             float: left;
@@ -39,7 +42,8 @@ let Info = props => {
                 width: 600px;
             }
             @media (max-width: 640px) {
-                width: 380px;
+                font-size: 14px;
+                width: 360px;
             }
         }
 
@@ -164,7 +168,7 @@ let Info = props => {
                 </div>
                 <div id="links">
                     Join the Horde!
-                    <a href="https://discord.gg/nTN9T6sS" target="_blank" rel="noreferrer">
+                    <a href="https://discord.gg/BBEBjvpp" target="_blank" rel="noreferrer">
                         <div className="link" id="discord">
                             <div id="discord-text">On Discord</div>
                         </div>

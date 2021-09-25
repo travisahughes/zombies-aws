@@ -2,7 +2,7 @@
 import { css } from '@emotion/react'
 import footerleft from '../assets/footer_left.png'
 import footerright from '../assets/footer_right.png'
-import discord from '../assets/icons/discord.png'
+import discord from '../assets/icons/discord_large.png'
 
 let Footer = props => {
     const date = new Date()
@@ -14,8 +14,11 @@ let Footer = props => {
         height: 500px;
         width: 100%;
         background-color: #000000;
-        color: #B1B1B1;
+        color: #FFFFFF;
         font-size: 14px;
+        @media (max-width: 640px) {
+            height: 350px;
+        }
 
         #footerleft {
             position: absolute;
@@ -27,6 +30,7 @@ let Footer = props => {
             }
             @media (max-width: 640px) {
                 width: 250px;
+                left: 27%;
             }
         }
         #footerright {
@@ -38,19 +42,32 @@ let Footer = props => {
                 width: 300px;
             }
             @media (max-width: 640px) {
-                width: 250px;
+                display: none;
             }
         }
         }
 
         #footer-text {
+            position: relative;
             z-index: 10;
+            font-size: 20px;
             padding: 180px 0 0 0;
             @media (max-width: 960px) {
                 padding: 150px 0 0 0;
             }
             @media (max-width: 640px) {
+                font-size: 14px;
                 padding: 100px 0 0 0;
+            }
+
+            #top {
+                background-color: #000000;
+                padding: 10px;
+                width: 660px;
+                margin: 0 auto;
+                @media (max-width: 640px) {
+                    width: 290px;
+                }
             }
 
             img {
@@ -61,31 +78,30 @@ let Footer = props => {
         #footer-links {
             z-index: 10;
             position: absolute;
-            bottom: 100px;
-            left: 0;
+            background-color: #000000;
+            padding: 10px;
+            bottom: 55px;
+            left: 64px;
             @media (max-width: 960px) {
                 bottom: 100px;
             }
             @media (max-width: 640px) {
-                bottom: 120px;
+                bottom: 40px;
             }
 
             #footer-links-left {
                 float: left;
-                width: 440px;
                 text-align: right;
-                padding: 15px 10px 15px;
                 color: #AFF038;
                 
                 @media (max-width: 640px) {
-                    width: 300px;
                     font-size: 10px;
                 }
             }
 
             #footer-links-right {
                 float: left;
-                padding: 15px 0 15px 10px;
+                
                 @media (max-width: 640px) {
                     font-size: 10px;
                 }
@@ -106,9 +122,9 @@ let Footer = props => {
     return (
         <div id="footer" css={footer}>
             <div id="footer-text">
-                Join the horde on DISCORD to get your Nice Fun Zombie<br />
-                <a href="https://discord.gg/nTN9T6sS" target="_blank" rel="noreferrer">
-                    <img src={discord} alt="discord" />
+                <div id="top">Join the horde on DISCORD to get your Nice Fun Zombie</div>
+                <a href="https://discord.gg/BBEBjvpp" target="_blank" rel="noreferrer">
+                    <img id="discord" src={discord} alt="discord" />
                 </a>
             </div>
             <div id="footer-links">
