@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import grungewhite from '../assets/grunge_white.png'
+import pigeon from '../assets/pigeon.png'
 
 let Mission = props => {
     const mission = css`
@@ -21,6 +22,8 @@ let Mission = props => {
             font-family: teko;
             color: #000000;
             font-size: 45px;
+            line-height: 45px;
+            font-weight: 400;
             text-transform: uppercase;
             margin: 0;
         }
@@ -34,6 +37,7 @@ let Mission = props => {
         p {
             color: #000000;
             font-size: 14px;
+            line-height: 24.5px;
             margin-top: 0;
         }
     `
@@ -68,6 +72,9 @@ let Mission = props => {
 
             .goal-item {
                 padding: 0 30px 40px 0;
+                @media (max-width: 640px) {
+                    padding: 0 0 40px 0;
+                }
 
                 .green-highlight {
                     color: #AFF038;
@@ -95,6 +102,15 @@ let Mission = props => {
                 }
                 @media (max-width: 640px) {
                     width: 150px;
+                }
+            }
+
+            #end {
+                text-align: center;
+                p {
+                    font-size: 20px;
+                    line-height: 30px;
+                    color: #FFFFFF;
                 }
             }
         }
@@ -131,9 +147,10 @@ let Mission = props => {
                         <h3>Build the Nice Fun Zombie universe via art and storytelling</h3>
                         <p>The NFZ universe will unfold through unique art and storytelling. <span className="green-highlight">Our zombies are misunderstood</span> - they didn't choose to be zombies yet the humans hunt and kill them. <span className="green-highlight">This is a story told from the zombie point of view.</span></p>
                     </div>
-                    <div className="goal-item">
+                    <div className="goal-item" id="end">
                         <p>We have many creative ideas for how our universe will expand and evolve.</p>
                         <p><span className="green-highlight">Like NFTs, we’re only at the beginning.</span></p>
+                        <img src={pigeon} alt="pigeon" />
                     </div>
                 </div>
             </div>

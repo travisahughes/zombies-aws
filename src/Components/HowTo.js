@@ -15,7 +15,6 @@ let HowTo = props => {
             font-size: 45px;
             color: #FFFFFF;
             margin-top: -5px;
-            padding-bottom: 40px;
         }
 
         h2 {
@@ -43,10 +42,13 @@ let HowTo = props => {
             border-radius: 8px;
             background-position: 45% 20px;
             @media (max-width: 960px) {
-                background-position: 35% 0;
+                padding-top: 155px;
+                background-position: 50% 20px;
             }
-            @media (max-width: 960px) {
-                background-position: 50% 10px;
+            @media (max-width: 640px) {
+                padding-top: 155px;
+                margin: 0 0 25px 0;
+                background-position: 50% 20px;
             }
 
             h2 {

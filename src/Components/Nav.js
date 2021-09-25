@@ -220,8 +220,8 @@ let Header = props => {
                 <ul css={navmenu}>
                     <li className="text"><a href="#mission" onClick={toggleMenu}>Mission & Goals</a></li>
                     <li className="text"><a href="#roadmap"onClick={toggleMenu}>Roadmap</a></li>
-                    <li className="text"><a href="#howto"onClick={toggleMenu}>How to Mint</a></li>
                     <li className="text"><a href="#team"onClick={toggleMenu}>Team</a></li>
+                    <li className="text"><a href="#howto"onClick={toggleMenu}>How to Mint</a></li>
                     <li className="text"><a href="#faq"onClick={toggleMenu}>FAQ</a></li>
                     <li className="icon" id="discord"><a href="https://discord.gg/BBEBjvpp" target="_blank" rel="noreferrer"onClick={toggleMenu}><img alt="discord" src={discordLogo} /></a></li>
                     <li className="icon" id="twitter"><a href="https://www.twitter.com/nicefunzombies" target="_blank" rel="noreferrer"onClick={toggleMenu}><img alt="twitter" src={twitterLogo} /></a></li>

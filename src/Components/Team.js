@@ -42,26 +42,34 @@ let Team = props => {
     `
 
     const members = css`
-        display: grid;
-        grid-template-columns: repeat(auto-fill,minmax(305px, 1fr));
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
         font-size: 14px;
         color: #FFFFFF;
+        @media (max-width: 640px) {
+            flex-direction: column;
+            align-items: center;
+        }
         
         .member {
-            max-width: 274px;
+            width: 21%;
             background-color: #000000;
             padding: 16px 16px;
-            margin: 20px 10px 0 0;
+            margin: 20px 0 0 0;
             color: #B1B1B1;
+            @media (max-width: 960px) {
+                width: 27%;
+                margin: 20px 0;
+            }
+            @media (max-width: 640px) {
+                width: 310px;
+                margin: 20px 0;
+            }
 
             img {
-                width: 273px;
-                @media (max-width: 960px) {
-                    width: 273px;
-                }
-                @media (max-width: 640px) {
-                    width: 273px;
-                }
+                width: 100%;
             }
 
             h3 {

@@ -28,16 +28,21 @@ let Info = props => {
     const topText = css`
         font-size: 18px;
         padding: 150px 0 0 0;
-        display: block;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        @media (max-width: 960px) {
+            flex-direction: column;
+        }
         @media (max-width: 640px) {
             padding: 80px 0 0 0;
         }
 
         .description {
-            float: left;
             width: 800px;
             height: 210px;
             line-height: 36px;
+            margin-right: 15px;
             @media (max-width: 960px) {
                 width: 600px;
             }
@@ -48,13 +53,15 @@ let Info = props => {
         }
 
         #links {
-            float: right;
             width: 320px;
             text-align: center;
             margin-top: -20px;
+            @media (max-width: 960px) {
+                align-self: flex-end;
+            }
             @media (max-width: 640px) {
-                float: left;
-                margin: 150px auto 0;
+                align-self: center;
+                margin: 150px 0 0 0;
             }
 
             .link {
@@ -105,7 +112,7 @@ let Info = props => {
     const bottomText = css`
         float: left;
         text-align: left;
-        padding: 250px 0 50px 0;
+        padding: 20px 0 50px 0;
         
         h1 {
             font-family: teko;
