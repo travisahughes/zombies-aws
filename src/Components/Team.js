@@ -36,30 +36,31 @@ let Team = props => {
 
         p {
             font-size: 14px;
+            line-height: 24.5px;
             color: #B1B1B1;
         }
     `
 
     const members = css`
         display: grid;
-        grid-template-columns: repeat(auto-fill,minmax(416px, 1fr));
+        grid-template-columns: repeat(auto-fill,minmax(305px, 1fr));
         font-size: 14px;
         color: #FFFFFF;
         
         .member {
-            max-width: 380px;
+            max-width: 274px;
             background-color: #000000;
             padding: 16px 16px;
             margin: 20px 10px 0 0;
             color: #B1B1B1;
 
             img {
-                width: 380px;
+                width: 273px;
                 @media (max-width: 960px) {
-                    width: 380px;
+                    width: 273px;
                 }
                 @media (max-width: 640px) {
-                    width: 380px;
+                    width: 273px;
                 }
             }
 
@@ -81,7 +82,10 @@ let Team = props => {
         <div css={teamwrap}>
             <div className="common-padding" id="team" css={team}>
                 <h1>THE TEAM</h1>
-                <p>This project is not affiliated with any companies listed in our backgrounds - this is a separate passion project!</p>
+                <p>
+                    This project is not affiliated with any companies listed in our backgrounds -<br />
+                    this is a separate passion project!
+                </p>
                 <div css={members}>
                     <div className="member" id="rayminbi">
                         <img src={ray} alt="bio" />

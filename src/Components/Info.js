@@ -34,6 +34,7 @@ let Info = props => {
             float: left;
             width: 800px;
             height: 210px;
+            line-height: 36px;
             @media (max-width: 960px) {
                 width: 600px;
             }
@@ -49,7 +50,7 @@ let Info = props => {
             margin-top: -20px;
             @media (max-width: 640px) {
                 float: left;
-                margin: 70px auto 0;
+                margin: 150px auto 0;
             }
 
             .link {
@@ -176,7 +177,7 @@ let Info = props => {
                 </div>
             </div>
             <div id="mint" css={bottomText}>
-                <h1>MINT - <span className="green-highlight">COMING SOON</span></h1>
+                <h1>MINT - <span className="green-highlight">COMING SOON (MID-OCT)</span></h1>
                 <div className="mint-numbers">
                     <h2>10,000</h2>
                     <span className="green-highlight">Total</span>

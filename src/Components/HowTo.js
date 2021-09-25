@@ -14,7 +14,7 @@ let HowTo = props => {
             font-weight: 400;
             font-size: 45px;
             color: #FFFFFF;
-            margin: 0;
+            margin-top: -5px;
             padding-bottom: 40px;
         }
 
@@ -37,7 +37,7 @@ let HowTo = props => {
         
         .step-item {
             padding: 145px 20px 20px 20px;
-            margin-right: 25px;
+            margin: 0 25px 25px 0;
             color: #B1B1B1;
             background-color: #151515;
             border-radius: 8px;

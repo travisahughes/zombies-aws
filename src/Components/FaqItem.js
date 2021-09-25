@@ -6,11 +6,11 @@ import caret from '../assets/icons/caret.png'
 let FaqItem = props => {
     const faq = css`
         width: 100%;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
 
         .header {
             font-size: 18px;
-            padding: 10px 10px;
+            padding: 15px 15px;
             background-color: #151515;
             cursor: pointer;
 
@@ -29,8 +29,10 @@ let FaqItem = props => {
 
         .content {
             background-color: #151515;
+            color: #E5E5E5;
             font-size: 14px;
-            padding: 10px 10px;
+            line-height: 24.5px;
+            padding: 10px 15px;
         }
 
         .content.hide {

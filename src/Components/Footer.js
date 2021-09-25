@@ -22,12 +22,25 @@ let Footer = props => {
             left: 0;
             top: 0;
             z-index: 0;
+            @media (max-width: 960px) {
+                width: 300px;
+            }
+            @media (max-width: 640px) {
+                width: 250px;
+            }
         }
         #footerright {
             position: absolute;
             right: 0;
             bottom: 0;
             z-index: 0;
+            @media (max-width: 960px) {
+                width: 300px;
+            }
+            @media (max-width: 640px) {
+                width: 250px;
+            }
+        }
         }
 
         #footer-text {

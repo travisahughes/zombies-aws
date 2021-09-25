@@ -22,7 +22,7 @@ let Mission = props => {
             color: #000000;
             font-size: 45px;
             text-transform: uppercase;
-            margin: 5px 0 0;
+            margin: 0;
         }
 
         h2 {
@@ -67,7 +67,7 @@ let Mission = props => {
             
 
             .goal-item {
-                padding-right: 30px;
+                padding: 0 30px 40px 0;
 
                 .green-highlight {
                     color: #AFF038;
@@ -76,6 +76,7 @@ let Mission = props => {
                 h3 {
                     font-size: 18px;
                     font-weight: 700;
+                    line-height: 30px;
                     color: #FFFFFF;
                     margin: 2px 0;
                 }
@@ -84,6 +85,7 @@ let Mission = props => {
                     color: #B1B1B1;
                     font-size: 14px;
                     font-weight: 400;
+                    line-height: 24.5px;
                 }
             }
 
@@ -114,8 +116,8 @@ let Mission = props => {
                 <h1>WHAT ARE THE NFZS TRYING TO DO?</h1>
                 <div id="goals">
                     <div className="goal-item">
-                        <h3>Make the NFZ experience Nice and Fun</h3>
-                        <p>We'll implement NFT game theory mechanics to make it <span className="green-highlight">FUN</span> to be a zombie. A perfect tie-in with zombies, thematic actions in the future will include <span className="green-highlight">horde challenges, hunting</span> (similar to staking), and <span className="green-highlight">killing</span> (similar to burning).</p>
+                        <h3>Make the NFZ experience Nice and Fun via Game Theory Mechanics</h3>
+                        <p>We'll implement NFT game theory mechanics to make it <span className="green-highlight">FUN</span> to be a zombie. A perfect tie-in with zombies, thematic actions in the future will include <span className="green-highlight">horde challenges, hunting/searching</span> (similar to staking), and <span className="green-highlight">killing</span> (similar to burning).</p>
                     </div>
                     <div className="goal-item">
                         <h3>Deliver value via real world and virtual benefits</h3>
@@ -126,7 +128,7 @@ let Mission = props => {
                         <p>We love NFTs and are creating a place that pays homage to all zombie NFTs. Additionally, we'll <span className="green-highlight">be at the center of zombie moments</span> in movies, shows, comics, games and more.</p>
                     </div>
                     <div className="goal-item">
-                        <h3>Build the Nice Fun Zombie universe</h3>
+                        <h3>Build the Nice Fun Zombie universe via art and storytelling</h3>
                         <p>The NFZ universe will unfold through unique art and storytelling. <span className="green-highlight">Our zombies are misunderstood</span> - they didn't choose to be zombies yet the humans hunt and kill them. <span className="green-highlight">This is a story told from the zombie point of view.</span></p>
                     </div>
                     <div className="goal-item">

@@ -84,10 +84,10 @@ function App() {
           <Roadmap />
         </div>
         <div className='content-section'>
-          <HowTo />
+          <Team />
         </div>
         <div className='content-section'>
-          <Team />
+          <HowTo />
         </div>
         <div className='content-section'>
           <Faq />

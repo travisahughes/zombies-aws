@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import textmask from '../assets/textmask.png'
+import textmask from '../assets/textmask.jpg'
 import Nav from'./Nav'
 
 

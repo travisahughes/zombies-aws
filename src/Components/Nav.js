@@ -84,7 +84,7 @@ let Header = props => {
             @media (max-width: 640px) {
                 position: absolute;
                 top: 15px;
-                left: 42%;
+                left: 33%;
             } 
         }
     `
