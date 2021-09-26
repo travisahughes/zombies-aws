@@ -23,17 +23,17 @@ let Hero = props => {
         #header {
             z-index: 10;
             width: 753px;
-            margin-top: 290px;
+            margin-top: 340px;
             flex-direction: column;
             display: flex;
             align-items: center;
             justify-content: center;
             @media (max-width: 960px) {
-                margin-top: 150px;
+                margin-top: 180px;
                 width: 640px;
             }
             @media (max-width: 640px) {
-                margin-top: 310px;
+                margin-top: 360px;
                 width: 360px;
             }
         }
@@ -50,7 +50,7 @@ let Hero = props => {
             }
             @media (max-width: 640px) {
                 width: 300px;
-                padding-left: 20px;
+                padding-left: 0;
                 font-size: 24px;
                 font-weight: 500;
                 align-self: center;
@@ -59,13 +59,13 @@ let Hero = props => {
 
         #main-text {
             font-family: teko;
-            width: 630px;
+            width: 625px;
             align-self: flex-end;
             font-weight: 400;
             font-size: 116px;
             margin-top: -35px;
             @media (max-width: 960px) {
-                width: 550px;
+                width: 525px;
                 font-size: 96px;
             }
             @media (max-width: 640px) {
@@ -82,7 +82,9 @@ let Hero = props => {
             align-self: flex-end;
             font-weight: 400;
             font-size: 18px;
+            text-align: center;
             margin-top: -35px;
+            
             @media (max-width: 960px) {
                 width: 550px;
                 font-size: 14px;

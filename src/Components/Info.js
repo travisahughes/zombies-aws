@@ -3,6 +3,7 @@ import { css } from '@emotion/react'
 import grungebg from '../assets/grunge.png'
 import discord from '../assets/icons/discord.png'
 import twitter from '../assets/icons/twitter.png'
+import zombie from '../assets/gallery/mint.jpg'
 
 let Info = props => {
     const info = css`
@@ -110,9 +111,8 @@ let Info = props => {
     `
     
     const bottomText = css`
-        float: left;
-        text-align: left;
-        padding: 20px 0 50px 0;
+        
+        padding: 20px 0 0 0;
         
         h1 {
             font-family: teko;
@@ -125,30 +125,119 @@ let Info = props => {
             color: #50E6FF;
         }
 
+        #flex-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            @media (max-width: 960px) {
+                flex-direction: column;
+            }
+
+            #first-two {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                max-width: 34%;
+
+                .end {
+                    margin-right: 24px;
+                }
+
+                @media (max-width: 960px) {
+                    flex-direction: row;
+                    width: 100%;
+                    max-width: 100%;
+
+                    .mint-numbers {
+                        width: 50%;
+                    }
+                    
+                    .end {
+                        margin-right: 0;
+                    }
+                }
+
+                @media (max-width: 640px) {
+                    flex-direction: column;
+                    width: 100%;
+                    max-width: 100%;
+
+                    .mint-numbers {
+                        width: calc(100% - 48px);
+                        margin: 25px 0 0 0;
+                    }
+                }
+
+                
+            }
+    
+            #last-two {
+                display: flex;
+                flex-direction: row;
+                width: 66%;
+
+                .mint-numbers {
+                    width: 50%;
+                }
+
+                @media (max-width: 960px) {
+                    width: 100%;
+                    min-width: 0;
+                }
+
+                @media (max-width: 640px) {
+                    flex-direction: column;
+                    width: 100%;
+
+                    .mint-numbers, 
+                    .mint-numbers.zombie-bg {
+                        width: calc(100% - 48px);
+                        margin: 25px 0 0 0;
+                    }
+
+                    .zombie-bg {
+                        min-height: 317px;
+                    }
+                }
+
+                
+
+                .zombie-bg {
+                    padding: 24px;
+                    background-image: url(${zombie});
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: cover;
+                }
+            }
+        }
+
         .mint-numbers {
-            float: left;
-            width: 380px;
             font-size: 14px;
+            line-height: 24.5px;
             background-color: #151515;
             color: #999999;
-            padding: 10px 10px 10px 10px;
+            padding: 24px;
             margin: 0 25px 25px 0;
             text-align: center;
 
-            @media (max-width: 960px) {
-                width: 300px;
-            }
 
             h2 {
                 font-weight: 700;
-                font-size: 36px;
+                font-size: 48px;
+                line-height: 48px;
                 color: #FFFFFF;
                 margin: 10px 5px 10px 0;
             }
 
             p {
                 font-size: 14px;
+                font-weight: 400;
                 margin-top: 0;
+            }
+
+            .leftalign {
+                text-align: left;
             }
 
             #discord {
@@ -160,10 +249,14 @@ let Info = props => {
             }
         }
 
-        .mint-numbers.no-bg {
+        .mint-numbers.zombie-bg {
             background: none;
             text-align: left;
             padding: 0;
+        }
+
+        .mint-numbers.end {
+            margin-right: 0;
         }
     `
 
@@ -189,28 +282,34 @@ let Info = props => {
             </div>
             <div id="mint" css={bottomText}>
                 <h1>MINT - <span className="green-highlight">COMING SOON (MID-OCT)</span></h1>
-                <div className="mint-numbers">
-                    <h2>10,000</h2>
-                    <span className="green-highlight">Total</span>
-                </div>
-                <div className="mint-numbers">
-                    <h2>8,000</h2>
-                    <span className="green-highlight">Available at Launch</span>
-                </div>
-                <div className="mint-numbers">
-                    <h2>.06 ETH</h2>
-                    <span className="green-highlight">Price</span>
-                </div>
-                <div className="mint-numbers">
-                    <h2 id="discord"><img src={discord} alt="discord" /></h2>
-                    <span className="green-highlight">Want Pre-Sale Access? Join our Discord!</span>
-                </div>
-                <div className="mint-numbers">
-                    <h2>2,000</h2>
-                    <span className="green-highlight">Reserved</span>
-                </div>
-                <div className="mint-numbers no-bg">
-                    <p>Reserved NFZs will be available in the future <span className="green-highlight">EXCLUSIVELY for Nice Fun Zombie holders</span> via <a href="#roadmap">Hunting!!</a> (see Roadmap). Holding a Genesis Zombie gets you the best chance to get one of these in the future! See details below</p>
+
+                <div id="flex-container">
+                    <div id="first-two">
+                        <div className="mint-numbers">
+                            <h2>8,000</h2>
+                            <p className="green-highlight">
+                                Available at Launch
+                            </p>
+                            <p className="green-highlight">
+                                Join our Discord to learn how to get Pre-Sale Access!
+                            </p>
+                        </div>
+                        <div className="mint-numbers end">
+                            <h2>.06 ETH</h2>
+                            <span className="green-highlight">Price</span>
+                        </div>
+                    </div>
+                    
+                    <div id="last-two">
+                        <div className="mint-numbers">
+                            <h2>2,000</h2>
+                            <p className="green-highlight">Reserved to be found by NFZ Holders<br />(Only 10,000 Genesis NFZs will ever exist)</p>
+                            <p className="leftalign">Reserved NFZs will be available in the future <span className="green-highlight">EXCLUSIVELY for Nice Fun Zombie holders</span> via <a href="#roadmap">Hunting!!</a> (see Roadmap). Holding a Genesis Zombie gets you the best chance to get one of these in the future! See details below</p>
+                        </div>
+                        <div className="mint-numbers zombie-bg end">
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="clear"></div>
