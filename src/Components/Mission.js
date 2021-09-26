@@ -163,7 +163,7 @@ let Mission = props => {
             <div css={clear}></div>
             <div className="common-padding" css={bottomText}>
                 <h2>GOALS</h2>
-                <h1>WHAT ARE THE NFZS TRYING TO DO?</h1>
+                <h1>WHAT ARE THE NICE FUN ZOMBIES TRYING TO DO?</h1>
                 <div id="goals">
                     <div className="goal-item">
                         <h3>Make the NFZ experience Nice and Fun via Game Theory Mechanics</h3>
