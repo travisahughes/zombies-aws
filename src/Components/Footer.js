@@ -29,8 +29,7 @@ let Footer = props => {
                 width: 300px;
             }
             @media (max-width: 640px) {
-                width: 250px;
-                left: 25%;
+                display: none;
             }
         }
         #footerright {
