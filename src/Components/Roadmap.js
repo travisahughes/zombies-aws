@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import grungewhite from '../assets/grunge_white.png'
+import zombie from '../assets/gallery/roadmap.jpg'
 
 let Roadmap = props => {
     const roadmap = css`
@@ -8,38 +9,69 @@ let Roadmap = props => {
         color: white;
     `
     const topText = css`
-        float: left;
-        background-image: url(${grungewhite});
-        background-repeat: no-repeat;
-        background-size: cover;
-        font-size: 18px;
-        max-width: 600px;
-        padding: 15px 25px 25px;
-        margin: 40px 0 0 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-end;
 
-        h1 {
-            font-family: teko;
-            color: #000000;
-            font-size: 45px;
-            text-transform: uppercase;
-            margin: -5px 0 5px;
+        margin: 30px auto 20px auto;
+        padding: 0 20px;
+        max-width: 1310px;
+        @media (max-width: 960px) {
+            margin: 30px 0 20px;
+            padding: 0;
+        }
+        @media (max-width: 640px) {
+            flex-direction: column;
+            margin: 30px 0 20px;
+            padding: 0;
+
+            img {
+                width: 100%;
+                height: auto;
+            }
         }
 
-        h2 {
-            color: #AB19EF;
-            font-size: 14px;
-            text-transform: uppercase;
-            margin: 10px 0 0 0;
-        }
 
-        p {
-            color: #000000;
-            font-size: 14px;
-            margin-top: 0;
-        }
+        .grungebox {
+            background-image: url(${grungewhite});
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-size: 18px;
+            max-width: 600px;
+            padding: 20px 25px 25px;
+            margin: 40px 0 0 0;
+            @media (max-width: 640px) {
+                margin-top: 0;
+            }
 
-        .bold {
-            font-weight: 700;
+            .bold {
+                font-weight: 700;
+            }
+    
+            h1 {
+                font-family: teko;
+                color: #000000;
+                font-size: 45px;
+                line-height: 45px;
+                font-weight: 400;
+                text-transform: uppercase;
+                margin: 10px 0;
+            }
+    
+            h2 {
+                color: #AB19EF;
+                font-size: 14px;
+                line-height: 14px;
+                margin: 10px 0 0 0;
+            }
+    
+            p {
+                color: #000000;
+                font-size: 14px;
+                line-height: 24.5px;
+                margin-top: 0;
+            }
         }
     `
 
@@ -224,15 +256,17 @@ let Roadmap = props => {
     `
 
     return (
-        <div id="roadmap" className="common-padding" css={roadmap}>
+        <div id="roadmap" css={roadmap}>
             <div css={topText}>
-                <h2>Project Roadmap</h2>
-                <h1>Generations of Zombies - Game Theory</h1>
-                <p>In the future, new generations of zombies will deliver value to holders. Owners can use their zombies to “go searching” and come back with more zombies comrades (a New and Fun NFT).</p>
-                <p className="bold">Holding a Genesis (Gen 1) Zombie will give you the best chance for an older gen zombie!</p>
+                <div className="grungebox">
+                    <h1>Generations of Zombies - Game Theory</h1>
+                    <p>In the future, new generations of zombies will deliver value to holders. Owners can use their zombies to “go searching” and come back with more zombies comrades (a New and Fun NFT).</p>
+                    <p className="bold">Holding a Genesis (Gen 1) Zombie will give you the best chance for an older gen zombie!</p>
+                </div>
+                <img src={zombie} alt="zombie" />
             </div>
-            <div css={clear}></div>
-            <div css={bottomText}>
+            
+            <div className="common-padding" css={bottomText}>
                 <div id="timeline-wrapper">
                     <div id="timeline-section">
                         <div className="timeline-item">

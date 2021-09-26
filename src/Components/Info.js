@@ -119,6 +119,9 @@ let Info = props => {
             font-weight: 400;
             font-size: 45px;
             margin: 10px 0;
+            @media (max-width: 960px) {
+                max-width: 300px;
+            }
         }
 
         a {

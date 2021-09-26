@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import grungewhite from '../assets/grunge_white.png'
+import zombie from '../assets/gallery/mission.png'
 import pigeon from '../assets/pigeon.png'
 
 let Mission = props => {
@@ -9,36 +10,65 @@ let Mission = props => {
         color: white;
     `
     const topText = css`
-        float: right;
-        background-image: url(${grungewhite});
-        background-repeat: no-repeat;
-        background-size: cover;
-        font-size: 18px;
-        max-width: 600px;
-        padding: 15px 25px 25px;
-        margin: 40px 0 0 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: flex-end;
 
-        h1 {
-            font-family: teko;
-            color: #000000;
-            font-size: 45px;
-            line-height: 45px;
-            font-weight: 400;
-            text-transform: uppercase;
-            margin: 0;
+        margin: 30px auto 20px auto;
+        padding: 0 20px;
+        max-width: 1310px;
+        @media (max-width: 960px) {
+            margin: 30px 0 20px;
+            padding: 0;
+        }
+        @media (max-width: 640px) {
+            flex-direction: column;
+            margin: 30px 0 20px;
+            padding: 0;
+
+            img {
+                width: 100%;
+                height: auto;
+            }
         }
 
-        h2 {
-            color: #E80253;
-            font-size: 14px;
-            margin: 10px 0 0 0;
-        }
 
-        p {
-            color: #000000;
-            font-size: 14px;
-            line-height: 24.5px;
-            margin-top: 0;
+        .grungebox {
+            background-image: url(${grungewhite});
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-size: 18px;
+            max-width: 600px;
+            padding: 20px 25px 25px;
+            margin: 40px 0 0 0;
+            @media (max-width: 640px) {
+                margin-top: 0;
+            }
+    
+            h1 {
+                font-family: teko;
+                color: #000000;
+                font-size: 45px;
+                line-height: 45px;
+                font-weight: 400;
+                text-transform: uppercase;
+                margin: 10px 0;
+            }
+    
+            h2 {
+                color: #AB19EF;
+                font-size: 14px;
+                line-height: 14px;
+                margin: 10px 0 0 0;
+            }
+    
+            p {
+                color: #000000;
+                font-size: 14px;
+                line-height: 24.5px;
+                margin-top: 0;
+            }
         }
     `
 
@@ -121,13 +151,17 @@ let Mission = props => {
     `
 
     return (
-        <div id="mission" className="common-padding" css={mission}>
+        <div id="mission" css={mission}>
             <div css={topText}>
-                <h1>Join the Nice Fun Zombie Horde</h1>
-                <p>What does it mean to be a Zombie? We’re here to redefine it. We are unrelentless and undying and grow stronger by the numbers. Your zombie avatar is your alter-ego. While we may lead normal lives in real life, our zombie identity symbolizes our desire for more BRAINS and to be a part of something FUN in an ever-evolving digital world.</p>
+                <img src={zombie} alt="zombie" />
+                <div className="grungebox">
+                    <h2>MISSION</h2>
+                    <h1>Join the Nice Fun Zombie Horde</h1>
+                    <p>What does it mean to be a Zombie? We’re here to redefine it. We are unrelentless and undying and grow stronger by the numbers. Your zombie avatar is your alter-ego. While we may lead normal lives in real life, our zombie identity symbolizes our desire for more BRAINS and to be a part of something FUN in an ever-evolving digital world.</p>
+                </div>
             </div>
             <div css={clear}></div>
-            <div css={bottomText}>
+            <div className="common-padding" css={bottomText}>
                 <h2>GOALS</h2>
                 <h1>WHAT ARE THE NFZS TRYING TO DO?</h1>
                 <div id="goals">
