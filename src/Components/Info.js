@@ -140,7 +140,7 @@ let Info = props => {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-                max-width: 34%;
+                width: 34%;
 
                 .end {
                     margin-right: 24px;
@@ -267,7 +267,7 @@ let Info = props => {
         <div className="common-padding" css={info}>
             <div css={topText}>
                 <div className="description">
-                    <span className="green-highlight">Nice Fun Zombies</span> (NFZs) is an art collection of 6,666 initial mint (and 10k total) unique zombie characters on the Ethereum blockchain (ERC-721). Art is inspired by horror and zombie lore, movies, shows, comics, our favorite NFT projects, and more.
+                    <span className="green-highlight">Nice Fun Zombies</span> (NFZs) is a collection of unique zombie NFT characters on the Ethereum blockchain in search of BRAINS. Nice Fun Zombie owners will get access to game mechanics such as hunting, killing, and hording for benefits, a community of zombie loving fans, and digital and real world perks. Come join the NFZ horde, we're definitely nice and fun.
                 </div>
                 <div id="links">
                     Join the Horde!
@@ -294,7 +294,7 @@ let Info = props => {
                                 Available at Launch
                             </p>
                             <p className="green-highlight">
-                                Join our Discord to learn how to get Pre-Sale Access!
+                                Join our Discord to learn how<br />to get Pre-Sale Access!
                             </p>
                         </div>
                         <div className="mint-numbers end">

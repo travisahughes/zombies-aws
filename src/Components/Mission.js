@@ -171,15 +171,15 @@ let Mission = props => {
                     </div>
                     <div className="goal-item">
                         <h3>Deliver value via real world and virtual benefits</h3>
-                        <p>We'll put our NFT holders as the top priority and will work undyingly to make things Nice and Fun via <span className="green-highlight">partnerships, collaborations, airdrops, merchandise and more.</span> Real world brands will see the power of the horde community and the impact we can have.</p>
+                        <p>We'll put our NFZ holders as the top priority and will work undyingly to make things Nice and Fun via <span className="green-highlight">partnerships, collaborations, airdrops, merchandise and more.</span> Real world brands will see the power of the horde community and the impact we can have.</p>
                     </div>
                     <div className="goal-item">
                         <h3>Build the ultimate zombie horde community</h3>
-                        <p>We love NFTs and are creating a place that pays homage to all zombie NFTs. Additionally, we'll <span className="green-highlight">be at the center of zombie moments</span> in movies, shows, comics, games and more.</p>
+                        <p>We love NFTs and are <span className="green-highlight">creating a community to appreciate zombie trait NFTs</span> and celebrate achievements in the space. Additionally, our Discord will be a place to just kick back and have a nice fun chat about your favorite zombie movies, shows, comics, video games and more.</p>
                     </div>
                     <div className="goal-item">
                         <h3>Build the Nice Fun Zombie universe via art and storytelling</h3>
-                        <p>The NFZ universe will unfold through unique art and storytelling. <span className="green-highlight">Our zombies are misunderstood</span> - they didn't choose to be zombies yet the humans hunt and kill them. <span className="green-highlight">This is a story told from the zombie point of view.</span></p>
+                        <p>The NFZ universe will unfold through unique NFT art and storytelling. <span className="green-highlight">Our zombies are misunderstood</span> - they didn't choose to be zombies yet the humans hunt and kill them. <span className="green-highlight">This is a story told from the zombie point of view.</span></p>
                     </div>
                     <div className="goal-item" id="end">
                         <p>We have many creative ideas for how our universe will expand and evolve.</p>

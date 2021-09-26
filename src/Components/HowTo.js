@@ -65,8 +65,7 @@ let HowTo = props => {
             }
 
             a {
-                text-decoration: none;
-                color: #FFFFFF;
+                color: #50E6FF;
             }
         }
 
@@ -94,7 +93,7 @@ let HowTo = props => {
                 <div className="step-item" id="step-1">
                     <h2>Step 1</h2>
                     <h3>Get some Ethereum</h3>
-                    <p>You can buy ETH on Binance, Coinbase, or any centralized exchange.&nbsp; 
+                    <p>You can buy ETH on <a href="https://www.binance.com" target="_blank" rel="noreferrer">Binance</a>, <a href="https://www.coinbase.com" target="_blank" rel="noreferrer">Coinbase</a>, or any centralized exchange.&nbsp; 
                         <a href="https://www.coinbase.com" target="_blank" rel="noreferrer">Learn more</a>
                     </p>
                 </div>
@@ -102,7 +101,7 @@ let HowTo = props => {
                     <h2>Step 2</h2>
                     <h3>Connect Metamask and mint your Nice Fun Zombie!</h3>
                     <p>Set up Metamask or another non-custodial wallet. Transfer the ETH to your Metamask wallet.</p>
-                    <p>Learn more about <a href="https://www.coinbase.com" target="_blank" rel="noreferrer">Binance</a> or <a href="https://www.coinbase.com" target="_blank" rel="noreferrer">Coinbase</a></p>
+                    <p>Learn more about <a href="https://www.binance.com" target="_blank" rel="noreferrer">Binance</a> or <a href="https://www.coinbase.com" target="_blank" rel="noreferrer">Coinbase</a></p>
                 </div>
                 <div className="step-item" id="step-3">
                     <h2>Step 3</h2>

@@ -30,7 +30,7 @@ let Footer = props => {
             }
             @media (max-width: 640px) {
                 width: 250px;
-                left: 27%;
+                left: 25%;
             }
         }
         #footerright {
@@ -70,51 +70,20 @@ let Footer = props => {
                 }
             }
 
+            #footer-copyright {
+                font-size: 14px;
+                width: 400px;
+                background-color: #000000;
+                padding: 10px;
+                margin: 50px auto 0;
+                @media (max-width: 640px) {
+                    font-size: 12px;
+                    width: 300px;
+                }
+            }
+
             img {
                 padding-top: 15px;
-            }
-        }
-
-        #footer-links {
-            z-index: 10;
-            position: absolute;
-            background-color: #000000;
-            padding: 10px;
-            bottom: 55px;
-            left: 64px;
-            @media (max-width: 960px) {
-                bottom: 100px;
-            }
-            @media (max-width: 640px) {
-                bottom: 40px;
-            }
-
-            #footer-links-left {
-                float: left;
-                text-align: right;
-                color: #AFF038;
-                
-                @media (max-width: 640px) {
-                    font-size: 10px;
-                }
-            }
-
-            #footer-links-right {
-                float: left;
-                
-                @media (max-width: 640px) {
-                    font-size: 10px;
-                }
-
-                a {
-                    color: #50E6FF;
-                    text-decoration: underline;
-                    padding-left: 10px;
-
-                    &:hover, &:active {
-                        color: #999999;
-                    }
-                }
             }
         }
     `
@@ -126,15 +95,8 @@ let Footer = props => {
                 <a href="https://discord.gg/BBEBjvpp" target="_blank" rel="noreferrer">
                     <img id="discord" src={discord} alt="discord" />
                 </a>
-            </div>
-            <div id="footer-links">
-                <div id="footer-links-left">
+                <div id="footer-copyright">
                     NICE FUN ZOMBIES {year} - ALL RIGHTS RESERVED
-                </div>
-                <div id="footer-links-right">
-                    <a href="#terms">TERMS</a> |
-                    <a href="#privacy">PRIVACY POLICY</a> |
-                    <a href="#contact">CONTACT</a>
                 </div>
             </div>
 

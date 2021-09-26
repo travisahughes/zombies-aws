@@ -91,7 +91,7 @@ let Team = props => {
             <div className="common-padding" id="team" css={team}>
                 <h1>THE TEAM</h1>
                 <p>
-                    This project is not affiliated with any companies listed in our backgrounds -<br />
+                    This project is NOT AFFILIATED with any companies listed in our backgrounds -<br />
                     this is a separate passion project!
                 </p>
                 <div css={members}>
@@ -104,21 +104,21 @@ let Team = props => {
                     </div>
                     <div className="member" id="tdubs">
                         <img src={tdubs} alt="bio" />
-                        <h3>@tdubs1</h3>
-                        <h4>Lead, Tech</h4>
+                        <h3>@tdubs1 | Taylor</h3>
+                        <h4>Founder, Tech</h4>
                         <p>Background in Tech for Disney+, Activision Blizzard</p>
                         <p>Sees red whenever Shaun of the Dead is on</p>
                     </div>
                     <div className="member" id="firestarteronibi">
                         <img src={firestarter} alt="bio" />
-                        <h3>@firestarteronibi</h3>
+                        <h3>@firestarteronibi | Sarah</h3>
                         <h4>Artist, Illustrator, Toy Designer</h4>
                         <p>Art contributor for Disney</p>
                         <p>Creatively building our new Zombieland</p>
                     </div>
                     <div className="member" id="bloodline">
                         <img src={bloodline} alt="bio" />
-                        <h3>@bloodl1n3</h3>
+                        <h3>@bloodl1n3 | Travis</h3>
                         <h4>Development Lead</h4>
                         <p>Software Engineer for FuboTV</p>
                         <p>Just wait 28 Days Later to see all the magic he can build</p>
