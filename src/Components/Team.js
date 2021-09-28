@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import teambg from '../assets/team_bg.jpg'
+import twitter from '../assets/icons/twitter.png'
 import ray from '../assets/bios/ray.png'
 import andy from '../assets/bios/andy.png'
 import bearheart from '../assets/bios/bearheart.png'
@@ -17,6 +18,11 @@ let Team = props => {
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
+
+        .green-highlight {
+            color: #AFF038;
+            font-weight: 700;
+        }
 
         #team {
             padding-top: 64px;
@@ -73,15 +79,26 @@ let Team = props => {
             }
 
             h3 {
+                font-family: teko;
                 color: #FFFFFF;
-                font-size: 18px;
-                margin-bottom: 0;
+                font-size: 32px;
+                line-height: 32px;
+                font-weight: 400;
+                margin: 10px 0 0 0;
+
+                img {
+                    width: 27px;
+                    height: auto;
+                    float: right;
+                }
             }
 
             h4 {
                 color: #AFF038;
                 font-size: 14px;
+                line-height: 24.5px;
                 margin-top: 0px;
+                font-weight: 400;
             }
         }
     `
@@ -91,13 +108,13 @@ let Team = props => {
             <div className="common-padding" id="team" css={team}>
                 <h1>THE TEAM</h1>
                 <p>
-                    This project is NOT AFFILIATED with any companies listed in our backgrounds -<br />
+                    This project is <span className="green-highlight">NOT AFFILIATED</span> with any companies listed in our backgrounds -<br />
                     this is a separate passion project!
                 </p>
                 <div css={members}>
                     <div className="member" id="rayminbi">
                         <img src={ray} alt="bio" />
-                        <h3>@rayminbi | Raymond</h3>
+                        <h3>@rayminbi | Raymond <a href="https://twitter.com/rayminbi" target="_blank" rel="noreferrer"><img src={twitter} alt="twitter" /></a></h3>
                         <h4>Founder, Strategy, Brand, Marketing, Partnerships</h4>
                         <p>Marketing & Business lead for ESPN in Asia, NFT Enthusiast</p>
                         <p>Thinks twice about visiting Korea after watching Kingdom</p>
@@ -132,7 +149,7 @@ let Team = props => {
                     </div>
                     <div className="member" id="andywmi">
                         <img src={andy} alt="bio" />
-                        <h3>@andywmi</h3>
+                        <h3>@andywmi | Andy</h3>
                         <h4>Research Advisor</h4>
                         <p>Blockchain Maxi / Red Pill Guy</p>
                         <p>Goes to bed early so he doesn’t miss the Dawn of the Dead</p>
@@ -157,7 +174,7 @@ let Team = props => {
                 <div css={members}>
                     <div className="member" id="tert">
                         <img src={tert} alt="bio" />
-                        <h3>@TerT | Terence </h3>
+                        <h3>@TerT | Terence  <a href="https://twitter.com/Uni_Tert/" target="_blank" rel="noreferrer"><img src={twitter} alt="twitter" /></a></h3>
                         <h4>Strategic Advisor</h4>
                         <p>Founder, Uninterested Unicorns</p>
                         <p>Ensuring no Resident Evil falls upon this project</p>

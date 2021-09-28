@@ -91,12 +91,30 @@ let Mission = props => {
         #goals {
             margin-top: 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fill,minmax(360px, 1fr));
+            grid-template-areas: 
+                "a b c"
+                "d e e";
+            grid-template-rows: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
+
             @media (max-width: 960px) {
-                grid-template-columns: repeat(auto-fill,minmax(300px, 1fr));
+                grid-template-areas: 
+                    "a b"
+                    "c d"
+                    "e e";
+                    grid-template-rows: 1fr 1fr 1fr;
+                    grid-template-columns: 1fr 1fr;
             }
             @media (max-width: 640px) {
-                grid-template-columns: repeat(auto-fill,minmax(240px, 1fr));
+                grid-template-areas: 
+                    "a"
+                    "b"
+                    "c"
+                    "d"
+                    "e";
+                grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+                grid-template-columns: 1fr;
+                
             }
             
 
@@ -126,6 +144,13 @@ let Mission = props => {
                 }
             }
 
+            #goal1 { grid-area: a; }
+            #goal2 { grid-area: b; }
+            #goal3 { grid-area: c; }
+            #goal4 { grid-area: d; }
+            #goal5 { grid-area: e; }
+
+
             .goal-item-img img{
                 @media (max-width: 960px) {
                     width: 200px;
@@ -135,12 +160,17 @@ let Mission = props => {
                 }
             }
 
-            #end {
+            #goal5 {
                 text-align: center;
                 p {
                     font-size: 20px;
                     line-height: 30px;
                     color: #FFFFFF;
+                }
+
+                p.top {
+                    margin-top: 0;
+                    padding-top: 5px;
                 }
             }
         }
@@ -162,28 +192,27 @@ let Mission = props => {
             </div>
             <div css={clear}></div>
             <div className="common-padding" css={bottomText}>
-                <h2>GOALS</h2>
-                <h1>WHAT ARE THE NFZS TRYING TO DO?</h1>
+                <h1>GOALS</h1>
                 <div id="goals">
-                    <div className="goal-item">
+                    <div className="goal-item" id="goal1">
                         <h3>Make the NFZ experience Nice and Fun via Game Theory Mechanics</h3>
                         <p>We'll implement NFT game theory mechanics to make it <span className="green-highlight">FUN</span> to be a zombie. A perfect tie-in with zombies, thematic actions in the future will include <span className="green-highlight">horde challenges, hunting/searching</span> (similar to staking), and <span className="green-highlight">killing</span> (similar to burning).</p>
                     </div>
-                    <div className="goal-item">
+                    <div className="goal-item" id="goal2">
                         <h3>Deliver value via real world and virtual benefits</h3>
                         <p>We'll put our NFZ holders as the top priority and will work undyingly to make things Nice and Fun via <span className="green-highlight">partnerships, collaborations, airdrops, merchandise and more.</span> Real world brands will see the power of the horde community and the impact we can have.</p>
                     </div>
-                    <div className="goal-item">
+                    <div className="goal-item" id="goal3">
                         <h3>Build the ultimate zombie horde community</h3>
                         <p>We love NFTs and are <span className="green-highlight">creating a community to appreciate zombie trait NFTs</span> and celebrate achievements in the space. Additionally, our Discord will be a place to just kick back and have a nice fun chat about your favorite zombie movies, shows, comics, video games and more.</p>
                     </div>
-                    <div className="goal-item">
+                    <div className="goal-item" id="goa4">
                         <h3>Build the Nice Fun Zombie universe via art and storytelling</h3>
                         <p>The NFZ universe will unfold through unique NFT art and storytelling. <span className="green-highlight">Our zombies are misunderstood</span> - they didn't choose to be zombies yet the humans hunt and kill them. <span className="green-highlight">This is a story told from the zombie point of view.</span></p>
                     </div>
-                    <div className="goal-item" id="end">
-                        <p>We have many creative ideas for how our universe will expand and evolve.</p>
-                        <p><span className="green-highlight">Like NFTs, we’re only at the beginning.</span></p>
+                    <div className="goal-item" id="goal5">
+                        <p className="top">We have many creative ideas for how our universe will expand and evolve.<br />
+                        <span className="green-highlight">Like NFTs, we’re only at the beginning.</span></p>
                         <img src={pigeon} alt="pigeon" />
                     </div>
                 </div>
