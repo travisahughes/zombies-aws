@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import footerleft from '../assets/footer_left.png'
+import footerleft from '../assets/footer_left2.png'
 import footerright from '../assets/footer_right.png'
 import discord from '../assets/icons/discord_large.png'
 
@@ -16,9 +16,6 @@ let Footer = props => {
         background-color: #000000;
         color: #FFFFFF;
         font-size: 14px;
-        @media (max-width: 640px) {
-            height: 350px;
-        }
 
         #footerleft {
             position: absolute;
@@ -29,7 +26,8 @@ let Footer = props => {
                 width: 300px;
             }
             @media (max-width: 640px) {
-                display: none;
+                width: 360px;
+                height: auto;
             }
         }
         #footerright {
@@ -49,51 +47,98 @@ let Footer = props => {
         #footer-text {
             position: relative;
             z-index: 10;
-            font-size: 20px;
-            padding: 180px 0 0 0;
+            font-size: 18px;
+            line-height: 27px;
+            padding: 250px 0 0 0;
             @media (max-width: 960px) {
-                padding: 150px 0 0 0;
+                padding: 240px 0 0 0;
             }
             @media (max-width: 640px) {
                 font-size: 14px;
-                padding: 100px 0 0 0;
+                line-height: 21px;
+                padding: 310px 0 0 0;
             }
 
-            #top {
-                background-color: #000000;
-                padding: 10px;
-                width: 660px;
-                margin: 0 auto;
-                @media (max-width: 640px) {
-                    width: 290px;
+            
+            #wrapper {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+
+                #discord-icon {
+                    background-color: #000000;
+                    width: 55px;
+                    padding: 7px;
+                    @media (max-width: 640px) {
+                        width: 40px;
+                    }
+                    
+                    img {
+                        width: 55px;
+                        height: auto;
+                        margin-top: 5px;
+                        @media (max-width: 640px) {
+                            width: 40px;
+                        }
+                    }
                 }
+
+                #text {
+                    text-align: left;
+                    background-color: #000000;
+                    padding: 7px;
+                    
+                }
+            }
+        }
+
+        #copyright-wrapper {
+            position: absolute;
+            bottom: 63px;
+            padding: 0 0 0 64px;
+            width: calc(100% - 64px);
+            z-index: 10;
+            @media (max-width: 640px) {
+                padding: 0;
+                bottom: 16px;
+                margin: 0 auto;
+                width: 100%;
+                font-size: 12px;
             }
 
             #footer-copyright {
-                font-size: 14px;
-                width: 400px;
+                color: #AFF038;
                 background-color: #000000;
-                padding: 10px;
-                margin: 50px auto 0;
+                font-size: 14px;
+                font-weight: 700;
+                text-align: left;
+                width: fit-content;
+                
                 @media (max-width: 640px) {
                     font-size: 12px;
-                    width: 300px;
+                    margin: 0 auto;
                 }
             }
-
-            img {
-                padding-top: 15px;
-            }
         }
+
+        
     `
 
     return (
         <div id="footer" css={footer}>
             <div id="footer-text">
-                <div id="top">Join the horde on DISCORD to get your Nice Fun Zombie</div>
-                <a href="https://discord.gg/BBEBjvpp" target="_blank" rel="noreferrer">
-                    <img id="discord" src={discord} alt="discord" />
-                </a>
+                <div id="wrapper">
+                    <div id="discord-icon">
+                        <a href="https://discord.gg/BBEBjvpp" target="_blank" rel="noreferrer">
+                            <img id="discord" src={discord} alt="discord" />
+                        </a>
+                    </div>
+                    <div id="text">Join the horde on DISCORD<br />to get your Nice Fun Zombie</div>
+                </div>
+            </div>
+
+            <div id="copyright-wrapper">
                 <div id="footer-copyright">
                     NICE FUN ZOMBIES {year} - ALL RIGHTS RESERVED
                 </div>
