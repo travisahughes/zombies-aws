@@ -311,10 +311,8 @@ let Roadmap = props => {
               <ul>
                 <li>The NFZ Team Grows</li>
                 <li>Establish all the key NFT support tools </li>
-                <li>
-                  Horde challenges begin - benefits for collecting select
-                  zombies
-                </li>
+                <li>Horde challenges begin - benefits for collecting select zombies</li>
+                <li>Searching game mechanics introduced</li>
                 <li>Member Surprises & Exclusive Benefits/Rewards</li>
                 <li>Establish the Community Fund</li>
                 <li>Commissioning of Art Story NFT Special</li>
@@ -328,17 +326,9 @@ let Roadmap = props => {
             </div>
             <div className="roadmap-content">
               <ul>
-                <li>
-                  Searching mechanics introduced with Generation 2 Zombie Pets
-                  (wait till you see these!)
-                </li>
-                <li>
-                  More game theory mechanics introduced, rewarding holders
-                </li>
-                <li>
-                  Collaborations with zombie themed media releases (movies,
-                  shows, games, etc)
-                </li>
+                <li>Generation 2 Zombie Pets (wait till you see these!) get added to the location prize pool</li>
+                <li>More game theory mechanics introduced, rewarding holders</li>
+                <li>Collaborations with zombie themed media releases (movies, shows, games, etc)</li>
                 <li>Brains DAO establishment</li>
                 <li>Exclusive merchandise</li>
                 <li>More to be announced</li>
