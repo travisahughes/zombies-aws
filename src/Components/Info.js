@@ -271,7 +271,7 @@ let Info = props => {
                 </div>
                 <div id="links">
                     Join the Horde!
-                    <a href="https://discord.gg/BBEBjvpp" target="_blank" rel="noreferrer">
+                    <a href="https://discord.gg/nicefunzombies" target="_blank" rel="noreferrer">
                         <div className="link" id="discord">
                             <div id="discord-text">On Discord</div>
                         </div>
