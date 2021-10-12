@@ -47,7 +47,7 @@ let Faq = props => {
             <div id="faq-list">
                 <FaqItem 
                     title="When do Nice Fun Zombies go on sale?" 
-                    content="Mid-Oct, exact date and time will be confirmed soon. Stay tuned on our Discord, Twitter, and Instagram for announcements."
+                    content="Pre-Sale Begins Thurs Oct 21, Public Sale Begins Fri Oct 22."
                 />
                 <FaqItem 
                     title="How many NFZs are available?" 

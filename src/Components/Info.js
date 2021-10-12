@@ -41,15 +41,16 @@ let Info = props => {
 
         .description {
             width: 800px;
-            height: 210px;
             line-height: 36px;
             margin-right: 15px;
             @media (max-width: 960px) {
-                width: 600px;
+                width: 100%;
+                margin-right: 0;
             }
             @media (max-width: 640px) {
                 font-size: 14px;
-                width: 360px;
+                width: 100%;
+                margin-right: 0;
             }
         }
 
@@ -59,10 +60,11 @@ let Info = props => {
             margin-top: -20px;
             @media (max-width: 960px) {
                 align-self: flex-end;
+                margin-top: 40px;
             }
             @media (max-width: 640px) {
                 align-self: center;
-                margin: 150px 0 0 0;
+                margin: 60px 0 0 0;
             }
 
             .link {
@@ -267,7 +269,7 @@ let Info = props => {
         <div className="common-padding" css={info}>
             <div css={topText}>
                 <div className="description">
-                    <span className="green-highlight">Nice Fun Zombies</span> (NFZs) is a collection of unique zombie NFT characters on the Ethereum blockchain in search of BRAINS. Nice Fun Zombie owners will get access to game mechanics such as hunting, killing, and hording for benefits, a community of zombie loving fans, and digital and real world perks. Come join the NFZ horde, we're definitely nice and fun.
+                    <span className="green-highlight">Nice Fun Zombies</span> (NFZs) is a collection of unique zombie NFT characters on the Ethereum blockchain in search of BRAINS. Nice Fun Zombie owners will get access to a world where Every Decision Matters – holders will be faced with several choices, and they will be able to create a tailored NFT experience. Game theory mechanics such as searching locations, hording, and holding will reward different benefits. Additionally, NFZ holders will have access to a community of zombie loving fans, real life rewards, and be at the start of the development of a new IP. Come join the NFZ horde... we're definitely nice and fun.
                 </div>
                 <div id="links">
                     Join the Horde!

@@ -3,6 +3,7 @@ import { css } from '@emotion/react'
 import footerleft from '../assets/footer_left2.png'
 import footerright from '../assets/footer_right.png'
 import discord from '../assets/icons/discord_large.png'
+import nftcal from '../assets/icons/nft-calendar-transparent.png'
 
 let Footer = props => {
     const date = new Date()
@@ -49,7 +50,7 @@ let Footer = props => {
             z-index: 10;
             font-size: 18px;
             line-height: 27px;
-            padding: 250px 0 0 0;
+            padding: 220px 0 0 0;
             @media (max-width: 960px) {
                 padding: 240px 0 0 0;
             }
@@ -89,6 +90,38 @@ let Footer = props => {
                     background-color: #000000;
                     padding: 7px;
                     
+                }
+            }
+
+            #nftcal-wrapper {
+                display: flex;
+                flex-direction: row;
+                align-items: left;
+                justify-content: center;
+
+                #nftcal-icon {
+                    background-color: #000000;
+                    width: 100px;
+                    padding: 7px;
+                    @media (max-width: 640px) {
+                        width: 70px;
+                    }
+                    
+                    img {
+                        width: 100px;
+                        height: auto;
+                        margin-top: 5px;
+                        @media (max-width: 640px) {
+                            width: 70px;
+                        }
+                    }
+                }
+
+                #text {
+                    align-self: center;
+                    background-color: #000000;
+                    padding: 7px;
+                    font-style: italic;
                 }
             }
         }
@@ -135,6 +168,14 @@ let Footer = props => {
                         </a>
                     </div>
                     <div id="text">Join the horde on DISCORD<br />to get your Nice Fun Zombie</div>
+                </div>
+                <div id="nftcal-wrapper">
+                    <div id="text">As seen on</div>
+                    <div id="nftcal-icon">
+                        <a href="https://nftcalendar.io/event/nice-fun-zombies/" target="_blank" rel="noreferrer">
+                            <img id="nftcal-img" src={nftcal} alt="nft calendar" />
+                        </a>
+                    </div>
                 </div>
             </div>
 
