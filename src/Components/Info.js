@@ -121,9 +121,6 @@ let Info = props => {
             font-weight: 400;
             font-size: 45px;
             margin: 10px 0;
-            @media (max-width: 960px) {
-                max-width: 300px;
-            }
         }
 
         a {
@@ -286,7 +283,7 @@ let Info = props => {
                 </div>
             </div>
             <div id="mint" css={bottomText}>
-                <h1>MINT - <span className="green-highlight">COMING SOON (MID-OCT)</span></h1>
+                <h1>MINT - <span className="green-highlight">OCT 22 PUBLIC SALE</span></h1>
 
                 <div id="flex-container">
                     <div id="first-two">
