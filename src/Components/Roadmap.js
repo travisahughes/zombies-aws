@@ -2,6 +2,9 @@
 import { css } from "@emotion/react";
 import grungewhite from "../assets/grunge_white.png";
 import zombie from "../assets/gallery/roadmap.jpg";
+import roadmap1 from "../assets/roadmap/roadmap1.png";
+import roadmap2 from "../assets/roadmap/roadmap2.png";
+import roadmap3 from "../assets/roadmap/roadmap3.png";
 
 let Roadmap = props => {
   const roadmap = css`
@@ -175,26 +178,94 @@ let Roadmap = props => {
       justify-content: space-between;
 
       .roadmap-item {
+        display: flex;
+        flex-direction: column;
         padding: 0;
-        background-color: #151515;
+        background-color: #000000;
         margin: 0 20px 20px 0;
         width: calc(33% - 20px);
         @media (max-width: 960px) {
-          width: calc(50% - 20px);
+          width: 100%;
+          margin-right: 0;
+          flex-direction: row;
+
+          #roadmap1 {
+            padding-top: 30px;
+          }
+  
+          #roadmap2 {
+            padding-top: 15px;
+          }
+  
+          #roadmap3 {
+            padding-top: 50px;
+          }
         }
         @media (max-width: 640px) {
           width: 100%;
           margin-right: 0;
+          flex-direction: column;
         }
 
         .roadmap-header {
-          background-color: #aff038;
+          background: none;
           color: #000000;
           padding: 10px;
+
+          @media (max-width: 960px) {
+            max-width: 300px;
+          }
+          @media (max-width: 640px) {
+            align-self: center;
+            max-width: 275px;
+          }
+
+          img {
+            width: 100%;
+          }
         }
 
         .roadmap-content {
-          padding: 10px 10px;
+          padding: 0 10px;
+
+          .centered {
+            font-size: 18px;
+            line-height: 31.5px;
+            font-weight: 600;
+            margin-top: 20px;
+            text-transform: uppercase;
+            color: #FFFFFF;
+            text-align: center;
+
+            @media (max-width: 960px) {
+              text-align: left;
+            }
+            @media (max-width: 640px) {
+              text-align: center;
+            }
+          }
+
+          h4 {
+            color: white;
+            font-size: 14px;
+            line-height: 21px;
+            margin-bottom: 0;
+          }
+  
+          p {
+            color: #b1b1b1;
+            font-size: 14px;
+            line-height: 24.5px;
+            font-weight: 400;
+            margin-top: 0;
+          }
+
+          li {
+            color: #b1b1b1;
+            font-size: 14px;
+            line-height: 24.5px;
+            font-weight: 400;
+          }
         }
 
         h2 {
@@ -226,7 +297,7 @@ let Roadmap = props => {
           line-height: 24.5px;
 
           li {
-            padding: 10px 0 0 0;
+            padding: 0 0 10px 0;
           }
         }
       }
@@ -304,61 +375,63 @@ let Roadmap = props => {
         <div id="roadmap-section">
           <div className="roadmap-item">
             <div className="roadmap-header">
-              <h2>Roadmap 1.0</h2>
-              <h3>The Spread Begins!</h3>
+              <img src={roadmap1} alt="Roadmap 1.0" />
             </div>
-            <div className="roadmap-content">
+            <div className="roadmap-content" id="roadmap1">
+              <h4>Search. Hold. Horde. Burn.</h4>
               <ul>
-                <li>The NFZ Team Grows</li>
-                <li>Establish all the key NFT support tools </li>
-                <li>Horde challenges begin - benefits for collecting select zombies</li>
-                <li>Searching game mechanics introduced</li>
+                <li>Keycard airdrop unlocks searching locations</li>
+                <li>First two locations debut offering different NFT rewards</li>
+                <li>Horde Challenges</li>
+              </ul>
+
+              <h4>Community Benefits & Collabs</h4>
+              <ul>
                 <li>Member Surprises & Exclusive Benefits/Rewards</li>
-                <li>Establish the Community Fund</li>
-                <li>Commissioning of Art Story NFT Special</li>
+                <li>Establish of the Community Fund</li>
+                <li>NFT Collab with Professional Comic Book Aritst</li>
               </ul>
             </div>
           </div>
           <div className="roadmap-item">
             <div className="roadmap-header">
-              <h2>Roadmap 2.0</h2>
-              <h3>The Horde Grows Stronger</h3>
+              <img src={roadmap2} alt="Roadmap 2.0" />
             </div>
-            <div className="roadmap-content">
+            <div className="roadmap-content" id="roadmap2">
+              <h4>Generation 2 Zombie Pets</h4>
+              <p>And other items get added to the location prize pools</p>
+
+              <h4>Choose your Zombie Destiny!</h4>
               <ul>
-                <li>Generation 2 Zombie Pets (wait till you see these!) get added to the location prize pool</li>
-                <li>More game theory mechanics introduced, rewarding holders</li>
-                <li>Collaborations with zombie themed media releases (movies, shows, games, etc)</li>
+                <li>More game theory mechanics introduced</li>
+                <li>Third location opens for searching, new rewards</li>
+              </ul>
+
+              <h4>More Community Benefits</h4>
+              <ul>
                 <li>Brains DAO establishment</li>
                 <li>Exclusive merchandise</li>
-                <li>More to be announced</li>
               </ul>
+
+              <p class="centered">More to be announced</p>
             </div>
           </div>
           <div className="roadmap-item">
             <div className="roadmap-header">
-              <h2>Beyond</h2>
-              <h3>The Long Term Vision</h3>
+              <img src={roadmap3} alt="Beyond" />
             </div>
-            <div className="roadmap-content">
-              <ul>
-                <li>
-                  Zombie themed collaborations extend further into the real
-                  world and an NFT BRAINS consultancy is established, working
-                  with brands to perfect their NFT strategy and execution. All
-                  NFZ holders will receive a share of the benefits of future
-                  projects.
-                </li>
-                <li>
-                  Nice Fun Zombie entertainment - the culmination of the
-                  universe we build will be seen by the masses.
-                </li>
-                <li>The Metaverse - we're still early, but we'll be there.</li>
-                <li>
-                  A Nice Fun Zombie Rave Party in Vegas - it just sounds too
-                  fun.
-                </li>
-              </ul>
+            <div className="roadmap-content" id="roadmap3">
+              <h4>NFT BRAINS</h4>
+              <p>Consultancy is established to work with brands</p>
+
+              <h4>Nice Fun Zombie Entertainment</h4>
+              <p>The universe we build will be seen by the masses</p>
+
+              <h4>The Metaverse</h4>
+              <p>We're still early, but we'll be there</p>
+
+              <h4>A Nice Fun Zombie Rave Party in Vegas</h4>
+              <p>It just sounds too fun</p>
             </div>
           </div>
         </div>
