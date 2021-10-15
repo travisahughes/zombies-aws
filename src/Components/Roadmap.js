@@ -74,6 +74,11 @@ let Roadmap = props => {
         line-height: 24.5px;
         margin-top: 0;
       }
+
+      a {
+        color: #AB19EF;
+        text-decoration: underline;
+      }
     }
   `;
 
@@ -337,6 +342,9 @@ let Roadmap = props => {
             Holding a Genesis (Gen 1) Zombie will give you the best chance for
             an older gen zombie!
           </p>
+          <p className="bold">
+            Read our post on game theory and why <a href="https://medium.com/@nicefunzombies/nice-fun-zombies-every-decision-matters-8ee3b90517a4" target="_blank" rel="noreferrer">Every Decision Matters</a>.
+          </p>
         </div>
         <img src={zombie} alt="zombie" />
       </div>
@@ -413,7 +421,7 @@ let Roadmap = props => {
                 <li>Exclusive merchandise</li>
               </ul>
 
-              <p class="centered">More to be announced</p>
+              <p className="centered">More to be announced</p>
             </div>
           </div>
           <div className="roadmap-item">
