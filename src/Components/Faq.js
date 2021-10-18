@@ -85,7 +85,7 @@ let Faq = props => {
                 <FaqItem 
                     title="What rights do I get as a Nice Fun Zombie holder?" 
                     content={
-                        <span>We encourage creation and building with your NFZ. You will have the commercialization rights to you NFZ on a non-exclusive basis, shared with us so that we can also help grow the IP and characters. More details <a href="/NFZ_Terms_2021.pdf" target="_blank" rel="noreferrer">here</a></span>
+                        <span>We encourage creation and building with your NFZ. You will have the commercialization rights to you NFZ on a non-exclusive basis, shared with us so that we can also help grow the IP and characters. More details <a href="https://images.nicefunzombies.io/site/NFZ_Terms_2021.pdf" target="_blank" rel="noreferrer">here</a></span>
                     }
                 />
                 <FaqItem 
