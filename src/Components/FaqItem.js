@@ -38,6 +38,10 @@ let FaqItem = props => {
         .content.hide {
             display: none;
         }
+
+        a {
+            color: #50E6FF;
+        }
     `
 
     const { title, content } = props

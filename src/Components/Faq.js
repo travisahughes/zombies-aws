@@ -2,6 +2,7 @@
 import { css } from '@emotion/react'
 import FaqItem from './FaqItem'
 import zombie from '../assets/gallery/faq.jpg'
+import pdf from '../assets/NFZ_Terms_2021.pdf'
 
 let Faq = props => {
     const faq = css`
@@ -84,7 +85,9 @@ let Faq = props => {
                 />
                 <FaqItem 
                     title="What rights do I get as a Nice Fun Zombie holder?" 
-                    content="We encourage creation and building with your NFZ. You will have the rights to the specific combination of traits to your NFZ. More details to come on IP usage."
+                    content={
+                        <span>We encourage creation and building with your NFZ. You will have the commercialization rights to you NFZ on a non-exclusive basis, shared with us so that we can also help grow the IP and characters. More details <a href={pdf} target="_blank" rel="noreferrer">here</a></span>
+                    }
                 />
                 <FaqItem 
                     title="Will rarities matter?" 
