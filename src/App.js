@@ -5,6 +5,7 @@ import overpassmono from './assets/fonts/OverpassMono-Regular.ttf'
 import teko from './assets/fonts/Teko-Regular.ttf'
 import headerimg from './assets/bg.jpg'
 import Hero from './Components/Hero'
+import MintLink from './Components/MintLink'
 import Info from './Components/Info'
 import Gallery from './Components/Gallery'
 import Mission from './Components/Mission'
@@ -70,6 +71,9 @@ function App() {
       <div className="body">
         <div className='content-section' css={herobg} >
           <Hero />
+        </div>
+        <div className='content-section'>
+          <MintLink />
         </div>
         <div className='content-section'>
           <Info />
