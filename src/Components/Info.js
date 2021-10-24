@@ -283,12 +283,12 @@ let Info = props => {
                 </div>
             </div>
             <div id="mint" css={bottomText}>
-                <h1>MINT - <span className="green-highlight">OCT 22 PUBLIC SALE</span></h1>
+                <h1>MINT - <span className="green-highlight">OCT 23 PUBLIC SALE</span></h1>
 
                 <div id="flex-container">
                     <div id="first-two">
                         <div className="mint-numbers">
-                            <h2>8,000</h2>
+                            <h2>4,666</h2>
                             <p className="green-highlight">
                                 Available at Launch
                             </p>
@@ -305,7 +305,7 @@ let Info = props => {
                     <div id="last-two">
                         <div className="mint-numbers">
                             <h2>2,000</h2>
-                            <p className="green-highlight">Reserved to be found by NFZ Holders<br />(Only 10,000 Genesis NFZs will ever exist)</p>
+                            <p className="green-highlight">Reserved to be found by NFZ Holders<br />(Only 6,666 Genesis NFZs will ever exist)</p>
                             <p className="leftalign">Reserved NFZs will be available in the future <span className="green-highlight">EXCLUSIVELY for Nice Fun Zombie holders</span> via <a href="#roadmap">Hunting!!</a> (see Roadmap). Holding a Genesis Zombie gets you the best chance to get one of these in the future! See details below</p>
                         </div>
                         <div className="mint-numbers zombie-bg end">
