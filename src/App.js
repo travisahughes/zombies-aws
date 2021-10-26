@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
+import ReactModal from 'react-modal';
 import spacemono from './assets/fonts/SpaceMono-Regular.ttf'
 import overpassmono from './assets/fonts/OverpassMono-Regular.ttf'
 import teko from './assets/fonts/Teko-Regular.ttf'
@@ -17,6 +18,7 @@ import Footer from './Components/Footer'
 
 // Update with the contract address logged out to the CLI when it was deployed 
 const greeterAddress = "your-contract-address"
+ReactModal.setAppElement('#root')
 
 function App() {
   const appStyles = css`
@@ -82,13 +84,13 @@ function App() {
           <Gallery />
         </div>
         <div className='content-section'>
-          <Mission />
-        </div>
-        <div className='content-section'>
           <Roadmap />
         </div>
         <div className='content-section'>
           <Team />
+        </div>
+        <div className='content-section'>
+          <Mission />
         </div>
         <div className='content-section'>
           <HowTo />

@@ -47,6 +47,7 @@ let MintLink = props => {
                 border: 3px solid #24EEA4;
                 text-align: center;
                 padding: 10px;
+                text-transform: uppercase;
 
                 &:hover {
                     background-color: #24EEA4;
@@ -59,13 +60,9 @@ let MintLink = props => {
     return (
         <div className="common-padding" css={info}>
             <div className="mint-wrapper">
-                <div className="dates">
-                    <span className="green-highlight">Presale:</span> 10/22<br />
-                    <span className="green-highlight">Public Sale:</span> 10/23
-                </div>
                 <a href="https://mint.nicefunzombies.io" target="_blank" rel="noreferrer">
                     <div id="mint-button-link">
-                        Mint My Zombie!
+                        Click to mint now!
                     </div>
                 </a>
             </div>

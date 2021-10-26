@@ -1,12 +1,25 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import ReactModal from 'react-modal';
+import { useState } from "react";
 import grungewhite from "../assets/grunge_white.png";
-import zombie from "../assets/gallery/roadmap.jpg";
+import edmsmall from '../assets/edm_small.jpeg'
+import edm from '../assets/edm.jpeg'
 import roadmap1 from "../assets/roadmap/roadmap1.png";
 import roadmap2 from "../assets/roadmap/roadmap2.png";
 import roadmap3 from "../assets/roadmap/roadmap3.png";
 
 let Roadmap = props => {
+  const [showModal, setShowModal] = useState(false)
+
+  const handleOpenModal = () => {
+    setShowModal(true)
+  }
+  
+  const handleCloseModal = () => {
+    setShowModal(false)
+  }
+
   const roadmap = css`
     background-color: #000000;
     color: white;
@@ -20,6 +33,13 @@ let Roadmap = props => {
     margin: 30px auto 20px auto;
     padding: 0 20px;
     max-width: 1310px;
+
+    img {
+      width: auto;
+      max-width: 500px;
+      height: auto;
+      cursor: pointer;
+    }
     @media (max-width: 960px) {
       margin: 30px 0 20px;
       padding: 0;
@@ -31,6 +51,7 @@ let Roadmap = props => {
 
       img {
         width: 100%;
+        max-width: 100%;
         height: auto;
       }
     }
@@ -329,24 +350,31 @@ let Roadmap = props => {
     <div css={roadmap}>
       <div css={topText}>
         <div className="grungebox">
-          <h1>Generations of Zombies - Game Theory</h1>
+          <h1>Every Decision Matters</h1>
           <p>
-            A few weeks after launch, holders will be given the ability to
-            search for new NFTs in the Nice Fun Zombie universe. These NFTs will
-            be found in different locations such as the grocery store and
-            school. Every decision you make matters and affects others. This is
-            a social experiment about zombie behavior. Will you go searching, or
-            will you hold for a future location? More details to come!
+            With different decision paths, Nice Fun Zombies will create a world that
+            allows the holder to decide how they want their NFZ experience to be.
+            You can decide on the prizes you want to aim for, your level of risk, and
+            how active you want to be. Utilizing some supply and demand dynamics,
+            each decision you make also has an impact on other holders. Even not
+            making a decision is a choice that has impact
           </p>
           <p className="bold">
-            Holding a Genesis (Gen 1) Zombie will give you the best chance for
-            an older gen zombie!
-          </p>
-          <p className="bold">
-            Read our post on game theory and why <a href="https://medium.com/@nicefunzombies/nice-fun-zombies-every-decision-matters-8ee3b90517a4" target="_blank" rel="noreferrer">Every Decision Matters</a>.
+            Read more about game theory here: <a href="https://medium.com/@nicefunzombies/nice-fun-zombies-every-decision-matters-8ee3b90517a4" target="_blank" rel="noreferrer">Every Decision Matters</a>
           </p>
         </div>
-        <img src={zombie} alt="zombie" />
+        <ReactModal 
+           isOpen={showModal}
+           contentLabel="Every Decision Matters"
+           onRequestClose={handleCloseModal}
+           shouldCloseOnOverlayClick={true}
+           className="Modal"
+           overlayClassName="Overlay"
+        >
+          <img src={edm} alt="Every Decision Matters" /><br />
+          <div className="ModalClose" onClick={handleCloseModal}>Close</div>
+        </ReactModal>
+        <img src={edmsmall} onClick={handleOpenModal} alt="Every Decision Matters" />
       </div>
 
       <div className="common-padding" css={bottomText}>
@@ -396,7 +424,7 @@ let Roadmap = props => {
               <h4>Community Benefits & Collabs</h4>
               <ul>
                 <li>Member Surprises & Exclusive Benefits/Rewards</li>
-                <li>Establish of the Community Fund</li>
+                <li>Establishment of the Community Fund</li>
                 <li>NFT Collab with Professional Comic Book Aritst</li>
               </ul>
             </div>
