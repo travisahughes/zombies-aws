@@ -14,7 +14,6 @@ import spacemono from './assets/fonts/SpaceMono-Regular.ttf'
 import overpassmono from './assets/fonts/OverpassMono-Regular.ttf'
 import teko from './assets/fonts/Teko-Regular.ttf'
 
-
 const herobg = css`
   width: 100%;
   background-image: url("${headerimg}");
@@ -62,7 +61,6 @@ const appStyles = css`
 `
 
 const Routing = () => {
-
   return (
     <Router >
       <div css={appStyles}>

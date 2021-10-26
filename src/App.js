@@ -12,7 +12,7 @@ import Footer from './Components/Footer'
 
 function App() {
   return (
-    <div  className="Home">
+    <div className="App">
       <div className="body">
           <MintLink />
           <Info />
