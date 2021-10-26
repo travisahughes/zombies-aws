@@ -15,7 +15,7 @@ import HowTo from './Components/HowTo'
 import Faq from './Components/Faq'
 import Footer from './Components/Footer'
 
-// Update with the contract address logged out to the CLI when it was deployed 
+// Update with the contract address logged out to the CLI when it was deployed
 const greeterAddress = "your-contract-address"
 
 function App() {
@@ -43,7 +43,7 @@ function App() {
       margin: 60px auto 20px auto;
       padding: 0 20px;
       max-width: 1310px;
-        
+
       @media (max-width: 960px) {
           max-width: 940px;
           padding: 0 20px;
