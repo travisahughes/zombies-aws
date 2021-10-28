@@ -2,25 +2,25 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { css } from '@emotion/react'
+import { css } from '@emotion/react';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Thing from './pages/Thing';
-import Hero from './Components/Hero'
-import headerimg from './assets/bg.jpg'
-import spacemono from './assets/fonts/SpaceMono-Regular.ttf'
-import overpassmono from './assets/fonts/OverpassMono-Regular.ttf'
-import teko from './assets/fonts/Teko-Regular.ttf'
+import Hero from './Components/Hero';
+import headerimg from './assets/bg.jpg';
+import spacemono from './assets/fonts/SpaceMono-Regular.ttf';
+import overpassmono from './assets/fonts/OverpassMono-Regular.ttf';
+import teko from './assets/fonts/Teko-Regular.ttf';
 
 const herobg = css`
   width: 100%;
-  background-image: url("${headerimg}");
+  background-image: url('${headerimg}');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-`
+`;
 
 const appStyles = css`
   @font-face {
@@ -40,7 +40,7 @@ const appStyles = css`
 
   font-family: overpassmono;
   background-color: #000000;
-  color: #FFFFFF;
+  color: #ffffff;
 
   .common-padding {
     margin: 60px auto 20px auto;
@@ -48,23 +48,23 @@ const appStyles = css`
     max-width: 1310px;
 
     @media (max-width: 960px) {
-        max-width: 940px;
-        padding: 0 20px;
-        margin: 60px auto 20px auto;
+      max-width: 940px;
+      padding: 0 20px;
+      margin: 60px auto 20px auto;
     }
     @media (max-width: 640px) {
       max-width: 620px;
       padding: 0 10px;
       margin: 60px auto 20px auto;
     }
- }
-`
+  }
+`;
 
 const Routing = () => {
   return (
-    <Router >
+    <Router>
       <div css={appStyles}>
-        <div className='content-section' css={herobg} >
+        <div className="content-section" css={herobg}>
           <Hero />
         </div>
         <Switch>

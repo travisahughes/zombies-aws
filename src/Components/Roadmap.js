@@ -1,24 +1,24 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
+import { css } from '@emotion/react';
 import ReactModal from 'react-modal';
-import { useState } from "react";
-import grungewhite from "../assets/grunge_white.png";
+import { useState } from 'react';
+import grungewhite from '../assets/grunge_white.png';
 import edmsmall from '../assets/edm_small.jpg';
 import edm from '../assets/edm.jpg';
-import roadmap1 from "../assets/roadmap/roadmap1.png";
-import roadmap2 from "../assets/roadmap/roadmap2.png";
-import roadmap3 from "../assets/roadmap/roadmap3.png";
+import roadmap1 from '../assets/roadmap/roadmap1.png';
+import roadmap2 from '../assets/roadmap/roadmap2.png';
+import roadmap3 from '../assets/roadmap/roadmap3.png';
 
-let Roadmap = props => {
-  const [showModal, setShowModal] = useState(false)
+let Roadmap = (props) => {
+  const [showModal, setShowModal] = useState(false);
 
   const handleOpenModal = () => {
-    setShowModal(true)
-  }
-  
+    setShowModal(true);
+  };
+
   const handleCloseModal = () => {
-    setShowModal(false)
-  }
+    setShowModal(false);
+  };
 
   const roadmap = css`
     background-color: #000000;
@@ -97,7 +97,7 @@ let Roadmap = props => {
       }
 
       a {
-        color: #AB19EF;
+        color: #ab19ef;
         text-decoration: underline;
       }
     }
@@ -218,11 +218,11 @@ let Roadmap = props => {
           #roadmap1 {
             padding-top: 30px;
           }
-  
+
           #roadmap2 {
             padding-top: 15px;
           }
-  
+
           #roadmap3 {
             padding-top: 50px;
           }
@@ -260,7 +260,7 @@ let Roadmap = props => {
             font-weight: 600;
             margin-top: 20px;
             text-transform: uppercase;
-            color: #FFFFFF;
+            color: #ffffff;
             text-align: center;
 
             @media (max-width: 960px) {
@@ -277,7 +277,7 @@ let Roadmap = props => {
             line-height: 21px;
             margin-bottom: 0;
           }
-  
+
           p {
             color: #b1b1b1;
             font-size: 14px;
@@ -352,29 +352,43 @@ let Roadmap = props => {
         <div className="grungebox">
           <h1>Every Decision Matters</h1>
           <p>
-            With different decision paths, Nice Fun Zombies will create a world that
-            allows the holder to decide how they want their NFZ experience to be.
-            You can decide on the prizes you want to aim for, your level of risk, and
-            how active you want to be. Utilizing some supply and demand dynamics,
-            each decision you make also has an impact on other holders. Even not
-            making a decision is a choice that has impact
+            With different decision paths, Nice Fun Zombies will create a world
+            that allows the holder to decide how they want their NFZ experience
+            to be. You can decide on the prizes you want to aim for, your level
+            of risk, and how active you want to be. Utilizing some supply and
+            demand dynamics, each decision you make also has an impact on other
+            holders. Even not making a decision is a choice that has impact
           </p>
           <p className="bold">
-            Read more about game theory here: <a href="https://medium.com/@nicefunzombies/nice-fun-zombies-every-decision-matters-8ee3b90517a4" target="_blank" rel="noreferrer">Every Decision Matters</a>
+            Read more about game theory here:{' '}
+            <a
+              href="https://medium.com/@nicefunzombies/nice-fun-zombies-every-decision-matters-8ee3b90517a4"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Every Decision Matters
+            </a>
           </p>
         </div>
-        <ReactModal 
-           isOpen={showModal}
-           contentLabel="Every Decision Matters"
-           onRequestClose={handleCloseModal}
-           shouldCloseOnOverlayClick={true}
-           className="Modal"
-           overlayClassName="Overlay"
+        <ReactModal
+          isOpen={showModal}
+          contentLabel="Every Decision Matters"
+          onRequestClose={handleCloseModal}
+          shouldCloseOnOverlayClick={true}
+          className="Modal"
+          overlayClassName="Overlay"
         >
-          <img src={edm} alt="Every Decision Matters" /><br />
-          <div className="ModalClose" onClick={handleCloseModal}>Close</div>
+          <img src={edm} alt="Every Decision Matters" />
+          <br />
+          <div className="ModalClose" onClick={handleCloseModal}>
+            Close
+          </div>
         </ReactModal>
-        <img src={edmsmall} onClick={handleOpenModal} alt="Every Decision Matters" />
+        <img
+          src={edmsmall}
+          onClick={handleOpenModal}
+          alt="Every Decision Matters"
+        />
       </div>
 
       <div className="common-padding" css={bottomText}>
@@ -417,7 +431,9 @@ let Roadmap = props => {
               <h4>Search. Hold. Horde. Burn.</h4>
               <ul>
                 <li>Keycard airdrop unlocks searching locations</li>
-                <li>First two locations debut offering different NFT rewards</li>
+                <li>
+                  First two locations debut offering different NFT rewards
+                </li>
                 <li>Horde Challenges</li>
               </ul>
 
@@ -474,8 +490,12 @@ let Roadmap = props => {
       </div>
       <div css={clear}></div>
       <div css={footer}>
-        MORE DETAILS OF OUR ROADMAP FOUND ON{" "}
-        <a href="https://discord.gg/nicefunzombies" target="_blank" rel="noreferrer">
+        MORE DETAILS OF OUR ROADMAP FOUND ON{' '}
+        <a
+          href="https://discord.gg/nicefunzombies"
+          target="_blank"
+          rel="noreferrer"
+        >
           DISCORD
         </a>
       </div>

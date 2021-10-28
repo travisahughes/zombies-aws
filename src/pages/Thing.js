@@ -4,7 +4,7 @@ function Thing() {
   return (
     <div className="Thing">
       <div className="body">
-        <div className="content-section" style={{color: 'white'}}>
+        <div className="content-section" style={{ color: 'white' }}>
           Thing!
         </div>
       </div>
