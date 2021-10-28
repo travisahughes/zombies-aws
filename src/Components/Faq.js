@@ -53,9 +53,9 @@ let Faq = props => {
                     title="How many NFZs are available?" 
                     content={
                         <ul>
-                            <li>8,000 NFZs will be available, excluding giveaways</li>
-                            <li>2,000 NFZs will be unreleased and only be available in the future for NFZ holders via horde challenges and Searching/Hunting</li>
-                            <li>There will be only 10,000 Genesis (Gen 1) NFZs ever available and deflationary mechanics will be introduced at a later point.</li>
+                            <li>4,444 NFZs will be available, excluding giveaways</li>
+                            <li>2,222 NFZs will be unreleased and only be available in the future for NFZ holders via horde challenges and Searching/Hunting</li>
+                            <li>There will be only 6,666 Genesis (Gen 1) NFZs ever available and deflationary mechanics will be introduced at a later point.</li>
                         </ul>
                     }
                 />

@@ -12,3 +12,44 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* ReactModal overlay CSS */
+.Modal {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+  background-color: rgba(0, 0, 0, 0.73);
+  text-align: center;
+  padding: 20px;
+}
+
+@media (max-width: 640px) {
+  .Modal {
+    top: 100px;
+  }
+}
+
+.Modal img {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+
+.Modal .ModalClose {
+  margin-top: 20px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(6, 6, 6, 0.73);
+}
