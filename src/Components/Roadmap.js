@@ -475,7 +475,7 @@ let Roadmap = props => {
       <div css={clear}></div>
       <div css={footer}>
         MORE DETAILS OF OUR ROADMAP FOUND ON{" "}
-        <a href="https://discord.gg/nicefunzombies" target="_blank" rel="noreferrer">
+        <a href="https://discord.gg/77VswFkcuY" target="_blank" rel="noreferrer">
           DISCORD
         </a>
       </div>
