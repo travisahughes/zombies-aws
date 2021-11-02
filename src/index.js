@@ -2,17 +2,25 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { MoralisProvider } from 'react-moralis';
 import { css } from '@emotion/react';
+import moralisEnv from './constants/moralis_env';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Thing from './pages/Thing';
+import Dashboard from './pages/Dashboard';
 import Hero from './Components/Hero';
 import headerimg from './assets/bg.jpg';
 import spacemono from './assets/fonts/SpaceMono-Regular.ttf';
 import overpassmono from './assets/fonts/OverpassMono-Regular.ttf';
 import teko from './assets/fonts/Teko-Regular.ttf';
+
+// TODO: Setup env variable to switch between testnet/mainnet
+const MORALIS_CONFIG = {
+  serverUrl: moralisEnv.rinkeby.serverUrl,
+  appId: moralisEnv.rinkeby.appId,
+};
 
 const herobg = css`
   width: 100%;
@@ -69,7 +77,7 @@ const Routing = () => {
         </div>
         <Switch>
           <Route exact path="/" component={App} />
-          <Route path="/thing" component={Thing} />
+          <Route path="/dashboard" component={Dashboard} />
         </Switch>
       </div>
     </Router>
@@ -77,9 +85,14 @@ const Routing = () => {
 };
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Routing />
-  </React.StrictMode>,
+  <MoralisProvider
+    appId={MORALIS_CONFIG.appId}
+    serverUrl={MORALIS_CONFIG.serverUrl}
+  >
+    <React.StrictMode>
+      <Routing />
+    </React.StrictMode>
+  </MoralisProvider>,
   document.getElementById('root')
 );
 
