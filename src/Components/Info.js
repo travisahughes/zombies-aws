@@ -273,7 +273,7 @@ let Info = (props) => {
         <div id="links">
           Join the Horde!
           <a
-            href="https://discord.gg/nicefunzombies"
+            href="https://discord.gg/77VswFkcuY"
             target="_blank"
             rel="noreferrer"
           >

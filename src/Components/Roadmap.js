@@ -492,7 +492,7 @@ let Roadmap = (props) => {
       <div css={footer}>
         MORE DETAILS OF OUR ROADMAP FOUND ON{' '}
         <a
-          href="https://discord.gg/nicefunzombies"
+          href="https://discord.gg/77VswFkcuY"
           target="_blank"
           rel="noreferrer"
         >

@@ -225,11 +225,6 @@ let Header = (props) => {
       <div className={`header-right toggle-${toggleState}`}>
         <ul css={navmenu}>
           <li className="text">
-            <a href="/dashboard" onClick={toggleMenu}>
-              Dashboard
-            </a>
-          </li>
-          <li className="text">
             <a href="#mission" onClick={toggleMenu}>
               Mission & Goals
             </a>
@@ -256,7 +251,7 @@ let Header = (props) => {
           </li>
           <li className="icon" id="discord">
             <a
-              href="https://discord.gg/nicefunzombies"
+              href="https://discord.gg/77VswFkcuY"
               target="_blank"
               rel="noreferrer"
               onClick={toggleMenu}

@@ -164,7 +164,7 @@ let Footer = (props) => {
         <div id="wrapper">
           <div id="discord-icon">
             <a
-              href="https://discord.gg/nicefunzombies"
+              href="https://discord.gg/77VswFkcuY"
               target="_blank"
               rel="noreferrer"
             >
