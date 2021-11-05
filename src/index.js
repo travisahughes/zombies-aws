@@ -10,8 +10,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
-import Hero from './Components/Hero';
-import headerimg from './assets/bg.jpg';
+import Challenge from './pages/Challenge';
 import spacemono from './assets/fonts/SpaceMono-Regular.ttf';
 import overpassmono from './assets/fonts/OverpassMono-Regular.ttf';
 import teko from './assets/fonts/Teko-Regular.ttf';
@@ -21,14 +20,6 @@ const MORALIS_CONFIG = {
   serverUrl: moralisEnv.rinkeby.serverUrl,
   appId: moralisEnv.rinkeby.appId,
 };
-
-const herobg = css`
-  width: 100%;
-  background-image: url('${headerimg}');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-`;
 
 const appStyles = css`
   @font-face {
@@ -72,12 +63,10 @@ const Routing = () => {
   return (
     <Router>
       <div css={appStyles}>
-        <div className="content-section" css={herobg}>
-          <Hero />
-        </div>
         <Switch>
           <Route exact path="/" component={App} />
           <Route path="/dashboard" component={Dashboard} />
+          <Route path="/challenge" component={Challenge} />
         </Switch>
       </div>
     </Router>

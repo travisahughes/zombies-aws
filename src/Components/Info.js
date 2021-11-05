@@ -85,7 +85,7 @@ let Info = (props) => {
           text-align: left;
           background-image: url(${discord});
           background-repeat: no-repeat;
-          margin: 0 auto;
+          margin: 4px auto 0;
           padding: 4px 0 0 50px;
           width: 120px;
         }
