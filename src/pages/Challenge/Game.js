@@ -17,24 +17,6 @@ function Game() {
       text-align: center;
       max-width: 800px;
     }
-
-    .card {
-      margin: 38px;
-      &:first-of-type {
-        margin-left: 0px;
-      }
-      &:last-of-type {
-        margin-right: 0px;
-      }
-      .card-portrait {
-        width: 216px;
-        height: 216px;
-        background-color: #c4c4c4;
-      }
-      .card-text {
-        margin-top: 22px;
-      }
-    }
   `;
 
   return (
