@@ -16,13 +16,22 @@ function Game() {
       color: white;
       text-align: center;
       max-width: 800px;
+
+      h1 {
+        font-family: teko;
+        text-transform: uppercase;
+        font-size: 45px;
+        line-height: 45px;
+        font-weight: 400;
+        color: #ffffff;
+      }
     }
   `;
 
   return (
     <div css={containerCss}>
       <div className="content-section">
-        <h1>Welcome to the nice fun Challenge!</h1>
+        <h1>Your NFZ Crew Requirements</h1>
       </div>
       <div className="content-section">
         <p>
@@ -34,6 +43,10 @@ function Game() {
         <Card subtitle="orange background" />
         <Card subtitle="eyepatch" />
         <Card subtitle="mohawk" />
+      </div>
+      <div className="content-section">
+        <h2>Your Collection</h2>
+        <p>Choose who to send</p>
       </div>
     </div>
   );

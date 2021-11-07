@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/react';
 
-function Welcome({ setActivePage }) {
+function Welcome({ setActivePage, authenticate, isAuthenticated }) {
   const challengeCss = css`
     .btn {
       display: inline-flex;
@@ -23,10 +23,6 @@ function Welcome({ setActivePage }) {
     }
   `;
 
-  const test = () => {
-    alert('test');
-  };
-
   return (
     <div css={challengeCss}>
       <div className="content-section">
@@ -46,13 +42,16 @@ function Welcome({ setActivePage }) {
         </p>
       </div>
       <div className="content-section">
-        {/* conditinoally show one or the other */}
-        <div class="btn" onClick={() => test()}>
-          Connect Your Wallet
-        </div>
-        <div class="btn" onClick={() => setActivePage('game')}>
-          Face Your Challenge
-        </div>
+        {!isAuthenticated && (
+          <div id="login" className="btn" onClick={() => authenticate()}>
+            Connect Your Wallet
+          </div>
+        )}
+        {isAuthenticated && (
+          <div className="btn" onClick={() => setActivePage('game')}>
+            Face Your Challenge
+          </div>
+        )}
       </div>
     </div>
   );

@@ -23,7 +23,7 @@ function Dashboard() {
         const nfts = await Web3Api.account.getNFTs({
           address: user.get('ethAddress'),
           token_address: CONTRACT_ID,
-          chain: 'rinkeby',
+          chain: NETWORK,
         });
         setUserNfts(nfts);
 
@@ -55,14 +55,20 @@ function Dashboard() {
       flex-wrap: wrap;
 
       .nft-container {
-        width: 300px;
+        width: 100px;
         padding: 10px;
-        margin: 10px;
+        margin: 0 10px 10px;
 
         .nft-img {
-          width: 250px;
+          width: 100px;
           height: auto;
         }
+      }
+    }
+
+    #challenges {
+      a {
+        color: lightblue;
       }
     }
   `;
@@ -92,17 +98,22 @@ function Dashboard() {
             {isAuthenticated && (
               <div>
                 <h2>Wallet connected: {user.get('ethAddress')}</h2>
+                <h3>Your horde:</h3>
                 <div id="user-nfts">
                   {userNfts?.result.length > 0 &&
                     userNfts?.result.map((nft, index) => (
-                      <div className="nft-container">
+                      <div className="nft-container" key={index}>
                         <img
                           src={JSON.parse(nft.metadata).image}
                           className="nft-img"
                         />
-                        <div>nft id: {nft.token_id}</div>
+                        <div>NFZ #{nft.token_id}</div>
                       </div>
                     ))}
+                </div>
+                <h3>Challenges:</h3>
+                <div id="challenges">
+                  <a href="/challenge">Challenge #1 - (Nov. 15 - Nov. 19)</a>
                 </div>
               </div>
             )}
