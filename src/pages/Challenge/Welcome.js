@@ -1,9 +1,24 @@
 /** @jsxImportSource @emotion/react */
 
 import { css } from '@emotion/react';
+import bgimg from '../../assets/challenge/challengebg.png';
 
 function Welcome({ setActivePage, authenticate, isAuthenticated }) {
   const challengeCss = css`
+    background-image: url(${bgimg});
+    background-size: 100% auto;
+    background-position: top;
+    background-repeat: no-repeat;
+    animation: fadein 4s;
+    -moz-animation: fadein 4s; /* Firefox */
+    -webkit-animation: fadein 4s; /* Safari and Chrome */
+    -o-animation: fadein 4s; /* Opera */
+
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto 20px auto;
+    padding: 75vh 20px 0;
+
     .btn {
       display: inline-flex;
       border: 3px solid #ab19ef;
@@ -16,10 +31,45 @@ function Welcome({ setActivePage, authenticate, isAuthenticated }) {
       display: flex;
       flex-direction: row;
       justify-content: center;
-      align-items: center;
+      align-self: center;
       color: white;
       text-align: center;
       max-width: 800px;
+    }
+    @keyframes fadein {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    @-moz-keyframes fadein {
+      /* Firefox */
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    @-webkit-keyframes fadein {
+      /* Safari and Chrome */
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    @-o-keyframes fadein {
+      /* Opera */
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
   `;
 

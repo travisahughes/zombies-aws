@@ -7,12 +7,16 @@ import Card from '../../Components/Card';
 function Game() {
   const containerCss = css`
     margin: 20px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto 20px auto;
+    padding: 0 20px;
 
     .content-section {
       display: flex;
       flex-direction: row;
       justify-content: center;
-      align-items: center;
+      align-self: center;
       color: white;
       text-align: center;
       max-width: 800px;

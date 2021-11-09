@@ -36,7 +36,7 @@ function Challenge() {
   }, [user]);
 
   const containerCss = css`
-    margin: 20px;
+    margin: 0;
   `;
 
   const challengeCss = css`
@@ -45,10 +45,9 @@ function Challenge() {
     justify-content: center;
     align-items: center;
 
-    margin: 30px auto 20px auto;
-    padding: 0 20px;
-    max-width: 1310px;
-    height: calc(100vh - 200px);
+    .body {
+      width: 100%;
+    }
   `;
 
   let activePageComponent;
@@ -71,7 +70,7 @@ function Challenge() {
 
   return (
     <div css={containerCss}>
-      <Nav />
+      {/* <Nav /> */}
       <div css={challengeCss} className="Challenge">
         <div className="body">{activePageComponent}</div>
       </div>
