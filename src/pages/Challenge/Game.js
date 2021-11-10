@@ -4,7 +4,8 @@ import { css } from '@emotion/react';
 
 import Card from '../../Components/Card';
 
-function Game() {
+function Game({ setActivePage, userNfts }) {
+  console.log('game nfts', userNfts);
   const containerCss = css`
     margin: 20px;
     display: flex;
@@ -30,6 +31,32 @@ function Game() {
         color: #ffffff;
       }
     }
+
+    #collection {
+      max-width: 1300px;
+      align-self: center;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+
+      #user-nfts {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .nft-container {
+          width: 200px;
+          margin: 0 10px 10px;
+          cursor: pointer;
+
+          .nft-img {
+            width: 200px;
+            height: auto;
+          }
+        }
+      }
+    }
   `;
 
   return (
@@ -39,18 +66,26 @@ function Game() {
       </div>
       <div className="content-section">
         <p>
-          Your NFZ Challenge Requirements Assemble a team of 3 NFZs with at
-          least 1 of the following traits
+          Glad we can count on you! To pull off this heist, you’ll need to build
+          a team with these traits
         </p>
       </div>
       <div className="content-section">
-        <Card subtitle="orange background" />
-        <Card subtitle="eyepatch" />
-        <Card subtitle="mohawk" />
+        <Card subtitle="Charcoal Background" />
+        <Card subtitle="Burglar Eye Wear" />
+        <Card subtitle="Any NFZ" />
       </div>
-      <div className="content-section">
+      <div id="collection">
         <h2>Your Collection</h2>
         <p>Choose who to send</p>
+        <div id="user-nfts">
+          {userNfts?.result.length > 0 &&
+            userNfts?.result.map((nft, index) => (
+              <div className="nft-container" key={index}>
+                <img src={JSON.parse(nft.metadata).image} className="nft-img" />
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );

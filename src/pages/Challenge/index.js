@@ -53,10 +53,14 @@ function Challenge() {
   let activePageComponent;
   switch (activePage) {
     case 'game':
-      activePageComponent = <Game setActivePage={setActivePage} />;
+      activePageComponent = (
+        <Game setActivePage={setActivePage} userNfts={userNfts} />
+      );
       break;
     case 'results':
-      activePageComponent = <Results setActivePage={setActivePage} />;
+      activePageComponent = (
+        <Results setActivePage={setActivePage} userNfts={userNfts} />
+      );
       break;
     default:
       activePageComponent = (
