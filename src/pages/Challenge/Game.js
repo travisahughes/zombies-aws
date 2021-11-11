@@ -108,7 +108,6 @@ function Game({ setActivePage, userNfts }) {
   }
 
   function onDragEnd(e) {
-    console.log('END', pendingTarget);
     if (pendingTarget) {
       pendingTarget.src = '';
     }

@@ -31,7 +31,7 @@ function Card({ subtitle }) {
   return (
     <div css={cardCss}>
       <div className="card-portrait">
-        <img onerror="this.style.display='none'" />
+        <img />
       </div>
       <div className="card-text">{subtitle}</div>
     </div>
