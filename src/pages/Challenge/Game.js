@@ -4,6 +4,10 @@ import { css } from '@emotion/react';
 
 import Card from '../../Components/Card';
 
+import zombie3 from '../../assets/gallery/zombie3.png';
+import zombie2 from '../../assets/gallery/zombie2.png';
+import zombie1 from '../../assets/gallery/zombie1.png';
+
 function Game({ setActivePage, userNfts }) {
   console.log('game nfts', userNfts);
   const containerCss = css`
@@ -12,6 +16,10 @@ function Game({ setActivePage, userNfts }) {
     flex-direction: column;
     margin: 0 auto 20px auto;
     padding: 0 20px;
+
+    .pending {
+      opacity: 0.5;
+    }
 
     .content-section {
       display: flex;
@@ -53,11 +61,58 @@ function Game({ setActivePage, userNfts }) {
           .nft-img {
             width: 200px;
             height: auto;
+            cursor: move; /* fallback if grab cursor is unsupported */
+            cursor: grab;
+            cursor: -moz-grab;
+            cursor: -webkit-grab;
+          }
+          .nft-img:active {
+            cursor: grabbing;
+            cursor: -moz-grabbing;
+            cursor: -webkit-grabbing;
           }
         }
       }
     }
+
+    .target-cards {
+      margin: 38px;
+      &:first-of-type {
+        margin-left: 0px;
+      }
+      &:last-of-type {
+        margin-right: 0px;
+      }
+    }
   `;
+
+  let draggingImgSrc = null;
+  let pendingTarget = null;
+
+  function onDragStart(e) {
+    draggingImgSrc = e.target.src;
+  }
+
+  function onDrop(e) {
+    pendingTarget = null;
+    e.target.classList.remove('pending');
+  }
+
+  function onDragEnter(e) {
+    let targetImg = e.target.querySelector('img');
+    if (targetImg) {
+      targetImg.classList.add('pending');
+      targetImg.src = draggingImgSrc;
+      pendingTarget = targetImg;
+    }
+  }
+
+  function onDragEnd(e) {
+    console.log('END', pendingTarget);
+    if (pendingTarget) {
+      pendingTarget.src = '';
+    }
+  }
 
   return (
     <div css={containerCss}>
@@ -71,9 +126,33 @@ function Game({ setActivePage, userNfts }) {
         </p>
       </div>
       <div className="content-section">
-        <Card subtitle="Charcoal Background" />
-        <Card subtitle="Burglar Eye Wear" />
-        <Card subtitle="Any NFZ" />
+        <div
+          className="target-cards"
+          draggable="true"
+          onDragOver={(event) => event.preventDefault()}
+          onDragEnter={onDragEnter}
+          onDrop={onDrop}
+        >
+          <Card subtitle="Charcoal Background" />
+        </div>
+        <div
+          className="target-cards"
+          draggable="true"
+          onDragOver={(event) => event.preventDefault()}
+          onDragEnter={onDragEnter}
+          onDrop={onDrop}
+        >
+          <Card subtitle="Burglar Eye Wear" draggable="true" />
+        </div>
+        <div
+          className="target-cards"
+          draggable="true"
+          onDragOver={(event) => event.preventDefault()}
+          onDragEnter={onDragEnter}
+          onDrop={onDrop}
+        >
+          <Card subtitle="Any NFZ" draggable="true" />
+        </div>
       </div>
       <div id="collection">
         <h2>Your Collection</h2>
@@ -85,6 +164,36 @@ function Game({ setActivePage, userNfts }) {
                 <img src={JSON.parse(nft.metadata).image} className="nft-img" />
               </div>
             ))}
+          <div className="nft-container">
+            <img
+              src={zombie1}
+              className="nft-img"
+              draggable="true"
+              onDragStart={onDragStart}
+              onDragOver={(event) => event.preventDefault()}
+              onDragEnd={onDragEnd}
+            />
+          </div>
+          <div className="nft-container">
+            <img
+              src={zombie2}
+              className="nft-img"
+              draggable="true"
+              onDragStart={onDragStart}
+              onDragOver={(event) => event.preventDefault()}
+              onDragEnd={onDragEnd}
+            />
+          </div>
+          <div className="nft-container">
+            <img
+              src={zombie3}
+              className="nft-img"
+              draggable="true"
+              onDragStart={onDragStart}
+              onDragOver={(event) => event.preventDefault()}
+              onDragEnd={onDragEnd}
+            />
+          </div>
         </div>
       </div>
     </div>

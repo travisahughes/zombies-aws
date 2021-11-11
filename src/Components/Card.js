@@ -15,6 +15,13 @@ function Card({ subtitle }) {
       width: 216px;
       height: 216px;
       background-color: #c4c4c4;
+      img {
+        height: 100%;
+        width: 100%;
+      }
+      img[src=''] {
+        display: none;
+      }
     }
     .card-text {
       margin-top: 22px;
@@ -23,7 +30,9 @@ function Card({ subtitle }) {
 
   return (
     <div css={cardCss}>
-      <div className="card-portrait"></div>
+      <div className="card-portrait">
+        <img onerror="this.style.display='none'" />
+      </div>
       <div className="card-text">{subtitle}</div>
     </div>
   );
