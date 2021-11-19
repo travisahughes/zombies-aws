@@ -297,7 +297,7 @@ let Info = props => {
                             </p>
                         </div>
                         <div className="mint-numbers end">
-                            <h2>.06 ETH</h2>
+                            <h2>.02 ETH</h2>
                             <span className="green-highlight">Price</span>
                         </div>
                     </div>
