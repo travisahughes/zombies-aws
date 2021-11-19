@@ -160,7 +160,14 @@ function Game({ setActivePage, userNfts }) {
           {userNfts?.result.length > 0 &&
             userNfts?.result.map((nft, index) => (
               <div className="nft-container" key={index}>
-                <img src={JSON.parse(nft.metadata).image} className="nft-img" />
+                <img
+                  src={JSON.parse(nft.metadata).image}
+                  className="nft-img"
+                  draggable="true"
+                  onDragStart={onDragStart}
+                  onDragOver={(event) => event.preventDefault()}
+                  onDragEnd={onDragEnd}
+                />
               </div>
             ))}
           <div className="nft-container">

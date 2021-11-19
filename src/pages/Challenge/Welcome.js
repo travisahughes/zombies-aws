@@ -2,6 +2,8 @@
 
 import { css } from '@emotion/react';
 import bgimg from '../../assets/challenge/challengebg.png';
+import rainingeth from '../../assets/challenge/rainingeth.png';
+import './Welcome.css';
 
 function Welcome({ setActivePage, authenticate, isAuthenticated }) {
   const challengeCss = css`
@@ -18,6 +20,22 @@ function Welcome({ setActivePage, authenticate, isAuthenticated }) {
     flex-direction: column;
     margin: 0 auto 20px auto;
     padding: 75vh 20px 0;
+
+    #ethrain {
+      position: absolute;
+      top: -1000px;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-image: url(${rainingeth});
+      background-size: 100% auto;
+      background-position: top;
+      background-repeat: no-repeat;
+      animation: slidedown 0.75s forwards 0.75s;
+      -moz-animation: slidedown 0.75s forwards 0.75s; /* Firefox */
+      -webkit-animation: slidedown 0.75s forwards 0.75s; /* Safari and Chrome */
+      -o-animation: slidedown 0.75s forwards 0.75s; /* Opera */
+    }
 
     .btn {
       display: inline-flex;
@@ -36,45 +54,11 @@ function Welcome({ setActivePage, authenticate, isAuthenticated }) {
       text-align: center;
       max-width: 800px;
     }
-    @keyframes fadein {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-    @-moz-keyframes fadein {
-      /* Firefox */
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-    @-webkit-keyframes fadein {
-      /* Safari and Chrome */
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-    @-o-keyframes fadein {
-      /* Opera */
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
   `;
 
   return (
     <div css={challengeCss}>
+      <div id="ethrain"></div>
       <div className="content-section">
         <h1>Welcome to the nice fun Challenge!</h1>
       </div>
