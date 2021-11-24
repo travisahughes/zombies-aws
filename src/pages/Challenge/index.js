@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useMoralis, useMoralisWeb3Api } from 'react-moralis';
 import { css } from '@emotion/react';
 
@@ -50,34 +51,41 @@ function Challenge() {
     }
   `;
 
-  let activePageComponent;
-  switch (activePage) {
-    case 'game':
-      activePageComponent = (
-        <Game setActivePage={setActivePage} userNfts={userNfts} />
-      );
-      break;
-    case 'results':
-      activePageComponent = (
-        <Results setActivePage={setActivePage} userNfts={userNfts} />
-      );
-      break;
-    default:
-      activePageComponent = (
-        <Welcome
-          setActivePage={setActivePage}
-          authenticate={authenticate}
-          isAuthenticated={isAuthenticated}
-        />
-      );
-  }
-
   return (
     <div css={containerCss}>
-      {/* <Nav /> */}
       <div css={challengeCss} className="Challenge">
-        <div className="body">{activePageComponent}</div>
+        <div className="body">
+          <Router>
+            <Switch>
+              <Route path="/welcome">
+                <Welcome
+                  setActivePage={setActivePage}
+                  authenticate={authenticate}
+                  isAuthenticated={isAuthenticated}
+                />
+              </Route>
+              <Route path="/info">
+                <Welcome
+                  setActivePage={setActivePage}
+                  authenticate={authenticate}
+                  isAuthenticated={isAuthenticated}
+                />
+              </Route>
+              <Route path="/game">
+                <Game setActivePage={setActivePage} userNfts={userNfts} />
+              </Route>
+              <Route path="/">
+                <Welcome
+                  setActivePage={setActivePage}
+                  authenticate={authenticate}
+                  isAuthenticated={isAuthenticated}
+                />
+              </Route>
+            </Switch>
+          </Router>
+        </div>
       </div>
+      {/* <Nav /> */}
     </div>
   );
 }
