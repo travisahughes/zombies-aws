@@ -12,6 +12,30 @@
   z-index: 1;
 }
 
+.pigeon-image {
+  position: absolute;
+  left: calc(50% - 300px);
+  top: calc(50% - 300px);
+  opacity: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pigeon-image img {
+  width: 368px;
+  height: 363px;
+  margin-bottom: 42px;
+}
+
+.pigeon-image-text {
+  text-align: center;
+  width: 640px;
+  color: white;
+}
+
 .welcome-text {
   text-align: center;
   opacity: 1;
@@ -31,5 +55,30 @@
   position: absolute;
   right: 0;
   top: 0;
+  opacity: 0;
+}
+
+.next-step-button {
+  border: 1px solid white;
+  padding: 8px 20px;
+  background: transparent;
+  color: white;
+  font-size: 22px;
+  position: absolute;
+  left: 50%;
+  bottom: 8%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  opacity: 0;
+}
+
+.pigeon-text {
+  position: absolute;
+  width: 640px;
+  color: white;
+  text-align: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%);
   opacity: 0;
 }
