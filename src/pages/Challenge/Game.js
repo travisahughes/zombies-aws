@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import gsap from 'gsap';
 
@@ -8,10 +8,38 @@ import Card from '../../Components/Card';
 import shadow from '../../assets/game/shadow.png';
 import theif from '../../assets/game/theif.png';
 import wildcard from '../../assets/game/wildcard.png';
+import checkbox from '../../assets/game/check.png';
+
 import './Game.css';
 const maxes = [];
 
 function Game({ userNfts }) {
+  const [shadowBox, setShadowBox] = useState(shadow);
+  const [theifBox, setTheifBox] = useState(theif);
+  const [wildcardBox, setWildcardBox] = useState(wildcard);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (count === 1) {
+      gsap.to('.preview-sections .preview-section.shadow .checkbox', {
+        duration: 0.5,
+        opacity: 1,
+        ease: 'power1.inOut',
+      });
+    } else if (count === 2) {
+      gsap.to('.preview-sections .preview-section.theif .checkbox', {
+        duration: 0.5,
+        opacity: 1,
+        ease: 'power1.inOut',
+      });
+    } else {
+      gsap.to('.preview-sections .preview-section.wildcard .checkbox', {
+        duration: 0.5,
+        opacity: 1,
+        ease: 'power1.inOut',
+      });
+    }
+  }, [count]);
   userNfts = {
     total: 8,
     page: 0,
@@ -161,8 +189,18 @@ function Game({ userNfts }) {
 
         .nft-container {
           width: 200px;
+          height: 200px;
           margin: 0 10px 10px;
           cursor: pointer;
+          position: relative;
+
+          .checkbox {
+            opacity: 0;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%);
+          }
 
           .nft-img {
             width: 200px;
@@ -266,6 +304,88 @@ function Game({ userNfts }) {
       opacity: 1,
       ease: 'power1.inOut',
       delay: 9,
+    });
+  };
+
+  const handleNtfBoxClick = (imageUrl, index) => {
+    if (count === 3) {
+      return;
+    }
+    if (count === 0) {
+      setShadowBox(imageUrl);
+    } else if (count === 1) {
+      setTheifBox(imageUrl);
+    } else {
+      setWildcardBox(imageUrl);
+    }
+    setCount(count + 1);
+
+    gsap.to(`#nft-box-${index} .checkbox`, {
+      duration: 0.5,
+      opacity: 1,
+      ease: 'power1.inOut',
+    });
+    gsap.to(`#nft-box-${index} .nft-img`, {
+      duration: 0.5,
+      opacity: 0.5,
+      ease: 'power1.inOut',
+    });
+  };
+
+  const handleSend = () => {
+    gsap.to('#collection', {
+      duration: 0.5,
+      opacity: 0,
+      ease: 'power1.easeOut',
+    });
+    gsap.to('#collection', {
+      duration: 0.1,
+      display: 'none',
+      ease: 'power1.inOut',
+      delay: 0.5,
+    });
+    gsap.to('.game-preview', {
+      duration: 0.5,
+      paddingTop: 0,
+      ease: 'power1.inOut',
+      delay: 0.5,
+    });
+    gsap.to('.game-preview', {
+      duration: 0.5,
+      paddingBottom: 0,
+      ease: 'power1.inOut',
+      delay: 0.5,
+    });
+    gsap.to('.game-preview-header.content', {
+      duration: 0.5,
+      opacity: 0,
+      ease: 'power1.easeOut',
+      delay: 0.5,
+    });
+    gsap.to('.send-my-team-button', {
+      duration: 0.5,
+      opacity: 0,
+      ease: 'power1.easeOut',
+      delay: 0.5,
+    });
+
+    gsap.to('.preview-sections .preview-section.shadow', {
+      duration: 0.5,
+      opacity: 0,
+      ease: 'power1.easeOut',
+      delay: 1,
+    });
+    gsap.to('.preview-sections .preview-section.theif', {
+      duration: 0.5,
+      opacity: 0,
+      ease: 'power1.easeOut',
+      delay: 1.5,
+    });
+    gsap.to('.preview-sections .preview-section.wildcard', {
+      duration: 0.5,
+      opacity: 0,
+      ease: 'power1.easeOut',
+      delay: 2,
     });
   };
 
@@ -375,7 +495,10 @@ function Game({ userNfts }) {
         </div>
         <div className="preview-sections">
           <div className="preview-section shadow">
-            <img src={shadow} alt="" />
+            <div className="preview-section-image">
+              <img src={shadowBox} alt="" />
+              <img className="checkbox" src={checkbox} alt="" />
+            </div>
             <div className="preview-section-text">
               <div className="preview-section-text-header">The Shadow</div>
               <div className="preview-section-text-sub-header">
@@ -384,14 +507,20 @@ function Game({ userNfts }) {
             </div>
           </div>
           <div className="preview-section theif">
-            <img src={theif} alt="" />
+            <div className="preview-section-image">
+              <img src={theifBox} alt="" />
+              <img className="checkbox" src={checkbox} alt="" />
+            </div>
             <div className="preview-section-text">
               <div className="preview-section-text-header">The Theif</div>
               <div className="preview-section-text-sub-header">(suit)</div>
             </div>
           </div>
           <div className="preview-section wildcard">
-            <img src={wildcard} alt="" />
+            <div className="preview-section-image">
+              <img src={wildcardBox} alt="" />
+              <img className="checkbox" src={checkbox} alt="" />
+            </div>
             <div className="preview-section-text">
               <div className="preview-section-text-header">The Wildcard</div>
               <div className="preview-section-text-sub-header">
@@ -406,20 +535,32 @@ function Game({ userNfts }) {
         >
           Start
         </div>
-        <div className="send-my-team-button" onClick={() => handleSend()}>
+        <button
+          className="send-my-team-button"
+          onClick={() => handleSend()}
+          disabled={count < 3}
+        >
           Send my team!
-        </div>
+        </button>
         <div id="collection">
           <h2>Your Collection</h2>
           <p>Choose who to send</p>
           <div id="user-nfts">
             {userNfts?.result.length > 0 &&
               userNfts?.result.map((nft, index) => (
-                <div className="nft-container" key={index}>
+                <div
+                  className="nft-container"
+                  key={index}
+                  id={`nft-box-${index}`}
+                  onClick={() =>
+                    handleNtfBoxClick(JSON.parse(nft.metadata).image, index)
+                  }
+                >
                   <img
                     src={JSON.parse(nft.metadata).image}
                     className="nft-img"
                   />
+                  <img className="checkbox" src={checkbox} alt="" />
                 </div>
               ))}
           </div>
