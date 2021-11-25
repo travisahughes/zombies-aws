@@ -230,6 +230,25 @@ function Game({ userNfts }) {
       delay: 8,
     });
 
+    gsap.to('.shadow.alone', {
+      duration: 0.1,
+      display: 'none',
+      ease: 'power1.easeOut',
+      delay: 9,
+    });
+    gsap.to('.theif.alone', {
+      duration: 0.1,
+      display: 'none',
+      ease: 'power1.easeOut',
+      delay: 9,
+    });
+    gsap.to('.wildcard.alone', {
+      duration: 0.1,
+      display: 'none',
+      ease: 'power1.inOut',
+      delay: 9,
+    });
+
     gsap.to('.game-preview-header.preview', {
       duration: 1,
       opacity: 1,
@@ -251,22 +270,11 @@ function Game({ userNfts }) {
   };
 
   const handleStart = () => {
-    gsap.to('.shadow.alone', {
+    gsap.to('.preview-sections', {
       duration: 0.1,
-      display: 'none',
+      opacity: 0,
       ease: 'power1.easeOut',
     });
-    gsap.to('.theif.alone', {
-      duration: 0.1,
-      display: 'none',
-      ease: 'power1.easeOut',
-    });
-    gsap.to('.wildcard.alone', {
-      duration: 0.1,
-      display: 'none',
-      ease: 'power1.easeOut',
-    });
-
     gsap.to('.game-preview-start-button', {
       duration: 0.1,
       display: 'none',
@@ -292,10 +300,10 @@ function Game({ userNfts }) {
       delay: 0.5,
     });
     gsap.to('.game-preview-header.content', {
-      duration: 0.1,
-      display: 'block',
+      duration: 0.5,
+      opacity: 1,
       ease: 'power1.inOut',
-      delay: 0.5,
+      delay: 1,
     });
     gsap.to('.game-preview-header.content', {
       duration: 0.5,
@@ -303,6 +311,14 @@ function Game({ userNfts }) {
       ease: 'power1.inOut',
       delay: 0.5,
     });
+
+    gsap.to('.preview-sections', {
+      duration: 0.5,
+      opacity: 1,
+      ease: 'power1.inOut',
+      delay: 1,
+    });
+
     gsap.to('#collection', {
       duration: 0.1,
       display: 'block',
@@ -315,14 +331,16 @@ function Game({ userNfts }) {
       ease: 'power1.inOut',
       delay: 0.5,
     });
+
     gsap.to('.game-preview', {
       duration: 0.5,
-      marginTop: 129,
+      paddingTop: 235,
       ease: 'power1.inOut',
+      delay: 1.5,
     });
     gsap.to('.game-preview', {
       duration: 0.5,
-      marginBottom: 64,
+      paddingBottom: 64,
       ease: 'power1.inOut',
     });
   };
