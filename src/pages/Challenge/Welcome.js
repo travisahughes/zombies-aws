@@ -6,7 +6,7 @@ import bgimg from '../../assets/challenge/challengebg.png';
 import rainingeth from '../../assets/challenge/rainingeth.png';
 import './Welcome.css';
 
-function Welcome({ setActivePage, authenticate, isAuthenticated }) {
+function Welcome({ authenticate, isAuthenticated }) {
   const history = useHistory();
   const challengeCss = css`
     background-image: url(${bgimg});
@@ -79,16 +79,12 @@ function Welcome({ setActivePage, authenticate, isAuthenticated }) {
       </div>
       <div className="content-section">
         {!isAuthenticated && (
-          <div
-            id="login"
-            className="btn"
-            onClick={() => history.push('/challenge/info')}
-          >
+          <div id="login" className="btn" onClick={() => authenticate()}>
             Connect Your Wallet
           </div>
         )}
         {isAuthenticated && (
-          <div className="btn" onClick={() => history.push('/game')}>
+          <div className="btn" onClick={() => history.push('/challenge/info')}>
             Face Your Challenge
           </div>
         )}

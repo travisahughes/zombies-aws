@@ -60,7 +60,6 @@ function Challenge() {
             <Switch>
               <Route path="/challenge/welcome">
                 <Welcome
-                  setActivePage={setActivePage}
                   authenticate={authenticate}
                   isAuthenticated={isAuthenticated}
                 />
