@@ -13,7 +13,7 @@ import Info from './Info';
 function Challenge() {
   const [activePage, setActivePage] = useState('welcome');
   const { authenticate, isAuthenticated, user } = useMoralis();
-  let CONTRACT_ID = '0xeA7500664c4cCb77A89479a1daa75d59e2FBc97f';
+  let CONTRACT_ID = '0x4e68891b8b491dd128981ed14fb0a1eee59012b4';
   let NETWORK = 'rinkeby';
 
   const Web3Api = useMoralisWeb3Api();
