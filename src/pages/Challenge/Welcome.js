@@ -1,11 +1,13 @@
 /** @jsxImportSource @emotion/react */
 
 import { css } from '@emotion/react';
+import { useHistory } from 'react-router-dom';
 import bgimg from '../../assets/challenge/challengebg.png';
 import rainingeth from '../../assets/challenge/rainingeth.png';
 import './Welcome.css';
 
 function Welcome({ setActivePage, authenticate, isAuthenticated }) {
+  const history = useHistory();
   const challengeCss = css`
     background-image: url(${bgimg});
     background-size: 100% auto;
@@ -77,12 +79,16 @@ function Welcome({ setActivePage, authenticate, isAuthenticated }) {
       </div>
       <div className="content-section">
         {!isAuthenticated && (
-          <div id="login" className="btn" onClick={() => authenticate()}>
+          <div
+            id="login"
+            className="btn"
+            onClick={() => history.push('/challenge/info')}
+          >
             Connect Your Wallet
           </div>
         )}
         {isAuthenticated && (
-          <div className="btn" onClick={() => setActivePage('game')}>
+          <div className="btn" onClick={() => history.push('/game')}>
             Face Your Challenge
           </div>
         )}

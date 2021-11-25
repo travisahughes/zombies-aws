@@ -8,6 +8,7 @@ import Nav from '../../Components/Nav';
 import Welcome from './Welcome';
 import Game from './Game';
 import Results from './Results';
+import Info from './Info';
 
 function Challenge() {
   const [activePage, setActivePage] = useState('welcome');
@@ -57,21 +58,21 @@ function Challenge() {
         <div className="body">
           <Router>
             <Switch>
-              <Route path="/welcome">
+              <Route path="/challenge/welcome">
                 <Welcome
                   setActivePage={setActivePage}
                   authenticate={authenticate}
                   isAuthenticated={isAuthenticated}
                 />
               </Route>
-              <Route path="/info">
-                <Welcome
+              <Route path="/challenge/info">
+                <Info
                   setActivePage={setActivePage}
                   authenticate={authenticate}
                   isAuthenticated={isAuthenticated}
                 />
               </Route>
-              <Route path="/game">
+              <Route path="/challenge/game">
                 <Game setActivePage={setActivePage} userNfts={userNfts} />
               </Route>
               <Route path="/">

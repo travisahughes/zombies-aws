@@ -1,0 +1,35 @@
+.info-page {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.zombie-image {
+  position: absolute;
+  left: calc(50% - 300px);
+  top: calc(50% - 300px);
+  opacity: 0;
+  z-index: 1;
+}
+
+.welcome-text {
+  text-align: center;
+  opacity: 1;
+}
+
+.your-challenge-text {
+  text-align: center;
+  position: absolute;
+  bottom: calc(50% - 300px);
+  left: 25%;
+  width: 50%;
+  opacity: 0;
+  z-index: 2;
+}
+
+.info-page-background {
+  position: absolute;
+  right: 0;
+  top: 0;
+  opacity: 0;
+}
