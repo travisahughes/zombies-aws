@@ -1,13 +1,17 @@
 /** @jsxImportSource @emotion/react */
 
+import { useEffect } from 'react';
 import { css } from '@emotion/react';
+import gsap from 'gsap';
 
 import Card from '../../Components/Card';
+import shadow from '../../assets/game/shadow.png';
+import theif from '../../assets/game/theif.png';
+import wildcard from '../../assets/game/wildcard.png';
+import './Game.css';
+const maxes = [];
 
-function Game({ setActivePage, userNfts }) {
-  console.log('game nfts', userNfts);
-
-  // Stealing all Travis' Zombies
+function Game({ userNfts }) {
   userNfts = {
     total: 8,
     page: 0,
@@ -138,40 +142,15 @@ function Game({ setActivePage, userNfts }) {
   };
 
   const containerCss = css`
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto 20px auto;
-    padding: 0 20px;
-
-    .pending {
-      opacity: 0.5;
-    }
-
-    .content-section {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-self: center;
-      color: white;
-      text-align: center;
-      max-width: 800px;
-
-      h1 {
-        font-family: teko;
-        text-transform: uppercase;
-        font-size: 45px;
-        line-height: 45px;
-        font-weight: 400;
-        color: #ffffff;
-      }
-    }
+    width: 100%;
+    height: 100%;
 
     #collection {
       max-width: 1300px;
       align-self: center;
       text-align: center;
-      display: flex;
+      display: none;
+      opacity: 0;
       flex-direction: column;
 
       #user-nfts {
@@ -201,123 +180,256 @@ function Game({ setActivePage, userNfts }) {
         }
       }
     }
-
-    .target-cards {
-      margin: 38px;
-      &:first-of-type {
-        margin-left: 0px;
-      }
-      &:last-of-type {
-        margin-right: 0px;
-      }
-    }
   `;
 
-  let draggingImgSrc = null;
-  let draggingImgAttrs = null;
-  let pendingTarget = null;
+  useEffect(() => {
+    playAnimation();
+    return () => {
+      maxes.forEach((max) => {
+        max.kill();
+      });
+    };
+  }, []);
 
-  function onDragStart(e, attributes) {
-    draggingImgSrc = e.target.src;
-    draggingImgAttrs = attributes;
-  }
+  const playAnimation = () => {
+    gsap.to('.shadow.alone', {
+      duration: 1,
+      opacity: 1,
+      ease: 'power1.inOut',
+    });
+    gsap.to('.shadow.alone', {
+      duration: 1,
+      opacity: 0,
+      ease: 'power1.easeOut',
+      delay: 2,
+    });
 
-  function onDrop(e) {
-    pendingTarget = null;
-    e.target.classList.remove('pending');
-  }
+    gsap.to('.theif.alone', {
+      duration: 1,
+      opacity: 1,
+      ease: 'power1.inOut',
+      delay: 3,
+    });
+    gsap.to('.theif.alone', {
+      duration: 1,
+      opacity: 0,
+      ease: 'power1.easeOut',
+      delay: 5,
+    });
 
-  function meetsReqs(el, attrs) {
-    return !!draggingImgAttrs.filter((obj) => {
-      return (
-        obj.trait_type === el.dataset.reqType &&
-        obj.value === el.dataset.reqValue
-      );
-    }).length;
-  }
+    gsap.to('.wildcard.alone', {
+      duration: 1,
+      opacity: 1,
+      ease: 'power1.inOut',
+      delay: 6,
+    });
+    gsap.to('.wildcard.alone', {
+      duration: 1,
+      opacity: 0,
+      ease: 'power1.easeOut',
+      delay: 8,
+    });
 
-  function onDragEnter(e) {
-    if (e.target.classList.contains('target-cards')) {
-      if (meetsReqs(e.target, draggingImgAttrs)) {
-        let targetImg = e.target.querySelector('img');
-        if (targetImg) {
-          targetImg.classList.add('pending');
-          targetImg.src = draggingImgSrc;
-          pendingTarget = targetImg;
-        }
-      }
-    }
-  }
+    gsap.to('.game-preview-header.preview', {
+      duration: 1,
+      opacity: 1,
+      ease: 'power1.inOut',
+      delay: 9,
+    });
+    gsap.to('.preview-sections', {
+      duration: 1,
+      opacity: 1,
+      ease: 'power1.inOut',
+      delay: 9,
+    });
+    gsap.to('.game-preview-start-button', {
+      duration: 1,
+      opacity: 1,
+      ease: 'power1.inOut',
+      delay: 9,
+    });
+  };
 
-  function onDragEnd(e) {
-    if (pendingTarget) {
-      pendingTarget.src = '';
-    }
-  }
+  const handleStart = () => {
+    gsap.to('.shadow.alone', {
+      duration: 0.1,
+      display: 'none',
+      ease: 'power1.easeOut',
+    });
+    gsap.to('.theif.alone', {
+      duration: 0.1,
+      display: 'none',
+      ease: 'power1.easeOut',
+    });
+    gsap.to('.wildcard.alone', {
+      duration: 0.1,
+      display: 'none',
+      ease: 'power1.easeOut',
+    });
+
+    gsap.to('.game-preview-start-button', {
+      duration: 0.1,
+      display: 'none',
+      ease: 'power1.easeOut',
+    });
+
+    gsap.to('.send-my-team-button', {
+      duration: 0.1,
+      display: 'flex',
+      ease: 'power1.easeOut',
+      delay: 0.5,
+    });
+    gsap.to('.send-my-team-button', {
+      duration: 0.5,
+      opacity: 1,
+      ease: 'power1.inOut',
+      delay: 0.5,
+    });
+    gsap.to('.game-preview-header.preview', {
+      duration: 0.5,
+      opacity: 0,
+      ease: 'power1.easeOut',
+      delay: 0.5,
+    });
+    gsap.to('.game-preview-header.content', {
+      duration: 0.1,
+      display: 'block',
+      ease: 'power1.inOut',
+      delay: 0.5,
+    });
+    gsap.to('.game-preview-header.content', {
+      duration: 0.5,
+      opacity: 1,
+      ease: 'power1.inOut',
+      delay: 0.5,
+    });
+    gsap.to('#collection', {
+      duration: 0.1,
+      display: 'block',
+      ease: 'power1.inOut',
+      delay: 0.5,
+    });
+    gsap.to('#collection', {
+      duration: 1,
+      opacity: 1,
+      ease: 'power1.inOut',
+      delay: 0.5,
+    });
+    gsap.to('.game-preview', {
+      duration: 0.5,
+      marginTop: 129,
+      ease: 'power1.inOut',
+    });
+    gsap.to('.game-preview', {
+      duration: 0.5,
+      marginBottom: 64,
+      ease: 'power1.inOut',
+    });
+  };
+
+  // function meetsReqs(el, attrs) {
+  //   return !!draggingImgAttrs.filter((obj) => {
+  //     return (
+  //       obj.trait_type === el.dataset.reqType &&
+  //       obj.value === el.dataset.reqValue
+  //     );
+  //   }).length;
+  // }
 
   return (
     <div css={containerCss}>
-      <div className="content-section">
-        <h1>Your NFZ Crew Requirements</h1>
-      </div>
-      <div className="content-section">
-        <p>
-          Glad we can count on you! To pull off this heist, you’ll need to build
-          a team with these traits
-        </p>
-      </div>
-      <div className="content-section">
-        <div
-          className="target-cards"
-          draggable="true"
-          onDragOver={(event) => event.preventDefault()}
-          onDragEnter={onDragEnter}
-          onDrop={onDrop}
-          data-req-type="Background"
-          data-req-value="Charcoal"
-        >
-          <Card subtitle="Charcoal Background" />
+      <div className="game-preview">
+        <div className="game-preview-header preview">
+          <div className="game-preview-header-title">Recruit your team</div>
+          <div className="game-preview-header-desc">
+            Glad we can count on you! To pull off this heist, you’ll need to
+            build a team with these traits
+          </div>
         </div>
-        <div
-          className="target-cards"
-          draggable="true"
-          onDragOver={(event) => event.preventDefault()}
-          onDragEnter={onDragEnter}
-          onDrop={onDrop}
-          data-type="Eye_wear"
-          data-value="Burglar"
-        >
-          <Card subtitle="Burglar Eye Wear" draggable="true" />
+        <div className="game-preview-header content">
+          <div className="game-preview-header-title">
+            Your NFZ Crew Requirements
+          </div>
+          <div className="game-preview-header-desc">
+            Glad we can count on you! To pull off this heist, you’ll need to
+            build a team with these traits
+          </div>
         </div>
-        <div
-          className="target-cards"
-          draggable="true"
-          onDragOver={(event) => event.preventDefault()}
-          onDragEnter={onDragEnter}
-          onDrop={onDrop}
-        >
-          <Card subtitle="Any NFZ" draggable="true" />
-        </div>
-      </div>
-      <div id="collection">
-        <h2>Your Collection</h2>
-        <p>Choose who to send</p>
-        <div id="user-nfts">
-          {userNfts?.result.length > 0 &&
-            userNfts?.result.map((nft, index) => (
-              <div className="nft-container" key={index}>
-                <img
-                  src={JSON.parse(nft.metadata).image}
-                  className="nft-img"
-                  draggable="true"
-                  onDragStart={(event) =>
-                    onDragStart(event, JSON.parse(nft.metadata).attributes)
-                  }
-                  onDragOver={(event) => event.preventDefault()}
-                  onDragEnd={onDragEnd}
-                />
+        <div className="preview-sections">
+          <div className="preview-section shadow">
+            <img src={shadow} alt="" />
+            <div className="preview-section-text">
+              <div className="preview-section-text-header">The Shadow</div>
+              <div className="preview-section-text-sub-header">
+                (charcol background)
               </div>
-            ))}
+            </div>
+          </div>
+          <div className="preview-section theif">
+            <img src={theif} alt="" />
+            <div className="preview-section-text">
+              <div className="preview-section-text-header">The Theif</div>
+              <div className="preview-section-text-sub-header">(suit)</div>
+            </div>
+          </div>
+          <div className="preview-section wildcard">
+            <img src={wildcard} alt="" />
+            <div className="preview-section-text">
+              <div className="preview-section-text-header">The Wildcard</div>
+              <div className="preview-section-text-sub-header">
+                (your favorite NFZ)
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="game-preview-start-button"
+          onClick={() => handleStart()}
+        >
+          Start
+        </div>
+        <div className="send-my-team-button" onClick={() => handleSend()}>
+          Send my team!
+        </div>
+        <div id="collection">
+          <h2>Your Collection</h2>
+          <p>Choose who to send</p>
+          <div id="user-nfts">
+            {userNfts?.result.length > 0 &&
+              userNfts?.result.map((nft, index) => (
+                <div className="nft-container" key={index}>
+                  <img
+                    src={JSON.parse(nft.metadata).image}
+                    className="nft-img"
+                  />
+                </div>
+              ))}
+          </div>
+        </div>
+        <div className="preview-section shadow alone">
+          <img src={shadow} alt="" />
+          <div className="preview-section-text">
+            <div className="preview-section-text-header">The Shadow</div>
+            <div className="preview-section-text-sub-header">
+              (charcol background)
+            </div>
+          </div>
+        </div>
+        <div className="preview-section theif alone">
+          <img src={theif} alt="" />
+          <div className="preview-section-text">
+            <div className="preview-section-text-header">The Theif</div>
+            <div className="preview-section-text-sub-header">(suit)</div>
+          </div>
+        </div>
+        <div className="preview-section wildcard alone">
+          <img src={wildcard} alt="" />
+          <div className="preview-section-text">
+            <div className="preview-section-text-header">The Wildcard</div>
+            <div className="preview-section-text-sub-header">
+              (your favorite NFZ)
+            </div>
+          </div>
         </div>
       </div>
     </div>

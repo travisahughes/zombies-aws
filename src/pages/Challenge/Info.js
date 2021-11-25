@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import gsap from 'gsap';
 import zombie from '../../assets/challenge/info-zombie.png';
 import background from '../../assets/challenge/info-background.png';
@@ -9,7 +10,8 @@ import './Info.css';
 
 const maxes = [];
 
-function Info({ userNfts }) {
+function Info() {
+  const history = useHistory();
   useEffect(() => {
     playAnimation();
     return () => {
@@ -99,7 +101,13 @@ function Info({ userNfts }) {
       opacity: 1,
       ease: 'power1.inOut',
       delay: 6,
+      onComplete: handleNavigate,
     });
+  };
+  const handleNavigate = () => {
+    setTimeout(() => {
+      history.push('/challenge/game');
+    }, 4500);
   };
   return (
     <div className="info-page">
