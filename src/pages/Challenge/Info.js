@@ -25,38 +25,38 @@ function Info() {
     gsap.to('.zombie-image', {
       duration: 3,
       opacity: 100,
-      delay: 2,
+      delay: 1,
       ease: 'power1.inOut',
     });
 
     gsap.to('.zombie-image', {
       duration: 0.5,
       left: 0,
-      delay: 5,
+      delay: 4,
       ease: 'power1.inOut',
     });
     gsap.to('.welcome-text', {
       duration: 0.5,
       opacity: 0,
-      delay: 5,
+      delay: 4,
       ease: 'power1.inOut',
     });
     gsap.to('.your-challenge-text', {
       duration: 0.5,
       opacity: 100,
-      delay: 5,
+      delay: 4,
       ease: 'power1.inOut',
     });
     gsap.to('.info-page-background', {
       duration: 0.5,
       opacity: 100,
-      delay: 5,
+      delay: 4,
       ease: 'power1.inOut',
     });
     gsap.to('.next-step-button', {
       duration: 0.5,
       opacity: 100,
-      delay: 5,
+      delay: 4,
       ease: 'power1.inOut',
     });
   };

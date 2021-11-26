@@ -9,6 +9,7 @@ import './Welcome.css';
 function Welcome({ authenticate, isAuthenticated }) {
   const history = useHistory();
   const challengeCss = css`
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 51.27%, #000000 100%);
     background-image: url(${bgimg});
     background-size: 100% auto;
     background-position: top;
@@ -45,6 +46,16 @@ function Welcome({ authenticate, isAuthenticated }) {
       padding: 20px;
       cursor: pointer;
       margin: 8px;
+      -webkit-transition: border 500ms ease-out;
+      -moz-transition: border 500ms ease-out;
+      -o-transition: border 500ms ease-out;
+      transition: border 500ms ease-out;
+    }
+
+    .btn:hover {
+      border: 3px solid #ccee25;
+      box-sizing: border-box;
+      filter: drop-shadow(0px 0px 4px #ccee25);
     }
 
     .content-section {
