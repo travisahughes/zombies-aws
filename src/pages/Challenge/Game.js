@@ -572,14 +572,22 @@ function Game({ userNfts }) {
           </div>
           <div className="final-bottom-buttons-header">Let'em know!</div>
           <div className="final-buttom-buttons">
-            <div className="final-button discord-button">
+            <a
+              className="final-button discord-button"
+              href="https://www.twitter.com/nicefunzombies"
+              target="_blank"
+            >
               <img src={discord} alt="" />
               <div className="final-button-text">Discord</div>
-            </div>
-            <div className="final-button twitter-button">
+            </a>
+            <a
+              className="final-button twitter-button"
+              href="https://discord.gg/77VswFkcuY"
+              target="_blank"
+            >
               <img src={twitter} alt="" />
               <div className="final-button-text">Twitter</div>
-            </div>
+            </a>
           </div>
         </div>
         <div className="game-preview-header preview">
