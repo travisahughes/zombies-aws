@@ -233,6 +233,11 @@ function Game({ userNfts }) {
   }, []);
 
   const playAnimation = () => {
+    gsap.to('.game-preview', {
+      duration: 0.5,
+      opacity: 1,
+      ease: 'power1.inOut',
+    });
     gsap.to('.shadow.alone', {
       duration: 1,
       opacity: 1,
