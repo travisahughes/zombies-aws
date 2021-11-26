@@ -4,11 +4,13 @@ import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import gsap from 'gsap';
 
-import Card from '../../Components/Card';
 import shadow from '../../assets/game/shadow.png';
 import theif from '../../assets/game/theif.png';
 import wildcard from '../../assets/game/wildcard.png';
 import checkbox from '../../assets/game/check.png';
+import pigeon from '../../assets/challenge/pigeon.png';
+import discord from '../../assets/icons/discord.png';
+import twitter from '../../assets/icons/twitter.png';
 
 import './Game.css';
 const maxes = [];
@@ -21,19 +23,19 @@ function Game({ userNfts }) {
 
   useEffect(() => {
     if (count === 1) {
-      gsap.to('.preview-sections .preview-section.shadow .checkbox', {
+      gsap.to('.preview-sections.preview .preview-section.shadow .checkbox', {
         duration: 0.5,
         opacity: 1,
         ease: 'power1.inOut',
       });
     } else if (count === 2) {
-      gsap.to('.preview-sections .preview-section.theif .checkbox', {
+      gsap.to('.preview-sections.preview .preview-section.theif .checkbox', {
         duration: 0.5,
         opacity: 1,
         ease: 'power1.inOut',
       });
     } else {
-      gsap.to('.preview-sections .preview-section.wildcard .checkbox', {
+      gsap.to('.preview-sections.preview .preview-section.wildcard .checkbox', {
         duration: 0.5,
         opacity: 1,
         ease: 'power1.inOut',
@@ -180,6 +182,7 @@ function Game({ userNfts }) {
       display: none;
       opacity: 0;
       flex-direction: column;
+      z-index: 3;
 
       #user-nfts {
         display: flex;
@@ -293,7 +296,7 @@ function Game({ userNfts }) {
       ease: 'power1.inOut',
       delay: 9,
     });
-    gsap.to('.preview-sections', {
+    gsap.to('.preview-sections.preview', {
       duration: 1,
       opacity: 1,
       ease: 'power1.inOut',
@@ -356,6 +359,11 @@ function Game({ userNfts }) {
       ease: 'power1.inOut',
       delay: 0.5,
     });
+    gsap.to('.game-preview', {
+      duration: 0.1,
+      overflow: 'hidden',
+      ease: 'power1.inOut',
+    });
     gsap.to('.game-preview-header.content', {
       duration: 0.5,
       opacity: 0,
@@ -369,28 +377,107 @@ function Game({ userNfts }) {
       delay: 0.5,
     });
 
-    gsap.to('.preview-sections .preview-section.shadow', {
+    gsap.to('.preview-sections.preview .preview-section.shadow', {
       duration: 0.5,
       opacity: 0,
       ease: 'power1.easeOut',
       delay: 1,
     });
-    gsap.to('.preview-sections .preview-section.theif', {
+    gsap.to('.preview-sections.preview .preview-section.theif', {
       duration: 0.5,
       opacity: 0,
       ease: 'power1.easeOut',
       delay: 1.5,
     });
-    gsap.to('.preview-sections .preview-section.wildcard', {
+    gsap.to('.preview-sections.preview .preview-section.wildcard', {
       duration: 0.5,
       opacity: 0,
       ease: 'power1.easeOut',
       delay: 2,
     });
+
+    gsap.to('.preview-sections.preview', {
+      duration: 0.1,
+      display: 'none',
+      ease: 'power1.easeOut',
+      delay: 2.5,
+    });
+
+    gsap.to('.preview-sections.final', {
+      duration: 0.1,
+      display: 'flex',
+      ease: 'power1.easeOut',
+      delay: 2.5,
+    });
+
+    gsap.to('.pigeon', {
+      duration: 0.5,
+      opacity: 1,
+      ease: 'power1.easeOut',
+      delay: 2.5,
+    });
+    gsap.to('.pigeon', {
+      duration: 0.5,
+      scale: 1,
+      ease: 'power1.easeOut',
+      delay: 2.5,
+    });
+
+    gsap.to('.background-wrapper', {
+      duration: 0.5,
+      opacity: 1,
+      delay: 3,
+    });
+
+    gsap.from('.preview-sections.final .preview-section.shadow', {
+      duration: 0.5,
+      x: -100,
+      ease: 'power1.easeOut',
+      delay: 3,
+    });
+    gsap.to('.preview-sections.final .preview-section.shadow', {
+      duration: 0.5,
+      opacity: 1,
+      ease: 'power1.easeOut',
+      delay: 3.2,
+    });
+
+    gsap.from('.preview-sections.final .preview-section.theif', {
+      duration: 0.5,
+      y: -500,
+      ease: 'power1.easeOut',
+      delay: 3,
+    });
+    gsap.to('.preview-sections.final .preview-section.theif', {
+      duration: 0.5,
+      opacity: 1,
+      ease: 'power1.easeOut',
+      delay: 3.2,
+    });
+
+    gsap.from('.preview-sections.final .preview-section.wildcard', {
+      duration: 0.5,
+      x: 1100,
+      ease: 'power1.easeOut',
+      delay: 3,
+    });
+    gsap.to('.preview-sections.final .preview-section.wildcard', {
+      duration: 0.5,
+      opacity: 1,
+      ease: 'power1.easeOut',
+      delay: 3.2,
+    });
+
+    gsap.to('.final-bottom', {
+      duration: 0.5,
+      opacity: 1,
+      ease: 'power1.easeOut',
+      delay: 3,
+    });
   };
 
   const handleStart = () => {
-    gsap.to('.preview-sections', {
+    gsap.to('.preview-sections.preview', {
       duration: 0.1,
       opacity: 0,
       ease: 'power1.easeOut',
@@ -423,16 +510,10 @@ function Game({ userNfts }) {
       duration: 0.5,
       opacity: 1,
       ease: 'power1.inOut',
-      delay: 1,
-    });
-    gsap.to('.game-preview-header.content', {
-      duration: 0.5,
-      opacity: 1,
-      ease: 'power1.inOut',
-      delay: 0.5,
+      delay: 1.5,
     });
 
-    gsap.to('.preview-sections', {
+    gsap.to('.preview-sections.preview', {
       duration: 0.5,
       opacity: 1,
       ease: 'power1.inOut',
@@ -477,6 +558,30 @@ function Game({ userNfts }) {
   return (
     <div css={containerCss}>
       <div className="game-preview">
+        <div className="background-wrapper" />
+        <div className="pigeon">
+          <img src={pigeon} alt="" />
+        </div>
+        <div className="final-bottom">
+          <div className="mb-2 text-3xl text-center text-white uppercase final-bottom-title">
+            achievement unlocked
+          </div>
+          <div className="mb-10 text-center text-white final-bottom-desc">
+            Your horde has risen to the challenge and won! We've added yoru
+            reward to your wallet.
+          </div>
+          <div className="final-bottom-buttons-header">Let'em know!</div>
+          <div className="final-buttom-buttons">
+            <div className="final-button discord-button">
+              <img src={discord} alt="" />
+              <div className="final-button-text">Discord</div>
+            </div>
+            <div className="final-button twitter-button">
+              <img src={twitter} alt="" />
+              <div className="final-button-text">Twitter</div>
+            </div>
+          </div>
+        </div>
         <div className="game-preview-header preview">
           <div className="game-preview-header-title">Recruit your team</div>
           <div className="game-preview-header-desc">
@@ -493,7 +598,7 @@ function Game({ userNfts }) {
             build a team with these traits
           </div>
         </div>
-        <div className="preview-sections">
+        <div className="preview-sections preview">
           <div className="preview-section shadow">
             <div className="preview-section-image">
               <img src={shadowBox} alt="" />
@@ -526,6 +631,26 @@ function Game({ userNfts }) {
               <div className="preview-section-text-sub-header">
                 (your favorite NFZ)
               </div>
+            </div>
+          </div>
+        </div>
+        <div className="preview-sections final">
+          <div className="preview-section shadow">
+            <div className="preview-section-image">
+              <img src={shadowBox} alt="" />
+              <img className="checkbox" src={checkbox} alt="" />
+            </div>
+          </div>
+          <div className="preview-section theif">
+            <div className="preview-section-image">
+              <img src={theifBox} alt="" />
+              <img className="checkbox" src={checkbox} alt="" />
+            </div>
+          </div>
+          <div className="preview-section wildcard">
+            <div className="preview-section-image">
+              <img src={wildcardBox} alt="" />
+              <img className="checkbox" src={checkbox} alt="" />
             </div>
           </div>
         </div>
