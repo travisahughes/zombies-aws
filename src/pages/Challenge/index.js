@@ -11,7 +11,6 @@ import Results from './Results';
 import Info from './Info';
 
 function Challenge() {
-  const [activePage, setActivePage] = useState('welcome');
   const { authenticate, isAuthenticated, user } = useMoralis();
   let CONTRACT_ID = '0x4e68891b8b491dd128981ed14fb0a1eee59012b4';
   let NETWORK = 'rinkeby';
@@ -66,17 +65,15 @@ function Challenge() {
               </Route>
               <Route path="/challenge/info">
                 <Info
-                  setActivePage={setActivePage}
                   authenticate={authenticate}
                   isAuthenticated={isAuthenticated}
                 />
               </Route>
               <Route path="/challenge/game">
-                <Game setActivePage={setActivePage} userNfts={userNfts} />
+                <Game userNfts={userNfts} />
               </Route>
               <Route path="/">
                 <Welcome
-                  setActivePage={setActivePage}
                   authenticate={authenticate}
                   isAuthenticated={isAuthenticated}
                 />
