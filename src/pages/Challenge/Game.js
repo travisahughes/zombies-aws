@@ -68,7 +68,7 @@ function Game({ userNfts }) {
         contract_type: 'ERC721',
         token_uri: 'https://api.nicefunzombies.io/metadata/5',
         metadata:
-          '{"attributes":[{"value":"Closed","trait_type":"Eyes"},{"value":"Bulletproof Vest","trait_type":"Outfit"},{"value":"Macho","trait_type":"Hair"},{"value":"Strawberry","trait_type":"Background"},{"value":"Pacifier","trait_type":"Mouth"},{"value":"Generic","trait_type":"Type"},{"value":"Male","trait_type":"Gender"},{"value":"Pink","trait_type":"Color"},{"value":"Genesis","trait_type":"Group"}],"description":"NFZ","image":"https://images.nicefunzombies.io/5.png","name":"#5","zombieId":"5"}',
+          '{"attributes":[{"value":"Closed","trait_type":"Eyes"},{"value":"Bulletproof Vest","trait_type":"Outfit"},{"value":"Macho","trait_type":"Hair"},{"value":"Strawberry","trait_type":"Background"},{"value":"Pacifier","trait_type":"Mouth"},{"value":"Generic","trait_type":"Type"},{"value":"Male","trait_type":"Gender"},{"value":"Pink","trait_type":"Color"}],"description":"NFZ","image":"https://images.nicefunzombies.io/5.png","name":"#5","zombieId":"5"}',
         synced_at: '2021-11-11T01:27:20.055Z',
         name: 'Nice Fun Zombies',
         symbol: 'NFZ',
@@ -98,7 +98,7 @@ function Game({ userNfts }) {
         contract_type: 'ERC721',
         token_uri: 'https://api.nicefunzombies.io/metadata/1',
         metadata:
-          '{"attributes":[{"value":"Wide Blank","trait_type":"Eyes"},{"value":"None","trait_type":"Outfit"},{"value":"Messy Sandy","trait_type":"Hair"},{"value":"Crown","trait_type":"Head_gear"},{"value":"Gold","trait_type":"Background"},{"value":"Chewed Hand","trait_type":"Mouth"},{"value":"Generic","trait_type":"Type"},{"value":"Male","trait_type":"Gender"},{"value":"Green","trait_type":"Color"},{"value":"Genesis","trait_type":"Group"}],"description":"NFZ","image":"https://images.nicefunzombies.io/1.png","name":"#1","zombieId":"1"}',
+          '{"attributes":[{"value":"Wide Blank","trait_type":"Eyes"},{"value":"None","trait_type":"Outfit"},{"value":"Messy Sandy","trait_type":"Hair"},{"value":"Crown","trait_type":"Head_gear"},{"value":"Gold","trait_type":"Background"},{"value":"Chewed Hand","trait_type":"Mouth"},{"value":"Male","trait_type":"Gender"},{"value":"Green","trait_type":"Color"},{"value":"Genesis","trait_type":"Group"}],"description":"NFZ","image":"https://images.nicefunzombies.io/1.png","name":"#1","zombieId":"1"}',
         synced_at: '2021-11-11T01:27:20.071Z',
         name: 'Nice Fun Zombies',
         symbol: 'NFZ',
@@ -208,6 +208,22 @@ function Game({ userNfts }) {
           cursor: pointer;
           position: relative;
 
+          .genesis-text {
+            opacity: 0;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%);
+          }
+
+          &.genesis {
+            &:hover {
+              .genesis-text {
+                opacity: 1;
+              }
+            }
+          }
+
           .checkbox {
             opacity: 0;
             position: absolute;
@@ -228,6 +244,12 @@ function Game({ userNfts }) {
             cursor: grabbing;
             cursor: -moz-grabbing;
             cursor: -webkit-grabbing;
+          }
+
+          &:hover {
+            .nft-img {
+              opacity: 0.5;
+            }
           }
         }
       }
@@ -340,17 +362,17 @@ function Game({ userNfts }) {
       }
 
       if (item.trait_type === 'Group' && item.value === 'Genesis') {
-        if (!shadowBox) {
+        if (!shadowBox.image) {
           console.log('3');
           setShadowBox(metaData);
           return;
         }
-        if (!theifBox) {
+        if (!theifBox.image) {
           console.log('4');
           setTheifBox(metaData);
           return;
         }
-        if (!wildcardBox) {
+        if (!wildcardBox.image) {
           console.log('5');
           setWildcardBox(metaData);
         }
@@ -716,7 +738,14 @@ function Game({ userNfts }) {
             {userNfts?.result.length > 0 &&
               userNfts?.result.map((nft, index) => (
                 <div
-                  className="nft-container"
+                  className={`nft-container ${
+                    JSON.parse(nft.metadata).attributes.find(
+                      (item) =>
+                        item.trait_type === 'Group' && item.value === 'Genesis'
+                    )
+                      ? 'genesis'
+                      : ''
+                  }`}
                   key={index}
                   id={`nft-box-${index}`}
                   onClick={() =>
@@ -728,6 +757,7 @@ function Game({ userNfts }) {
                     className="nft-img"
                   />
                   <img className="checkbox" src={checkbox} alt="" />
+                  <div className="genesis-text">Genesis</div>
                 </div>
               ))}
           </div>
