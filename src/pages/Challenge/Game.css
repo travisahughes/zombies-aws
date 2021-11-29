@@ -47,6 +47,14 @@
   margin-bottom: 50px;
 }
 
+.preview-sections.preview {
+  z-index: 2;
+}
+
+.preview-sections.preview .preview-section {
+  cursor: pointer;
+}
+
 .preview-sections.final {
   display: none;
   opacity: 1;

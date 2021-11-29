@@ -19,11 +19,11 @@ function Game({ userNfts }) {
   const [shadowBox, setShadowBox] = useState({});
   const [theifBox, setTheifBox] = useState({});
   const [wildcardBox, setWildcardBox] = useState({});
-  const [count, setCount] = useState(0);
+  const [clickedItems, setClickedItems] = useState([]);
+  const [wildCardUsed, setWildCardUsed] = useState(false);
 
   useEffect(() => {
     if (shadowBox.image) {
-      setCount(1);
       gsap.to('.preview-sections.preview .preview-section.shadow .checkbox', {
         duration: 0.5,
         opacity: 1,
@@ -34,7 +34,6 @@ function Game({ userNfts }) {
 
   useEffect(() => {
     if (theifBox.image) {
-      setCount(2);
       gsap.to('.preview-sections.preview .preview-section.theif .checkbox', {
         duration: 0.5,
         opacity: 1,
@@ -45,7 +44,6 @@ function Game({ userNfts }) {
 
   useEffect(() => {
     if (wildcardBox.image) {
-      setCount(3);
       gsap.to('.preview-sections.preview .preview-section.wildcard .checkbox', {
         duration: 0.5,
         opacity: 1,
@@ -348,37 +346,220 @@ function Game({ userNfts }) {
     });
   };
 
+  const getTrait = (trait, md) => {
+    for (let x = 0; x < md.length; x++) {
+      if (md[x].trait_type === trait) {
+        return md[x].value;
+      }
+    }
+    return null;
+  };
+
+  const handleClickBox = (box) => {
+    let index = -1;
+    if (box === 'shadow') {
+      index = clickedItems.indexOf(shadowBox.index);
+      setShadowBox({});
+      gsap.to(`#nft-box-${shadowBox.index} .checkbox`, {
+        duration: 0.5,
+        opacity: 0,
+        ease: 'power1.easeOut',
+      });
+      gsap.to(`#nft-box-${shadowBox.index} .nft-img`, {
+        duration: 0.5,
+        opacity: 1,
+        ease: 'power1.easeOut',
+      });
+    } else if (box === 'theif') {
+      index = clickedItems.indexOf(theifBox.index);
+      setTheifBox({});
+      gsap.to(`#nft-box-${theifBox.index} .checkbox`, {
+        duration: 0.5,
+        opacity: 0,
+        ease: 'power1.easeOut',
+      });
+      gsap.to(`#nft-box-${theifBox.index} .nft-img`, {
+        duration: 0.5,
+        opacity: 1,
+        ease: 'power1.easeOut',
+      });
+    } else {
+      index = clickedItems.indexOf(wildcardBox.index);
+      setWildcardBox({});
+      gsap.to(`#nft-box-${wildcardBox.index} .checkbox`, {
+        duration: 0.5,
+        opacity: 0,
+        ease: 'power1.easeOut',
+      });
+      gsap.to(`#nft-box-${wildcardBox.index} .nft-img`, {
+        duration: 0.5,
+        opacity: 1,
+        ease: 'power1.easeOut',
+      });
+    }
+
+    if (index > -1) {
+      clickedItems.splice(index, 1);
+
+      gsap.to(`.preview-sections.preview .preview-section.${box} .checkbox`, {
+        duration: 0.5,
+        opacity: 0,
+        ease: 'power1.easeOut',
+      });
+    }
+  };
+
   const handleNtfBoxClick = (metaData, index) => {
-    console.log('--------', metaData);
-    metaData.attributes.forEach((item) => {
-      if (item.trait_type === 'Background' && item.value === 'Charcoal') {
-        console.log('1');
-        setShadowBox(metaData);
+    console.log('------------', metaData);
+    console.log('click event clickedItems', clickedItems);
+    if (
+      clickedItems.includes(index) ||
+      (shadowBox.image && theifBox.image && wildcardBox.image)
+    ) {
+      return;
+    }
+    if (getTrait('Background', metaData.attributes) === 'Charcoal') {
+      if (
+        shadowBox.image &&
+        getTrait('Group', shadowBox.attributes) === 'Genesis'
+      ) {
+        setWildCardUsed(false);
+        handleClickBox('shadow');
+      }
+      setShadowBox({
+        ...metaData,
+        index,
+      });
+      console.log('1');
+      const customClickedItems = [...clickedItems];
+      setClickedItems([...customClickedItems, index]);
+      gsap.to(`#nft-box-${index} .checkbox`, {
+        duration: 0.5,
+        opacity: 1,
+        ease: 'power1.inOut',
+      });
+      gsap.to(`#nft-box-${index} .nft-img`, {
+        duration: 0.5,
+        opacity: 0.5,
+        ease: 'power1.inOut',
+      });
+      return;
+    }
+
+    if (getTrait('Eye_wear', metaData.attributes) === 'Burglar') {
+      if (
+        theifBox.image &&
+        getTrait('Group', theifBox.attributes) === 'Genesis'
+      ) {
+        setWildCardUsed(false);
+        handleClickBox('theif');
+      }
+      setTheifBox({
+        ...metaData,
+        index,
+      });
+
+      console.log('2');
+      const customClickedItems = [...clickedItems];
+      setClickedItems([...customClickedItems, index]);
+      gsap.to(`#nft-box-${index} .checkbox`, {
+        duration: 0.5,
+        opacity: 1,
+        ease: 'power1.inOut',
+      });
+      gsap.to(`#nft-box-${index} .nft-img`, {
+        duration: 0.5,
+        opacity: 0.5,
+        ease: 'power1.inOut',
+      });
+      return;
+    }
+
+    if (getTrait('Group', metaData.attributes) === 'Genesis') {
+      if (wildCardUsed) {
+        return;
+      }
+      console.log('genesis case', shadowBox, theifBox, wildcardBox);
+      if (!shadowBox.image) {
+        console.log('3');
+        setShadowBox({
+          ...metaData,
+          index,
+        });
+        const customClickedItems = [...clickedItems];
+        setClickedItems([...customClickedItems, index]);
+        gsap.to(`#nft-box-${index} .checkbox`, {
+          duration: 0.5,
+          opacity: 1,
+          ease: 'power1.inOut',
+        });
+        gsap.to(`#nft-box-${index} .nft-img`, {
+          duration: 0.5,
+          opacity: 0.5,
+          ease: 'power1.inOut',
+        });
+        setWildCardUsed(true);
+        return;
+      }
+      if (!theifBox.image) {
+        console.log('4');
+        setTheifBox({
+          ...metaData,
+          index,
+        });
+        const customClickedItems = [...clickedItems];
+        setClickedItems([...customClickedItems, index]);
+        gsap.to(`#nft-box-${index} .checkbox`, {
+          duration: 0.5,
+          opacity: 1,
+          ease: 'power1.inOut',
+        });
+        gsap.to(`#nft-box-${index} .nft-img`, {
+          duration: 0.5,
+          opacity: 0.5,
+          ease: 'power1.inOut',
+        });
+        setWildCardUsed(true);
+        return;
       }
 
-      if (item.trait_type === 'Eye_wear' && item.value === 'Burglar') {
-        console.log('2');
-        setTheifBox(metaData);
+      if (!wildcardBox.image) {
+        console.log('5');
+        setWildcardBox({
+          ...metaData,
+          index,
+        });
+        const customClickedItems = [...clickedItems];
+        setClickedItems([...customClickedItems, index]);
+        gsap.to(`#nft-box-${index} .checkbox`, {
+          duration: 0.5,
+          opacity: 1,
+          ease: 'power1.inOut',
+        });
+        gsap.to(`#nft-box-${index} .nft-img`, {
+          duration: 0.5,
+          opacity: 0.5,
+          ease: 'power1.inOut',
+        });
+        setWildCardUsed(true);
+        return;
       }
+    }
 
-      if (item.trait_type === 'Group' && item.value === 'Genesis') {
-        if (!shadowBox.image) {
-          console.log('3');
-          setShadowBox(metaData);
-          return;
-        }
-        if (!theifBox.image) {
-          console.log('4');
-          setTheifBox(metaData);
-          return;
-        }
-        if (!wildcardBox.image) {
-          console.log('5');
-          setWildcardBox(metaData);
-        }
-      }
+    console.log('6');
+    if (
+      wildcardBox.image &&
+      getTrait('Group', wildcardBox.attributes) === 'Genesis'
+    ) {
+      setWildCardUsed(false);
+      handleClickBox('wildcard');
+    }
+    setWildcardBox({
+      ...metaData,
+      index,
     });
-
+    const customClickedItems = [...clickedItems];
+    setClickedItems([...customClickedItems, index]);
     gsap.to(`#nft-box-${index} .checkbox`, {
       duration: 0.5,
       opacity: 1,
@@ -602,15 +783,7 @@ function Game({ userNfts }) {
     });
   };
 
-  // function meetsReqs(el, attrs) {
-  //   return !!draggingImgAttrs.filter((obj) => {
-  //     return (
-  //       obj.trait_type === el.dataset.reqType &&
-  //       obj.value === el.dataset.reqValue
-  //     );
-  //   }).length;
-  // }
-
+  console.log('render', clickedItems);
   return (
     <div css={containerCss}>
       <div className="game-preview">
@@ -663,7 +836,10 @@ function Game({ userNfts }) {
           </div>
         </div>
         <div className="preview-sections preview">
-          <div className="preview-section shadow">
+          <div
+            className="shadow preview-section"
+            onClick={() => handleClickBox('shadow')}
+          >
             <div className="preview-section-image">
               <img src={shadowBox.image || shadowImage} alt="" />
               <img className="checkbox" src={checkbox} alt="" />
@@ -675,7 +851,10 @@ function Game({ userNfts }) {
               </div>
             </div>
           </div>
-          <div className="preview-section theif">
+          <div
+            className="preview-section theif"
+            onClick={() => handleClickBox('theif')}
+          >
             <div className="preview-section-image">
               <img src={theifBox.image || theifImage} alt="" />
               <img className="checkbox" src={checkbox} alt="" />
@@ -685,7 +864,10 @@ function Game({ userNfts }) {
               <div className="preview-section-text-sub-header">(suit)</div>
             </div>
           </div>
-          <div className="preview-section wildcard">
+          <div
+            className="preview-section wildcard"
+            onClick={() => handleClickBox('wildcard')}
+          >
             <div className="preview-section-image">
               <img src={wildcardBox.image || wildcardImage} alt="" />
               <img className="checkbox" src={checkbox} alt="" />
@@ -699,7 +881,7 @@ function Game({ userNfts }) {
           </div>
         </div>
         <div className="preview-sections final">
-          <div className="preview-section shadow">
+          <div className="shadow preview-section">
             <div className="preview-section-image">
               <img src={shadowBox.image || shadowImage} alt="" />
               <img className="checkbox" src={checkbox} alt="" />
@@ -727,7 +909,7 @@ function Game({ userNfts }) {
         <button
           className="send-my-team-button"
           onClick={() => handleSend()}
-          disabled={count < 3}
+          disabled={!shadowBox.image && !theifBox.image && !wildcardBox.image}
         >
           Send my team!
         </button>
@@ -762,7 +944,7 @@ function Game({ userNfts }) {
               ))}
           </div>
         </div>
-        <div className="preview-section shadow alone">
+        <div className="shadow preview-section alone">
           <img src={shadowImage} alt="" />
           <div className="preview-section-text">
             <div className="preview-section-text-header">The Shadow</div>
