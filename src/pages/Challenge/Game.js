@@ -8,7 +8,7 @@ import shadowImage from '../../assets/game/shadow.png';
 import theifImage from '../../assets/game/theif.png';
 import wildcardImage from '../../assets/game/wildcard.png';
 import checkbox from '../../assets/game/check.png';
-import pigeon from '../../assets/challenge/pigeon.png';
+import comic from '../../assets/challenge/comic.png';
 import discord from '../../assets/icons/discord.png';
 import twitter from '../../assets/icons/twitter.png';
 
@@ -339,10 +339,16 @@ function Game({ userNfts }) {
       delay: 9,
     });
     gsap.to('.game-preview-start-button', {
-      duration: 1,
-      opacity: 1,
+      duration: 0.1,
+      display: 'flex',
       ease: 'power1.inOut',
       delay: 9,
+    });
+    gsap.to('.game-preview-start-button', {
+      duration: 0.9,
+      opacity: 1,
+      ease: 'power1.inOut',
+      delay: 9.1,
     });
   };
 
@@ -359,6 +365,12 @@ function Game({ userNfts }) {
     let index = -1;
     if (box === 'shadow') {
       index = clickedItems.indexOf(shadowBox.index);
+      if (
+        shadowBox.image &&
+        getTrait('Group', shadowBox.attributes) === 'Genesis'
+      ) {
+        setWildCardUsed(false);
+      }
       setShadowBox({});
       gsap.to(`#nft-box-${shadowBox.index} .checkbox`, {
         duration: 0.5,
@@ -372,6 +384,12 @@ function Game({ userNfts }) {
       });
     } else if (box === 'theif') {
       index = clickedItems.indexOf(theifBox.index);
+      if (
+        theifBox.image &&
+        getTrait('Group', theifBox.attributes) === 'Genesis'
+      ) {
+        setWildCardUsed(false);
+      }
       setTheifBox({});
       gsap.to(`#nft-box-${theifBox.index} .checkbox`, {
         duration: 0.5,
@@ -385,6 +403,12 @@ function Game({ userNfts }) {
       });
     } else {
       index = clickedItems.indexOf(wildcardBox.index);
+      if (
+        wildcardBox.image &&
+        getTrait('Group', wildcardBox.attributes) === 'Genesis'
+      ) {
+        setWildCardUsed(false);
+      }
       setWildcardBox({});
       gsap.to(`#nft-box-${wildcardBox.index} .checkbox`, {
         duration: 0.5,
@@ -410,7 +434,7 @@ function Game({ userNfts }) {
   };
 
   const handleNtfBoxClick = (metaData, index) => {
-    console.log('------------', metaData);
+    console.log('------------', metaData, index);
     console.log('click event clickedItems', clickedItems);
     if (
       clickedItems.includes(index) ||
@@ -418,6 +442,7 @@ function Game({ userNfts }) {
     ) {
       return;
     }
+    console.log('passed');
     if (getTrait('Background', metaData.attributes) === 'Charcoal') {
       if (
         shadowBox.image &&
@@ -476,6 +501,7 @@ function Game({ userNfts }) {
     }
 
     if (getTrait('Group', metaData.attributes) === 'Genesis') {
+      console.log('wildcardused', wildCardUsed);
       if (wildCardUsed) {
         return;
       }
@@ -783,13 +809,12 @@ function Game({ userNfts }) {
     });
   };
 
-  console.log('render', clickedItems);
   return (
     <div css={containerCss}>
       <div className="game-preview">
         <div className="background-wrapper" />
         <div className="pigeon">
-          <img src={pigeon} alt="" />
+          <img src={comic} alt="" />
         </div>
         <div className="final-bottom">
           <div className="mb-2 text-3xl text-center text-white uppercase final-bottom-title">
@@ -909,7 +934,7 @@ function Game({ userNfts }) {
         <button
           className="send-my-team-button"
           onClick={() => handleSend()}
-          disabled={!shadowBox.image && !theifBox.image && !wildcardBox.image}
+          disabled={!shadowBox.image || !theifBox.image || !wildcardBox.image}
         >
           Send my team!
         </button>
