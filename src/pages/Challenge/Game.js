@@ -435,7 +435,6 @@ function Game({ userNfts }) {
 
   const handleNtfBoxClick = (metaData, index) => {
     console.log('------------', metaData, index);
-    console.log('click event clickedItems', clickedItems);
     if (
       clickedItems.includes(index) ||
       (shadowBox.image && theifBox.image && wildcardBox.image)
@@ -808,7 +807,7 @@ function Game({ userNfts }) {
       ease: 'power1.inOut',
     });
   };
-
+  console.log('final', clickedItems);
   return (
     <div css={containerCss}>
       <div className="game-preview">
