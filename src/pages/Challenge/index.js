@@ -70,7 +70,7 @@ function Challenge() {
                 />
               </Route>
               <Route path="/challenge/game">
-                <Game userNfts={userNfts} />
+                <Game userNfts={userNfts} user={user} />
               </Route>
               <Route path="/">
                 <Welcome

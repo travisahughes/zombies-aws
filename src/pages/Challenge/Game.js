@@ -11,17 +11,35 @@ import checkbox from '../../assets/game/check.png';
 import comic from '../../assets/challenge/comic.png';
 import discord from '../../assets/icons/discord.png';
 import twitter from '../../assets/icons/twitter.png';
-
+import UserNFZ from '../../Components/userNFZ';
+import ChallengeSelection from '../../Components/challengeSelection';
+import challenge from '../Challenge/configs/challenge1.json';
 import './Game.css';
+import { isCompositeComponentWithType } from 'react-dom/test-utils';
 const maxes = [];
 
-function Game({ userNfts }) {
+function Game({ userNfts, user }) {
   const [shadowBox, setShadowBox] = useState({});
   const [theifBox, setTheifBox] = useState({});
   const [wildcardBox, setWildcardBox] = useState({});
   const [clickedItems, setClickedItems] = useState([]);
   const [wildCardUsed, setWildCardUsed] = useState(false);
+  const [selectedCount, setSelectedCount] = useState(0);
 
+  const [challengeBoxes, setChallengeBoxes] = useState([]);
+
+  const [genesisZombies, setGenesisZombies] = useState([]);
+  useEffect(() => {
+    setChallengeBoxes(challenge.boxes);
+  }, []);
+  useEffect(() => {
+    if (user) {
+      console.log(user.get('ethAddress'));
+    }
+  }, []);
+  useEffect(() => {
+    console.log(selectedCount);
+  }, [selectedCount]);
   useEffect(() => {
     if (shadowBox.image) {
       gsap.to('.preview-sections.preview .preview-section.shadow .checkbox', {
@@ -307,24 +325,24 @@ function Game({ userNfts }) {
       delay: 8,
     });
 
-    gsap.to('.shadow.alone', {
-      duration: 0.1,
-      display: 'none',
-      ease: 'power1.easeOut',
-      delay: 9,
-    });
-    gsap.to('.theif.alone', {
-      duration: 0.1,
-      display: 'none',
-      ease: 'power1.easeOut',
-      delay: 9,
-    });
-    gsap.to('.wildcard.alone', {
-      duration: 0.1,
-      display: 'none',
-      ease: 'power1.inOut',
-      delay: 9,
-    });
+    // gsap.to('.shadow.alone', {
+    //   duration: 0.1,
+    //   display: 'none',
+    //   ease: 'power1.easeOut',
+    //   delay: 9,
+    // });
+    // gsap.to('.theif.alone', {
+    //   duration: 0.1,
+    //   display: 'none',
+    //   ease: 'power1.easeOut',
+    //   delay: 9,
+    // });
+    // gsap.to('.wildcard.alone', {
+    //   duration: 0.1,
+    //   display: 'none',
+    //   ease: 'power1.inOut',
+    //   delay: 9,
+    // });
 
     gsap.to('.game-preview-header.preview', {
       duration: 1,
@@ -359,6 +377,57 @@ function Game({ userNfts }) {
       }
     }
     return null;
+  };
+  const updateChallengeBox = (slot, zombieMetadata) => {
+    const boxes = [...challengeBoxes];
+    const index = boxes.indexOf(slot);
+    boxes[index].zombie = zombieMetadata;
+
+    setChallengeBoxes(boxes);
+  };
+
+  const validate = (metadata) => {
+    const { attributes } = metadata;
+    const genesisCount = genesisZombies.length;
+    console.log('genesis count', genesisCount);
+    // const genesisCount = challengeBoxes
+    //   .filter((z) => Object.keys(z.zombie).length > 0)
+    //   .map((obj) => {
+    //     return obj.zombie;
+    //   })
+    //   .filter((zombie) => getTrait('Group', zombie.attributes) == 'Genesis');
+
+    const isGenesis = getTrait('Group', attributes) ? true : false;
+    const available = challengeBoxes.filter(
+      (b) => Object.keys(b.zombie).length === 0
+    );
+
+    for (var i = 0; i < available.length; i++) {
+      const { category, requirements, wildcard } = available[i];
+      if (requirements.includes(getTrait(category, attributes))) {
+        console.log('requirement');
+        return available[i];
+      } else if (genesisCount == 0 && isGenesis) {
+        const usedGenesis = [...genesisZombies];
+        usedGenesis.push(attributes);
+        setGenesisZombies(usedGenesis);
+        console.log('used genesis', usedGenesis);
+        return available[i];
+      } else if (wildcard) {
+        return available[i];
+      }
+    }
+  };
+
+  const hordeClick = (metadata, index) => {
+    const selectedSlot = validate(metadata);
+    if (selectedSlot) {
+      updateChallengeBox(selectedSlot, metadata);
+      const count = selectedCount + 1;
+      setSelectedCount(count);
+    }
+
+    return;
   };
 
   const handleClickBox = (box) => {
@@ -598,7 +667,31 @@ function Game({ userNfts }) {
     });
   };
 
+  const handleBoxClick = (challengeBox) => {
+    console.log(challengeBox);
+    if (Object.keys(challengeBox.zombie).length === 0) return;
+    const boxes = [...challengeBoxes];
+    const index = boxes.indexOf(challengeBox);
+
+    const zombieMetadata = boxes[index].zombie;
+
+    boxes[index].zombie = {};
+
+    setChallengeBoxes(boxes);
+
+    const genesis = genesisZombies.filter(
+      (z) => zombieMetadata.attributes != z
+    );
+    console.log('setting new genesis', genesis);
+    console.log(zombieMetadata);
+    setGenesisZombies(genesis);
+
+    const count = selectedCount - 1;
+    setSelectedCount(count);
+  };
   const handleSend = () => {
+    //fire off payload
+
     gsap.to('#collection', {
       duration: 0.5,
       opacity: 0,
@@ -761,7 +854,7 @@ function Game({ userNfts }) {
       duration: 0.5,
       opacity: 1,
       ease: 'power1.inOut',
-      delay: 0.5,
+      delay: 2,
     });
     gsap.to('.game-preview-header.preview', {
       duration: 0.5,
@@ -861,69 +954,24 @@ function Game({ userNfts }) {
           </div>
         </div>
         <div className="preview-sections preview">
-          <div
-            className="shadow preview-section"
-            onClick={() => handleClickBox('shadow')}
-          >
-            <div className="preview-section-image">
-              <img src={shadowBox.image || shadowImage} alt="" />
-              <img className="checkbox" src={checkbox} alt="" />
-            </div>
-            <div className="preview-section-text">
-              <div className="preview-section-text-header">The Shadow</div>
-              <div className="preview-section-text-sub-header">
-                (charcol background)
-              </div>
-            </div>
-          </div>
-          <div
-            className="preview-section theif"
-            onClick={() => handleClickBox('theif')}
-          >
-            <div className="preview-section-image">
-              <img src={theifBox.image || theifImage} alt="" />
-              <img className="checkbox" src={checkbox} alt="" />
-            </div>
-            <div className="preview-section-text">
-              <div className="preview-section-text-header">The Theif</div>
-              <div className="preview-section-text-sub-header">(suit)</div>
-            </div>
-          </div>
-          <div
-            className="preview-section wildcard"
-            onClick={() => handleClickBox('wildcard')}
-          >
-            <div className="preview-section-image">
-              <img src={wildcardBox.image || wildcardImage} alt="" />
-              <img className="checkbox" src={checkbox} alt="" />
-            </div>
-            <div className="preview-section-text">
-              <div className="preview-section-text-header">The Star</div>
-              <div className="preview-section-text-sub-header">
-                (your favorite NFZ)
-              </div>
-            </div>
-          </div>
+          {challengeBoxes.map((box, index) => (
+            <ChallengeSelection
+              box={box}
+              id={index}
+              key={index}
+              onClick={handleBoxClick}
+            ></ChallengeSelection>
+          ))}
         </div>
         <div className="preview-sections final">
-          <div className="shadow preview-section">
-            <div className="preview-section-image">
-              <img src={shadowBox.image || shadowImage} alt="" />
-              <img className="checkbox" src={checkbox} alt="" />
-            </div>
-          </div>
-          <div className="preview-section theif">
-            <div className="preview-section-image">
-              <img src={theifBox.image || theifImage} alt="" />
-              <img className="checkbox" src={checkbox} alt="" />
-            </div>
-          </div>
-          <div className="preview-section wildcard">
-            <div className="preview-section-image">
-              <img src={wildcardBox.image || wildcardImage} alt="" />
-              <img className="checkbox" src={checkbox} alt="" />
-            </div>
-          </div>
+          {challengeBoxes.map((box, index) => (
+            <ChallengeSelection
+              box={box}
+              id={index}
+              key={index}
+              onClick={handleBoxClick}
+            ></ChallengeSelection>
+          ))}
         </div>
         <div
           className="game-preview-start-button"
@@ -934,7 +982,8 @@ function Game({ userNfts }) {
         <button
           className="send-my-team-button"
           onClick={() => handleSend()}
-          disabled={!shadowBox.image || !theifBox.image || !wildcardBox.image}
+          disabled={selectedCount < 3}
+          //disabled={!shadowBox.image || !theifBox.image || !wildcardBox.image}
         >
           Send my team!
         </button>
@@ -944,28 +993,13 @@ function Game({ userNfts }) {
           <div id="user-nfts">
             {userNfts?.result.length > 0 &&
               userNfts?.result.map((nft, index) => (
-                <div
-                  className={`nft-container ${
-                    JSON.parse(nft.metadata).attributes.find(
-                      (item) =>
-                        item.trait_type === 'Group' && item.value === 'Genesis'
-                    )
-                      ? 'genesis'
-                      : ''
-                  }`}
+                <UserNFZ
+                  nfz={nft}
+                  id={index}
                   key={index}
-                  id={`nft-box-${index}`}
-                  onClick={() =>
-                    handleNtfBoxClick(JSON.parse(nft.metadata), index)
-                  }
-                >
-                  <img
-                    src={JSON.parse(nft.metadata).image}
-                    className="nft-img"
-                  />
-                  <img className="checkbox" src={checkbox} alt="" />
-                  <div className="genesis-text">Genesis</div>
-                </div>
+                  //onClick={handleNtfBoxClick}
+                  onClick={hordeClick}
+                ></UserNFZ>
               ))}
           </div>
         </div>
