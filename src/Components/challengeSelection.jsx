@@ -4,6 +4,7 @@ import '../../src/pages/Challenge/Game.css';
 import theif from '../assets/game/theif.png';
 const ChallengeSelection = (props) => {
   const { divClassName, headerText, subHeaderText, defaultImage } = props.box;
+  const { final } = props;
   const { image } = props.box.zombie;
   const x = 'theif';
   return (
@@ -15,8 +16,12 @@ const ChallengeSelection = (props) => {
         {/* <img className="checkbox" src={checkbox} alt="" /> */}
       </div>
       <div className="preview-section-text">
-        <div className="preview-section-text-header">{headerText}</div>
-        <div className="preview-section-text-sub-header">{subHeaderText}</div>
+        <div className="preview-section-text-header">
+          {!final ? headerText : ''}
+        </div>
+        <div className="preview-section-text-sub-header">
+          {!final ? subHeaderText : ''}
+        </div>
       </div>
     </div>
   );

@@ -32,11 +32,7 @@ function Game({ userNfts, user }) {
   useEffect(() => {
     setChallengeBoxes(challenge.boxes);
   }, []);
-  useEffect(() => {
-    if (user) {
-      console.log(user.get('ethAddress'));
-    }
-  }, []);
+
   useEffect(() => {
     console.log(selectedCount);
   }, [selectedCount]);
@@ -369,7 +365,6 @@ function Game({ userNfts, user }) {
       delay: 9.1,
     });
   };
-
   const getTrait = (trait, md) => {
     for (let x = 0; x < md.length; x++) {
       if (md[x].trait_type === trait) {
@@ -385,7 +380,6 @@ function Game({ userNfts, user }) {
 
     setChallengeBoxes(boxes);
   };
-
   const validate = (metadata) => {
     const { attributes } = metadata;
     const genesisCount = genesisZombies.length;
@@ -418,7 +412,6 @@ function Game({ userNfts, user }) {
       }
     }
   };
-
   const hordeClick = (metadata, index) => {
     const selectedSlot = validate(metadata);
     if (selectedSlot) {
@@ -429,7 +422,6 @@ function Game({ userNfts, user }) {
 
     return;
   };
-
   const handleClickBox = (box) => {
     let index = -1;
     if (box === 'shadow') {
@@ -501,7 +493,6 @@ function Game({ userNfts, user }) {
       });
     }
   };
-
   const handleNtfBoxClick = (metaData, index) => {
     console.log('------------', metaData, index);
     console.log('click event clickedItems', clickedItems);
@@ -666,7 +657,6 @@ function Game({ userNfts, user }) {
       ease: 'power1.inOut',
     });
   };
-
   const handleBoxClick = (challengeBox) => {
     console.log(challengeBox);
     if (Object.keys(challengeBox.zombie).length === 0) return;
@@ -691,6 +681,29 @@ function Game({ userNfts, user }) {
   };
   const handleSend = () => {
     //fire off payload
+    if (!user) return;
+    const userAdress = user.get('ethAddress');
+    const challengId = `0_${userAdress.substring(6, 10)}`;
+
+    const _ids = challengeBoxes.map((box) => {
+      const { zombie } = box;
+      return zombie.zombieId;
+    });
+
+    const payload = {
+      challengeKey: challengId,
+      userWallet: userAdress,
+      nfzIds: _ids,
+    };
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      mode: 'no-cors',
+    };
+    fetch('https://api.nicefunzombies.io/challenge', options);
+    console.log(payload);
+    console.log(userAdress);
+    console.log(challengId);
 
     gsap.to('#collection', {
       duration: 0.5,
@@ -774,7 +787,7 @@ function Game({ userNfts, user }) {
     });
     gsap.to('.pigeon', {
       duration: 0.5,
-      scale: 1,
+      scale: 0.75,
       ease: 'power1.easeOut',
       delay: 2.5,
     });
@@ -831,7 +844,6 @@ function Game({ userNfts, user }) {
       delay: 3,
     });
   };
-
   const handleStart = () => {
     gsap.to('.preview-sections.preview', {
       duration: 0.1,
@@ -921,7 +933,7 @@ function Game({ userNfts, user }) {
           <div className="final-buttom-buttons">
             <a
               className="final-button discord-button"
-              href="https://www.twitter.com/nicefunzombies"
+              href="https://discord.gg/77VswFkcuY"
               target="_blank"
             >
               <img src={discord} alt="" />
@@ -929,7 +941,7 @@ function Game({ userNfts, user }) {
             </a>
             <a
               className="final-button twitter-button"
-              href="https://discord.gg/77VswFkcuY"
+              href="https://www.twitter.com/nicefunzombies"
               target="_blank"
             >
               <img src={twitter} alt="" />
@@ -970,6 +982,7 @@ function Game({ userNfts, user }) {
               id={index}
               key={index}
               onClick={handleBoxClick}
+              final={true}
             ></ChallengeSelection>
           ))}
         </div>
