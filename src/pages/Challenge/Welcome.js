@@ -22,7 +22,28 @@ function Welcome({ authenticate, isAuthenticated }) {
     display: flex;
     flex-direction: column;
     margin: 0 auto 20px auto;
-    padding: 75vh 20px 0;
+    padding: 90vh 20px 0;
+    @media (max-width: 1300px) {
+      padding-top: 80vh;
+    }
+    @media (max-width: 1000px) {
+      padding-top: 60vh;
+    }
+    @media (max-width: 640px) {
+      padding-top: 30vh;
+    }
+
+    h1 {
+      @media (max-width: 640px) {
+        font-size: 24px;
+      }
+    }
+
+    p {
+      @media (max-width: 640px) {
+        font-size: 14px;
+      }
+    }
 
     #ethrain {
       position: absolute;
@@ -50,6 +71,7 @@ function Welcome({ authenticate, isAuthenticated }) {
       -moz-transition: border 500ms ease-out;
       -o-transition: border 500ms ease-out;
       transition: border 500ms ease-out;
+      z-index: 99;
     }
 
     .btn:hover {
