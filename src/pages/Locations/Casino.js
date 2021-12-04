@@ -163,6 +163,15 @@ const NFTsContainer = styled.div`
       width: 100%;
     }
 
+    .checkbox {
+      width: 30px;
+      height: 30px;
+      opacity: 0;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+
     @media (min-width: 767px) {
       width: 187px;
       height: 187px;
@@ -351,35 +360,35 @@ export default function CasinoPage() {
   const [selectedIds, setSelectedIds] = useState([]);
 
   const hordeClick = (metadata, index) => {
-    const zombies = challengeBoxes
-      .filter((z) => Object.keys(z.zombie).length > 0)
-      .map((obj) => {
-        return obj.zombie;
-      });
+    // const zombies = challengeBoxes
+    //   .filter((z) => Object.keys(z.zombie).length > 0)
+    //   .map((obj) => {
+    //     return obj.zombie;
+    //   });
 
-    let isPresent = false;
-    zombies.forEach((z) => {
-      console.log('z zombie id', z.zombieId);
-      console.log(metadata);
-      console.log('metadata zombieId', metadata.zombieId);
-      if (z.zombieId === metadata.zombieId) isPresent = true;
-    });
-    if (isPresent) {
-      console.log('alaready used');
-      return;
-    }
+    // let isPresent = false;
+    // zombies.forEach((z) => {
+    //   console.log('z zombie id', z.zombieId);
+    //   console.log(metadata);
+    //   console.log('metadata zombieId', metadata.zombieId);
+    //   if (z.zombieId === metadata.zombieId) isPresent = true;
+    // });
+    // if (isPresent) {
+    //   console.log('alaready used');
+    //   return;
+    // }
 
-    const selectedSlot = validate(metadata);
-    if (selectedSlot) {
-      updateChallengeBox(selectedSlot, metadata);
-      const count = selectedCount + 1;
-      setSelectedCount(count);
+    // const selectedSlot = validate(metadata);
+    // if (selectedSlot) {
+    // updateChallengeBox(selectedSlot, metadata);
+    // const count = selectedCount + 1;
+    // setSelectedCount(count);
 
-      const _ids = [...selectedIds];
-      _ids.push(metadata.zombieId);
-      console.log('adding id', _ids);
-      setSelectedIds(_ids);
-    }
+    const _ids = [...selectedIds];
+    _ids.push(metadata.zombieId);
+    console.log('adding id', _ids);
+    setSelectedIds(_ids);
+    // }
 
     return;
   };

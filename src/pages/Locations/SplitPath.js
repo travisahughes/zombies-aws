@@ -3,6 +3,7 @@ import background from '../../assets/locations/split-path-image.png';
 import textBg from '../../assets/locations/text-bg.png';
 import casino from '../../assets/locations/casino.png';
 import school from '../../assets/locations/school.png';
+import { useHistory } from 'react-router';
 
 const SplitPathPageContainer = styled.div`
   height: 100vh;
@@ -85,6 +86,11 @@ const LocationImage = styled.img`
     max-width: 50%;
     cursor: pointer;
     margin: 0 1rem;
+    transition: all 0.3s ease-in-out;
+
+    :hover {
+      transform: scale(1.3);
+    }
   }
 `;
 
@@ -102,12 +108,18 @@ const SplitPathContent = styled.div`
 `;
 
 export default function SplitPathPage() {
+  const history = useHistory();
+
   return (
     <SplitPathPageContainer>
       <SplitPathContent>
         <SplitPathHeader>Every Decision Matters</SplitPathHeader>
         <LocationImageContainer>
-          <LocationImage src={casino} alt="casino" />
+          <LocationImage
+            src={casino}
+            alt="casino"
+            onClick={() => history.push('/locations/casino')}
+          />
           <LocationImage src={school} alt="school" />
         </LocationImageContainer>
         <SplitPathTextContainer>
