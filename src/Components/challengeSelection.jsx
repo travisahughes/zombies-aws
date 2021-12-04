@@ -4,11 +4,16 @@ import '../../src/pages/Challenge/Game.css';
 import theif from '../assets/game/theif.png';
 const ChallengeSelection = (props) => {
   const { divClassName, headerText, subHeaderText, defaultImage } = props.box;
-  const { final } = props;
+  const { final, alone } = props;
   const { image } = props.box.zombie;
-  const x = 'theif';
+
+  const cn = alone ? `${divClassName} ${alone}` : divClassName;
+
   return (
-    <div className={divClassName} onClick={() => props.onClick(props.box)}>
+    <div
+      className={cn}
+      onClick={props.onClick ? () => props.onClick(props.box) : null}
+    >
       <div className="preview-section-image">
         <img
           src={image || require(`../assets/game/${defaultImage}.png`).default}
