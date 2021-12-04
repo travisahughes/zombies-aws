@@ -360,34 +360,19 @@ export default function CasinoPage() {
   const [selectedIds, setSelectedIds] = useState([]);
 
   const hordeClick = (metadata, index) => {
-    // const zombies = challengeBoxes
-    //   .filter((z) => Object.keys(z.zombie).length > 0)
-    //   .map((obj) => {
-    //     return obj.zombie;
-    //   });
+    if (selectedIds.includes(metadata.zombieId)) {
+      const _ids = [...selectedIds].filter((z) => z != metadata.zombieId);
 
-    // let isPresent = false;
-    // zombies.forEach((z) => {
-    //   console.log('z zombie id', z.zombieId);
-    //   console.log(metadata);
-    //   console.log('metadata zombieId', metadata.zombieId);
-    //   if (z.zombieId === metadata.zombieId) isPresent = true;
-    // });
-    // if (isPresent) {
-    //   console.log('alaready used');
-    //   return;
-    // }
+      setSelectedIds(_ids);
 
-    // const selectedSlot = validate(metadata);
-    // if (selectedSlot) {
-    // updateChallengeBox(selectedSlot, metadata);
-    // const count = selectedCount + 1;
-    // setSelectedCount(count);
+      return;
+    } else {
+      const _ids = [...selectedIds];
+      _ids.push(metadata.zombieId);
 
-    const _ids = [...selectedIds];
-    _ids.push(metadata.zombieId);
-    console.log('adding id', _ids);
-    setSelectedIds(_ids);
+      setSelectedIds(_ids);
+    }
+
     // }
 
     return;
@@ -404,8 +389,8 @@ export default function CasinoPage() {
             <CasinoTagline>You like some fast-paced action!</CasinoTagline>
             <BenefitText>Location Benefit</BenefitText>
             <ul>
-              {BenefitList.map((item) => (
-                <li>{item.listItem}</li>
+              {BenefitList.map((item, index) => (
+                <li key={index}>{item.listItem}</li>
               ))}
             </ul>
             <BetButton>BET ON THE CASINO</BetButton>
