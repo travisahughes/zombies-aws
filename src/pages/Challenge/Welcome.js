@@ -1,12 +1,15 @@
 /** @jsxImportSource @emotion/react */
 
 import { css } from '@emotion/react';
+import { useHistory } from 'react-router-dom';
 import bgimg from '../../assets/challenge/challengebg.png';
 import rainingeth from '../../assets/challenge/rainingeth.png';
 import './Welcome.css';
 
-function Welcome({ setActivePage, authenticate, isAuthenticated }) {
+function Welcome({ authenticate, isAuthenticated }) {
+  const history = useHistory();
   const challengeCss = css`
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 51.27%, #000000 100%);
     background-image: url(${bgimg});
     background-size: 100% auto;
     background-position: top;
@@ -19,7 +22,28 @@ function Welcome({ setActivePage, authenticate, isAuthenticated }) {
     display: flex;
     flex-direction: column;
     margin: 0 auto 20px auto;
-    padding: 75vh 20px 0;
+    padding: 90vh 20px 0;
+    @media (max-width: 1300px) {
+      padding-top: 80vh;
+    }
+    @media (max-width: 1000px) {
+      padding-top: 60vh;
+    }
+    @media (max-width: 640px) {
+      padding-top: 30vh;
+    }
+
+    h1 {
+      @media (max-width: 640px) {
+        font-size: 24px;
+      }
+    }
+
+    p {
+      @media (max-width: 640px) {
+        font-size: 14px;
+      }
+    }
 
     #ethrain {
       position: absolute;
@@ -43,6 +67,17 @@ function Welcome({ setActivePage, authenticate, isAuthenticated }) {
       padding: 20px;
       cursor: pointer;
       margin: 8px;
+      -webkit-transition: border 500ms ease-out;
+      -moz-transition: border 500ms ease-out;
+      -o-transition: border 500ms ease-out;
+      transition: border 500ms ease-out;
+      z-index: 99;
+    }
+
+    .btn:hover {
+      border: 3px solid #ccee25;
+      box-sizing: border-box;
+      filter: drop-shadow(0px 0px 4px #ccee25);
     }
 
     .content-section {
@@ -82,7 +117,7 @@ function Welcome({ setActivePage, authenticate, isAuthenticated }) {
           </div>
         )}
         {isAuthenticated && (
-          <div className="btn" onClick={() => setActivePage('game')}>
+          <div className="btn" onClick={() => history.push('/challenge/info')}>
             Face Your Challenge
           </div>
         )}
