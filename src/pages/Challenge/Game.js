@@ -68,7 +68,7 @@ function Game({ userNfts, user }) {
       });
     }
   }, [wildcardBox]);
-  userNfts = {
+  let xuserNfts = {
     total: 8,
     page: 0,
     page_size: 500,

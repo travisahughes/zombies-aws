@@ -1,37 +1,71 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
-import { useMoralis, useMoralisWeb3Api } from 'react-moralis';
-
+import { useMoralis, useMoralisWeb3Api, useChain } from 'react-moralis';
+import { contract_data } from '../constants/moralis_env';
 import Hero from '../Components/Hero';
 import headerimg from '../assets/bg.jpg';
 
 function Dashboard() {
-  let CONTRACT_ID = '0xeA7500664c4cCb77A89479a1daa75d59e2FBc97f';
-  let NETWORK = 'rinkeby';
+  // TODO: setup env var
+  const prod = false;
+  let CONTRACT_ID;
+  let NETWORK;
+  let Web3Api;
 
-  const { authenticate, isAuthenticated, user } = useMoralis();
-  const Web3Api = useMoralisWeb3Api();
+  const { Moralis, authenticate, isAuthenticated, user } = useMoralis();
+  const { switchNetwork, chainId, chain, account } = useChain();
+  const ethereum = window.ethereum;
+  if (ethereum) {
+    Web3Api = useMoralisWeb3Api();
+    Moralis.enableWeb3();
+  }
 
   const [userNfts, setUserNfts] = useState(null);
+  const [userAccount, setUserAccount] = useState(account);
 
   useEffect(() => {
-    if (user && Web3Api) {
-      console.log('user', user);
-      console.log('Web3Api', Web3Api);
+    if (userAccount && Web3Api) {
+      if (chainId === '0x1') {
+        CONTRACT_ID = contract_data.mainnet.contract_id;
+        NETWORK = contract_data.mainnet.network_id;
+      } else {
+        CONTRACT_ID = contract_data.rinkeby.contract_id;
+        NETWORK = contract_data.rinkeby.network_id;
+      }
+      // console.log('CONTRACT_ID', CONTRACT_ID);
+      // console.log('NETWORK', NETWORK);
       const fetchNfts = async () => {
-        const nfts = await Web3Api.account.getNFTs({
-          address: user.get('ethAddress'),
+        const nfts = await Web3Api.account.getNFTsForContract({
+          address: userAccount,
           token_address: CONTRACT_ID,
           chain: NETWORK,
         });
         setUserNfts(nfts);
-
         console.log('nfts', nfts);
       };
       fetchNfts();
     }
-  }, [user]);
+  }, [userAccount, chainId]);
+
+  useEffect(() => {
+    // If no account address is found from Moralis
+    // fetch it via window.ethereum
+    // This is the problem on page load usually
+    if (!account) {
+      const fetchAccount = async () => {
+        const web3Accounts = await ethereum.request({
+          method: 'eth_requestAccounts',
+        });
+        const web3Account = web3Accounts[0];
+        setUserAccount(web3Account);
+      };
+      fetchAccount();
+    } else if (account !== userAccount) {
+      // When changing wallets in Metamask, 'account' is updated through Moralis
+      setUserAccount(account);
+    }
+  }, [account]);
 
   const dashboardCss = css`
     display: flex;
@@ -71,6 +105,21 @@ function Dashboard() {
         color: lightblue;
       }
     }
+
+    .network-switch {
+      padding: 5px;
+      border: 2px solid #4035fa;
+      border-radius: 4px;
+      background: rgb(64, 53, 250);
+      background: linear-gradient(
+        90deg,
+        rgba(64, 53, 250, 1) 0%,
+        rgba(68, 42, 164, 1) 48%,
+        rgba(55, 0, 128, 1) 100%
+      );
+      color: white;
+      cursor: pointer;
+    }
   `;
 
   const herobg = css`
@@ -97,17 +146,36 @@ function Dashboard() {
             )}
             {isAuthenticated && (
               <div>
-                <h2>Wallet connected: {user.get('ethAddress')}</h2>
+                <h2>Wallet connected: {userAccount}</h2>
+                <h3>
+                  Chain ({contract_data[chainId]?.network_name || 'Unknown'})
+                </h3>
+                {chainId === '0x1' && (
+                  <button
+                    className="network-switch"
+                    onClick={() => switchNetwork('0x4')}
+                  >
+                    Switch to Rinkeby
+                  </button>
+                )}
+                {chainId === '0x4' && (
+                  <button
+                    className="network-switch"
+                    onClick={() => switchNetwork('0x1')}
+                  >
+                    Switch to Ethereum
+                  </button>
+                )}
                 <h3>Your horde:</h3>
                 <div id="user-nfts">
                   {userNfts?.result.length > 0 &&
                     userNfts?.result.map((nft, index) => (
                       <div className="nft-container" key={index}>
                         <img
-                          src={JSON.parse(nft.metadata).image}
+                          src={JSON.parse(nft?.metadata)?.image}
                           className="nft-img"
                         />
-                        <div>NFZ #{nft.token_id}</div>
+                        <div>NFZ #{nft?.token_id}</div>
                       </div>
                     ))}
                 </div>

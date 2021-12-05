@@ -2,35 +2,47 @@
 
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import bgimg from '../../assets/challenge/challengebg.png';
 import rainingeth from '../../assets/challenge/rainingeth.png';
+import fox from '../../assets/challenge/metamaskfox.png';
 import './Welcome.css';
+import { contract_data } from '../../constants/moralis_env';
 
-function Welcome({ authenticate, isAuthenticated, user }) {
-  const [completed, setCompleted] = useState(false);
+function Welcome({
+  authenticate,
+  isAuthenticated,
+  user,
+  switchNetwork,
+  chainId,
+  account,
+}) {
+  // TODO: Change to '0x1' for prod!
+  const preferredChain = '0x4';
+  const [challengeCompleted, setChallengeCompleted] = useState(false);
+  const [shortAddress, setShortAddress] = useState(false);
 
   useEffect(() => {
-    console.log('welcome user,', user);
-    if (user) {
-      console.log('user challenge', user);
-      const userAddress = user.get('ethAddress');
-      const options = {
-        mode: 'no-cors',
-      };
-      console.log('user address, welcome', userAddress);
-      fetch(
-        `https://api.nicefunzombies.io/challenge/${userAddress}`,
-        options
-      ).then((result) => {
-        console.log('result', result);
-
-        result.nfzIds.length > 0 ? setCompleted(true) : null;
-      });
+    if (account) {
+      if (account.length > 25) {
+        setShortAddress(
+          account.substr(0, 6) +
+            '...' +
+            account.substr(account.length - 4, account.length)
+        );
+      }
+      axios
+        .get(`https://api.nicefunzombies.io/challenge/${account}`)
+        .then((response) => {
+          setChallengeCompleted(true);
+        })
+        .catch(() => {
+          console.log('No saved user data');
+          setChallengeCompleted(false);
+        });
     }
-
-    //Check to see if user already completed challenge
-  }, [user]);
+  }, [account]);
 
   const history = useHistory();
   const challengeCss = css`
@@ -105,9 +117,34 @@ function Welcome({ authenticate, isAuthenticated, user }) {
       filter: drop-shadow(0px 0px 4px #ccee25);
     }
 
-    .content-section {
+    .challenge-complete {
+      color: #ccee25;
+    }
+
+    #user-address {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 250 px;
+      z-index: 100;
+      color: white;
       display: flex;
       flex-direction: row;
+      align-content: center;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 10px 10px 0;
+
+      #fox {
+        width: 25px;
+        height: auto;
+        padding: 0 10px 0 0;
+      }
+    }
+
+    .content-section {
+      display: flex;
+      flex-direction: column;
       justify-content: center;
       align-self: center;
       color: white;
@@ -134,6 +171,11 @@ function Welcome({ authenticate, isAuthenticated, user }) {
           Rise to the challenge to win something cool, before: xx/xx xxPM SG /
           xxAM ET - xx/xx xxPM SG / xxAM ET
         </p>
+        {challengeCompleted && (
+          <p className="challenge-complete">
+            Congratulations! You've completed this challenge.
+          </p>
+        )}
       </div>
       <div className="content-section">
         {!isAuthenticated && (
@@ -141,11 +183,20 @@ function Welcome({ authenticate, isAuthenticated, user }) {
             Connect Your Wallet
           </div>
         )}
-        {isAuthenticated && (
+        {isAuthenticated && chainId === preferredChain && (
           <div className="btn" onClick={() => history.push('/challenge/info')}>
             Face Your Challenge
           </div>
         )}
+        {isAuthenticated && chainId !== preferredChain && (
+          <div className="btn" onClick={() => switchNetwork(preferredChain)}>
+            Switch to {contract_data[preferredChain]?.network_name || 'Unknown'}
+          </div>
+        )}
+      </div>
+      <div id="user-address">
+        <img id="fox" src={fox} alt="Metamask" />
+        {shortAddress}
       </div>
     </div>
   );
