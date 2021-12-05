@@ -11,8 +11,10 @@ const UserNFZ = (props) => {
 
   const [finalMetadata, setFinalMetadata] = useState(metadata);
 
-  if (!finalMetadata && props.nfz?.token_uri) {
-    axios.get(props.nfz?.token_uri).then((response) => {
+  if (!finalMetadata && props.nfz?.token_id) {
+    const { token_id } = props.nfz;
+    const token_uri = `https://api.nicefunzombies.io/metadata/${token_id}`;
+    axios.get(token_uri).then((response) => {
       console.log('Manually setting NFZ metadata', response.data);
       setFinalMetadata(response.data);
     });

@@ -183,7 +183,7 @@ function Welcome({
             Connect Your Wallet
           </div>
         )}
-        {isAuthenticated && chainId === preferredChain && (
+        {isAuthenticated && chainId === preferredChain && !challengeCompleted && (
           <div className="btn" onClick={() => history.push('/challenge/info')}>
             Face Your Challenge
           </div>

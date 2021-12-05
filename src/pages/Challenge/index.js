@@ -28,7 +28,9 @@ function Challenge() {
   const [userAccount, setUserAccount] = useState(account);
 
   useEffect(() => {
-    if (userAccount && Web3Api) {
+    if (userAccount && Web3Api && chainId) {
+      console.log('chainId', chainId);
+      console.log('userAccount', userAccount);
       if (chainId === '0x1') {
         CONTRACT_ID = contract_data.mainnet.contract_id;
         NETWORK = contract_data.mainnet.network_id;
