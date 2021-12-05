@@ -35,7 +35,6 @@ function App() {
         <div className="content-section" css={herobg}>
           <Hero />
         </div>
-        <MintLink />
         <Info />
         <Gallery />
         <Roadmap />
