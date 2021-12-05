@@ -259,10 +259,20 @@
   box-sizing: border-box;
   margin-right: 18px;
 }
+.discord-button:hover {
+  border: 3px solid #ab19ef;
+  box-sizing: border-box;
+  filter: drop-shadow(0px 0px 4px #ab19ef);
+}
 
 .twitter-button {
   border: 3px solid #50e6ff;
   box-sizing: border-box;
+}
+.twitter-button:hover {
+  border: 3px solid #50e6ff;
+  box-sizing: border-box;
+  filter: drop-shadow(0px 0px 4px #50e6ff);
 }
 
 .final-button img {
@@ -300,7 +310,7 @@
 
 .alone {
   width: 300px;
-  height: 300px;
+  height: auto;
   position: absolute;
   left: calc(50% - 150px);
   top: calc(50% - 150px);

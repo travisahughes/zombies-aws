@@ -17,8 +17,8 @@ import teko from './assets/fonts/Teko-Regular.ttf';
 
 // TODO: Setup env variable to switch between testnet/mainnet
 const MORALIS_CONFIG = {
-  serverUrl: moralisEnv.rinkeby.serverUrl,
-  appId: moralisEnv.rinkeby.appId,
+  serverUrl: moralisEnv.mainnet.serverUrl,
+  appId: moralisEnv.mainnet.appId,
 };
 
 const appStyles = css`

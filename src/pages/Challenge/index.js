@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { useMoralis, useMoralisWeb3Api } from 'react-moralis';
+import { useMoralis, useMoralisWeb3Api, useChain } from 'react-moralis';
 import { css } from '@emotion/react';
+import { contract_data } from '../../constants/moralis_env';
 
 import Nav from '../../Components/Nav';
 import Welcome from './Welcome';
@@ -11,32 +12,50 @@ import Results from './Results';
 import Info from './Info';
 
 function Challenge() {
-  const { authenticate, isAuthenticated, user } = useMoralis();
-  let CONTRACT_ID = '0x4e68891b8b491dd128981ed14fb0a1eee59012b4';
-  let NETWORK = 'rinkeby';
+  let CONTRACT_ID;
+  let NETWORK;
+  let Web3Api;
 
-  const Web3Api = useMoralisWeb3Api();
-  const [nfzUser, setNFZuser] = useState(null);
+  const { Moralis, authenticate, isAuthenticated, user, refetchUserData } =
+    useMoralis();
+  const { switchNetwork, chainId, account } = useChain();
+  const ethereum = window.ethereum;
+  if (ethereum) {
+    Web3Api = useMoralisWeb3Api();
+    Moralis.enableWeb3();
+  }
+
   const [userNfts, setUserNfts] = useState(null);
 
   useEffect(() => {
-    if (user && Web3Api) {
-      setNFZuser(user);
-      console.log('user address', user.get('ethAddress'));
-      console.log('user', user);
+    if (account && Web3Api) {
+      if (chainId === '0x1') {
+        CONTRACT_ID = contract_data.mainnet.contract_id;
+        NETWORK = contract_data.mainnet.network_id;
+      } else {
+        CONTRACT_ID = contract_data.rinkeby.contract_id;
+        NETWORK = contract_data.rinkeby.network_id;
+      }
+      console.log('CONTRACT_ID', CONTRACT_ID);
+      console.log('NETWORK', NETWORK);
       const fetchNfts = async () => {
-        const nfts = await Web3Api.account.getNFTs({
-          address: user.get('ethAddress'),
+        const nfts = await Web3Api.account.getNFTsForContract({
+          address: account,
           token_address: CONTRACT_ID,
           chain: NETWORK,
         });
         setUserNfts(nfts);
-
         console.log('nfts', nfts);
       };
       fetchNfts();
+    } else {
+      if (isAuthenticated) {
+        refetchUserData();
+      } else {
+        authenticate();
+      }
     }
-  }, [user]);
+  }, [account, chainId]);
 
   const containerCss = css`
     margin: 0;
@@ -59,12 +78,12 @@ function Challenge() {
         <div className="body">
           <Router>
             <Switch>
-              <Route path="/challenge/welcome">
+              {/* <Route path="/challenge/welcome">
                 <Welcome
                   authenticate={authenticate}
                   isAuthenticated={isAuthenticated}
                 />
-              </Route>
+              </Route> */}
               <Route path="/challenge/info">
                 <Info
                   authenticate={authenticate}
@@ -78,14 +97,16 @@ function Challenge() {
                 <Welcome
                   authenticate={authenticate}
                   isAuthenticated={isAuthenticated}
-                  user={nfzUser}
+                  user={user}
+                  switchNetwork={switchNetwork}
+                  chainId={chainId}
+                  account={account}
                 />
               </Route>
             </Switch>
           </Router>
         </div>
       </div>
-      {/* <Nav /> */}
     </div>
   );
 }
