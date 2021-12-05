@@ -16,8 +16,7 @@ function Challenge() {
   let NETWORK;
   let Web3Api;
 
-  const { Moralis, authenticate, isAuthenticated, user, refetchUserData } =
-    useMoralis();
+  const { Moralis, authenticate, isAuthenticated, user } = useMoralis();
   const { switchNetwork, chainId, account } = useChain();
   const ethereum = window.ethereum;
   if (ethereum) {
@@ -26,9 +25,10 @@ function Challenge() {
   }
 
   const [userNfts, setUserNfts] = useState(null);
+  const [userAccount, setUserAccount] = useState(account);
 
   useEffect(() => {
-    if (account && Web3Api) {
+    if (userAccount && Web3Api) {
       if (chainId === '0x1') {
         CONTRACT_ID = contract_data.mainnet.contract_id;
         NETWORK = contract_data.mainnet.network_id;
@@ -36,11 +36,11 @@ function Challenge() {
         CONTRACT_ID = contract_data.rinkeby.contract_id;
         NETWORK = contract_data.rinkeby.network_id;
       }
-      console.log('CONTRACT_ID', CONTRACT_ID);
-      console.log('NETWORK', NETWORK);
+      // console.log('CONTRACT_ID', CONTRACT_ID);
+      // console.log('NETWORK', NETWORK);
       const fetchNfts = async () => {
         const nfts = await Web3Api.account.getNFTsForContract({
-          address: account,
+          address: userAccount,
           token_address: CONTRACT_ID,
           chain: NETWORK,
         });
@@ -48,14 +48,27 @@ function Challenge() {
         console.log('nfts', nfts);
       };
       fetchNfts();
-    } else {
-      if (isAuthenticated) {
-        refetchUserData();
-      } else {
-        authenticate();
-      }
     }
-  }, [account, chainId]);
+  }, [userAccount, chainId]);
+
+  useEffect(() => {
+    // If no account address is found from Moralis
+    // fetch it via window.ethereum
+    // This is the problem on page load usually
+    if (!account) {
+      const fetchAccount = async () => {
+        const web3Accounts = await window.ethereum.request({
+          method: 'eth_requestAccounts',
+        });
+        const web3Account = web3Accounts[0];
+        setUserAccount(web3Account);
+      };
+      fetchAccount();
+    } else if (account !== userAccount) {
+      // When changing wallets in Metamask, 'account' is updated through Moralis
+      setUserAccount(account);
+    }
+  }, [account]);
 
   const containerCss = css`
     margin: 0;
@@ -100,7 +113,7 @@ function Challenge() {
                   user={user}
                   switchNetwork={switchNetwork}
                   chainId={chainId}
-                  account={account}
+                  account={userAccount}
                 />
               </Route>
             </Switch>

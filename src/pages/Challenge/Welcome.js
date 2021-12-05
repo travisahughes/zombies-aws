@@ -170,7 +170,6 @@ function Welcome({
         <p>
           Rise to the challenge to win something cool, before: xx/xx xxPM SG /
           xxAM ET - xx/xx xxPM SG / xxAM ET
-          <br /> acc {account}
         </p>
         {challengeCompleted && (
           <p className="challenge-complete">
