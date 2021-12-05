@@ -1,12 +1,37 @@
 /** @jsxImportSource @emotion/react */
 
 import { css } from '@emotion/react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import bgimg from '../../assets/challenge/challengebg.png';
 import rainingeth from '../../assets/challenge/rainingeth.png';
 import './Welcome.css';
 
-function Welcome({ authenticate, isAuthenticated }) {
+function Welcome({ authenticate, isAuthenticated, user }) {
+  const [completed, setCompleted] = useState(false);
+
+  useEffect(() => {
+    console.log('welcome user,', user);
+    if (user) {
+      console.log('user challenge', user);
+      const userAddress = user.get('ethAddress');
+      const options = {
+        mode: 'no-cors',
+      };
+      console.log('user address, welcome', userAddress);
+      fetch(
+        `https://api.nicefunzombies.io/challenge/${userAddress}`,
+        options
+      ).then((result) => {
+        console.log('result', result);
+
+        result.nfzIds.length > 0 ? setCompleted(true) : null;
+      });
+    }
+
+    //Check to see if user already completed challenge
+  }, [user]);
+
   const history = useHistory();
   const challengeCss = css`
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 51.27%, #000000 100%);

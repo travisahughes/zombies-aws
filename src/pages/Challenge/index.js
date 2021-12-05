@@ -16,11 +16,13 @@ function Challenge() {
   let NETWORK = 'rinkeby';
 
   const Web3Api = useMoralisWeb3Api();
-
+  const [nfzUser, setNFZuser] = useState(null);
   const [userNfts, setUserNfts] = useState(null);
 
   useEffect(() => {
     if (user && Web3Api) {
+      setNFZuser(user);
+      console.log('user address', user.get('ethAddress'));
       console.log('user', user);
       const fetchNfts = async () => {
         const nfts = await Web3Api.account.getNFTs({
@@ -76,6 +78,7 @@ function Challenge() {
                 <Welcome
                   authenticate={authenticate}
                   isAuthenticated={isAuthenticated}
+                  user={nfzUser}
                 />
               </Route>
             </Switch>
