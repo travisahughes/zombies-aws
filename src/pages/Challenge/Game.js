@@ -788,7 +788,8 @@ function Game({ userNfts, user }) {
           </div>
           <div className="game-preview-header-desc">
             Glad we can count on you! To pull off this heist, you’ll need to
-            build a team with these traits
+            build a team with these traits. Any NFZ with the Genesis trait can
+            be used as a wildcard (only once)
           </div>
         </div>
         <div
@@ -861,7 +862,7 @@ function Game({ userNfts, user }) {
         <div className="preview-section theif alone">
           <img src={theifImage} alt="" />
           <div className="preview-section-text">
-            <div className="preview-section-text-header">The Theif</div>
+            <div className="preview-section-text-header">The Thief</div>
             <div className="preview-section-text-sub-header">
               (Bulletproof Vest or Burglar Eye Wear)
             </div>
