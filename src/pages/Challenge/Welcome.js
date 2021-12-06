@@ -171,7 +171,7 @@ function Welcome({
         <p>
           Rise to the challenge to win something cool! Finish before:
           <br />
-          December 14th 10AM ET/ 4PM CTE / 11PM SG/Asia
+          December 14th 10AM ET/ 4PM CET / 11PM SG/Asia
         </p>
         {challengeCompleted && (
           <p className="challenge-complete">
