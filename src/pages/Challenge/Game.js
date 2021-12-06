@@ -347,6 +347,7 @@ function Game({ userNfts, user }) {
       opacity: 1,
       ease: 'power1.inOut',
       delay: 9,
+      display: 'block',
     });
     gsap.to('.preview-sections.preview', {
       duration: 1,
@@ -552,6 +553,7 @@ function Game({ userNfts, user }) {
       opacity: 0,
       ease: 'power1.easeOut',
       delay: 0.5,
+      display: 'none',
     });
     gsap.to('.send-my-team-button', {
       duration: 0.5,
@@ -691,12 +693,14 @@ function Game({ userNfts, user }) {
       opacity: 0,
       ease: 'power1.easeOut',
       delay: 0.5,
+      display: 'none',
     });
     gsap.to('.game-preview-header.content', {
       duration: 0.5,
       opacity: 1,
       ease: 'power1.inOut',
       delay: 1.5,
+      display: 'block',
     });
 
     gsap.to('.preview-sections.preview', {
@@ -721,7 +725,6 @@ function Game({ userNfts, user }) {
 
     gsap.to('.game-preview', {
       duration: 0.5,
-      paddingTop: 235,
       ease: 'power1.inOut',
       delay: 1.5,
     });

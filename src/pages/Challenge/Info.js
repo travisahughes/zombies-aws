@@ -119,6 +119,7 @@ function Info() {
         <img src={comic} alt="" />
         <div className="pigeon-image-text">
           Get your team together to pull off the heist and obtain the first ever
+          <br />
           Horde Challenge reward before time runs out!
         </div>
       </div>
@@ -127,6 +128,7 @@ function Info() {
       </div>
       <div className="your-challenge-text">
         Your challenge (should you choose to accept it) is to assemble a team of
+        <br />
         Nice Fun Zombies with a very particular set of skills.
       </div>
       <div className="pigeon-final">
