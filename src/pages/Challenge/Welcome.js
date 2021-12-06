@@ -169,8 +169,9 @@ function Welcome({
       </div>
       <div className="content-section">
         <p>
-          Rise to the challenge to win something cool, before: xx/xx xxPM SG /
-          xxAM ET - xx/xx xxPM SG / xxAM ET
+          Rise to the challenge to win something cool! Finish before:
+          <br />
+          December 14th 10AM ET/ 4PM CTE / 11PM SG/Asia
         </p>
         {challengeCompleted && (
           <p className="challenge-complete">

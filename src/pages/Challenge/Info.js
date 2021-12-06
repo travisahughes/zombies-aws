@@ -119,7 +119,6 @@ function Info() {
         <img src={comic} alt="" />
         <div className="pigeon-image-text">
           Get your team together to pull off the heist and obtain the first ever
-          <br />
           Horde Challenge reward before time runs out!
         </div>
       </div>
