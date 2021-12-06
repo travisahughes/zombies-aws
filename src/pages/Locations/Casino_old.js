@@ -1,8 +1,6 @@
 import styled from '@emotion/styled';
 import background from '../../assets/locations/split-path-image.png';
-import NFZs from '../../assets/locations/2797.png';
-import Keycard from '../../assets/locations/keycard.png';
-import discord from '../../assets/icons/discord.png';
+import cardBackground from '../../assets/locations/card-bg.png';
 import UserNFZ from '../../Components/userNFZ';
 import casino from '../../assets/locations/casino.png';
 import { useState } from 'react';
@@ -22,26 +20,26 @@ const CasinoPageContainer = styled.div`
 `;
 
 const BenefitContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
+  background-image: url(${cardBackground});
+  background-size: 100% 60vh;
+  background-repeat: no-repeat;
+  position: relative;
+  /* display: flex;
+  flex-direction: column; */
+  min-height: 480px;
+  font-size: 10px;
+  color: black;
+  width: 100%;
+  /* padding: 40% 35% 10px 5%; */
 
   @media (min-width: 767px) {
-    max-width: 620px;
-    padding: 2rem 0 0 4rem;
+    background-size: 100% 100%;
+    height: 500px;
+    padding: 0;
+    width: 600px;
+    font-size: 14px;
+    height: 652px;
   }
-`;
-
-const BenefitRow = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const HiddenItemsRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 2rem; ;
 `;
 
 const BenefitContent = styled.div`
@@ -59,6 +57,30 @@ const BenefitContent = styled.div`
       margin-left: 5%;
     }
   }
+`;
+
+const TheCasinoText = styled.h1`
+  display: none;
+  font-family: teko;
+  font-size: 45px;
+  margin-left: 10%;
+  margin-bottom: 0px;
+  @media (min-width: 767px) {
+    display: block;
+  }
+`;
+
+const CasinoTagline = styled.p`
+  display: none;
+  margin: 0 0 30px 10%;
+
+  @media (min-width: 767px) {
+    display: block;
+  }
+`;
+
+const BenefitText = styled.div`
+  margin-left: 10%;
 `;
 
 const InstructionContainer = styled.div`
@@ -82,7 +104,6 @@ const TopContainer = styled.div`
   @media (min-width: 767px) {
     justify-content: center;
     align-items: center;
-    padding-top: 3.5rem;
   }
 `;
 
@@ -116,32 +137,15 @@ const BetButton = styled.div`
     align-items: center;
     border: 3px solid #ab19ef;
     height: 48px;
-    width: 350px;
+    width: 230px;
     cursor: pointer;
     font-weight: 700;
     margin-left: 40px;
-    margin-top: 1rem;
 
     &:hover {
       background: #ab19ef;
     }
   }
-`;
-
-const HiddenItems = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 250px;
-  min-width: 200px;
-`;
-
-const RewardRightText = styled.div`
-  margin-left: 3rem;
-  line-height: 175%;
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 1rem;
 `;
 
 const NFTsContainer = styled.div`
@@ -154,7 +158,6 @@ const NFTsContainer = styled.div`
     width: 110px;
     height: 110px;
     margin: 3px;
-    position: relative;
     cursor: pointer;
     img {
       width: 100%;
@@ -196,73 +199,31 @@ const CasinoImage = styled.img`
 
   @media (min-width: 767px) {
     display: block;
-    width: 571px;
-    height: 583px;
   }
-`;
-
-const BenefitIcons = styled.img`
-  margin: 0.5rem;
-  padding: 0.5rem;
-  max-width: 32px;
-`;
-
-const YellowText = styled.span`
-  color: #ccee25;
-`;
-
-const ZombieHeld = styled(YellowText)`
-  margin-bottom: 1rem;
 `;
 
 const BenefitList = [
   {
-    img: discord,
-    alt: 'discord',
-    listItem: (
-      <ul>
-        <li>
-          <b>An active degen experience </b> - entering the casino gives access
-          to a special Discord channel to play casino games and earn Brain
-          Fragments (see table below)
-        </li>
-      </ul>
-    ),
+    listItem: 'An active degen experience',
+  },
+
+  {
+    listItem: 'Entry into special discord channel to play casino games',
   },
   {
-    img: discord,
-    alt: 'discord',
-    listItem: (
-      <ul>
-        <li>
-          <b>Brain fragments are redeemable for prizes, </b> selection rotates
-          weekly
-        </li>
-      </ul>
-    ),
+    listItem: 'Minimum 10,000 points to start playing with',
   },
   {
-    img: discord,
-    alt: 'discord',
-    listItem: (
-      <ul>
-        <li>
-          <b>Access to monthly poker games </b>
-        </li>
-      </ul>
-    ),
+    listItem: 'Entry into exclusive poker games',
   },
   {
-    img: discord,
-    alt: 'discord',
-    listItem: (
-      <ul>
-        <li>
-          <b>New trait </b> added to your Nice Fun Zombie’s metadata –{' '}
-          <YellowText>Location: Casino</YellowText>
-        </li>
-      </ul>
-    ),
+    listItem: 'Weekly rotating prizes to be claimed',
+  },
+  {
+    listItem: 'A X% chance to find a new NFZ',
+  },
+  {
+    listItem: '200 total zombies available within casino',
   },
 ];
 
@@ -395,61 +356,6 @@ const userNfts = {
   status: 'SYNCED',
 };
 
-const MidRowContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  max-width: 75%;
-  margin: 2rem 0 5rem 7%;
-`;
-
-const ProbabilityContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
-`;
-
-const ProbabilityLeftText = styled.span`
-  margin-right: 3rem;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 175%;
-`;
-
-const Row = styled.div`
-  display: flex;
-  justify-content: ${(props) => props.justifyContent};
-  align-items: ${(props) => props.alignItems};
-`;
-
-const Col = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: ${(props) => props.justifyContent};
-  align-items: ${(props) => props.alignItems};
-`;
-
-const TopRowSubheader = styled.b`
-  font-size: 18;
-  margin: 1rem 0;
-`;
-
-const MidRowSubheader = styled.b`
-  font-size: 18;
-`;
-
-const ProbabilityItemRow = styled(Row)`
-  margin-bottom: 1rem;
-`;
-
-function ListItemWithIcon({ img, alt, text }) {
-  return (
-    <BenefitRow>
-      <BenefitIcons src={img} alt={alt} height="100%" />
-      {text}
-    </BenefitRow>
-  );
-}
-
 export default function CasinoPage() {
   const [selectedIds, setSelectedIds] = useState([]);
 
@@ -476,139 +382,23 @@ export default function CasinoPage() {
     <CasinoPageContainer>
       <BackButton>Back</BackButton>
       <TopContainer>
-        <Col justifyContent="center" alignItems="center">
-          <CasinoImage src={casino} alt="casino" />
-          <BetButton>BET ON THE CASINO</BetButton>
-        </Col>
+        <CasinoImage src={casino} alt="casino" />
         <BenefitContainer>
-          <TopRowSubheader>Guaranteed Benefits</TopRowSubheader>
-          {BenefitList.map((item, index) => (
-            <ListItemWithIcon
-              img={item.img}
-              alt={item.alt}
-              text={item.listItem}
-              key={index}
-            />
-          ))}
-          <br />
-          <TopRowSubheader>
-            What’s Hiding in the Casino (To be found by Searching)
-          </TopRowSubheader>
-          <HiddenItemsRow>
-            <HiddenItems>
-              <img src={NFZs} alt="300 NFZs" />
-              <span>300 NFZs</span>
-            </HiddenItems>
-            <HiddenItems>
-              <img
-                src={Keycard}
-                alt="150 Keycards"
-                style={{ maxWidth: '106px' }}
-              />
-              <span>150 Keycards</span>
-            </HiddenItems>
-            <HiddenItems>
-              <img src={NFZs} alt="5 Custom NFZs" />
-              <p>5 Custom NFZs</p>
-              <span style={{ fontSize: '10px' }}>
-                (no utility, special commission)
-              </span>
-            </HiddenItems>
-          </HiddenItemsRow>
+          <BenefitContent>
+            <TheCasinoText>The Casino</TheCasinoText>
+            <CasinoTagline>You like some fast-paced action!</CasinoTagline>
+            <BenefitText>Location Benefit</BenefitText>
+            <ul>
+              {BenefitList.map((item, index) => (
+                <li key={index}>{item.listItem}</li>
+              ))}
+            </ul>
+            <BetButton>BET ON THE CASINO</BetButton>
+          </BenefitContent>
         </BenefitContainer>
       </TopContainer>
-      <MidRowContainer>
-        <ProbabilityContainer>
-          <MidRowSubheader>
-            Horde Size Search Prize Probabilities
-          </MidRowSubheader>
-          <p style={{ fontSize: '10px' }}>
-            *Sending a Genesis Zombie in a Horde gives +1 to the Horde Size
-            (only once)
-          </p>
-          <Row justifyContent="space-between" alignItems="center">
-            <Col justifyContent="space-between" alignItems="space-between">
-              <ProbabilityItemRow
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <ProbabilityLeftText>Send 1 NFZ</ProbabilityLeftText>{' '}
-                <YellowText>0%</YellowText>
-              </ProbabilityItemRow>
-              <ProbabilityItemRow
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <ProbabilityLeftText>Send 2 NFZs</ProbabilityLeftText>{' '}
-                <YellowText>25%</YellowText>
-              </ProbabilityItemRow>
-
-              <ProbabilityItemRow
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <ProbabilityLeftText>Send 3 NFZs</ProbabilityLeftText>{' '}
-                <YellowText>35%</YellowText>
-              </ProbabilityItemRow>
-            </Col>
-            <Col justifyContent="start" alignItems="space-between">
-              <ProbabilityItemRow
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <ProbabilityLeftText>Send 4 NFZs</ProbabilityLeftText>{' '}
-                <YellowText>50%</YellowText>
-              </ProbabilityItemRow>
-
-              <ProbabilityItemRow
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <ProbabilityLeftText>Send 5 NFZs</ProbabilityLeftText>{' '}
-                <YellowText>70%</YellowText>
-              </ProbabilityItemRow>
-
-              <ProbabilityItemRow
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <ProbabilityLeftText>Send 6 nicefunzombies</ProbabilityLeftText>{' '}
-                <YellowText>100%</YellowText>
-              </ProbabilityItemRow>
-            </Col>
-          </Row>
-        </ProbabilityContainer>
-        <ProbabilityContainer>
-          <MidRowSubheader>Zombies Held within Casino</MidRowSubheader>
-          <br />
-          <Row justifyContent="space-between" alignItems="center">
-            <Col justifyContent="start" alignItems="space-between">
-              <ZombieHeld>1 - 3 NFZs</ZombieHeld>
-              <ZombieHeld>4 - 8 NFZs</ZombieHeld>
-              <ZombieHeld>9 - 14 NFZs</ZombieHeld>
-              <ZombieHeld>15 + NFZs</ZombieHeld>
-            </Col>
-            <Col justifyContent="start" alignItems="space-between">
-              <RewardRightText>
-                Collect 1,000 Brain Fragments Daily
-              </RewardRightText>
-              <RewardRightText>
-                Collect 3,000 Brain Fragments Daily
-              </RewardRightText>
-              <RewardRightText>
-                Collect 6,000 Brain Fragments Daily
-              </RewardRightText>
-              <RewardRightText>
-                Collect 10,000 Brain Fragments Daily
-              </RewardRightText>
-            </Col>
-          </Row>
-        </ProbabilityContainer>
-      </MidRowContainer>
       <InstructionContainer>
-        <b style={{ fontSize: '18px' }}>
-          CHOOSE THE ZOMBIES YOU WANT TO SEARCH WITH (MAX 6)
-        </b>
+        <span>CHOOSE THE ZOMBIES YOU WANT TO SEARCH WITH (MAX 6)</span>
         <p>2 Zombies Selected</p>
       </InstructionContainer>
       <NFTsContainer>
