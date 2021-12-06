@@ -302,14 +302,10 @@ let Info = (props) => {
             <div className="mint-numbers">
               <h2>4,444</h2>
               <p className="green-highlight">Available at Launch</p>
-              <p className="green-highlight">
-                Join our Discord to learn how
-                <br />
-                to get Pre-Sale Access!
-              </p>
+              <p className="green-highlight">Join our Discord to learn more!</p>
             </div>
             <div className="mint-numbers end">
-              <h2>.06 ETH</h2>
+              <h2>.02 ETH</h2>
               <span className="green-highlight">Price</span>
             </div>
           </div>
@@ -320,7 +316,7 @@ let Info = (props) => {
               <p className="green-highlight">
                 Reserved to be found by NFZ Holders
                 <br />
-                (Only 6,666 Genesis NFZs will ever exist)
+                (Only 6,666 Gen 1 NFZs will ever exist)
               </p>
               <p className="leftalign">
                 Reserved NFZs will be available in the future{' '}

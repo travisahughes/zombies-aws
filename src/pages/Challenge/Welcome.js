@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import bgimg from '../../assets/challenge/challengebg.png';
+import bgimg from '../../assets/challenge/challengebg.jpg';
 import rainingeth from '../../assets/challenge/rainingeth.png';
 import fox from '../../assets/challenge/metamaskfox.png';
 import './Welcome.css';
@@ -19,7 +19,8 @@ function Welcome({
   account,
 }) {
   // TODO: Change to '0x1' for prod!
-  const preferredChain = '0x4';
+  // const preferredChain = '0x4'; // rinkeby / staging
+  const preferredChain = '0x1'; // prod
   const [challengeCompleted, setChallengeCompleted] = useState(false);
   const [shortAddress, setShortAddress] = useState(false);
 
@@ -58,16 +59,16 @@ function Welcome({
 
     display: flex;
     flex-direction: column;
-    margin: 0 auto 20px auto;
-    padding: 90vh 20px 0;
+    margin: 0 auto;
+    padding: 67vh 20px 20px;
     @media (max-width: 1300px) {
-      padding-top: 80vh;
+      padding-top: 55vh;
     }
     @media (max-width: 1000px) {
-      padding-top: 60vh;
+      padding-top: 50vh;
     }
     @media (max-width: 640px) {
-      padding-top: 30vh;
+      padding-top: 40vh;
     }
 
     h1 {
