@@ -418,7 +418,7 @@ const MidRowContainer = styled.div`
 
   @media (min-width: 767px) {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     text-align: start;
     margin: 2rem 0 5rem 0;
     width: 80%;
