@@ -14,10 +14,10 @@ const CasinoPageContainer = styled.div`
   background-repeat: no-repeat;
   background-position-x: center;
   background-size: 160% 60vh;
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.75);
 
   @media (min-width: 767px) {
     background-size: 100% 100vh;
-    box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.75);
   }
 `;
 
@@ -25,6 +25,8 @@ const BenefitContainer = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 14px;
+  width: 100%;
+  padding: 0;
 
   @media (min-width: 767px) {
     max-width: 620px;
@@ -35,36 +37,28 @@ const BenefitContainer = styled.div`
 const BenefitRow = styled.div`
   display: flex;
   align-items: center;
+
+  @media (min-width: 767px) {
+    width: 80%;
+  }
 `;
 
 const HiddenItemsRow = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-top: 2rem; ;
-`;
-
-const BenefitContent = styled.div`
-  position: absolute;
-  z-index: 1;
-  top: 30%;
-  left: 3%;
-  max-width: 250px;
+  justify-content: space-around;
+  margin-top: 2rem;
+  flex-wrap: wrap;
 
   @media (min-width: 767px) {
-    top: 20%;
-    max-width: 400px;
-
-    ul {
-      margin-left: 5%;
-    }
+    justify-content: space-between;
   }
 `;
 
 const InstructionContainer = styled.div`
   margin-top: 1rem;
-  width: 100%;
   text-align: center;
+
   span {
     font-size: 18px;
     margin: 0;
@@ -77,26 +71,28 @@ const InstructionContainer = styled.div`
 
 const TopContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 3.5rem;
 
   @media (min-width: 767px) {
-    justify-content: center;
-    align-items: center;
-    padding-top: 3.5rem;
+    flex-direction: row;
   }
 `;
 
 const BackButton = styled.div`
-  display: none;
+  width: 87px;
+  height: 32px;
+  border: 3px solid #ab19ef;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 25px;
+  left: 25px;
 
   @media (min-width: 767px) {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 25px;
-    left: 25px;
-    border: 3px solid #ab19ef;
     color: white;
     height: 48px;
     width: 120px;
@@ -132,16 +128,27 @@ const HiddenItems = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 250px;
-  min-width: 200px;
+  justify-content: center;
+  min-height: 200px;
+  /* min-width: 50%; */
+  max-width: 144px;
+
+  @media (min-width: 767px) {
+    min-height: 250px;
+    min-width: 200px;
+  }
 `;
 
 const RewardRightText = styled.div`
   margin-left: 3rem;
   line-height: 175%;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
   margin-bottom: 1rem;
+
+  @media (mix-width: 767px) {
+    font-size: 14px;
+  }
 `;
 
 const NFTsContainer = styled.div`
@@ -149,6 +156,7 @@ const NFTsContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 1rem;
+  width: 100%;
 
   .nft-container {
     width: 110px;
@@ -192,7 +200,8 @@ const NFTsContainer = styled.div`
 `;
 
 const CasinoImage = styled.img`
-  display: none;
+  width: 220px;
+  height: 225px;
 
   @media (min-width: 767px) {
     display: block;
@@ -202,9 +211,13 @@ const CasinoImage = styled.img`
 `;
 
 const BenefitIcons = styled.img`
-  margin: 0.5rem;
-  padding: 0.5rem;
-  max-width: 32px;
+  display: none;
+  @media (min-width: 767px) {
+    display: block;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    max-width: 32px;
+  }
 `;
 
 const YellowText = styled.span`
@@ -213,6 +226,7 @@ const YellowText = styled.span`
 
 const ZombieHeld = styled(YellowText)`
   margin-bottom: 1rem;
+  min-width: 95px;
 `;
 
 const BenefitList = [
@@ -397,9 +411,18 @@ const userNfts = {
 
 const MidRowContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  max-width: 75%;
-  margin: 2rem 0 5rem 7%;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 3rem;
+  padding: 0 5%;
+
+  @media (min-width: 767px) {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: start;
+    margin: 2rem 0 5rem 0;
+    width: 80%;
+  }
 `;
 
 const ProbabilityContainer = styled.div`
@@ -409,10 +432,13 @@ const ProbabilityContainer = styled.div`
 `;
 
 const ProbabilityLeftText = styled.span`
-  margin-right: 3rem;
   font-size: 14px;
   font-weight: bold;
   line-height: 175%;
+
+  @media (min-width: 767px) {
+    margin-right: 3rem;
+  }
 `;
 
 const Row = styled.div`
@@ -429,16 +455,33 @@ const Col = styled.div`
 `;
 
 const TopRowSubheader = styled.b`
-  font-size: 18;
-  margin: 1rem 0;
+  text-align: center;
+  font-size: 18px;
+  padding: 0 5%;
+
+  @media (min-width: 767px) {
+    text-align: start;
+    margin: 1rem 0;
+  }
 `;
 
 const MidRowSubheader = styled.b`
-  font-size: 18;
+  font-size: 18px;
+  margin: 1rem;
+
+  @media (min-width: 767px) {
+    text-align: start;
+    margin: 0;
+  }
 `;
 
 const ProbabilityItemRow = styled(Row)`
   margin-bottom: 1rem;
+  min-width: 140px;
+
+  @media (min-width: 767px) {
+    max-width: none;
+  }
 `;
 
 function ListItemWithIcon({ img, alt, text }) {
@@ -522,7 +565,7 @@ export default function CasinoPage() {
           <MidRowSubheader>
             Horde Size Search Prize Probabilities
           </MidRowSubheader>
-          <p style={{ fontSize: '10px' }}>
+          <p style={{ fontSize: '10px', textAlign: 'justify' }}>
             *Sending a Genesis Zombie in a Horde gives +1 to the Horde Size
             (only once)
           </p>
@@ -572,7 +615,7 @@ export default function CasinoPage() {
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <ProbabilityLeftText>Send 6 nicefunzombies</ProbabilityLeftText>{' '}
+                <ProbabilityLeftText>Send 6 NFZs</ProbabilityLeftText>{' '}
                 <YellowText>100%</YellowText>
               </ProbabilityItemRow>
             </Col>
@@ -581,28 +624,32 @@ export default function CasinoPage() {
         <ProbabilityContainer>
           <MidRowSubheader>Zombies Held within Casino</MidRowSubheader>
           <br />
-          <Row justifyContent="space-between" alignItems="center">
-            <Col justifyContent="start" alignItems="space-between">
+          <Col justifyContent="space-around" alignItems="space-around">
+            <Row justifyContent="space-between" alignItems="center">
               <ZombieHeld>1 - 3 NFZs</ZombieHeld>
-              <ZombieHeld>4 - 8 NFZs</ZombieHeld>
-              <ZombieHeld>9 - 14 NFZs</ZombieHeld>
-              <ZombieHeld>15 + NFZs</ZombieHeld>
-            </Col>
-            <Col justifyContent="start" alignItems="space-between">
               <RewardRightText>
                 Collect 1,000 Brain Fragments Daily
               </RewardRightText>
+            </Row>
+            <Row justifyContent="space-between" alignItems="center">
+              <ZombieHeld>4 - 8 NFZs</ZombieHeld>
               <RewardRightText>
                 Collect 3,000 Brain Fragments Daily
               </RewardRightText>
+            </Row>
+            <Row justifyContent="space-between" alignItems="center">
+              <ZombieHeld>9 - 14 NFZs</ZombieHeld>
               <RewardRightText>
                 Collect 6,000 Brain Fragments Daily
               </RewardRightText>
+            </Row>
+            <Row justifyContent="space-between" alignItems="center">
+              <ZombieHeld>15+ NFZs</ZombieHeld>
               <RewardRightText>
                 Collect 10,000 Brain Fragments Daily
               </RewardRightText>
-            </Col>
-          </Row>
+            </Row>
+          </Col>
         </ProbabilityContainer>
       </MidRowContainer>
       <InstructionContainer>
