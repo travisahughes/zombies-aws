@@ -51,6 +51,7 @@ const HiddenItemsRow = styled.div`
   flex-wrap: wrap;
 
   @media (min-width: 767px) {
+    align-items: flex-start;
     justify-content: space-between;
   }
 `;
@@ -134,6 +135,7 @@ const HiddenItems = styled.div`
   max-width: 144px;
 
   @media (min-width: 767px) {
+    justify-content: flex-start;
     min-height: 250px;
     min-width: 200px;
   }
