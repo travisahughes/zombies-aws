@@ -495,7 +495,7 @@ function ListItemWithIcon({ img, alt, text }) {
   );
 }
 
-export default function CasinoPage() {
+export default function CasinoPage({ tokensContract, userAccount }) {
   const [selectedIds, setSelectedIds] = useState([]);
 
   const hordeClick = (metadata, index) => {
@@ -516,14 +516,22 @@ export default function CasinoPage() {
 
     return;
   };
-
+  const casinoClick = () => {
+    console.log('token coontrat', tokensContract);
+    tokensContract.methods
+      .burnKeycard(userAccount, [14, 16], 1, 1)
+      .send({ from: userAccount })
+      .on('receipt', (receipt) => {
+        console.log('keyCardBurn txn', receipt);
+      });
+  };
   return (
     <CasinoPageContainer>
       <BackButton>Back</BackButton>
       <TopContainer>
         <Col justifyContent="center" alignItems="center">
           <CasinoImage src={casino} alt="casino" />
-          <BetButton>BET ON THE CASINO</BetButton>
+          <BetButton onClick={casinoClick}>BET ON THE CASINO</BetButton>
         </Col>
         <BenefitContainer>
           <TopRowSubheader>Guaranteed Benefits</TopRowSubheader>
