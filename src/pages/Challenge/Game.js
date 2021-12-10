@@ -30,6 +30,8 @@ function Game({ userNfts, user }) {
   const [challengeBoxes, setChallengeBoxes] = useState([]);
 
   const [genesisZombies, setGenesisZombies] = useState([]);
+  const [isInGame, setIsInGame] = useState(false);
+  const [isInFinal, setIsInFinal] = useState(false);
   useEffect(() => {
     setChallengeBoxes(challenge.boxes);
   }, []);
@@ -66,7 +68,7 @@ function Game({ userNfts, user }) {
       });
     }
   }, [wildcardBox]);
-  userNfts = {
+  let xuserNfts = {
     total: 8,
     page: 0,
     page_size: 500,
@@ -220,6 +222,10 @@ function Game({ userNfts, user }) {
           margin: 0 10px 10px;
           cursor: pointer;
           position: relative;
+          @media (max-width: 640px) {
+            width: 100px;
+            height: auto;
+          }
 
           .genesis-text {
             opacity: 0;
@@ -244,6 +250,9 @@ function Game({ userNfts, user }) {
             cursor: grab;
             cursor: -moz-grab;
             cursor: -webkit-grab;
+            @media (max-width: 640px) {
+              width: 100px;
+            }
           }
           .nft-img:active {
             cursor: grabbing;
@@ -643,13 +652,17 @@ function Game({ userNfts, user }) {
     });
 
     gsap.to('.final-bottom', {
+      display: 'flex',
       duration: 0.5,
       opacity: 1,
       ease: 'power1.easeOut',
       delay: 3,
     });
+
+    setIsInFinal(true);
   };
   const handleStart = () => {
+    setIsInGame(true);
     gsap.to('.preview-sections.preview', {
       duration: 0.1,
       opacity: 0,
@@ -727,7 +740,7 @@ function Game({ userNfts, user }) {
         <div className="pigeon">
           <img src={comic} alt="" />
         </div>
-        <div className="final-bottom">
+        <div className={isInFinal ? 'final-bottom isfinal' : 'final-bottom'}>
           <div className="mb-2 text-3xl text-center text-white uppercase final-bottom-title">
             achievement unlocked
           </div>
@@ -775,7 +788,13 @@ function Game({ userNfts, user }) {
             build a team with these traits
           </div>
         </div>
-        <div className="preview-sections preview">
+        <div
+          className={
+            isInGame
+              ? 'preview-sections preview ingame'
+              : 'preview-sections preview'
+          }
+        >
           {challengeBoxes.map((box, index) => (
             <ChallengeSelection
               box={box}
@@ -841,7 +860,7 @@ function Game({ userNfts, user }) {
           <div className="preview-section-text">
             <div className="preview-section-text-header">The Theif</div>
             <div className="preview-section-text-sub-header">
-              (Bulletproof Vest or Burglar eye wear)
+              (Bulletproof Vest or Burglar Eye Wear)
             </div>
           </div>
         </div>

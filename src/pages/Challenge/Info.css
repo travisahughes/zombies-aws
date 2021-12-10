@@ -64,7 +64,7 @@
   width: 150px;
   min-height: 50px;
   height: 50px;
-  border: 1px solid white;
+  border: 3px solid #ab19ef;
   padding: 8px 20px;
   background: transparent;
   color: white;
@@ -109,4 +109,79 @@
   text-align: center;
   margin-top: 18px;
   width: 640px;
+}
+
+@media (max-width: 640px) {
+  .info-page {
+    font-size: 16px;
+  }
+
+  .zombie-image {
+    left: calc(50% - 100px);
+    top: 100px;
+  }
+  .zombie-image img {
+    width: 200px;
+    height: 200px;
+    left: calc(50% - 100px);
+    top: 100px;
+  }
+
+  .your-challenge-text {
+    text-align: center;
+    position: absolute;
+    bottom: calc(50% - 150px);
+    left: 5%;
+    width: 90%;
+    opacity: 0;
+    z-index: 2;
+  }
+
+  .pigeon-image {
+    position: initial;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pigeon-image img {
+    width: 75vw;
+    height: auto;
+    margin-top: 100px;
+  }
+
+  .pigeon-image-text {
+    text-align: center;
+    width: 90%;
+    padding: 0 10px;
+    color: white;
+  }
+
+  .pigeon-final {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+  }
+
+  .pigeon-final img {
+    width: 75vw;
+  }
+
+  .pigeon-final-text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 150%;
+    color: white;
+    text-align: center;
+    margin-top: 18px;
+    width: 100%;
+  }
 }

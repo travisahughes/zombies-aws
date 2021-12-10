@@ -2,7 +2,7 @@
     "boxes": [
         {"_id": 1, "category": ["Background"], "requirements": ["Charcoal"], "divClassName": "shadow preview-section", "headerText": "The Shadow", "subHeaderText": "(Charcoal Background)", "defaultImage": "shadow", "zombie": {}},
 
-        {"_id": 2, "category": ["Outfit","Eye_wear"], "requirements": ["Bulletproof Vest", "Burglar"], "divClassName": "preview-section theif", "headerText": "The Theif", "subHeaderText": "(Bulletproof Vest or Burglar eye wear)", "defaultImage": "theif", "zombie": {}},
+        {"_id": 2, "category": ["Outfit","Eye_wear"], "requirements": ["Bulletproof Vest", "Burglar"], "divClassName": "preview-section theif", "headerText": "The Theif", "subHeaderText": "(Bulletproof Vest or Burglar Eye Wear)", "defaultImage": "theif", "zombie": {}},
         {"_id": 3, "category": ["NA"], "requirements": [], "wildcard": true, "divClassName": "preview-section wildcard", "headerText": "The Star", "subHeaderText": "(Your Favorite NFZ)","defaultImage": "wildcard", "zombie": {}}
     ]
 }
