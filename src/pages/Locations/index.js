@@ -91,7 +91,7 @@ export default function Location() {
   useEffect(() => {
     if (isWeb3Enabled) {
       const Web3 = require('web3');
-
+      console.log('Sdfsdfss');
       web3.setProvider(web3.currentProvider);
       const polyTokensContract = new web3.eth.Contract(
         PolyTokensABI.abi,
@@ -111,6 +111,19 @@ export default function Location() {
         contractAddress.GAME_MECHANICS
       );
 
+      gameMechanicsWSS.events
+        .EPrizes({})
+        .on('data', function (event) {
+          console.log('PRIZES');
+          console.log(event);
+
+          // console.log('event data', event)
+          console.log('------------------------------');
+        })
+        .on('error', function (error, receipt) {
+          // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+          console.log('event listener error', error);
+        });
       gameMechanicsWSS.events
         .ELocationSet({})
         .on('data', function (event) {

@@ -517,7 +517,10 @@ export default function CasinoPage({ tokensContract, userAccount }) {
     return;
   };
   const casinoClick = () => {
-    console.log('token coontrat', tokensContract);
+    //TODO - on button click we need to go to page (location - searching casino) on figma
+    //TODO: Hang on location -search casino for 10 seconds
+    //TODO: after 10 seconds go to result page
+    return;
     tokensContract.methods
       .burnKeycard(userAccount, [14, 16], 1, 1)
       .send({ from: userAccount })
