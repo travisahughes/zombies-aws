@@ -13,6 +13,7 @@ import casino from '../../assets/locations/casino.png';
 import shadow from '../../assets/game/shadow.png';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
+import { keyframes } from '@emotion/react';
 
 const CasinoPageContainer = styled.div`
   height: 100vh;
@@ -123,16 +124,17 @@ const BetButton = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 3px solid #ab19ef;
+    border: ${(props) =>
+      props.betting ? '3px solid grey' : '3px solid #ab19ef'};
     height: 48px;
     width: 350px;
-    cursor: pointer;
+    cursor: ${(props) => (props.betting ? 'normal' : 'pointer')};
     font-weight: 700;
     margin-left: 40px;
     margin-top: 1rem;
 
     &:hover {
-      background: #ab19ef;
+      background: ${(props) => (props.betting ? 'transparent' : '#ab19ef')};
     }
   }
 `;
@@ -511,6 +513,7 @@ export default function CasinoPage({ tokensContract, userAccount }) {
   const history = useHistory();
   const [selectedIds, setSelectedIds] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [betting, setBetting] = useState(false);
 
   const hordeClick = (metadata, index) => {
     if (selectedIds.includes(metadata.zombieId)) {
@@ -531,18 +534,16 @@ export default function CasinoPage({ tokensContract, userAccount }) {
     return;
   };
 
-  function sleep(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
-
   const casinoClick = () => {
-    setLoading(true);
-    sleep(10000).then(() => history.push('/locations/casino-result'));
-    return;
+    if (betting) return;
+
+    setBetting(true);
     tokensContract.methods
       .burnKeycard(userAccount, [14, 16], 1, 1)
       .send({ from: userAccount })
       .on('receipt', (receipt) => {
+        setLoading(true);
+        setBetting(false);
         console.log('keyCardBurn txn', receipt);
       });
   };
@@ -554,6 +555,30 @@ export default function CasinoPage({ tokensContract, userAccount }) {
     max-height: 90%;
   `;
 
+  const rotate360 = keyframes`
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  `;
+
+  const Spinner = styled.div`
+    animation: ${rotate360} 1s linear infinite;
+    transform: translateZ(0);
+
+    margin-left: 1rem;
+    border-top: 2px solid grey;
+    border-right: 2px solid grey;
+    border-bottom: 2px solid grey;
+    border-left: 2px solid black;
+    background: transparent;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+  `;
+
   return (
     <CasinoPageContainer loading={loading}>
       {!loading && (
@@ -562,7 +587,9 @@ export default function CasinoPage({ tokensContract, userAccount }) {
           <TopContainer>
             <Col justifyContent="center" alignItems="center">
               <CasinoImage src={casino} alt="casino" />
-              <BetButton onClick={casinoClick}>BET ON THE CASINO</BetButton>
+              <BetButton betting={betting} onClick={casinoClick}>
+                BET ON THE CASINO {betting && <Spinner />}
+              </BetButton>
             </Col>
             <BenefitContainer>
               <TopRowSubheader>Guaranteed Benefits</TopRowSubheader>
