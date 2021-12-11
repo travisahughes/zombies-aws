@@ -1,20 +1,32 @@
 import styled from '@emotion/styled';
 import background from '../../assets/locations/split-path-image.png';
+import paperBg from '../../assets/locations/paperbg.png';
+import slotMachine from '../../assets/locations/slotmachine.png';
+import brain from '../../assets/locations/brain.png';
+import chip from '../../assets/locations/chip.png';
+import card from '../../assets/locations/cards.png';
 import NFZs from '../../assets/locations/2797.png';
 import Keycard from '../../assets/locations/keycard.png';
 import discord from '../../assets/icons/discord.png';
 import UserNFZ from '../../Components/userNFZ';
 import casino from '../../assets/locations/casino.png';
+import shadow from '../../assets/game/shadow.png';
 import { useState } from 'react';
+import { useHistory } from 'react-router';
 
 const CasinoPageContainer = styled.div`
   height: 100vh;
   min-height: 700px;
-  background-image: url(${background});
+  background-image: url(${(props) => (props.loading ? paperBg : background)});
   background-repeat: no-repeat;
   background-position-x: center;
   background-size: 160% 60vh;
-  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.75);
+  box-shadow: ${(props) =>
+    props.loading ? 'none' : 'inset 0 0 0 2000px rgba(0, 0, 0, 0.75)'};
+  position: relative;
+  display: ${(props) => (props.loading ? 'flex' : 'block')};
+  justify-content: center;
+  align-items: flex-end;
 
   @media (min-width: 767px) {
     background-size: 100% 100vh;
@@ -246,8 +258,8 @@ const BenefitList = [
     ),
   },
   {
-    img: discord,
-    alt: 'discord',
+    img: brain,
+    alt: 'brain',
     listItem: (
       <ul>
         <li>
@@ -258,8 +270,8 @@ const BenefitList = [
     ),
   },
   {
-    img: discord,
-    alt: 'discord',
+    img: chip,
+    alt: 'chip',
     listItem: (
       <ul>
         <li>
@@ -269,8 +281,8 @@ const BenefitList = [
     ),
   },
   {
-    img: discord,
-    alt: 'discord',
+    img: card,
+    alt: 'card',
     listItem: (
       <ul>
         <li>
@@ -496,7 +508,9 @@ function ListItemWithIcon({ img, alt, text }) {
 }
 
 export default function CasinoPage({ tokensContract, userAccount }) {
+  const history = useHistory();
   const [selectedIds, setSelectedIds] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const hordeClick = (metadata, index) => {
     if (selectedIds.includes(metadata.zombieId)) {
@@ -516,10 +530,14 @@ export default function CasinoPage({ tokensContract, userAccount }) {
 
     return;
   };
+
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
   const casinoClick = () => {
-    //TODO - on button click we need to go to page (location - searching casino) on figma
-    //TODO: Hang on location -search casino for 10 seconds
-    //TODO: after 10 seconds go to result page
+    setLoading(true);
+    sleep(10000).then(() => history.push('/locations/casino-result'));
     return;
     tokensContract.methods
       .burnKeycard(userAccount, [14, 16], 1, 1)
@@ -528,160 +546,177 @@ export default function CasinoPage({ tokensContract, userAccount }) {
         console.log('keyCardBurn txn', receipt);
       });
   };
+
+  const SlotMachineImage = styled.img`
+    /* position: absolute;
+    right: 50%;
+    bottom: 0; */
+    max-height: 90%;
+  `;
+
   return (
-    <CasinoPageContainer>
-      <BackButton>Back</BackButton>
-      <TopContainer>
-        <Col justifyContent="center" alignItems="center">
-          <CasinoImage src={casino} alt="casino" />
-          <BetButton onClick={casinoClick}>BET ON THE CASINO</BetButton>
-        </Col>
-        <BenefitContainer>
-          <TopRowSubheader>Guaranteed Benefits</TopRowSubheader>
-          {BenefitList.map((item, index) => (
-            <ListItemWithIcon
-              img={item.img}
-              alt={item.alt}
-              text={item.listItem}
-              key={index}
-            />
-          ))}
-          <br />
-          <TopRowSubheader>
-            What’s Hiding in the Casino (To be found by Searching)
-          </TopRowSubheader>
-          <HiddenItemsRow>
-            <HiddenItems>
-              <img src={NFZs} alt="300 NFZs" />
-              <span>300 NFZs</span>
-            </HiddenItems>
-            <HiddenItems>
-              <img
-                src={Keycard}
-                alt="150 Keycards"
-                style={{ maxWidth: '106px' }}
-              />
-              <span>150 Keycards</span>
-            </HiddenItems>
-            <HiddenItems>
-              <img src={NFZs} alt="5 Custom NFZs" />
-              <p>5 Custom NFZs</p>
-              <span style={{ fontSize: '10px' }}>
-                (no utility, special commission)
-              </span>
-            </HiddenItems>
-          </HiddenItemsRow>
-        </BenefitContainer>
-      </TopContainer>
-      <MidRowContainer>
-        <ProbabilityContainer>
-          <MidRowSubheader>
-            Horde Size Search Prize Probabilities
-          </MidRowSubheader>
-          <p style={{ fontSize: '10px', textAlign: 'justify' }}>
-            *Sending a Genesis Zombie in a Horde gives +1 to the Horde Size
-            (only once)
-          </p>
-          <Row justifyContent="space-between" alignItems="center">
-            <Col justifyContent="space-between" alignItems="space-between">
-              <ProbabilityItemRow
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <ProbabilityLeftText>Send 1 NFZ</ProbabilityLeftText>{' '}
-                <YellowText>0%</YellowText>
-              </ProbabilityItemRow>
-              <ProbabilityItemRow
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <ProbabilityLeftText>Send 2 NFZs</ProbabilityLeftText>{' '}
-                <YellowText>25%</YellowText>
-              </ProbabilityItemRow>
-
-              <ProbabilityItemRow
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <ProbabilityLeftText>Send 3 NFZs</ProbabilityLeftText>{' '}
-                <YellowText>35%</YellowText>
-              </ProbabilityItemRow>
+    <CasinoPageContainer loading={loading}>
+      {!loading && (
+        <>
+          <BackButton>Back</BackButton>
+          <TopContainer>
+            <Col justifyContent="center" alignItems="center">
+              <CasinoImage src={casino} alt="casino" />
+              <BetButton onClick={casinoClick}>BET ON THE CASINO</BetButton>
             </Col>
-            <Col justifyContent="start" alignItems="space-between">
-              <ProbabilityItemRow
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <ProbabilityLeftText>Send 4 NFZs</ProbabilityLeftText>{' '}
-                <YellowText>50%</YellowText>
-              </ProbabilityItemRow>
+            <BenefitContainer>
+              <TopRowSubheader>Guaranteed Benefits</TopRowSubheader>
+              {BenefitList.map((item, index) => (
+                <ListItemWithIcon
+                  img={item.img}
+                  alt={item.alt}
+                  text={item.listItem}
+                  key={index}
+                />
+              ))}
+              <br />
+              <TopRowSubheader>
+                What’s Hiding in the Casino (To be found by Searching)
+              </TopRowSubheader>
+              <HiddenItemsRow>
+                <HiddenItems>
+                  <img src={NFZs} alt="300 NFZs" />
+                  <span>300 NFZs</span>
+                </HiddenItems>
+                <HiddenItems>
+                  <img
+                    src={Keycard}
+                    alt="150 Keycards"
+                    style={{ maxWidth: '106px' }}
+                  />
+                  <span>150 Keycards</span>
+                </HiddenItems>
+                <HiddenItems>
+                  <img
+                    src={shadow}
+                    alt="5 Custom NFZs"
+                    style={{ maxWidth: '144px' }}
+                  />
+                  <p>5 Custom NFZs</p>
+                  <span style={{ fontSize: '10px' }}>
+                    (no utility, special commission)
+                  </span>
+                </HiddenItems>
+              </HiddenItemsRow>
+            </BenefitContainer>
+          </TopContainer>
+          <MidRowContainer>
+            <ProbabilityContainer>
+              <MidRowSubheader>
+                Horde Size Search Prize Probabilities
+              </MidRowSubheader>
+              <p style={{ fontSize: '10px', textAlign: 'justify' }}>
+                *Sending a Genesis Zombie in a Horde gives +1 to the Horde Size
+                (only once)
+              </p>
+              <Row justifyContent="space-between" alignItems="center">
+                <Col justifyContent="space-between" alignItems="space-between">
+                  <ProbabilityItemRow
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                    <ProbabilityLeftText>Send 1 NFZ</ProbabilityLeftText>{' '}
+                    <YellowText>0%</YellowText>
+                  </ProbabilityItemRow>
+                  <ProbabilityItemRow
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                    <ProbabilityLeftText>Send 2 NFZs</ProbabilityLeftText>{' '}
+                    <YellowText>25%</YellowText>
+                  </ProbabilityItemRow>
 
-              <ProbabilityItemRow
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <ProbabilityLeftText>Send 5 NFZs</ProbabilityLeftText>{' '}
-                <YellowText>70%</YellowText>
-              </ProbabilityItemRow>
+                  <ProbabilityItemRow
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                    <ProbabilityLeftText>Send 3 NFZs</ProbabilityLeftText>{' '}
+                    <YellowText>35%</YellowText>
+                  </ProbabilityItemRow>
+                </Col>
+                <Col justifyContent="start" alignItems="space-between">
+                  <ProbabilityItemRow
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                    <ProbabilityLeftText>Send 4 NFZs</ProbabilityLeftText>{' '}
+                    <YellowText>50%</YellowText>
+                  </ProbabilityItemRow>
 
-              <ProbabilityItemRow
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <ProbabilityLeftText>Send 6 NFZs</ProbabilityLeftText>{' '}
-                <YellowText>100%</YellowText>
-              </ProbabilityItemRow>
-            </Col>
-          </Row>
-        </ProbabilityContainer>
-        <ProbabilityContainer>
-          <MidRowSubheader>Zombies Held within Casino</MidRowSubheader>
-          <br />
-          <Col justifyContent="space-around" alignItems="space-around">
-            <Row justifyContent="space-between" alignItems="center">
-              <ZombieHeld>1 - 3 NFZs</ZombieHeld>
-              <RewardRightText>
-                Collect 1,000 Brain Fragments Daily
-              </RewardRightText>
-            </Row>
-            <Row justifyContent="space-between" alignItems="center">
-              <ZombieHeld>4 - 8 NFZs</ZombieHeld>
-              <RewardRightText>
-                Collect 3,000 Brain Fragments Daily
-              </RewardRightText>
-            </Row>
-            <Row justifyContent="space-between" alignItems="center">
-              <ZombieHeld>9 - 14 NFZs</ZombieHeld>
-              <RewardRightText>
-                Collect 6,000 Brain Fragments Daily
-              </RewardRightText>
-            </Row>
-            <Row justifyContent="space-between" alignItems="center">
-              <ZombieHeld>15+ NFZs</ZombieHeld>
-              <RewardRightText>
-                Collect 10,000 Brain Fragments Daily
-              </RewardRightText>
-            </Row>
-          </Col>
-        </ProbabilityContainer>
-      </MidRowContainer>
-      <InstructionContainer>
-        <b style={{ fontSize: '18px' }}>
-          CHOOSE THE ZOMBIES YOU WANT TO SEARCH WITH (MAX 6)
-        </b>
-        <p>2 Zombies Selected</p>
-      </InstructionContainer>
-      <NFTsContainer>
-        {userNfts.result.map((nft, index) => (
-          <UserNFZ
-            nfz={nft}
-            id={index}
-            key={index}
-            selectedIds={selectedIds}
-            onClick={hordeClick}
-          ></UserNFZ>
-        ))}
-      </NFTsContainer>
+                  <ProbabilityItemRow
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                    <ProbabilityLeftText>Send 5 NFZs</ProbabilityLeftText>{' '}
+                    <YellowText>70%</YellowText>
+                  </ProbabilityItemRow>
+
+                  <ProbabilityItemRow
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                    <ProbabilityLeftText>Send 6 NFZs</ProbabilityLeftText>{' '}
+                    <YellowText>100%</YellowText>
+                  </ProbabilityItemRow>
+                </Col>
+              </Row>
+            </ProbabilityContainer>
+            <ProbabilityContainer>
+              <MidRowSubheader>Zombies Held within Casino</MidRowSubheader>
+              <br />
+              <Col justifyContent="space-around" alignItems="space-around">
+                <Row justifyContent="space-between" alignItems="center">
+                  <ZombieHeld>1 - 3 NFZs</ZombieHeld>
+                  <RewardRightText>
+                    Collect 1,000 Brain Fragments Daily
+                  </RewardRightText>
+                </Row>
+                <Row justifyContent="space-between" alignItems="center">
+                  <ZombieHeld>4 - 8 NFZs</ZombieHeld>
+                  <RewardRightText>
+                    Collect 3,000 Brain Fragments Daily
+                  </RewardRightText>
+                </Row>
+                <Row justifyContent="space-between" alignItems="center">
+                  <ZombieHeld>9 - 14 NFZs</ZombieHeld>
+                  <RewardRightText>
+                    Collect 6,000 Brain Fragments Daily
+                  </RewardRightText>
+                </Row>
+                <Row justifyContent="space-between" alignItems="center">
+                  <ZombieHeld>15+ NFZs</ZombieHeld>
+                  <RewardRightText>
+                    Collect 10,000 Brain Fragments Daily
+                  </RewardRightText>
+                </Row>
+              </Col>
+            </ProbabilityContainer>
+          </MidRowContainer>
+          <InstructionContainer>
+            <b style={{ fontSize: '18px' }}>
+              CHOOSE THE ZOMBIES YOU WANT TO SEARCH WITH (MAX 6)
+            </b>
+            <p>2 Zombies Selected</p>
+          </InstructionContainer>
+          <NFTsContainer>
+            {userNfts.result.map((nft, index) => (
+              <UserNFZ
+                nfz={nft}
+                id={index}
+                key={index}
+                selectedIds={selectedIds}
+                onClick={hordeClick}
+              ></UserNFZ>
+            ))}
+          </NFTsContainer>
+        </>
+      )}
+      {loading && <SlotMachineImage src={slotMachine} alt="slot-machine" />}
     </CasinoPageContainer>
   );
 }
