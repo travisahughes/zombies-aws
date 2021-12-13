@@ -539,7 +539,7 @@ export default function CasinoPage({ tokensContract, userAccount }) {
 
     setBetting(true);
     tokensContract.methods
-      .burnKeycard(userAccount, [14, 16], 1, 1)
+      .burnKeycard(userAccount, [12, 13, 14, 15], 1, 1)
       .send({ from: userAccount })
       .on('receipt', (receipt) => {
         setLoading(true);

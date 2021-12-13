@@ -3,7 +3,7 @@ import { useMoralis, useMoralisWeb3Api, useChain } from 'react-moralis';
 import CasinoPage from './Casino';
 import CasinoResultPage from './CasinoResult';
 import SplitPathPage from './SplitPath';
-
+import { useHistory } from 'react-router';
 import { useState, useEffect } from 'react';
 import { contract_data } from '../../constants/moralis_env';
 //IMPORT ABI
@@ -11,8 +11,7 @@ import PolyTokensABI from '../../constants/abis/NFZMechanicTokens.json';
 import PolyGameMechanicsABI from '../../constants/abis/NFZGameMechanics.json';
 import contractAddress from '../../constants/contracts.json';
 export default function Location() {
-  let PolyTokenAddress = '0x6ae65387889DEc72347974003A9eD2113efB6322';
-
+  const history = useHistory();
   const [polyTokensContract, setPolyTokensContract] = useState(null);
 
   let CONTRACT_ID;
@@ -91,11 +90,11 @@ export default function Location() {
   useEffect(() => {
     if (isWeb3Enabled) {
       const Web3 = require('web3');
-      console.log('Sdfsdfss');
+
       web3.setProvider(web3.currentProvider);
       const polyTokensContract = new web3.eth.Contract(
         PolyTokensABI.abi,
-        PolyTokenAddress
+        contractAddress.POLY_TOKENS
       );
 
       setPolyTokensContract(polyTokensContract);
@@ -117,6 +116,7 @@ export default function Location() {
           console.log('PRIZES');
           console.log(event);
           event.result === 'success';
+
           history.push('/locations/casino-result');
           // console.log('event data', event)
           console.log('------------------------------');
