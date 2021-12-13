@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Router, Switch, Route } from 'react-router-dom';
 import { useMoralis, useMoralisWeb3Api, useChain } from 'react-moralis';
 import CasinoPage from './Casino';
 import CasinoResultPage from './CasinoResult';
@@ -11,7 +11,6 @@ import PolyTokensABI from '../../constants/abis/NFZMechanicTokens.json';
 import PolyGameMechanicsABI from '../../constants/abis/NFZGameMechanics.json';
 import contractAddress from '../../constants/contracts.json';
 export default function Location() {
-  const history = useHistory();
   const [polyTokensContract, setPolyTokensContract] = useState(null);
 
   let CONTRACT_ID;
@@ -35,6 +34,7 @@ export default function Location() {
 
   const [userNfts, setUserNfts] = useState(null);
   const [userAccount, setUserAccount] = useState(account);
+  const history = useHistory();
 
   useEffect(() => {
     if (userAccount && Web3Api && chainId) {
@@ -115,8 +115,6 @@ export default function Location() {
         .on('data', function (event) {
           console.log('PRIZES');
           console.log(event);
-          event.result === 'success';
-
           history.push('/locations/casino-result');
           // console.log('event data', event)
           console.log('------------------------------');
@@ -145,7 +143,7 @@ export default function Location() {
 
   return (
     <div>
-      <Router>
+      <Router history={history}>
         <Switch>
           <Route path="/locations/casino">
             <CasinoPage
