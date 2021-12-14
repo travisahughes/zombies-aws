@@ -1,21 +1,24 @@
 import styled from '@emotion/styled';
 import background from '../../assets/locations/split-path-image.png';
-import paperBg from '../../assets/locations/paperbg.png';
+import paperBg from '../../assets/locations/looping-chalk-board-bg.png';
 import slotMachine from '../../assets/locations/slotmachine.png';
-import brain from '../../assets/locations/brain.png';
-import chip from '../../assets/locations/chip.png';
+import chairs from '../../assets/locations/chairs.png';
+import hat from '../../assets/locations/hat.png';
 import card from '../../assets/locations/cards.png';
 import NFZs from '../../assets/locations/2797.png';
+import head from '../../assets/locations/head.png';
+import eth1 from '../../assets/locations/eth.png';
+import eth3 from '../../assets/locations/eth-3.png';
 import Keycard from '../../assets/locations/keycard.png';
 import discord from '../../assets/icons/discord.png';
 import UserNFZ from '../../Components/userNFZ';
-import casino from '../../assets/locations/casino.png';
+import school from '../../assets/locations/school.png';
 import shadow from '../../assets/game/shadow.png';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
 import { keyframes } from '@emotion/react';
 
-const CasinoPageContainer = styled.div`
+const SchoolPageContainer = styled.div`
   height: 100vh;
   min-height: 700px;
   background: ${(props) =>
@@ -42,7 +45,7 @@ const BenefitContainer = styled.div`
   flex-direction: column;
   font-size: 14px;
   width: 100%;
-  padding: 0;
+  padding: 10%;
 
   @media (min-width: 767px) {
     max-width: 620px;
@@ -53,10 +56,10 @@ const BenefitContainer = styled.div`
 const BenefitRow = styled.div`
   display: flex;
   align-items: center;
-  width: 80%;
-
+  margin: 1rem;
   @media (min-width: 767px) {
-    width: 100%;
+    width: 80%;
+    margin: 0;
   }
 `;
 
@@ -131,33 +134,15 @@ const BetButton = styled.div`
     border: ${(props) =>
       props.betting ? '3px solid grey' : '3px solid #ab19ef'};
     height: 48px;
-    width: 350px;
+    width: 231px;
     cursor: ${(props) => (props.betting ? 'normal' : 'pointer')};
     font-weight: 700;
     margin-left: 40px;
-    margin-top: 1rem;
+    margin-top: 0;
 
     &:hover {
       background: ${(props) => (props.betting ? 'transparent' : '#ab19ef')};
     }
-  }
-`;
-
-const SendTeamButton = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: ${(props) =>
-    props.betting ? '3px solid grey' : '3px solid #ab19ef'};
-  height: 48px;
-  width: 90%;
-  cursor: ${(props) => (props.betting ? 'normal' : 'pointer')};
-  font-weight: 700;
-  margin: auto;
-  margin-top: 1rem;
-
-  @media (min-width: 767px) {
-    display: none;
   }
 `;
 
@@ -173,7 +158,7 @@ const HiddenItems = styled.div`
   @media (min-width: 767px) {
     justify-content: flex-start;
     min-height: 250px;
-    min-width: 200px;
+    min-width: 208px;
   }
 `;
 
@@ -237,7 +222,7 @@ const NFTsContainer = styled.div`
   }
 `;
 
-const CasinoImage = styled.img`
+const SchoolImage = styled.img`
   width: 220px;
   height: 225px;
 
@@ -271,58 +256,166 @@ const BenefitList = [
   {
     img: discord,
     alt: 'discord',
-    listItem: (
-      <ul>
-        <li>
-          <b>An active degen experience </b> - entering the casino gives access
-          to a special Discord channel to play casino games and earn Brain
-          Fragments (see table below)
-        </li>
-      </ul>
-    ),
+    listItem:
+      'The School is the home of the NFZ DAO (Decentralized Autonomous Organization). Access to special School DAO Discord channel',
   },
   {
-    img: brain,
-    alt: 'brain',
-    listItem: (
-      <ul>
-        <li>
-          <span>
-            <b>Brain fragments are redeemable for prizes, </b> selection rotates
-            weekly
-          </span>
-        </li>
-      </ul>
-    ),
+    img: chairs,
+    alt: 'chairs',
+    listItem: '1,200 total spots maximum within the school',
   },
   {
-    img: chip,
-    alt: 'chip',
-    listItem: (
-      <ul>
-        <li>
-          <span>
-            <b>Access to monthly poker games </b>
-          </span>
-        </li>
-      </ul>
-    ),
+    img: head,
+    alt: 'head',
+    listItem:
+      'Your zombies BECOME the DAO token. New trait added to your Nice Fun Zombie’s Metadata - Location: School',
   },
   {
-    img: card,
-    alt: 'card',
-    listItem: (
-      <ul>
-        <li>
-          <span>
-            <b>New trait </b> added to your Nice Fun Zombie’s metadata –{' '}
-            <YellowText>Location: Casino</YellowText>
-          </span>
-        </li>
-      </ul>
-    ),
+    img: eth1,
+    alt: 'eth1',
+    listItem:
+      'Estimate starting value of approx. 24 ETH, meaning automatic value increase to your zombie of 0.02ETH to start',
+  },
+  {
+    img: hat,
+    alt: 'hat',
+    listItem: 'Monthly AMAs and NFT education sessions with top NFT experts',
+  },
+  {
+    img: eth3,
+    alt: 'eth3',
+    listItem: 'Percentage of NFZ secondary sales will be given to the DAO',
   },
 ];
+
+const userNfts = {
+  total: 8,
+  page: 0,
+  page_size: 500,
+  result: [
+    {
+      token_address: '0xea7500664c4ccb77a89479a1daa75d59e2fbc97f',
+      token_id: '5',
+      amount: '1',
+      owner_of: '0x03766e2cabaa26324c10120ede914f9c1ca49861',
+      block_number: '9501322',
+      block_number_minted: '9501322',
+      contract_type: 'ERC721',
+      token_uri: 'https://api.nicefunzombies.io/metadata/5',
+      metadata:
+        '{"attributes":[{"value":"Closed","trait_type":"Eyes"},{"value":"Bulletproof Vest","trait_type":"Outfit"},{"value":"Macho","trait_type":"Hair"},{"value":"Strawberry","trait_type":"Background"},{"value":"Pacifier","trait_type":"Mouth"},{"value":"Generic","trait_type":"Type"},{"value":"Male","trait_type":"Gender"},{"value":"Pink","trait_type":"Color"}],"description":"NFZ","image":"https://images.nicefunzombies.io/5.png","name":"#5","zombieId":"5"}',
+      synced_at: '2021-11-11T01:27:20.055Z',
+      name: 'Nice Fun Zombies',
+      symbol: 'NFZ',
+    },
+    {
+      token_address: '0xea7500664c4ccb77a89479a1daa75d59e2fbc97f',
+      token_id: '2',
+      amount: '1',
+      owner_of: '0x03766e2cabaa26324c10120ede914f9c1ca49861',
+      block_number: '9501322',
+      block_number_minted: '9501322',
+      contract_type: 'ERC721',
+      token_uri: 'https://api.nicefunzombies.io/metadata/2',
+      metadata:
+        '{"attributes":[{"value":"Sus","trait_type":"Eyes"},{"value":"Hawaiian Green","trait_type":"Outfit"},{"value":"Burglar","trait_type":"Eye_wear"},{"value":"Bangs Seagreen","trait_type":"Hair"},{"value":"Arrow","trait_type":"Head_gear"},{"value":"Seagreen","trait_type":"Background"},{"value":"Tentacles","trait_type":"Mouth"},{"value":"Fleshy","trait_type":"Type"},{"value":"Female","trait_type":"Gender"}],"description":"NFZ","image":"https://images.nicefunzombies.io/2.png","name":"#2","zombieId":"2"}',
+      synced_at: '2021-11-11T01:27:20.062Z',
+      name: 'Nice Fun Zombies',
+      symbol: 'NFZ',
+    },
+    {
+      token_address: '0xea7500664c4ccb77a89479a1daa75d59e2fbc97f',
+      token_id: '1',
+      amount: '1',
+      owner_of: '0x03766e2cabaa26324c10120ede914f9c1ca49861',
+      block_number: '9501316',
+      block_number_minted: '9501316',
+      contract_type: 'ERC721',
+      token_uri: 'https://api.nicefunzombies.io/metadata/1',
+      metadata:
+        '{"attributes":[{"value":"Wide Blank","trait_type":"Eyes"},{"value":"None","trait_type":"Outfit"},{"value":"Messy Sandy","trait_type":"Hair"},{"value":"Crown","trait_type":"Head_gear"},{"value":"Gold","trait_type":"Background"},{"value":"Chewed Hand","trait_type":"Mouth"},{"value":"Male","trait_type":"Gender"},{"value":"Green","trait_type":"Color"},{"value":"Genesis","trait_type":"Group"}],"description":"NFZ","image":"https://images.nicefunzombies.io/1.png","name":"#1","zombieId":"1"}',
+      synced_at: '2021-11-11T01:27:20.071Z',
+      name: 'Nice Fun Zombies',
+      symbol: 'NFZ',
+    },
+    {
+      token_address: '0xea7500664c4ccb77a89479a1daa75d59e2fbc97f',
+      token_id: '10',
+      amount: '1',
+      owner_of: '0x03766e2cabaa26324c10120ede914f9c1ca49861',
+      block_number: '9503954',
+      block_number_minted: '9503954',
+      contract_type: 'ERC721',
+      token_uri: 'https://api.nicefunzombies.io/metadata/10',
+      metadata:
+        '{"attributes":[{"value":"Wide Blank","trait_type":"Eyes"},{"value":"Shirt Torn Red","trait_type":"Outfit"},{"value":"Messy Seagreen","trait_type":"Hair"},{"value":"Party","trait_type":"Head_gear"},{"value":"Headphones","trait_type":"Neck_gear"},{"value":"Grape","trait_type":"Background"},{"value":"Sewn","trait_type":"Mouth"},{"value":"Generic","trait_type":"Type"},{"value":"Male","trait_type":"Gender"},{"value":"Blue","trait_type":"Color"},{"value":"Genesis","trait_type":"Group"}],"description":"NFZ","name":"#10","image":"https://images.nicefunzombies.io/10.png","zombieId":"10"}',
+      synced_at: '2021-11-11T01:27:20.111Z',
+      name: 'Nice Fun Zombies',
+      symbol: 'NFZ',
+    },
+    {
+      token_address: '0xea7500664c4ccb77a89479a1daa75d59e2fbc97f',
+      token_id: '4',
+      amount: '1',
+      owner_of: '0x03766e2cabaa26324c10120ede914f9c1ca49861',
+      block_number: '9501322',
+      block_number_minted: '9501322',
+      contract_type: 'ERC721',
+      token_uri: 'https://api.nicefunzombies.io/metadata/4',
+      metadata:
+        '{"attributes":[{"value":"Button Teal","trait_type":"Eyes"},{"value":"Hip Hop","trait_type":"Outfit"},{"value":"Pigtails Grape","trait_type":"Hair"},{"value":"Spinning Beanie","trait_type":"Head_gear"},{"value":"Charcoal","trait_type":"Background"},{"value":"Ripped","trait_type":"Mouth"},{"value":"Generic","trait_type":"Type"},{"value":"Female","trait_type":"Gender"},{"value":"Purple","trait_type":"Color"},{"value":"Genesis","trait_type":"Group"}],"description":"NFZ","image":"https://images.nicefunzombies.io/4.png","name":"#4","zombieId":"4"}',
+      synced_at: '2021-11-11T01:27:20.088Z',
+      name: 'Nice Fun Zombies',
+      symbol: 'NFZ',
+    },
+    {
+      token_address: '0xea7500664c4ccb77a89479a1daa75d59e2fbc97f',
+      token_id: '8',
+      amount: '1',
+      owner_of: '0x03766e2cabaa26324c10120ede914f9c1ca49861',
+      block_number: '9502301',
+      block_number_minted: '9502301',
+      contract_type: 'ERC721',
+      token_uri: 'https://api.nicefunzombies.io/metadata/8',
+      metadata:
+        '{"attributes":[{"value":"Wide Blank","trait_type":"Eyes"},{"value":"Fur Coat One","trait_type":"Outfit"},{"value":"Brain Orange","trait_type":"Hair"},{"value":"Smiley","trait_type":"Head_gear"},{"value":"Seagreen","trait_type":"Background"},{"value":"Tongue Pepto","trait_type":"Mouth"},{"value":"Generic","trait_type":"Type"},{"value":"Male","trait_type":"Gender"},{"value":"Grey","trait_type":"Color"},{"value":"Genesis","trait_type":"Group"}],"description":"NFZ","name":"#8","image":"https://images.nicefunzombies.io/8.png","zombieId":"8"}',
+      synced_at: '2021-11-11T01:27:20.096Z',
+      name: 'Nice Fun Zombies',
+      symbol: 'NFZ',
+    },
+    {
+      token_address: '0xea7500664c4ccb77a89479a1daa75d59e2fbc97f',
+      token_id: '9',
+      amount: '1',
+      owner_of: '0x03766e2cabaa26324c10120ede914f9c1ca49861',
+      block_number: '9502306',
+      block_number_minted: '9502306',
+      contract_type: 'ERC721',
+      token_uri: 'https://api.nicefunzombies.io/metadata/9',
+      metadata:
+        '{"attributes":[{"value":"Mean ","trait_type":"Eyes"},{"value":"Tux Damaged","trait_type":"Outfit"},{"value":"Afro Rainbow","trait_type":"Hair"},{"value":"Baby Blue","trait_type":"Background"},{"value":"Rage","trait_type":"Mouth"},{"value":"Generic","trait_type":"Type"},{"value":"Male","trait_type":"Gender"},{"value":"Green","trait_type":"Color"},{"value":"Genesis","trait_type":"Group"}],"description":"NFZ","name":"#9","image":"https://images.nicefunzombies.io/9.png","zombieId":"9"}',
+      synced_at: '2021-11-11T01:27:20.104Z',
+      name: 'Nice Fun Zombies',
+      symbol: 'NFZ',
+    },
+    {
+      token_address: '0xea7500664c4ccb77a89479a1daa75d59e2fbc97f',
+      token_id: '3',
+      amount: '1',
+      owner_of: '0x03766e2cabaa26324c10120ede914f9c1ca49861',
+      block_number: '9501322',
+      block_number_minted: '9501322',
+      contract_type: 'ERC721',
+      token_uri: 'https://api.nicefunzombies.io/metadata/3',
+      metadata:
+        '{"attributes":[{"value":"Blank Wide","trait_type":"Eyes"},{"value":"Clown","trait_type":"Outfit"},{"value":"Youth Lime","trait_type":"Hair"},{"value":"Charcoal","trait_type":"Background"},{"value":"Pizza","trait_type":"Mouth"},{"value":"Robo","trait_type":"Type"},{"value":"Male","trait_type":"Gender"}],"description":"NFZ","image":"https://images.nicefunzombies.io/3.png","name":"#3","zombieId":"3"}',
+      synced_at: '2021-11-11T01:27:20.080Z',
+      name: 'Nice Fun Zombies',
+      symbol: 'NFZ',
+    },
+  ],
+  status: 'SYNCED',
+};
 
 const MidRowContainer = styled.div`
   display: flex;
@@ -335,8 +428,8 @@ const MidRowContainer = styled.div`
     flex-direction: row;
     justify-content: space-around;
     text-align: start;
-    margin: 2rem 0 5rem 0;
-    width: 80%;
+    margin: 4rem 0 2rem 0;
+    width: 90%;
   }
 `;
 
@@ -380,6 +473,18 @@ const TopRowSubheader = styled.b`
   }
 `;
 
+const TopRowSubheader2 = styled.b`
+  text-align: center;
+  font-size: 18px;
+  padding: 0 5%;
+
+  @media (min-width: 767px) {
+    text-align: start;
+    min-width: 608px;
+    margin: 0;
+  }
+`;
+
 const MidRowSubheader = styled.b`
   font-size: 18px;
   margin: 1rem;
@@ -399,47 +504,16 @@ const ProbabilityItemRow = styled(Row)`
   }
 `;
 
-const SlotMachineImage = styled.img`
-  /* position: absolute;
-    right: 50%;
-    bottom: 0; */
-  max-height: 90%;
-`;
-
-const rotate360 = keyframes`
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  `;
-
-const Spinner = styled.div`
-  animation: ${rotate360} 1s linear infinite;
-  transform: translateZ(0);
-
-  margin-left: 1rem;
-  border-top: 2px solid grey;
-  border-right: 2px solid grey;
-  border-bottom: 2px solid grey;
-  border-left: 2px solid black;
-  background: transparent;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-`;
-
 function ListItemWithIcon({ img, alt, text }) {
   return (
     <BenefitRow>
-      <BenefitIcons src={img} alt={alt} height="100%" />
+      <BenefitIcons src={img} alt={alt} height="" />
       {text}
     </BenefitRow>
   );
 }
 
-export default function CasinoPage({
+export default function SchoolPage({
   tokensContract,
   userAccount,
   zombieClick,
@@ -453,38 +527,68 @@ export default function CasinoPage({
 
   const casinoClick = () => {
     if (betting) return;
-    useKeyCard();
-    setBetting(true);
-    const _ids = selectedIds.map(Number);
-    console.log(_ids);
 
+    setBetting(true);
     tokensContract.methods
-      .burnKeycard(userAccount, _ids, 1, 1)
+      .burnKeycard(userAccount, [14, 16], 1, 1)
       .send({ from: userAccount })
       .on('receipt', (receipt) => {
         setLoading(true);
         setBetting(false);
-        //console.log('keyCardBurn txn', receipt);
-      })
-      .on('error', (err) => {
-        setBetting(false);
+        console.log('keyCardBurn txn', receipt);
       });
   };
 
+  const SlotMachineImage = styled.img`
+    /* position: absolute;
+    right: 50%;
+    bottom: 0; */
+    max-height: 90%;
+  `;
+
+  const rotate360 = keyframes`
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  `;
+
+  const Spinner = styled.div`
+    animation: ${rotate360} 1s linear infinite;
+    transform: translateZ(0);
+
+    margin-left: 1rem;
+    border-top: 2px solid grey;
+    border-right: 2px solid grey;
+    border-bottom: 2px solid grey;
+    border-left: 2px solid black;
+    background: transparent;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+  `;
+
+  const InventoryText = styled.b`
+    display: none;
+
+    @media (min-width: 767px) {
+      display: block;
+      font-size: 14px;
+      line-height: 150%;
+      margin-top: 1.5rem;
+    }
+  `;
+
   return (
-    <CasinoPageContainer loading={loading}>
+    <SchoolPageContainer loading={loading}>
       {!loading && (
         <>
           <BackButton onClick={() => history.push('/locations')}>
             Back
           </BackButton>
           <TopContainer>
-            <Col justifyContent="center" alignItems="center">
-              <CasinoImage src={casino} alt="casino" />
-              <BetButton betting={betting} onClick={casinoClick}>
-                BET ON THE CASINO {betting && <Spinner />}
-              </BetButton>
-            </Col>
             <BenefitContainer>
               <TopRowSubheader>Guaranteed Benefits</TopRowSubheader>
               {BenefitList.map((item, index) => (
@@ -496,9 +600,23 @@ export default function CasinoPage({
                 />
               ))}
               <br />
-              <TopRowSubheader>
-                What’s Hiding in the Casino (To be found by Searching)
-              </TopRowSubheader>
+            </BenefitContainer>
+            <Col justifyContent="center" alignItems="center">
+              <SchoolImage src={school} alt="school" />
+              <BetButton betting={betting} onClick={casinoClick}>
+                Hit the Books! {betting && <Spinner />}
+              </BetButton>
+              <InventoryText>
+                You have <YellowText>5</YellowText> keycards to use. One will be
+                burned to play.
+              </InventoryText>
+            </Col>
+          </TopContainer>
+          <MidRowContainer>
+            <ProbabilityContainer>
+              <TopRowSubheader2>
+                What’s Hiding in the School (To be found by Searching)
+              </TopRowSubheader2>
               <HiddenItemsRow>
                 <HiddenItems>
                   <img src={NFZs} alt="300 NFZs" />
@@ -510,7 +628,7 @@ export default function CasinoPage({
                     alt="150 Keycards"
                     style={{ maxWidth: '106px' }}
                   />
-                  <span>150 Keycards</span>
+                  <span>20 Zeneca Academy Tokens</span>
                 </HiddenItems>
                 <HiddenItems>
                   <img
@@ -518,15 +636,13 @@ export default function CasinoPage({
                     alt="5 Custom NFZs"
                     style={{ maxWidth: '144px' }}
                   />
-                  <p>5 Custom NFZs</p>
+                  <p>5 Brain Upgrade Tokens</p>
                   <span style={{ fontSize: '10px' }}>
-                    (no utility, special commission)
+                    used for upgrading your NFZ
                   </span>
                 </HiddenItems>
               </HiddenItemsRow>
-            </BenefitContainer>
-          </TopContainer>
-          <MidRowContainer>
+            </ProbabilityContainer>
             <ProbabilityContainer>
               <MidRowSubheader>
                 Horde Size Search Prize Probabilities
@@ -588,7 +704,7 @@ export default function CasinoPage({
               </Row>
             </ProbabilityContainer>
             <ProbabilityContainer>
-              <MidRowSubheader>Zombies Held within Casino</MidRowSubheader>
+              {/* <MidRowSubheader>Zombies Held within Casino</MidRowSubheader>
               <br />
               <Col justifyContent="space-around" alignItems="space-around">
                 <Row justifyContent="space-between" alignItems="center">
@@ -615,7 +731,7 @@ export default function CasinoPage({
                     Collect 10,000 Brain Fragments Daily
                   </RewardRightText>
                 </Row>
-              </Col>
+              </Col> */}
             </ProbabilityContainer>
           </MidRowContainer>
           <InstructionContainer>
@@ -638,10 +754,7 @@ export default function CasinoPage({
           </NFTsContainer>
         </>
       )}
-      {loading && <SlotMachineImage src={slotMachine} alt="slot-machine" />}
-      <SendTeamButton betting={betting} onClick={casinoClick}>
-        Send my team!
-      </SendTeamButton>
-    </CasinoPageContainer>
+      {/* {loading && <SlotMachineImage src={slotMachine} alt="slot-machine" />} */}
+    </SchoolPageContainer>
   );
 }

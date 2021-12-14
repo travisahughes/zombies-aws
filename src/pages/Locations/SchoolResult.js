@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-import background from '../../assets/locations/casino-interior-bg.png';
+import background from '../../assets/locations/school-interior-bg.png';
 import logo from '../../assets/locations/logo-result.png';
-import casino from '../../assets/locations/casino.png';
+import school from '../../assets/locations/school.png';
 import rewardContainer from '../../assets/locations/casino-reward-container.png';
 import zombie1 from '../../assets/gallery/zombie1.png';
 import zombie2 from '../../assets/gallery/zombie2.png';
@@ -10,7 +10,7 @@ import zombie4 from '../../assets/gallery/zombie4.png';
 import zombie5 from '../../assets/gallery/zombie5.png';
 import zombie6 from '../../assets/gallery/zombie6.png';
 
-const CasinoResultPageContainer = styled.div`
+const SchoolResultPageContainer = styled.div`
   height: 100vh;
   min-height: 900px;
   background-image: url(${background});
@@ -62,7 +62,7 @@ const RewardContainer = styled.div`
   @media (min-width: 767px) {
     height: 682;
     width: 850px;
-    padding: 3% 4% 6% 2%;
+    padding: 6% 2% 6% 2%;
   }
 `;
 
@@ -168,21 +168,13 @@ const ImageRow = styled(Row)`
   flex-wrap: wrap;
 `;
 
-export default function CasinoResultPage() {
+export default function SchoolResultPage() {
   return (
-    <CasinoResultPageContainer>
+    <SchoolResultPageContainer>
       <LogoImg src={logo} alt="reward-logo" />
-      <MobileKeycard src={casino} alt="casino" />
-
+      <MobileKeycard src={school} alt="school" />
       <RewardContainer>
         <TopRow justifyContent="center" alignItems="center">
-          <ImageCol justifyContent="center" alignItems="center">
-            <img
-              src={casino}
-              alt="casino"
-              style={{ maxWidth: '363px', width: '100%' }}
-            />
-          </ImageCol>
           <ImageCol justifyContent="center" alignItems="center">
             <ImageRow>
               <ZombieImage src={zombie1} alt="zombie" />
@@ -192,6 +184,13 @@ export default function CasinoResultPage() {
               <ZombieImage src={zombie5} alt="zombie" />
               <ZombieImage src={zombie6} alt="zombie" />
             </ImageRow>
+          </ImageCol>
+          <ImageCol justifyContent="center" alignItems="center">
+            <img
+              src={school}
+              alt="school"
+              style={{ maxWidth: '309px', width: '100%' }}
+            />
           </ImageCol>
         </TopRow>
         <Col alignItems="center" justifyContent="center">
@@ -220,6 +219,6 @@ export default function CasinoResultPage() {
         <ZombieImage src={zombie5} alt="zombie" />
         <ZombieImage src={zombie6} alt="zombie" />
       </MobileZombies>
-    </CasinoResultPageContainer>
+    </SchoolResultPageContainer>
   );
 }
