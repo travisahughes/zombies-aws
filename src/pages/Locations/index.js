@@ -12,7 +12,7 @@ import PolyGameMechanicsABI from '../../constants/abis/NFZGameMechanics.json';
 import contractAddress from '../../constants/contracts.json';
 export default function Location() {
   const [polyTokensContract, setPolyTokensContract] = useState(null);
-
+  const [selectedIds, setSelectedIds] = useState([]);
   let CONTRACT_ID;
   let NETWORK;
   let Web3Api;
@@ -33,6 +33,7 @@ export default function Location() {
   }
 
   const [userNfts, setUserNfts] = useState(null);
+  const [userKeycards, setUserKeycards] = useState(0);
   const [userAccount, setUserAccount] = useState(account);
   const history = useHistory();
 
@@ -55,13 +56,14 @@ export default function Location() {
           token_address: CONTRACT_ID,
           chain: NETWORK,
         });
-        const keycards = await Web3Api.account.getNFTsForContract({
+        const tokens = await Web3Api.account.getNFTsForContract({
           address: user.get('ethAddress'),
           token_address: contractAddress.POLY_TOKENS,
           chain: 'mumbai',
         });
         setUserNfts(nfts);
-        console.log('polyTokens', keycards);
+        keyCardParse(tokens);
+        console.log('polyTokens', tokens);
         console.log('nfts', nfts);
       };
       fetchNfts();
@@ -89,6 +91,7 @@ export default function Location() {
 
   useEffect(() => {
     if (isWeb3Enabled) {
+      console.log('enabling events');
       const Web3 = require('web3');
 
       web3.setProvider(web3.currentProvider);
@@ -111,12 +114,20 @@ export default function Location() {
       );
 
       gameMechanicsWSS.events
-        .EPrizes({})
+        .EPrizes()
         .on('data', function (event) {
+          const { userPrizes, from, location } = event.returnValues;
+
+          if (from != userAccount) return;
+
           console.log('PRIZES');
-          console.log(event);
+
+          console.log(
+            `user prizes - ${userPrizes}, from - ${from}, location - ${location}`
+          );
+
           history.push('/locations/casino-result');
-          // console.log('event data', event)
+
           console.log('------------------------------');
         })
         .on('error', function (error, receipt) {
@@ -126,8 +137,6 @@ export default function Location() {
       gameMechanicsWSS.events
         .ELocationSet({})
         .on('data', function (event) {
-          console.log('event!');
-          console.log(event);
           console.log(
             `New Location Event: Send ${event?.returnValues?._tokenIds} to Location #${event?.returnValues?._location}\n\n`
           );
@@ -141,14 +150,51 @@ export default function Location() {
     }
   }, [isWeb3Enabled]);
 
+  const useKeyCard = () => {
+    let keyCardAmount = userKeycards;
+    keyCardAmount--;
+    setUserKeycards(keyCardAmount);
+    console.log(keyCardAmount);
+  };
+  const keyCardParse = (tokens) => {
+    tokens.result?.forEach((token) => {
+      const { amount, token_id } = token;
+      console.log(token_id, amount);
+      token_id === '0' ? setUserKeycards(amount) : null;
+    });
+  };
+  const zombieSelect = (metadata, id) => {
+    if (selectedIds.includes(metadata.zombieId)) {
+      const _ids = [...selectedIds].filter((z) => z != metadata.zombieId);
+
+      setSelectedIds(_ids);
+
+      return;
+    } else {
+      if (selectedIds.length >= 6) return;
+
+      const _ids = [...selectedIds];
+      _ids.push(metadata.zombieId);
+      console.log(_ids);
+      setSelectedIds(_ids);
+    }
+
+    // }
+
+    return;
+  };
   return (
     <div>
       <Router history={history}>
         <Switch>
           <Route path="/locations/casino">
             <CasinoPage
+              zombieClick={zombieSelect}
               tokensContract={polyTokensContract}
               userAccount={userAccount}
+              selectedIds={selectedIds}
+              userNfts={userNfts}
+              useKeyCard={useKeyCard}
             />
           </Route>
           <Route path="/locations/casino-result" component={CasinoResultPage} />
