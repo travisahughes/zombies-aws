@@ -10,6 +10,8 @@ import { contract_data } from '../../constants/moralis_env';
 import PolyTokensABI from '../../constants/abis/NFZMechanicTokens.json';
 import PolyGameMechanicsABI from '../../constants/abis/NFZGameMechanics.json';
 import contractAddress from '../../constants/contracts.json';
+import SchoolPage from './School';
+import SchoolResultPage from './SchoolResult';
 export default function Location() {
   const [polyTokensContract, setPolyTokensContract] = useState(null);
   const [selectedIds, setSelectedIds] = useState([]);
@@ -197,7 +199,18 @@ export default function Location() {
               useKeyCard={useKeyCard}
             />
           </Route>
+          <Route path="/locations/school">
+            <SchoolPage
+              zombieClick={zombieSelect}
+              tokensContract={polyTokensContract}
+              userAccount={userAccount}
+              selectedIds={selectedIds}
+              userNfts={userNfts}
+              useKeyCard={useKeyCard}
+            />
+          </Route>
           <Route path="/locations/casino-result" component={CasinoResultPage} />
+          <Route path="/locations/school-result" component={SchoolResultPage} />
           <Route path="/" component={SplitPathPage} />
         </Switch>
       </Router>

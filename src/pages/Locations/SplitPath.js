@@ -120,7 +120,11 @@ export default function SplitPathPage() {
             alt="casino"
             onClick={() => history.push('/locations/casino')}
           />
-          <LocationImage src={school} alt="school" />
+          <LocationImage
+            src={school}
+            alt="school"
+            onClick={() => history.push('/locations/school')}
+          />
         </LocationImageContainer>
         <SplitPathTextContainer>
           <SplitPathTextMain>
