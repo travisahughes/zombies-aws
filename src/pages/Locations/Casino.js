@@ -11,7 +11,7 @@ import discord from '../../assets/icons/discord.png';
 import UserNFZ from '../../Components/userNFZ';
 import casino from '../../assets/locations/casino.png';
 import shadow from '../../assets/game/shadow.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { keyframes } from '@emotion/react';
 
@@ -522,27 +522,8 @@ export default function CasinoPage({
   const [loading, setLoading] = useState(false);
   const [betting, setBetting] = useState(false);
 
-  const hordeClick = (metadata, index) => {
-    if (selectedIds.includes(metadata.zombieId)) {
-      const _ids = [...selectedIds].filter((z) => z != metadata.zombieId);
-
-      setSelectedIds(_ids);
-
-      return;
-    } else {
-      const _ids = [...selectedIds];
-      _ids.push(metadata.zombieId);
-
-      setSelectedIds(_ids);
-    }
-
-    // }
-
-    return;
-  };
-
   const casinoClick = () => {
-    if (betting) return;
+    if (betting || selectedIds.length < 1) return;
     useKeyCard();
     setBetting(true);
     const _ids = selectedIds.map(Number);
@@ -596,7 +577,10 @@ export default function CasinoPage({
           <TopContainer>
             <Col justifyContent="center" alignItems="center">
               <CasinoImage src={casino} alt="casino" />
-              <BetButton betting={betting} onClick={casinoClick}>
+              <BetButton
+                betting={selectedIds.length < 1 || betting}
+                onClick={casinoClick}
+              >
                 BET ON THE CASINO {betting && <Spinner />}
               </BetButton>
             </Col>
@@ -737,7 +721,7 @@ export default function CasinoPage({
             <b style={{ fontSize: '18px' }}>
               CHOOSE THE ZOMBIES YOU WANT TO SEARCH WITH (MAX 6)
             </b>
-            <p>2 Zombies Selected</p>
+            <p>{selectedIds.length} Zombies Selected</p>
           </InstructionContainer>
           <NFTsContainer>
             {userNfts.result.map((nft, index) => (

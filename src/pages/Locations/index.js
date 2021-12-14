@@ -118,10 +118,10 @@ export default function Location() {
         .on('data', function (event) {
           const { userPrizes, from, location } = event.returnValues;
 
-          if (from != userAccount) return;
+          if (from.toLowerCase() != userAccount.toLowerCase()) return;
 
           console.log('PRIZES');
-
+          console.log(event);
           console.log(
             `user prizes - ${userPrizes}, from - ${from}, location - ${location}`
           );
@@ -138,7 +138,7 @@ export default function Location() {
         .ELocationSet({})
         .on('data', function (event) {
           console.log(
-            `New Location Event: Send ${event?.returnValues?._tokenIds} to Location #${event?.returnValues?._location}\n\n`
+            `New Location Event: Send ${event?.returnValues?.tokenIds} to Location #${event?.returnValues?.location}\n\n`
           );
           // console.log('event data', event)
           console.log('------------------------------');
