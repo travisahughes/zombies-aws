@@ -8,7 +8,12 @@ import moralisEnv from './constants/moralis_env';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import Challenge from './pages/Challenge';
 import Locations from './pages/Locations';
@@ -69,6 +74,7 @@ const Routing = () => {
           <Route path="/dashboard" component={Dashboard} />
           {/* <Route path="/challenge" component={Challenge} />
           <Route path="/locations" component={Locations} /> */}
+          <Redirect to="/" />
         </Switch>
       </div>
     </Router>
