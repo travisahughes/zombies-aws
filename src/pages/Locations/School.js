@@ -520,6 +520,7 @@ export default function SchoolPage({
   selectedIds,
   userNfts,
   useKeyCard,
+  userKeyCards,
 }) {
   const [loading, setLoading] = useState(false);
   const [betting, setBetting] = useState(false);
@@ -607,8 +608,8 @@ export default function SchoolPage({
                 Hit the Books! {betting && <Spinner />}
               </BetButton>
               <InventoryText>
-                You have <YellowText>5</YellowText> keycards to use. One will be
-                burned to play.
+                You have <YellowText>{userKeyCards}</YellowText> keycards to
+                use. One will be burned to play.
               </InventoryText>
             </Col>
           </TopContainer>

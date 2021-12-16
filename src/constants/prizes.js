@@ -1,2 +1,9 @@
-export const prizes = { 1: 'NFZ', 2: 'Zenica', 3: 'Keycard' };
-export const specialPrize = { 1: 'Custom NFZ', 2: '.1 ETH' };
+export const prizes = {
+  generalPrizes: {
+    1: 'Nice Fun Zombie NFT (unrevealed)',
+    2: 'Zenica Academy Token',
+    3: 'Generation 1 Keycard',
+    4: 'Custom Nice Fun Zombie',
+  },
+  specialPrizes: { 4: 'Custom NFZ', 5: '.1 ETH' },
+};

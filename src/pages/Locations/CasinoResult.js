@@ -9,6 +9,7 @@ import zombie3 from '../../assets/gallery/zombie3.png';
 import zombie4 from '../../assets/gallery/zombie4.png';
 import zombie5 from '../../assets/gallery/zombie5.png';
 import zombie6 from '../../assets/gallery/zombie6.png';
+import { useEffect, useState } from 'react';
 
 const CasinoResultPageContainer = styled.div`
   height: 100vh;
@@ -168,7 +169,15 @@ const ImageRow = styled(Row)`
   flex-wrap: wrap;
 `;
 
-export default function CasinoResultPage() {
+export default function CasinoResultPage({ selectedZombies, userRewards }) {
+  const [rewardStatement, setRewardStatement] = useState(null);
+  useEffect(() => {
+    const statement = userRewards?.generalReward
+      ? `Congraulations your zombies found a ${userRewards?.generalReward}`
+      : 'Sorry you loser, your zombies didnt find you shit. better luck next time, sucka';
+
+    setRewardStatement(statement);
+  }, [userRewards]);
   return (
     <CasinoResultPageContainer>
       <LogoImg src={logo} alt="reward-logo" />
@@ -185,19 +194,20 @@ export default function CasinoResultPage() {
           </ImageCol>
           <ImageCol justifyContent="center" alignItems="center">
             <ImageRow>
-              <ZombieImage src={zombie1} alt="zombie" />
-              <ZombieImage src={zombie2} alt="zombie" />
+              {selectedZombies.map((zombie, index) => (
+                <ZombieImage src={zombie.image} key={index} />
+              ))}
+              {/* <ZombieImage src={zombie1} alt="zombie" /> */}
+              {/* <ZombieImage src={zombie2} alt="zombie" />
               <ZombieImage src={zombie3} alt="zombie" />
               <ZombieImage src={zombie4} alt="zombie" />
               <ZombieImage src={zombie5} alt="zombie" />
-              <ZombieImage src={zombie6} alt="zombie" />
+              <ZombieImage src={zombie6} alt="zombie" /> */}
             </ImageRow>
           </ImageCol>
         </TopRow>
         <Col alignItems="center" justifyContent="center">
-          <RewardHighlight>
-            Congratulations your zombies found X/Y/Z.
-          </RewardHighlight>
+          <RewardHighlight>{rewardStatement}</RewardHighlight>
           <RewardSubtext>
             There are now only X number of Y in the Casino Copy
           </RewardSubtext>
@@ -213,12 +223,9 @@ export default function CasinoResultPage() {
         </Col>
       </RewardContainer>
       <MobileZombies>
-        <ZombieImage src={zombie1} alt="zombie" />
-        <ZombieImage src={zombie2} alt="zombie" />
-        <ZombieImage src={zombie3} alt="zombie" />
-        <ZombieImage src={zombie4} alt="zombie" />
-        <ZombieImage src={zombie5} alt="zombie" />
-        <ZombieImage src={zombie6} alt="zombie" />
+        {selectedZombies.map((zombie, index) => (
+          <ZombieImage src={zombie.image} key={index} />
+        ))}
       </MobileZombies>
     </CasinoResultPageContainer>
   );

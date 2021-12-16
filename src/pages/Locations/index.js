@@ -10,11 +10,12 @@ import { contract_data } from '../../constants/moralis_env';
 import PolyTokensABI from '../../constants/abis/NFZMechanicTokens.json';
 import PolyGameMechanicsABI from '../../constants/abis/NFZGameMechanics.json';
 import contractAddress from '../../constants/contracts.json';
+import { prizes } from '../../constants/prizes';
 import SchoolPage from './School';
 import SchoolResultPage from './SchoolResult';
 export default function Location() {
   const [polyTokensContract, setPolyTokensContract] = useState(null);
-  const [selectedIds, setSelectedIds] = useState([]);
+
   let CONTRACT_ID;
   let NETWORK;
   let Web3Api;
@@ -33,10 +34,12 @@ export default function Location() {
   if (ethereum) {
     Web3Api = useMoralisWeb3Api();
   }
-
+  const [selectedIds, setSelectedIds] = useState([]);
+  const [selectedZombies, setSelectedZombies] = useState([]);
   const [userNfts, setUserNfts] = useState(null);
   const [userKeycards, setUserKeycards] = useState(0);
   const [userAccount, setUserAccount] = useState(account);
+  const [userRewards, setUserRewards] = useState(null);
   const history = useHistory();
 
   useEffect(() => {
@@ -127,6 +130,12 @@ export default function Location() {
           console.log(
             `user prizes - ${userPrizes}, from - ${from}, location - ${location}`
           );
+          const prizeIds = userPrizes.map(Number);
+          const userRewards = {
+            generalReward: prizes.generalPrizes[prizeIds[0]],
+            specialReward: prizes.specialPrizes[prizeIds[1]],
+          };
+          setUserRewards(userRewards);
 
           history.push('/locations/casino-result');
 
@@ -163,22 +172,33 @@ export default function Location() {
       const { amount, token_id } = token;
       console.log(token_id, amount);
       token_id === '0' ? setUserKeycards(amount) : null;
+      console.log(userKeycards);
     });
   };
   const zombieSelect = (metadata, id) => {
     if (selectedIds.includes(metadata.zombieId)) {
       const _ids = [...selectedIds].filter((z) => z != metadata.zombieId);
-
+      const _selectedZombies = [...selectedZombies].filter(
+        (md) => md != metadata
+      );
+      setSelectedZombies(_selectedZombies);
       setSelectedIds(_ids);
+
+      console.log('removing selected zombies', _selectedZombies);
+      console.log('removing selected Id', _ids);
 
       return;
     } else {
       if (selectedIds.length >= 6) return;
 
       const _ids = [...selectedIds];
+      const _selectedZombies = [...selectedZombies];
+      _selectedZombies.push(metadata);
       _ids.push(metadata.zombieId);
       console.log(_ids);
+      console.log('selected zombies', _selectedZombies);
       setSelectedIds(_ids);
+      setSelectedZombies(_selectedZombies);
     }
 
     // }
@@ -207,9 +227,15 @@ export default function Location() {
               selectedIds={selectedIds}
               userNfts={userNfts}
               useKeyCard={useKeyCard}
+              userKeyCards={userKeycards}
             />
           </Route>
-          <Route path="/locations/casino-result" component={CasinoResultPage} />
+          <Route path="/locations/casino-result">
+            <CasinoResultPage
+              selectedZombies={selectedZombies}
+              userRewards={userRewards}
+            />
+          </Route>
           <Route path="/locations/school-result" component={SchoolResultPage} />
           <Route path="/" component={SplitPathPage} />
         </Switch>
