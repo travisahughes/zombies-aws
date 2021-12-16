@@ -181,7 +181,7 @@ function Dashboard() {
                 </div>
                 <h3>Challenges:</h3>
                 <div id="challenges">
-                  <a href="/challenge">Challenge #1 - (Nov. 15 - Nov. 19)</a>
+                  {/* <a href="/challenge">Challenge #1 - (Nov. 15 - Nov. 19)</a> */}
                 </div>
               </div>
             )}
