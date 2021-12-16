@@ -1,10 +1,9 @@
 import styled from '@emotion/styled';
 import background from '../../assets/locations/split-path-image.png';
-import paperBg from '../../assets/locations/looping-chalk-board-bg.png';
-import slotMachine from '../../assets/locations/slotmachine.png';
+import paperBg from '../../assets/locations/paperbg2.png';
+import chalkboard from '../../assets/locations/loading-school.gif';
 import chairs from '../../assets/locations/chairs.png';
 import hat from '../../assets/locations/hat.png';
-import card from '../../assets/locations/cards.png';
 import NFZs from '../../assets/locations/2797.png';
 import head from '../../assets/locations/head.png';
 import eth1 from '../../assets/locations/eth.png';
@@ -45,7 +44,7 @@ const BenefitContainer = styled.div`
   flex-direction: column;
   font-size: 14px;
   width: 100%;
-  padding: 10%;
+  margin-top: 10%;
 
   @media (min-width: 767px) {
     max-width: 620px;
@@ -224,12 +223,13 @@ const NFTsContainer = styled.div`
 
 const SchoolImage = styled.img`
   width: 220px;
-  height: 225px;
+  /* height: 225px; */
 
   @media (min-width: 767px) {
     display: block;
-    width: 571px;
-    height: 583px;
+    /* width: 571px; */
+    width: 100%;
+    /* height: 583px; */
   }
 `;
 
@@ -247,9 +247,57 @@ const YellowText = styled.span`
   color: #ccee25;
 `;
 
-const ZombieHeld = styled(YellowText)`
-  margin-bottom: 1rem;
-  min-width: 95px;
+const rotate360 = keyframes`
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  `;
+
+const Spinner = styled.div`
+  animation: ${rotate360} 1s linear infinite;
+  transform: translateZ(0);
+
+  margin-left: 1rem;
+  border-top: 2px solid grey;
+  border-right: 2px solid grey;
+  border-bottom: 2px solid grey;
+  border-left: 2px solid black;
+  background: transparent;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+`;
+
+const InventoryText = styled.b`
+  display: none;
+
+  @media (min-width: 767px) {
+    display: block;
+    font-size: 14px;
+    line-height: 150%;
+    margin-top: 1.5rem;
+  }
+`;
+
+const SendTeamButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: ${(props) =>
+    props.betting ? '3px solid grey' : '3px solid #ab19ef'};
+  height: 48px;
+  width: 90%;
+  cursor: ${(props) => (props.betting ? 'normal' : 'pointer')};
+  font-weight: 700;
+  margin: auto;
+  margin-top: 1rem;
+
+  @media (min-width: 767px) {
+    display: none;
+  }
 `;
 
 const BenefitList = [
@@ -287,135 +335,6 @@ const BenefitList = [
     listItem: 'Percentage of NFZ secondary sales will be given to the DAO',
   },
 ];
-
-const userNfts = {
-  total: 8,
-  page: 0,
-  page_size: 500,
-  result: [
-    {
-      token_address: '0xea7500664c4ccb77a89479a1daa75d59e2fbc97f',
-      token_id: '5',
-      amount: '1',
-      owner_of: '0x03766e2cabaa26324c10120ede914f9c1ca49861',
-      block_number: '9501322',
-      block_number_minted: '9501322',
-      contract_type: 'ERC721',
-      token_uri: 'https://api.nicefunzombies.io/metadata/5',
-      metadata:
-        '{"attributes":[{"value":"Closed","trait_type":"Eyes"},{"value":"Bulletproof Vest","trait_type":"Outfit"},{"value":"Macho","trait_type":"Hair"},{"value":"Strawberry","trait_type":"Background"},{"value":"Pacifier","trait_type":"Mouth"},{"value":"Generic","trait_type":"Type"},{"value":"Male","trait_type":"Gender"},{"value":"Pink","trait_type":"Color"}],"description":"NFZ","image":"https://images.nicefunzombies.io/5.png","name":"#5","zombieId":"5"}',
-      synced_at: '2021-11-11T01:27:20.055Z',
-      name: 'Nice Fun Zombies',
-      symbol: 'NFZ',
-    },
-    {
-      token_address: '0xea7500664c4ccb77a89479a1daa75d59e2fbc97f',
-      token_id: '2',
-      amount: '1',
-      owner_of: '0x03766e2cabaa26324c10120ede914f9c1ca49861',
-      block_number: '9501322',
-      block_number_minted: '9501322',
-      contract_type: 'ERC721',
-      token_uri: 'https://api.nicefunzombies.io/metadata/2',
-      metadata:
-        '{"attributes":[{"value":"Sus","trait_type":"Eyes"},{"value":"Hawaiian Green","trait_type":"Outfit"},{"value":"Burglar","trait_type":"Eye_wear"},{"value":"Bangs Seagreen","trait_type":"Hair"},{"value":"Arrow","trait_type":"Head_gear"},{"value":"Seagreen","trait_type":"Background"},{"value":"Tentacles","trait_type":"Mouth"},{"value":"Fleshy","trait_type":"Type"},{"value":"Female","trait_type":"Gender"}],"description":"NFZ","image":"https://images.nicefunzombies.io/2.png","name":"#2","zombieId":"2"}',
-      synced_at: '2021-11-11T01:27:20.062Z',
-      name: 'Nice Fun Zombies',
-      symbol: 'NFZ',
-    },
-    {
-      token_address: '0xea7500664c4ccb77a89479a1daa75d59e2fbc97f',
-      token_id: '1',
-      amount: '1',
-      owner_of: '0x03766e2cabaa26324c10120ede914f9c1ca49861',
-      block_number: '9501316',
-      block_number_minted: '9501316',
-      contract_type: 'ERC721',
-      token_uri: 'https://api.nicefunzombies.io/metadata/1',
-      metadata:
-        '{"attributes":[{"value":"Wide Blank","trait_type":"Eyes"},{"value":"None","trait_type":"Outfit"},{"value":"Messy Sandy","trait_type":"Hair"},{"value":"Crown","trait_type":"Head_gear"},{"value":"Gold","trait_type":"Background"},{"value":"Chewed Hand","trait_type":"Mouth"},{"value":"Male","trait_type":"Gender"},{"value":"Green","trait_type":"Color"},{"value":"Genesis","trait_type":"Group"}],"description":"NFZ","image":"https://images.nicefunzombies.io/1.png","name":"#1","zombieId":"1"}',
-      synced_at: '2021-11-11T01:27:20.071Z',
-      name: 'Nice Fun Zombies',
-      symbol: 'NFZ',
-    },
-    {
-      token_address: '0xea7500664c4ccb77a89479a1daa75d59e2fbc97f',
-      token_id: '10',
-      amount: '1',
-      owner_of: '0x03766e2cabaa26324c10120ede914f9c1ca49861',
-      block_number: '9503954',
-      block_number_minted: '9503954',
-      contract_type: 'ERC721',
-      token_uri: 'https://api.nicefunzombies.io/metadata/10',
-      metadata:
-        '{"attributes":[{"value":"Wide Blank","trait_type":"Eyes"},{"value":"Shirt Torn Red","trait_type":"Outfit"},{"value":"Messy Seagreen","trait_type":"Hair"},{"value":"Party","trait_type":"Head_gear"},{"value":"Headphones","trait_type":"Neck_gear"},{"value":"Grape","trait_type":"Background"},{"value":"Sewn","trait_type":"Mouth"},{"value":"Generic","trait_type":"Type"},{"value":"Male","trait_type":"Gender"},{"value":"Blue","trait_type":"Color"},{"value":"Genesis","trait_type":"Group"}],"description":"NFZ","name":"#10","image":"https://images.nicefunzombies.io/10.png","zombieId":"10"}',
-      synced_at: '2021-11-11T01:27:20.111Z',
-      name: 'Nice Fun Zombies',
-      symbol: 'NFZ',
-    },
-    {
-      token_address: '0xea7500664c4ccb77a89479a1daa75d59e2fbc97f',
-      token_id: '4',
-      amount: '1',
-      owner_of: '0x03766e2cabaa26324c10120ede914f9c1ca49861',
-      block_number: '9501322',
-      block_number_minted: '9501322',
-      contract_type: 'ERC721',
-      token_uri: 'https://api.nicefunzombies.io/metadata/4',
-      metadata:
-        '{"attributes":[{"value":"Button Teal","trait_type":"Eyes"},{"value":"Hip Hop","trait_type":"Outfit"},{"value":"Pigtails Grape","trait_type":"Hair"},{"value":"Spinning Beanie","trait_type":"Head_gear"},{"value":"Charcoal","trait_type":"Background"},{"value":"Ripped","trait_type":"Mouth"},{"value":"Generic","trait_type":"Type"},{"value":"Female","trait_type":"Gender"},{"value":"Purple","trait_type":"Color"},{"value":"Genesis","trait_type":"Group"}],"description":"NFZ","image":"https://images.nicefunzombies.io/4.png","name":"#4","zombieId":"4"}',
-      synced_at: '2021-11-11T01:27:20.088Z',
-      name: 'Nice Fun Zombies',
-      symbol: 'NFZ',
-    },
-    {
-      token_address: '0xea7500664c4ccb77a89479a1daa75d59e2fbc97f',
-      token_id: '8',
-      amount: '1',
-      owner_of: '0x03766e2cabaa26324c10120ede914f9c1ca49861',
-      block_number: '9502301',
-      block_number_minted: '9502301',
-      contract_type: 'ERC721',
-      token_uri: 'https://api.nicefunzombies.io/metadata/8',
-      metadata:
-        '{"attributes":[{"value":"Wide Blank","trait_type":"Eyes"},{"value":"Fur Coat One","trait_type":"Outfit"},{"value":"Brain Orange","trait_type":"Hair"},{"value":"Smiley","trait_type":"Head_gear"},{"value":"Seagreen","trait_type":"Background"},{"value":"Tongue Pepto","trait_type":"Mouth"},{"value":"Generic","trait_type":"Type"},{"value":"Male","trait_type":"Gender"},{"value":"Grey","trait_type":"Color"},{"value":"Genesis","trait_type":"Group"}],"description":"NFZ","name":"#8","image":"https://images.nicefunzombies.io/8.png","zombieId":"8"}',
-      synced_at: '2021-11-11T01:27:20.096Z',
-      name: 'Nice Fun Zombies',
-      symbol: 'NFZ',
-    },
-    {
-      token_address: '0xea7500664c4ccb77a89479a1daa75d59e2fbc97f',
-      token_id: '9',
-      amount: '1',
-      owner_of: '0x03766e2cabaa26324c10120ede914f9c1ca49861',
-      block_number: '9502306',
-      block_number_minted: '9502306',
-      contract_type: 'ERC721',
-      token_uri: 'https://api.nicefunzombies.io/metadata/9',
-      metadata:
-        '{"attributes":[{"value":"Mean ","trait_type":"Eyes"},{"value":"Tux Damaged","trait_type":"Outfit"},{"value":"Afro Rainbow","trait_type":"Hair"},{"value":"Baby Blue","trait_type":"Background"},{"value":"Rage","trait_type":"Mouth"},{"value":"Generic","trait_type":"Type"},{"value":"Male","trait_type":"Gender"},{"value":"Green","trait_type":"Color"},{"value":"Genesis","trait_type":"Group"}],"description":"NFZ","name":"#9","image":"https://images.nicefunzombies.io/9.png","zombieId":"9"}',
-      synced_at: '2021-11-11T01:27:20.104Z',
-      name: 'Nice Fun Zombies',
-      symbol: 'NFZ',
-    },
-    {
-      token_address: '0xea7500664c4ccb77a89479a1daa75d59e2fbc97f',
-      token_id: '3',
-      amount: '1',
-      owner_of: '0x03766e2cabaa26324c10120ede914f9c1ca49861',
-      block_number: '9501322',
-      block_number_minted: '9501322',
-      contract_type: 'ERC721',
-      token_uri: 'https://api.nicefunzombies.io/metadata/3',
-      metadata:
-        '{"attributes":[{"value":"Blank Wide","trait_type":"Eyes"},{"value":"Clown","trait_type":"Outfit"},{"value":"Youth Lime","trait_type":"Hair"},{"value":"Charcoal","trait_type":"Background"},{"value":"Pizza","trait_type":"Mouth"},{"value":"Robo","trait_type":"Type"},{"value":"Male","trait_type":"Gender"}],"description":"NFZ","image":"https://images.nicefunzombies.io/3.png","name":"#3","zombieId":"3"}',
-      synced_at: '2021-11-11T01:27:20.080Z',
-      name: 'Nice Fun Zombies',
-      symbol: 'NFZ',
-    },
-  ],
-  status: 'SYNCED',
-};
 
 const MidRowContainer = styled.div`
   display: flex;
@@ -540,48 +459,6 @@ export default function SchoolPage({
       });
   };
 
-  const SlotMachineImage = styled.img`
-    /* position: absolute;
-    right: 50%;
-    bottom: 0; */
-    max-height: 90%;
-  `;
-
-  const rotate360 = keyframes`
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  `;
-
-  const Spinner = styled.div`
-    animation: ${rotate360} 1s linear infinite;
-    transform: translateZ(0);
-
-    margin-left: 1rem;
-    border-top: 2px solid grey;
-    border-right: 2px solid grey;
-    border-bottom: 2px solid grey;
-    border-left: 2px solid black;
-    background: transparent;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-  `;
-
-  const InventoryText = styled.b`
-    display: none;
-
-    @media (min-width: 767px) {
-      display: block;
-      font-size: 14px;
-      line-height: 150%;
-      margin-top: 1.5rem;
-    }
-  `;
-
   return (
     <SchoolPageContainer loading={loading}>
       {!loading && (
@@ -604,7 +481,10 @@ export default function SchoolPage({
             </BenefitContainer>
             <Col justifyContent="center" alignItems="center">
               <SchoolImage src={school} alt="school" />
-              <BetButton betting={betting} onClick={casinoClick}>
+              <BetButton
+                betting={selectedIds.length < 1 || betting}
+                onClick={casinoClick}
+              >
                 Hit the Books! {betting && <Spinner />}
               </BetButton>
               <InventoryText>
@@ -755,7 +635,19 @@ export default function SchoolPage({
           </NFTsContainer>
         </>
       )}
-      {/* {loading && <SlotMachineImage src={slotMachine} alt="slot-machine" />} */}
+      {loading && (
+        <img
+          src={chalkboard}
+          alt="chalkboard"
+          style={{ maxHeight: '80%', margin: 'auto' }}
+        />
+      )}
+      <SendTeamButton
+        betting={selectedIds.length < 1 || betting}
+        onClick={casinoClick}
+      >
+        Send my team!
+      </SendTeamButton>
     </SchoolPageContainer>
   );
 }

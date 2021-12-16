@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import background from '../../assets/locations/split-path-image.png';
 import paperBg from '../../assets/locations/paperbg.png';
-import slotMachine from '../../assets/locations/slotmachine.png';
+import slotMachine from '../../assets/locations/loading-casino.gif';
 import brain from '../../assets/locations/brain.png';
 import chip from '../../assets/locations/chip.png';
 import card from '../../assets/locations/cards.png';
@@ -239,12 +239,13 @@ const NFTsContainer = styled.div`
 
 const CasinoImage = styled.img`
   width: 220px;
-  height: 225px;
+  /* height: 225px; */
 
   @media (min-width: 767px) {
     display: block;
-    width: 571px;
-    height: 583px;
+    /* width: 571px; */
+    width: 100%;
+    /* height: 583px; */
   }
 `;
 
@@ -641,7 +642,10 @@ export default function CasinoPage({
         </>
       )}
       {loading && <SlotMachineImage src={slotMachine} alt="slot-machine" />}
-      <SendTeamButton betting={betting} onClick={casinoClick}>
+      <SendTeamButton
+        betting={selectedIds.length < 1 || betting}
+        onClick={casinoClick}
+      >
         Send my team!
       </SendTeamButton>
     </CasinoPageContainer>
