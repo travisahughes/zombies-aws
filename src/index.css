@@ -37,12 +37,36 @@ code {
   width: 100%;
 }
 
-.Modal .ModalClose {
+.Modal .ModalClose,
+.Modal-TraitChecker .ModalClose {
   margin-top: 20px;
   color: white;
   cursor: pointer;
   font-size: 14px;
   text-decoration: underline;
+  font-family: overpassmono;
+  position: absolute;
+  bottom: 15px;
+  left: calc(50% - 10px);
+}
+
+.Modal-TraitChecker {
+  position: absolute;
+  top: 15vh;
+  left: 20vw;
+  right: 20vw;
+  bottom: 15vh;
+  background-color: #101010;
+  text-align: center;
+  padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+@media (max-width: 640px) {
+  .Modal-TraitChecker {
+    top: 100px;
+  }
 }
 
 .Overlay {
@@ -51,5 +75,25 @@ code {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(6, 6, 6, 0.73);
+  background: rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 1300px) {
+  .Modal-TraitChecker {
+    position: absolute;
+    top: 15vh;
+    left: 15vw;
+    right: 15vw;
+    bottom: 15vh;
+  }
+}
+
+@media (max-width: 1000px) {
+  .Modal-TraitChecker {
+    position: absolute;
+    top: 15vh;
+    left: 10vw;
+    right: 10vw;
+    bottom: 15vh;
+  }
 }

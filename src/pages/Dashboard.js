@@ -3,8 +3,9 @@ import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
 import { useMoralis, useMoralisWeb3Api, useChain } from 'react-moralis';
 import { contract_data } from '../constants/moralis_env';
-import Hero from '../Components/Hero';
-import headerimg from '../assets/bg.jpg';
+import NavV2 from '../Components/NavV2';
+import TraitChecker from '../Components/TraitChecker';
+import ReactModal from 'react-modal';
 
 function Dashboard() {
   // TODO: setup env var
@@ -23,6 +24,15 @@ function Dashboard() {
 
   const [userNfts, setUserNfts] = useState(null);
   const [userAccount, setUserAccount] = useState(account);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   useEffect(() => {
     if (userAccount && Web3Api) {
@@ -69,18 +79,114 @@ function Dashboard() {
 
   const dashboardCss = css`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-end;
-
+    align-items: flex-start;
     margin: 30px auto 20px auto;
     padding: 0 20px;
     max-width: 1310px;
+    @media (max-width: 640px) {
+      margin-top: 100px;
+    }
+
+    .green-highlight {
+      color: #aff038;
+    }
+
+    .dashboard-header {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      .checker {
+        padding-bottom: 5px;
+      }
+    }
+
+    .dashboard-info {
+      width: 100%;
+      margin-top: 40px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .dashboard-item {
+        background: #101010;
+        padding: 10px;
+        margin: 0 10px 0 0;
+        width: 30%;
+        &:last-child {
+          margin: 0;
+        }
+      }
+
+      #chain-info {
+        font-size: 14px;
+        line-height: 40px;
+      }
+    }
+
+    .your-horde {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 40px;
+
+      .horde-header {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+    }
+
+    h1 {
+      font-family: teko;
+      font-size: 45px;
+      font-weight: 400;
+      line-height: 45px;
+      text-transform: uppercase;
+      margin-bottom: 0;
+    }
+
+    h2 {
+      font-family: overpassmono;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 26px;
+      text-transform: uppercase;
+      color: #aff038;
+      margin-top: 5px;
+    }
 
     #login {
-      border: 3px solid green;
+      border: 3px solid #aff038;
       padding: 20px;
       cursor: pointer;
+    }
+
+    #trait-checker {
+      font-family: overpassmono;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 21px;
+      border: 3px solid #ab19ef;
+      background: black;
+      color: white;
+      padding: 5px 15px;
+      cursor: pointer;
+      -webkit-transition: border 500ms ease-out;
+      -moz-transition: border 500ms ease-out;
+      -o-transition: border 500ms ease-out;
+      transition: border 500ms ease-out;
+      &:hover {
+        border: 3px solid #ccee25;
+        box-sizing: border-box;
+        filter: drop-shadow(0px 0px 4px #ccee25);
+      }
     }
 
     #user-nfts {
@@ -107,38 +213,52 @@ function Dashboard() {
     }
 
     .network-switch {
-      padding: 5px;
-      border: 2px solid #4035fa;
+      margin-left: 5px;
+      padding: 2px 5px 0;
+      border: 2px solid white;
       border-radius: 4px;
-      background: rgb(64, 53, 250);
-      background: linear-gradient(
-        90deg,
-        rgba(64, 53, 250, 1) 0%,
-        rgba(68, 42, 164, 1) 48%,
-        rgba(55, 0, 128, 1) 100%
-      );
-      color: white;
+      background: white;
+      color: black;
+      font-family: overpassmono;
+      font-weight: 700;
+      text-transform: uppercase;
       cursor: pointer;
     }
   `;
 
   const herobg = css`
     width: 100%;
-    background-image: url('${headerimg}');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
   `;
 
   return (
     <div>
-      <div className="content-section" css={herobg}>
-        <Hero />
+      <div css={herobg}>
+        <NavV2 />
       </div>
       <div css={dashboardCss} className="Dashboard">
-        <div className="body">
-          <div className="content-section" style={{ color: 'white' }}>
+        <div className="dashboard-header">
+          <div>
             <h1>Dashboard</h1>
+          </div>
+          <div className="checker">
+            <ReactModal
+              isOpen={showModal}
+              contentLabel="Trait Checker"
+              onRequestClose={handleCloseModal}
+              shouldCloseOnOverlayClick={true}
+              className="Modal-TraitChecker"
+              overlayClassName="Overlay"
+            >
+              <TraitChecker />
+            </ReactModal>
+            <button id="trait-checker" onClick={handleOpenModal}>
+              Open Trait Checker
+            </button>
+          </div>
+        </div>
+        <div className="dashboard-info">
+          <div id="chain-info" className="dashboard-item">
+            <h2>Account</h2>
             {!isAuthenticated && (
               <div id="login" onClick={() => authenticate()}>
                 Login to see your horde!
@@ -146,47 +266,64 @@ function Dashboard() {
             )}
             {isAuthenticated && (
               <div>
-                <h2>Wallet connected: {userAccount}</h2>
-                <h3>
-                  Chain ({contract_data[chainId]?.network_name || 'Unknown'})
-                </h3>
-                {chainId === '0x1' && (
-                  <button
-                    className="network-switch"
-                    onClick={() => switchNetwork('0x4')}
-                  >
-                    Switch to Rinkeby
-                  </button>
-                )}
-                {chainId === '0x4' && (
-                  <button
-                    className="network-switch"
-                    onClick={() => switchNetwork('0x1')}
-                  >
-                    Switch to Ethereum
-                  </button>
-                )}
-                <h3>Your horde:</h3>
-                <div id="user-nfts">
-                  {userNfts?.result.length > 0 &&
-                    userNfts?.result.map((nft, index) => (
-                      <div className="nft-container" key={index}>
-                        <img
-                          src={JSON.parse(nft?.metadata)?.image}
-                          className="nft-img"
-                        />
-                        <div>NFZ #{nft?.token_id}</div>
-                      </div>
-                    ))}
-                </div>
-                <h3>Challenges:</h3>
-                <div id="challenges">
-                  {/* <a href="/challenge">Challenge #1 - (Nov. 15 - Nov. 19)</a> */}
+                <div>Wallet connected: {userAccount}</div>
+                <div>
+                  Chain: ({contract_data[chainId]?.network_name || 'Unknown'})
+                  {chainId === '0x1' && (
+                    <button
+                      className="network-switch"
+                      onClick={() => switchNetwork('0x4')}
+                    >
+                      Switch to Rinkeby
+                    </button>
+                  )}
+                  {chainId === '0x4' && (
+                    <button
+                      className="network-switch"
+                      onClick={() => switchNetwork('0x1')}
+                    >
+                      Switch to Ethereum
+                    </button>
+                  )}
                 </div>
               </div>
             )}
           </div>
+          <div id="dao" className="dashboard-item">
+            <h2>DAO</h2>
+            <div id="dao-value">
+              NFZ School DAO: 24ETH
+              <br />
+              Current Estimated Value (Updated weekly)
+            </div>
+          </div>
+          <div id="events" className="dashboard-item">
+            <h2>Active Events</h2>
+            <div id="challenges">
+              <a href="/locations">Locations - (Dec. 20 - Jan. 13)</a>
+            </div>
+          </div>
         </div>
+
+        {isAuthenticated && (
+          <div className="your-horde">
+            <div className="horde-header">
+              <h2>Your horde</h2>
+            </div>
+            <div id="user-nfts">
+              {userNfts?.result.length > 0 &&
+                userNfts?.result.map((nft, index) => (
+                  <div className="nft-container" key={index}>
+                    <img
+                      src={JSON.parse(nft?.metadata)?.image}
+                      className="nft-img"
+                    />
+                    <div>NFZ #{nft?.token_id}</div>
+                  </div>
+                ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
