@@ -106,6 +106,7 @@ const RewardHighlight = styled.p`
 
   @media (min-width: 767px) {
     font-size: 20px;
+    margin-bottom: 0;
   }
 `;
 
@@ -120,6 +121,8 @@ const YellowText = styled.p`
 
   @media (min-width: 767px) {
     font-size: 14px;
+    max-width: 450px;
+    margin-bottom: 1.2rem;
   }
 `;
 
@@ -136,10 +139,11 @@ const RewardSubtext = styled.p`
   font-size: 12px;
   line-height: 175%;
   text-align: center;
-  margin-bottom: 0 0 1rem 0;
+  margin-bottom: 1.5rem;
 
   @media (min-width: 767px) {
     font-size: 14px;
+    margin-top: 0;
   }
 `;
 
@@ -154,6 +158,9 @@ const RewardParagraph = styled.p`
 
   @media (min-width: 767px) {
     font-size: 14px;
+    max-width: 680px;
+    line-height: 17.5px;
+    margin-bottom: 4px;
   }
 `;
 
@@ -174,7 +181,7 @@ export default function CasinoResultPage({ selectedZombies, userRewards }) {
   useEffect(() => {
     const statement = userRewards?.generalReward
       ? `Congraulations your zombies found a ${userRewards?.generalReward}`
-      : 'Sorry you loser, your zombies didnt find you shit. better luck next time, sucka';
+      : 'Unfortunately your horde did not find a Search reward';
 
     setRewardStatement(statement);
   }, [userRewards]);
@@ -207,19 +214,23 @@ export default function CasinoResultPage({ selectedZombies, userRewards }) {
           </ImageCol>
         </TopRow>
         <Col alignItems="center" justifyContent="center">
-          <RewardHighlight>{rewardStatement}</RewardHighlight>
-          <RewardSubtext>
-            There are now only X number of Y in the Casino Copy
-          </RewardSubtext>
+          <RewardHighlight>
+            Welcome to the Nice Fun Zombies School!
+          </RewardHighlight>
+          <RewardSubtext>{rewardStatement}</RewardSubtext>
           <YellowText>
-            Your zombies are now associated with the Casino
+            Your horde will now be associated with the School and receive the
+            School Location Benefits
           </YellowText>
           <RewardParagraph>
-            Please check your NFT wallet in a few minutes to see your rewards
+            Please head to our Discord to verify your status and join the Casino
+            channels,
           </RewardParagraph>
-          <RewardParagraph>
-            Our world is growing…what locations will open up next?
-          </RewardParagraph>
+          {userRewards?.generalReward && (
+            <RewardParagraph>
+              and for details on how to receive your reward.
+            </RewardParagraph>
+          )}
         </Col>
       </RewardContainer>
       <MobileZombies>
