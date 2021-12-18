@@ -145,14 +145,25 @@ export default function Location() {
         console.log('school', schoolStruct);
         console.log('school prizes', schoolPrizes.prizes);
         console.log('casino prizes', casinoPrizes.prizes);
-        const counts = {};
+        const schoolPrizeCounts = {};
+        const casinoPrizeCounts = {};
 
         schoolPrizes.prizes.forEach((el) => {
-          counts[prizes.generalPrizes[el]] = counts[prizes.generalPrizes[el]]
-            ? (counts[prizes.generalPrizes[el]] += 1)
+          schoolPrizeCounts[prizes.generalPrizes[el]] = schoolPrizeCounts[
+            prizes.generalPrizes[el]
+          ]
+            ? (schoolPrizeCounts[prizes.generalPrizes[el]] += 1)
             : 1;
         });
-        console.log(counts);
+        casinoPrizes.prizes.forEach((el) => {
+          casinoPrizeCounts[prizes.generalPrizes[el]] = casinoPrizeCounts[
+            prizes.generalPrizes[el]
+          ]
+            ? (casinoPrizeCounts[prizes.generalPrizes[el]] += 1)
+            : 1;
+        });
+        console.log('School Prize', schoolPrizeCounts);
+        console.log('Casino Prizes', casinoPrizeCounts);
       };
 
       locationData();
@@ -176,7 +187,7 @@ export default function Location() {
           const { userPrizes, from, location } = event.returnValues;
 
           if (from.toLowerCase() != userAccount.toLowerCase()) return;
-
+          var startDate = new Date();
           console.log('PRIZES');
           console.log(event);
           console.log(
@@ -187,10 +198,31 @@ export default function Location() {
             generalReward: prizes.generalPrizes[prizeIds[0]],
             specialReward: prizes.specialPrizes[prizeIds[1]],
           };
-          setUserRewards(userRewards);
-
-          history.push('/locations/casino-result');
-
+          function sleep(time) {
+            return new Promise((resolve) => setTimeout(resolve, time));
+          }
+          console.log(userRewards.generalReward);
+          console.log('reward compare ', userRewards.generalReward === 'None');
+          const waitForPrizes = async () => {
+            if (userRewards.generalReward === 'None') {
+              await sleep(25000);
+              var endDate = new Date();
+              var seconds = (endDate.getTime() - startDate.getTime()) / 1000;
+              console.log('total time', seconds);
+              userRewards.generalReward = false;
+              console.log('waiting sleep');
+            }
+            console.log('after 5 seconds');
+            setUserRewards(userRewards);
+            if (location === '1') {
+              console.log('school');
+              history.push('/locations/school-result');
+            } else {
+              console.log('casino');
+              history.push('/locations/casino-result');
+            }
+          };
+          waitForPrizes();
           console.log('------------------------------');
         })
         .on('error', function (error, receipt) {

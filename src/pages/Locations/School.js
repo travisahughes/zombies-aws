@@ -446,11 +446,13 @@ export default function SchoolPage({
   const history = useHistory();
 
   const casinoClick = () => {
-    if (betting) return;
+    if (betting || selectedIds.length < 1) return;
 
+    useKeyCard();
     setBetting(true);
+    const _ids = selectedIds.map(Number);
     tokensContract.methods
-      .burnKeycard(userAccount, [14, 16], 1, 1)
+      .burnKeycard(userAccount, _ids, 1, 1)
       .send({ from: userAccount })
       .on('receipt', (receipt) => {
         setLoading(true);

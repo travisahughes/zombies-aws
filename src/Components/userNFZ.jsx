@@ -23,6 +23,8 @@ const UserNFZ = (props) => {
   const selected = selectedIds.includes(finalMetadata?.zombieId)
     ? 'selected'
     : '';
+  
+  
 
   const nfzCss = css`
     .selected {
