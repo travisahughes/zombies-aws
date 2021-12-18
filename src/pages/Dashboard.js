@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useMoralis, useMoralisWeb3Api, useChain } from 'react-moralis';
 import { contract_data } from '../constants/moralis_env';
 import NavV2 from '../Components/NavV2';
@@ -23,6 +24,7 @@ function Dashboard() {
   }
 
   const [userNfts, setUserNfts] = useState(null);
+  const [processedNfzs, setProcessedNfzs] = useState(null);
   const [userAccount, setUserAccount] = useState(account);
   const [showModal, setShowModal] = useState(false);
 
@@ -35,7 +37,8 @@ function Dashboard() {
   };
 
   useEffect(() => {
-    if (userAccount && Web3Api) {
+    if (userAccount && chainId && Web3Api) {
+      console.log(`zzz userAccount ${userAccount} -- chainId ${chainId}`);
       if (chainId === '0x1') {
         CONTRACT_ID = contract_data.mainnet.contract_id;
         NETWORK = contract_data.mainnet.network_id;
@@ -76,6 +79,57 @@ function Dashboard() {
       setUserAccount(account);
     }
   }, [account]);
+
+  useEffect(() => {
+    if (userNfts) {
+      console.log('userNfts update!', userNfts);
+      const fetchNftData = async () => {
+        const promises = [];
+        for (let x = 0; x < userNfts?.result.length; x++) {
+          promises.push(loadNFZTraits(userNfts?.result[x].token_id));
+        }
+        let values = await Promise.all(promises);
+        let mappedValues = values.map((res) => res.data);
+        let nfzsLocations = {
+          locations: [],
+          nolocations: [],
+        };
+        values.forEach((val) => {
+          const data = val.data;
+          let hasLocation = false;
+          for (let x = 0; x < data?.attributes?.length; x++) {
+            if (data.attributes[x].trait_type.toLowerCase() === 'location') {
+              hasLocation = true;
+              data.location = data.attributes[x].value;
+              nfzsLocations.locations.push(data);
+              break;
+            }
+          }
+          if (!hasLocation) nfzsLocations.nolocations.push(data);
+        });
+        console.log('nfzsLocations', nfzsLocations);
+        setProcessedNfzs(nfzsLocations);
+      };
+      fetchNftData();
+    }
+  }, [userNfts]);
+
+  useEffect(() => {
+    console.log('processedNfzs', processedNfzs);
+  }, [processedNfzs]);
+
+  const loadNFZTraits = async (zombieId) => {
+    if (zombieId && zombieId > 0 && zombieId <= 6666) {
+      let token_uri;
+      if (chainId === '0x4' && prod === false) {
+        token_uri = `https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/metadata/${zombieId}`;
+      } else {
+        token_uri = `https://api.nicefunzombies.io/metadata/${zombieId}`;
+      }
+      return axios.get(token_uri);
+    }
+    return null;
+  };
 
   const dashboardCss = css`
     display: flex;
@@ -189,7 +243,8 @@ function Dashboard() {
       }
     }
 
-    #user-nfts {
+    #user-nfts-locations,
+    #user-nfts-nolocations {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
@@ -310,15 +365,23 @@ function Dashboard() {
             <div className="horde-header">
               <h2>Your horde</h2>
             </div>
-            <div id="user-nfts">
-              {userNfts?.result.length > 0 &&
-                userNfts?.result.map((nft, index) => (
+            <div id="user-nfts-locations">
+              {processedNfzs?.locations?.length > 0 &&
+                processedNfzs?.locations.map((nft, index) => (
                   <div className="nft-container" key={index}>
-                    <img
-                      src={JSON.parse(nft?.metadata)?.image}
-                      className="nft-img"
-                    />
-                    <div>NFZ #{nft?.token_id}</div>
+                    <img src={nft?.image} className="nft-img" />
+                    <div>
+                      #{nft?.zombieId} - {nft?.location}
+                    </div>
+                  </div>
+                ))}
+            </div>
+            <div id="user-nfts-nolocations">
+              {processedNfzs?.nolocations?.length > 0 &&
+                processedNfzs?.nolocations.map((nft, index) => (
+                  <div className="nft-container" key={index}>
+                    <img src={nft?.image} className="nft-img" />
+                    <div>#{nft?.zombieId}</div>
                   </div>
                 ))}
             </div>
