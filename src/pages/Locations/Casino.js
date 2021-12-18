@@ -14,6 +14,7 @@ import shadow from '../../assets/game/shadow.png';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { keyframes } from '@emotion/react';
+import { isCompositeComponentWithType } from 'react-dom/cjs/react-dom-test-utils.production.min';
 
 const CasinoPageContainer = styled.div`
   height: 100vh;
@@ -458,7 +459,7 @@ export default function CasinoPage({
     console.log(_ids);
 
     tokensContract.methods
-      .burnKeycard(userAccount, _ids, 1, 1)
+      .burnKeycard(userAccount, _ids, 2, 1)
       .send({ from: userAccount })
       .on('receipt', (receipt) => {
         setLoading(true);

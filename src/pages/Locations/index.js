@@ -72,6 +72,8 @@ export default function Location() {
         console.log('nfts', nfts);
       };
       fetchNfts();
+
+      const getLocationData = async () => {};
     }
   }, [userAccount, chainId]);
 
@@ -100,10 +102,60 @@ export default function Location() {
       const Web3 = require('web3');
 
       web3.setProvider(web3.currentProvider);
+
       const polyTokensContract = new web3.eth.Contract(
         PolyTokensABI.abi,
         contractAddress.POLY_TOKENS
       );
+
+      const gameMechanicsContract = new web3.eth.Contract(
+        PolyGameMechanicsABI.abi,
+        contractAddress.GAME_MECHANICS
+      );
+
+      const locationData = async () => {
+        const gameMechanicsOptions = {
+          contractAddress: contractAddress.GAME_MECHANICS,
+
+          abi: PolyGameMechanicsABI.abi,
+        };
+
+        const casinoStruct = await Moralis.executeFunction({
+          functionName: 'returnStruct',
+          params: { _locationId: 2 },
+          ...gameMechanicsOptions,
+        });
+        const schoolStruct = await Moralis.executeFunction({
+          functionName: 'returnStruct',
+          params: { _locationId: 1 },
+          ...gameMechanicsOptions,
+        });
+
+        const schoolPrizes = await Moralis.executeFunction({
+          functionName: 'getLocationPrizeArray',
+          params: { _locationId: 1 },
+          ...gameMechanicsOptions,
+        });
+        const casinoPrizes = await Moralis.executeFunction({
+          functionName: 'getLocationPrizeArray',
+          params: { _locationId: 2 },
+          ...gameMechanicsOptions,
+        });
+        console.log('casino', casinoStruct);
+        console.log('school', schoolStruct);
+        console.log('school prizes', schoolPrizes.prizes);
+        console.log('casino prizes', casinoPrizes.prizes);
+        const counts = {};
+
+        schoolPrizes.prizes.forEach((el) => {
+          counts[prizes.generalPrizes[el]] = counts[prizes.generalPrizes[el]]
+            ? (counts[prizes.generalPrizes[el]] += 1)
+            : 1;
+        });
+        console.log(counts);
+      };
+
+      locationData();
 
       setPolyTokensContract(polyTokensContract);
 
@@ -165,27 +217,24 @@ export default function Location() {
     let keyCardAmount = userKeycards;
     keyCardAmount--;
     setUserKeycards(keyCardAmount);
-    console.log(keyCardAmount);
+    console.log('keyCard amount', keyCardAmount);
   };
   const keyCardParse = (tokens) => {
     tokens.result?.forEach((token) => {
       const { amount, token_id } = token;
-      console.log(token_id, amount);
+      console.log(`tokenId ${token_id} - amount ${amount}`);
       token_id === '0' ? setUserKeycards(amount) : null;
-      console.log(userKeycards);
+      console.log('userKeycards', amount);
     });
   };
   const zombieSelect = (metadata, id) => {
     if (selectedIds.includes(metadata.zombieId)) {
       const _ids = [...selectedIds].filter((z) => z != metadata.zombieId);
-      const _selectedZombies = [...selectedZombies].filter(
-        (md) => md != metadata
-      );
+      const _selectedZombies = [...selectedZombies].filter((md) => {
+        return md.zombieId != metadata.zombieId;
+      });
       setSelectedZombies(_selectedZombies);
       setSelectedIds(_ids);
-
-      console.log('removing selected zombies', _selectedZombies);
-      console.log('removing selected Id', _ids);
 
       return;
     } else {
