@@ -215,16 +215,16 @@ export default function CasinoResultPage({ selectedZombies, userRewards }) {
         </TopRow>
         <Col alignItems="center" justifyContent="center">
           <RewardHighlight>
-            Welcome to the Nice Fun Zombies School!
+            Welcome to the Nice Fun Zombies Casino!
           </RewardHighlight>
           <RewardSubtext>{rewardStatement}</RewardSubtext>
           <YellowText>
-            Your horde will now be associated with the School and receive the
-            School Location Benefits
+            Your horde will now be associated with the Casino and receive the
+            Casino Location Benefits
           </YellowText>
           <RewardParagraph>
             Please head to our Discord to verify your status and join the Casino
-            channels,
+            channels{userRewards?.generalReward && ','}
           </RewardParagraph>
           {userRewards?.generalReward && (
             <RewardParagraph>

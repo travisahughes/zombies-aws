@@ -38,9 +38,14 @@ const UserNFZ = (props) => {
     .selected.checkbox {
       opacity: 1;
     }
+
+    .located {
+      display: none;
+    }
   `;
   return (
     <div css={nfzCss}>
+      {/* TODO: Disable onClick if it's located in school / casino  */}
       <div
         onClick={
           props.onClick ? () => props.onClick(finalMetadata, props.id) : ''
@@ -55,6 +60,8 @@ const UserNFZ = (props) => {
       >
         <img src={finalMetadata?.image} className="nft-img" />
         <img className={`${selected} checkbox`} src={checkbox} alt="" />
+        {/* TODO: Change the hard coded Casino to some other place and set condition  */}
+        {false && <div className="located">In Casino</div>}
         <div className="genesis-text">Genesis</div>
       </div>
     </div>

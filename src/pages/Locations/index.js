@@ -291,6 +291,7 @@ export default function Location() {
               selectedIds={selectedIds}
               userNfts={userNfts}
               useKeyCard={useKeyCard}
+              userKeyCards={userKeycards}
             />
           </Route>
           <Route path="/locations/school">

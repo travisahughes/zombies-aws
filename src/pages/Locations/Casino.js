@@ -220,6 +220,23 @@ const NFTsContainer = styled.div`
       width: 187px;
       height: 187px;
     }
+
+    .located {
+      position: absolute;
+      left: 0%;
+      top: 0%;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: black;
+      opacity: 0.7;
+      cursor: auto;
+      font-weight: bold;
+      font-size: 1.2rem;
+      z-index: 999;
+    }
   }
   .genesis-text {
     opacity: 0;
@@ -432,6 +449,17 @@ const Spinner = styled.div`
   border-radius: 50%;
 `;
 
+const InventoryText = styled.b`
+  display: none;
+
+  @media (min-width: 767px) {
+    display: block;
+    font-size: 14px;
+    line-height: 150%;
+    margin-top: 1.5rem;
+  }
+`;
+
 function ListItemWithIcon({ img, alt, text }) {
   return (
     <BenefitRow>
@@ -448,6 +476,7 @@ export default function CasinoPage({
   selectedIds,
   userNfts,
   useKeyCard,
+  userKeyCards,
 }) {
   const [loading, setLoading] = useState(false);
   const [betting, setBetting] = useState(false);
@@ -488,6 +517,10 @@ export default function CasinoPage({
               >
                 BET ON THE CASINO {betting && <Spinner />}
               </BetButton>
+              <InventoryText>
+                You have <YellowText>{userKeyCards}</YellowText> keycards to
+                use. One will be burned to play.
+              </InventoryText>
             </Col>
             <BenefitContainer>
               <TopRowSubheader>Guaranteed Benefits</TopRowSubheader>
