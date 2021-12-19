@@ -621,7 +621,7 @@ export default function SchoolPage({
             <b style={{ fontSize: '18px' }}>
               CHOOSE THE ZOMBIES YOU WANT TO SEARCH WITH (MAX 6)
             </b>
-            <p>2 Zombies Selected</p>
+            <p>{selectedIds.length} Zombies Selected</p>
           </InstructionContainer>
           <NFTsContainer>
             {userNfts &&

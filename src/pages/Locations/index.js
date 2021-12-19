@@ -184,12 +184,12 @@ export default function Location() {
       gameMechanicsWSS.events
         .EPrizes()
         .on('data', function (event) {
+          const resultPages = { 1: 'school-result', 2: 'casino-result' };
           const { userPrizes, from, location } = event.returnValues;
 
           if (from.toLowerCase() != userAccount.toLowerCase()) return;
           var startDate = new Date();
-          console.log('PRIZES');
-          console.log(event);
+          console.log('prize payload', event);
           console.log(
             `user prizes - ${userPrizes}, from - ${from}, location - ${location}`
           );
@@ -201,8 +201,7 @@ export default function Location() {
           function sleep(time) {
             return new Promise((resolve) => setTimeout(resolve, time));
           }
-          console.log(userRewards.generalReward);
-          console.log('reward compare ', userRewards.generalReward === 'None');
+
           const waitForPrizes = async () => {
             if (userRewards.generalReward === 'None') {
               await sleep(25000);
@@ -214,13 +213,7 @@ export default function Location() {
             }
             console.log('after 5 seconds');
             setUserRewards(userRewards);
-            if (location === '1') {
-              console.log('school');
-              history.push('/locations/school-result');
-            } else {
-              console.log('casino');
-              history.push('/locations/casino-result');
-            }
+            history.push(`/locations/${resultPages[parseInt(location)]}`);
           };
           waitForPrizes();
           console.log('------------------------------');
@@ -317,7 +310,12 @@ export default function Location() {
               userRewards={userRewards}
             />
           </Route>
-          <Route path="/locations/school-result" component={SchoolResultPage} />
+          <Route path="/locations/school-result">
+            <SchoolResultPage
+              selectedZombies={selectedZombies}
+              userRewards={userRewards}
+            />
+          </Route>
           <Route path="/" component={SplitPathPage} />
         </Switch>
       </Router>

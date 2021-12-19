@@ -9,7 +9,7 @@ import zombie3 from '../../assets/gallery/zombie3.png';
 import zombie4 from '../../assets/gallery/zombie4.png';
 import zombie5 from '../../assets/gallery/zombie5.png';
 import zombie6 from '../../assets/gallery/zombie6.png';
-
+import { useEffect, useState } from 'react';
 const SchoolResultPageContainer = styled.div`
   height: 100vh;
   min-height: 900px;
@@ -168,7 +168,15 @@ const ImageRow = styled(Row)`
   flex-wrap: wrap;
 `;
 
-export default function SchoolResultPage() {
+export default function SchoolResultPage({ selectedZombies, userRewards }) {
+  const [rewardStatement, setRewardStatement] = useState(null);
+  useEffect(() => {
+    const statement = userRewards?.generalReward
+      ? `Congraulations your zombies found a ${userRewards?.generalReward}`
+      : 'Unfortunately your horde did not find a Search reward';
+
+    setRewardStatement(statement);
+  }, [userRewards]);
   return (
     <SchoolResultPageContainer>
       <LogoImg src={logo} alt="reward-logo" />
@@ -177,12 +185,9 @@ export default function SchoolResultPage() {
         <TopRow justifyContent="center" alignItems="center">
           <ImageCol justifyContent="center" alignItems="center">
             <ImageRow>
-              <ZombieImage src={zombie1} alt="zombie" />
-              <ZombieImage src={zombie2} alt="zombie" />
-              <ZombieImage src={zombie3} alt="zombie" />
-              <ZombieImage src={zombie4} alt="zombie" />
-              <ZombieImage src={zombie5} alt="zombie" />
-              <ZombieImage src={zombie6} alt="zombie" />
+              {selectedZombies.map((zombie, index) => (
+                <ZombieImage src={zombie.image} key={index} />
+              ))}
             </ImageRow>
           </ImageCol>
           <ImageCol justifyContent="center" alignItems="center">
@@ -212,12 +217,9 @@ export default function SchoolResultPage() {
         </Col>
       </RewardContainer>
       <MobileZombies>
-        <ZombieImage src={zombie1} alt="zombie" />
-        <ZombieImage src={zombie2} alt="zombie" />
-        <ZombieImage src={zombie3} alt="zombie" />
-        <ZombieImage src={zombie4} alt="zombie" />
-        <ZombieImage src={zombie5} alt="zombie" />
-        <ZombieImage src={zombie6} alt="zombie" />
+        {selectedZombies.map((zombie, index) => (
+          <ZombieImage src={zombie.image} key={index} />
+        ))}
       </MobileZombies>
     </SchoolResultPageContainer>
   );
