@@ -1,24 +1,37 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import checkbox from '../assets/game/check.png';
 const UserNFZ = (props) => {
   const { metadata: md } = props.nfz;
   const { selectedIds } = props;
   const metadata = JSON.parse(md);
-
   const [finalMetadata, setFinalMetadata] = useState(metadata);
 
-  if (!finalMetadata && props.nfz?.token_id) {
+  useEffect(() => {
     const { token_id } = props.nfz;
-    const token_uri = `https://api.nicefunzombies.io/metadata/${token_id}`;
+    //console.log('use effect token id', token_id);
+    console.log('getting token id', token_id);
+    const token_uri = `https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/metadata/${token_id}`;
     axios.get(token_uri).then((response) => {
       console.log('Manually setting NFZ metadata', response.data);
+      console.log('token id', token_id);
       setFinalMetadata(response.data);
     });
-  }
+  }, [md]);
+
+  // if (!finalMetadata && props.nfz?.token_id) {
+  //   const { token_id } = props.nfz;
+  //   //const token_uri = `https://api.nicefunzombies.io/metadata/${token_id}`;
+  //   const token_uri = `https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/metadata/${token_id}`;
+  //   axios.get(token_uri).then((response) => {
+  //     console.log('Manually setting NFZ metadata', response.data);
+  //     console.log('token id', token_id);
+  //     setFinalMetadata(response.data);
+  //   });
+  // }
 
   const selected = selectedIds.includes(finalMetadata?.zombieId)
     ? 'selected'
