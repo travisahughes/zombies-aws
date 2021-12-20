@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import axios from 'axios';
 import { useState } from 'react';
 
-let TraitChecker = (props) => {
+let TraitChecker = ({ prod }) => {
   const [zombieId, setZombieId] = useState(null);
   const [finalMetadata, setFinalMetadata] = useState(null);
 
@@ -14,10 +14,22 @@ let TraitChecker = (props) => {
   const loadNFZTraits = (e) => {
     if (zombieId && zombieId > 0 && zombieId <= 6666) {
       console.log(`load traits for ${zombieId}`);
-      const token_uri = `https://api.nicefunzombies.io/metadata/${zombieId}`;
+      let token_uri;
+      if (prod === false) {
+        token_uri = `https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/metadata/${zombieId}`;
+      } else {
+        token_uri = `https://api.nicefunzombies.io/metadata/${zombieId}`;
+      }
       axios.get(token_uri).then((response) => {
         console.log('Manually setting NFZ metadata', response.data);
-        setFinalMetadata(response.data);
+        const data = response.data;
+        for (let x = 0; x < data?.attributes?.length; x++) {
+          if (data.attributes[x].trait_type.toLowerCase() === 'location') {
+            data.location = data.attributes[x].value;
+            break;
+          }
+        }
+        setFinalMetadata(data);
       });
     }
   };
@@ -25,7 +37,7 @@ let TraitChecker = (props) => {
   const traitchecker = css`
     font-family: overpassmono;
     color: white;
-    background-color: #101010;
+    background-color: #151515;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -54,7 +66,7 @@ let TraitChecker = (props) => {
       #search-box {
         max-width: 200px;
         height: 24px;
-        border: 1px solid #101010;
+        border: 1px solid #151515;
         border-radius: 4px;
         margin-right: 10px;
         padding: 5px;
@@ -103,9 +115,19 @@ let TraitChecker = (props) => {
           width: 100%;
         }
 
+        #location {
+          width: 100%;
+          margin-top: -3px;
+          background-color: #dddddd;
+          color: #000000;
+          font-size: 14px;
+          line-height: 21px;
+          text-transform: uppercase;
+        }
+
         img {
           width: 100%;
-          min-width: 220px;
+          min-width: 200px;
           height: auto;
           transition: src 2s;
           @media (max-width: 960px) {
@@ -143,6 +165,8 @@ let TraitChecker = (props) => {
           }
           @media (max-width: 960px) {
             width: 30%;
+            font-size: 12px;
+            padding-left: 10px;
           }
 
           .trait-type {
@@ -178,6 +202,9 @@ let TraitChecker = (props) => {
         <div className="zombie-data">
           <div className="zombie-img">
             <img src={finalMetadata?.image} alt="NFZ Image" />
+            <div id="location">
+              Location: <b>{finalMetadata?.location}</b>
+            </div>
           </div>
           <div className="zombie-traits">
             {finalMetadata?.attributes &&

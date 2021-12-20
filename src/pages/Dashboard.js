@@ -7,6 +7,7 @@ import { contract_data } from '../constants/moralis_env';
 import NavV2 from '../Components/NavV2';
 import TraitChecker from '../Components/TraitChecker';
 import ReactModal from 'react-modal';
+import footerV2 from '../assets/footerV2.png';
 
 function Dashboard() {
   // TODO: setup env var
@@ -14,6 +15,9 @@ function Dashboard() {
   let CONTRACT_ID;
   let NETWORK;
   let Web3Api;
+  // TODO: Change to '0x1' for prod!
+  const preferredChain = '0x4'; // rinkeby / staging
+  // const preferredChain = '0x1'; // prod
 
   const { Moralis, authenticate, isAuthenticated, user } = useMoralis();
   const { switchNetwork, chainId, chain, account } = useChain();
@@ -23,10 +27,14 @@ function Dashboard() {
     Moralis.enableWeb3();
   }
 
+  const date = new Date();
+  const year = date.getFullYear();
+
   const [userNfts, setUserNfts] = useState(null);
   const [processedNfzs, setProcessedNfzs] = useState(null);
   const [userAccount, setUserAccount] = useState(account);
   const [showModal, setShowModal] = useState(false);
+  const [shortAddress, setShortAddress] = useState(null);
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -38,7 +46,14 @@ function Dashboard() {
 
   useEffect(() => {
     if (userAccount && chainId && Web3Api) {
-      console.log(`zzz userAccount ${userAccount} -- chainId ${chainId}`);
+      if (userAccount.length > 25) {
+        setShortAddress(
+          userAccount.substring(0, 6) +
+            '...' +
+            userAccount.substring(userAccount.length - 4, userAccount.length)
+        );
+      }
+
       if (chainId === '0x1') {
         CONTRACT_ID = contract_data.mainnet.contract_id;
         NETWORK = contract_data.mainnet.network_id;
@@ -136,9 +151,10 @@ function Dashboard() {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    margin: 30px auto 20px auto;
+    margin: 30px auto 0 auto;
     padding: 0 20px;
     max-width: 1310px;
+    min-height: calc(100vh - 110px);
     @media (max-width: 640px) {
       margin-top: 100px;
     }
@@ -165,14 +181,26 @@ function Dashboard() {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+      @media (max-width: 960px) {
+        flex-direction: column;
+        margin-top: 10px;
+      }
 
       .dashboard-item {
-        background: #101010;
+        background-color: #151515;
+        border-radius: 4px;
         padding: 10px;
         margin: 0 10px 0 0;
         width: 30%;
         &:last-child {
           margin: 0;
+        }
+        @media (max-width: 960px) {
+          width: calc(100% - 20px);
+          margin-top: 20px;
+          &:last-child {
+            margin-top: 20px;
+          }
         }
       }
 
@@ -182,11 +210,53 @@ function Dashboard() {
       }
     }
 
+    #dao {
+      font-size: 18px;
+      font-weigth: 700;
+      line-height: 16px;
+
+      #dao-value {
+        margin: 20px 0;
+      }
+
+      .subtext {
+        font-size: 11px;
+        line-height: 16px;
+        font-weight: 400;
+      }
+    }
+
+    #casino {
+      font-size: 14px;
+
+      #casino-rewards-wrapper {
+        margin-top: 20px;
+
+        .casino-rewards {
+          border: 3px solid #ab19ef;
+          background: black;
+          color: white;
+          text-decoration: none;
+          padding: 5px 15px;
+          cursor: pointer;
+          -webkit-transition: border 500ms ease-out;
+          -moz-transition: border 500ms ease-out;
+          -o-transition: border 500ms ease-out;
+          transition: border 500ms ease-out;
+          &:hover {
+            border: 3px solid #ccee25;
+            box-sizing: border-box;
+            filter: drop-shadow(0px 0px 4px #ccee25);
+          }
+        }
+      }
+    }
+
     .your-horde {
       display: flex;
       flex-direction: column;
       width: 100%;
-      margin-top: 40px;
+      margin: 40px 0 50px 0;
 
       .horde-header {
         width: 100%;
@@ -194,6 +264,45 @@ function Dashboard() {
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-end;
+      }
+
+      #current-events {
+        display: flex;
+        flex-direction: row;
+        font-size: 14px;
+        background-color: #151515;
+        border-radius: 4px;
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin: 10px 0;
+        @media (max-width: 960px) {
+          flex-direction: column;
+          width: calc(100% - 20px);
+          align-items: center;
+        }
+
+        .event-item {
+          width: 33%;
+          @media (max-width: 960px) {
+            width: calc(100% - 20px);
+            text-align: center;
+          }
+        }
+
+        #header {
+          font-size: 14px;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+
+        #time-remaining {
+          text-transform: uppercase;
+          text-align: center;
+
+          a {
+            color: #fff;
+          }
+        }
       }
     }
 
@@ -208,21 +317,16 @@ function Dashboard() {
 
     h2 {
       font-family: overpassmono;
-      font-size: 18px;
+      font-size: 14px;
       font-weight: 700;
-      line-height: 26px;
+      line-height: 14px;
       text-transform: uppercase;
       color: #aff038;
       margin-top: 5px;
     }
 
+    #trait-checker,
     #login {
-      border: 3px solid #aff038;
-      padding: 20px;
-      cursor: pointer;
-    }
-
-    #trait-checker {
       font-family: overpassmono;
       font-weight: 700;
       font-size: 14px;
@@ -241,6 +345,9 @@ function Dashboard() {
         box-sizing: border-box;
         filter: drop-shadow(0px 0px 4px #ccee25);
       }
+      @media (max-width: 960px) {
+        font-size: 10px;
+      }
     }
 
     #user-nfts-locations,
@@ -248,15 +355,36 @@ function Dashboard() {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
+      margin-top: 10px;
+      @media (max-width: 960px) {
+        justify-content: center;
+      }
 
       .nft-container {
-        width: 100px;
-        padding: 10px;
-        margin: 0 10px 10px;
+        width: 135px;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        text-transform: uppercase;
+        padding: 0 10px 10px 0;
+        margin: 0 10px 10px 0;
+        @media (max-width: 960px) {
+          width: 100px;
+        }
 
         .nft-img {
-          width: 100px;
+          width: 135px;
           height: auto;
+          @media (max-width: 960px) {
+            width: 100px;
+          }
+        }
+
+        .casino {
+          color: #aff038;
+        }
+        .school {
+          color: #ffa452;
         }
       }
     }
@@ -278,6 +406,28 @@ function Dashboard() {
       font-weight: 700;
       text-transform: uppercase;
       cursor: pointer;
+    }
+
+    #footer {
+      width: 100%;
+      margin-top: auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      color: #aff038;
+
+      #footer-img {
+        width: 100px;
+        height: auto;
+      }
+      #footer-text {
+        font-size: 14px;
+        font-weight: 700;
+        margin-left: 20px;
+        @media (max-width: 960px) {
+          font-size: 10px;
+        }
+      }
     }
   `;
 
@@ -304,7 +454,7 @@ function Dashboard() {
               className="Modal-TraitChecker"
               overlayClassName="Overlay"
             >
-              <TraitChecker />
+              <TraitChecker prod={prod} />
             </ReactModal>
             <button id="trait-checker" onClick={handleOpenModal}>
               Open Trait Checker
@@ -321,10 +471,22 @@ function Dashboard() {
             )}
             {isAuthenticated && (
               <div>
-                <div>Wallet connected: {userAccount}</div>
+                <div>
+                  Wallet connected: <b>{shortAddress}</b>
+                </div>
                 <div>
                   Chain: ({contract_data[chainId]?.network_name || 'Unknown'})
-                  {chainId === '0x1' && (
+                  {chainId !== preferredChain && (
+                    <button
+                      className="network-switch"
+                      onClick={() =>
+                        switchNetwork(contract_data[preferredChain]?.chain_id)
+                      }
+                    >
+                      Switch to {contract_data[preferredChain]?.network_name}
+                    </button>
+                  )}
+                  {/* {chainId === '0x1' && chainId !== preferredChain && (
                     <button
                       className="network-switch"
                       onClick={() => switchNetwork('0x4')}
@@ -332,14 +494,14 @@ function Dashboard() {
                       Switch to Rinkeby
                     </button>
                   )}
-                  {chainId === '0x4' && (
+                  {chainId === '0x4' && chainId !== preferredChain && (
                     <button
                       className="network-switch"
                       onClick={() => switchNetwork('0x1')}
                     >
                       Switch to Ethereum
                     </button>
-                  )}
+                  )} */}
                 </div>
               </div>
             )}
@@ -347,15 +509,34 @@ function Dashboard() {
           <div id="dao" className="dashboard-item">
             <h2>DAO</h2>
             <div id="dao-value">
-              NFZ School DAO: 24ETH
+              NFZ School DAO: <span className="green-highlight">24ETH</span>
               <br />
-              Current Estimated Value (Updated weekly)
+              <span className="subtext">
+                Current Estimated Value (Updated weekly)
+              </span>
+            </div>
+            <div id="nfz-increase">
+              <span className="green-highlight">+TBD</span>/NFZ
+              <br />
+              <span className="subtext">
+                Estimated Value Increase per School Zombie
+              </span>
             </div>
           </div>
-          <div id="events" className="dashboard-item">
-            <h2>Active Events</h2>
+          <div id="casino" className="dashboard-item">
+            <h2>Casino Rewards</h2>
             <div id="challenges">
-              <a href="/locations">Locations - (Dec. 20 - Jan. 13)</a>
+              Check our Discord for the latest casino prizes!
+              <div id="casino-rewards-wrapper">
+                <a
+                  className="casino-rewards"
+                  href="https://discord.gg/77VswFkcuY"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Roll those dice!
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -365,17 +546,34 @@ function Dashboard() {
             <div className="horde-header">
               <h2>Your horde</h2>
             </div>
+            <div id="current-events">
+              <div id="header" className="event-item green-highlight">
+                Active Events
+              </div>
+              <div id="time-remaining" className="event-item">
+                <a href="/locations">
+                  Casino vs School&nbsp;&nbsp;&nbsp;Ends Jan. 15
+                </a>
+              </div>
+              <div id="prizes-remaining" className="event-item">
+                &nbsp;
+              </div>
+            </div>
             <div id="user-nfts-locations">
               {processedNfzs?.locations?.length > 0 &&
                 processedNfzs?.locations.map((nft, index) => (
                   <div className="nft-container" key={index}>
                     <img src={nft?.image} className="nft-img" />
                     <div>
-                      #{nft?.zombieId} - {nft?.location}
+                      #{nft?.zombieId} -{' '}
+                      <span className={nft?.location.toLowerCase()}>
+                        {nft?.location}
+                      </span>
                     </div>
                   </div>
                 ))}
             </div>
+            {processedNfzs?.nolocations?.length > 0 && <h2>No Location</h2>}
             <div id="user-nfts-nolocations">
               {processedNfzs?.nolocations?.length > 0 &&
                 processedNfzs?.nolocations.map((nft, index) => (
@@ -387,6 +585,12 @@ function Dashboard() {
             </div>
           </div>
         )}
+        <div id="footer">
+          <img id="footer-img" src={footerV2} alt="Nice Fun Zombies" />
+          <div id="footer-text">
+            NICE FUN ZOMBIES {year} - ALL RIGHTS RESERVED
+          </div>
+        </div>
       </div>
     </div>
   );

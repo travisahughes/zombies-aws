@@ -14,14 +14,14 @@ let Header = (props) => {
     width: 100%;
     height: 60px;
     color: white;
-    background-color: #101010;
+    background-color: #151515;
     padding: 8px 0 10px;
     font-size: 14px;
     @media (max-width: 640px) {
       position: fixed;
       top: 0;
       left: 0;
-      background-color: #101010;
+      background-color: #151515;
     }
 
     .green-highlight {
@@ -54,7 +54,7 @@ let Header = (props) => {
         display: block;
         padding: 10px 0;
         width: 100%;
-        background: #101010;
+        background: #151515;
       }
     }
 
@@ -235,27 +235,27 @@ let Header = (props) => {
       <div className={`header-right toggle-${toggleState}`}>
         <ul css={navmenu}>
           <li className="text">
-            <a href="#mission" onClick={toggleMenu}>
+            <a href="/#mission" onClick={toggleMenu}>
               Mission & Goals
             </a>
           </li>
           <li className="text">
-            <a href="#roadmap" onClick={toggleMenu}>
+            <a href="/#roadmap" onClick={toggleMenu}>
               Roadmap
             </a>
           </li>
           <li className="text">
-            <a href="#team" onClick={toggleMenu}>
+            <a href="/#team" onClick={toggleMenu}>
               Team
             </a>
           </li>
           <li className="text">
-            <a href="#howto" onClick={toggleMenu}>
+            <a href="/#howto" onClick={toggleMenu}>
               How to Mint
             </a>
           </li>
           <li className="text">
-            <a href="#faq" onClick={toggleMenu}>
+            <a href="/#faq" onClick={toggleMenu}>
               FAQ
             </a>
           </li>
