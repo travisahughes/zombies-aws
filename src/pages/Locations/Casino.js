@@ -137,6 +137,7 @@ const BetButton = styled.div`
     font-weight: 700;
     margin-left: 40px;
     margin-top: 1rem;
+    margin-bottom: 1rem;
 
     &:hover {
       background: ${(props) => (props.betting ? 'transparent' : '#ab19ef')};
@@ -456,7 +457,7 @@ const InventoryText = styled.b`
     display: block;
     font-size: 14px;
     line-height: 150%;
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
   }
 `;
 
@@ -517,6 +518,9 @@ export default function CasinoPage({
               >
                 BET ON THE CASINO {betting && <Spinner />}
               </BetButton>
+              <InventoryText>
+                There are 1234 other Zombies currently in the Casino
+              </InventoryText>
               <InventoryText>
                 You have <YellowText>{userKeyCards}</YellowText> keycards to
                 use. One will be burned to play.

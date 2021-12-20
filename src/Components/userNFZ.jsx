@@ -56,13 +56,19 @@ const UserNFZ = (props) => {
       display: none;
     }
   `;
+
+  const location = finalMetadata?.attributes.find(
+    (item) => item.trait_type === 'Location'
+  )?.value;
+  console.log(location);
+
   return (
     <div css={nfzCss}>
-      {/* TODO: Disable onClick if it's located in school / casino  */}
       <div
-        onClick={
-          props.onClick ? () => props.onClick(finalMetadata, props.id) : ''
-        }
+        onClick={() => {
+          if (location) return;
+          props.onClick ? () => props.onClick(finalMetadata, props.id) : '';
+        }}
         className={`nft-container ${
           finalMetadata?.attributes.find(
             (item) => item.trait_type === 'Group' && item.value === 'Genesis'
@@ -73,8 +79,7 @@ const UserNFZ = (props) => {
       >
         <img src={finalMetadata?.image} className="nft-img" />
         <img className={`${selected} checkbox`} src={checkbox} alt="" />
-        {/* TODO: Change the hard coded Casino to some other place and set condition  */}
-        {false && <div className="located">In Casino</div>}
+        {location && <div className="located">In {location}</div>}
         <div className="genesis-text">Genesis</div>
       </div>
     </div>
