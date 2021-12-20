@@ -17,7 +17,7 @@ let Header = (props) => {
     background-color: #151515;
     padding: 8px 0 10px;
     font-size: 14px;
-    @media (max-width: 640px) {
+    @media (max-width: 700px) {
       position: fixed;
       top: 0;
       left: 0;
@@ -44,13 +44,13 @@ let Header = (props) => {
     }
 
     .toggle-false {
-      @media (max-width: 640px) {
+      @media (max-width: 700px) {
         display: none;
       }
     }
 
     .toggle-true {
-      @media (max-width: 640px) {
+      @media (max-width: 700px) {
         display: block;
         padding: 10px 0;
         width: 100%;
@@ -60,7 +60,7 @@ let Header = (props) => {
 
     #hamburger {
       display: none;
-      @media (max-width: 640px) {
+      @media (max-width: 700px) {
         display: block;
         position: absolute;
         top: 24px;
@@ -81,7 +81,7 @@ let Header = (props) => {
       font-weight: 400;
       width: 130px;
       margin: 0 0 0 15px;
-      @media (max-width: 640px) {
+      @media (max-width: 700px) {
         position: absolute;
         top: 15px;
         left: 31%;
@@ -99,7 +99,7 @@ let Header = (props) => {
     margin: 0;
     padding: 15px 10px 0px 0;
     float: left;
-    @media (max-width: 640px) {
+    @media (max-width: 700px) {
       margin: 0;
       padding: 50px 0 0 0;
     }
@@ -107,11 +107,11 @@ let Header = (props) => {
     li {
       float: left;
       padding: 7px 12px;
-      @media (max-width: 960px) {
+      @media (max-width: 1020px) {
         font-size: 12px;
         padding: 10px 8px;
       }
-      @media (max-width: 640px) {
+      @media (max-width: 700px) {
         font-size: 12px;
         font-weight: 500;
         padding: 16px 8px 16px 32px;
@@ -136,12 +136,12 @@ let Header = (props) => {
           color: #aff038;
           border-bottom: #aff038 4px solid;
           padding-bottom: 26px;
-          @media (max-width: 960px) {
-            padding-bottom: 20px;
+          @media (max-width: 1020px) {
+            padding-bottom: 27px;
           }
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 700px) {
           color: #aff038;
           font-size: 14px;
           padding: 7px 8px;
@@ -165,10 +165,10 @@ let Header = (props) => {
 
     li.icon {
       padding: 0 10x;
-      @media (max-width: 800px) {
+      @media (max-width: 880px) {
         display: none;
       }
-      @media (max-width: 640px) {
+      @media (max-width: 700px) {
         display: block;
         background: none;
         width: 70px;
@@ -183,8 +183,8 @@ let Header = (props) => {
       }
 
       img {
-        @media (max-width: 960px) {
-          width: 32px;
+        @media (max-width: 1020px) {
+          width: 25px;
         }
       }
     }
@@ -192,24 +192,33 @@ let Header = (props) => {
     li#twitter {
       padding-top: 5px;
 
-      @media (max-width: 960px) {
-        padding-top: 3px;
+      @media (max-width: 1020px) {
+        padding-top: 6px;
       }
     }
 
     li#discord {
       padding-top: 3px;
-      @media (max-width: 640px) {
+      @media (max-width: 1020px) {
+        padding-top: 6px;
+      }
+      @media (max-width: 700px) {
         margin-left: 80px;
       }
     }
 
     li#opensea {
       padding-top: 0;
+      @media (max-width: 1020px) {
+        padding-top: 3px;
+      }
     }
 
     li#etherscan {
       padding-top: 0;
+      @media (max-width: 1020px) {
+        padding-top: 3px;
+      }
     }
   `;
 
@@ -234,6 +243,11 @@ let Header = (props) => {
       </div>
       <div className={`header-right toggle-${toggleState}`}>
         <ul css={navmenu}>
+          <li className="text">
+            <a href="/dashboard" onClick={toggleMenu}>
+              Dashboard
+            </a>
+          </li>
           <li className="text">
             <a href="/#mission" onClick={toggleMenu}>
               Mission & Goals

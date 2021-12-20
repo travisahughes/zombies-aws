@@ -202,9 +202,11 @@ let TraitChecker = ({ prod }) => {
         <div className="zombie-data">
           <div className="zombie-img">
             <img src={finalMetadata?.image} alt="NFZ Image" />
-            <div id="location">
-              Location: <b>{finalMetadata?.location}</b>
-            </div>
+            {finalMetadata?.location && (
+              <div id="location">
+                Location: <b>{finalMetadata?.location}</b>
+              </div>
+            )}
           </div>
           <div className="zombie-traits">
             {finalMetadata?.attributes &&

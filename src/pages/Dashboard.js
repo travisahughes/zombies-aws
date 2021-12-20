@@ -97,7 +97,7 @@ function Dashboard() {
 
   useEffect(() => {
     if (userNfts) {
-      console.log('userNfts update!', userNfts);
+      console.log('userNfts update', userNfts);
       const fetchNftData = async () => {
         const promises = [];
         for (let x = 0; x < userNfts?.result.length; x++) {
@@ -155,7 +155,7 @@ function Dashboard() {
     padding: 0 20px;
     max-width: 1310px;
     min-height: calc(100vh - 110px);
-    @media (max-width: 640px) {
+    @media (max-width: 700px) {
       margin-top: 100px;
     }
 
