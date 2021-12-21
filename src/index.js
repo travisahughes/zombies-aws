@@ -72,8 +72,8 @@ const Routing = () => {
         <Switch>
           <Route exact path="/" component={App} />
           <Route path="/dashboard" component={Dashboard} />
-          {/* <Route path="/challenge" component={Challenge} />
-          <Route path="/locations" component={Locations} /> */}
+          {/* <Route path="/challenge" component={Challenge} /> */}
+          <Route path="/locations" component={Locations} />
           <Redirect to="/" />
         </Switch>
       </div>
