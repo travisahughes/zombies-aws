@@ -256,7 +256,7 @@ function Dashboard() {
       display: flex;
       flex-direction: column;
       width: 100%;
-      margin: 40px 0 50px 0;
+      margin: 10px 0 50px 0;
 
       .horde-header {
         width: 100%;
@@ -264,6 +264,7 @@ function Dashboard() {
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-end;
+        margin-top: 20px;
       }
 
       #current-events {
@@ -507,20 +508,12 @@ function Dashboard() {
             )}
           </div>
           <div id="dao" className="dashboard-item">
-            <h2>DAO</h2>
+            <h2>NFZ School DAO</h2>
             <div id="dao-value">
-              NFZ School DAO: <span className="green-highlight">24ETH</span>
+              Current Estimate Value:{' '}
+              <span className="green-highlight">24ETH</span>
               <br />
-              <span className="subtext">
-                Current Estimated Value (Updated weekly)
-              </span>
-            </div>
-            <div id="nfz-increase">
-              <span className="green-highlight">+TBD</span>/NFZ
-              <br />
-              <span className="subtext">
-                Estimated Value Increase per School Zombie
-              </span>
+              <span className="subtext">(Updated weekly)</span>
             </div>
           </div>
           <div id="casino" className="dashboard-item">
@@ -543,9 +536,6 @@ function Dashboard() {
 
         {isAuthenticated && (
           <div className="your-horde">
-            <div className="horde-header">
-              <h2>Your horde</h2>
-            </div>
             <div id="current-events">
               <div id="header" className="event-item green-highlight">
                 Active Events
@@ -558,6 +548,9 @@ function Dashboard() {
               <div id="prizes-remaining" className="event-item">
                 &nbsp;
               </div>
+            </div>
+            <div className="horde-header">
+              <h2>Your horde</h2>
             </div>
             <div id="user-nfts-locations">
               {processedNfzs?.locations?.length > 0 &&
