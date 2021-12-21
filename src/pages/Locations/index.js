@@ -62,7 +62,7 @@ export default function Location() {
           chain: NETWORK,
         });
         const tokens = await Web3Api.account.getNFTsForContract({
-          address: user.get('ethAddress'),
+          address: userAccount,
           token_address: contractAddress.POLY_TOKENS,
           chain: 'mumbai',
         });
@@ -170,9 +170,20 @@ export default function Location() {
 
       setPolyTokensContract(polyTokensContract);
 
+      var options = {
+        timeout: 5000, // ms
+        // Enable auto reconnection
+        reconnect: {
+          auto: true,
+          delay: 5000, // ms
+          maxAttempts: 5,
+          onTimeout: false,
+        },
+      };
       const maticweb3 = new Web3(
         new Web3.providers.WebsocketProvider(
-          'wss://speedy-nodes-nyc.moralis.io/2c972d75afae6cd6989c4928/polygon/mumbai/ws'
+          'wss://speedy-nodes-nyc.moralis.io/2c972d75afae6cd6989c4928/polygon/mumbai/ws',
+          options
         )
       );
 
@@ -317,7 +328,14 @@ export default function Location() {
               userRewards={userRewards}
             />
           </Route>
-          <Route path="/" component={SplitPathPage} />
+          <Route path="/">
+            <SplitPathPage
+              authenticate={authenticate}
+              isAuthenticated={isAuthenticated}
+              chainId={chainId}
+              switchNetwork={switchNetwork}
+            />
+          </Route>
         </Switch>
       </Router>
     </div>

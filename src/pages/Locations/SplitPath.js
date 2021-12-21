@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { contract_data } from '../../constants/moralis_env';
 import background from '../../assets/locations/split-path-image.png';
 import textBg from '../../assets/locations/text-bg.png';
 import casino from '../../assets/locations/casino.png';
@@ -107,8 +108,35 @@ const SplitPathContent = styled.div`
   }
 `;
 
-export default function SplitPathPage() {
+const FunButton = styled.div`
+  display: inline-flex;
+  border: 3px solid #ab19ef;
+  padding: 20px;
+  cursor: pointer;
+  margin: 8px;
+  -webkit-transition: border 500ms ease-out;
+  -moz-transition: border 500ms ease-out;
+  -o-transition: border 500ms ease-out;
+  transition: border 500ms ease-out;
+  z-index: 99;
+
+  &:hover {
+    border: 3px solid #ccee25;
+    box-sizing: border-box;
+    filter: drop-shadow(0px 0px 4px #ccee25);
+  }
+`;
+
+export default function SplitPathPage({
+  authenticate,
+  isAuthenticated,
+  chainId,
+  switchNetwork,
+}) {
   const history = useHistory();
+  // TODO: Change to '0x89' for prod!
+  const preferredChain = '0x13881'; // mumbai / staging
+  // const preferredChain = '0x89'; // prod polygon
 
   return (
     <SplitPathPageContainer>
@@ -127,6 +155,24 @@ export default function SplitPathPage() {
           />
         </LocationImageContainer>
         <SplitPathTextContainer>
+          {!isAuthenticated && (
+            <FunButton
+              id="login"
+              className="btn"
+              onClick={() => authenticate()}
+            >
+              Connect Your Wallet
+            </FunButton>
+          )}
+          {isAuthenticated && chainId !== preferredChain && (
+            <FunButton
+              className="btn"
+              onClick={() => switchNetwork(preferredChain)}
+            >
+              Switch to{' '}
+              {contract_data[preferredChain]?.network_name || 'Unknown'}
+            </FunButton>
+          )}
           <SplitPathTextMain>
             Two Locations have Emerged, Each with different Benefits
           </SplitPathTextMain>
