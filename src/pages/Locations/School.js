@@ -555,10 +555,7 @@ export default function SchoolPage({
                     alt="5 Custom NFZs"
                     style={{ maxWidth: '144px' }}
                   />
-                  <p>
-                    {schoolPrizeCounts[prizes.generalPrizes[4]]} Brain Upgrade
-                    Tokens
-                  </p>
+                  <p>5 Brain Upgrade Tokens</p>
                   <span style={{ fontSize: '10px' }}>
                     used for upgrading your NFZ
                   </span>

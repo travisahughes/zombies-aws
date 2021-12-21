@@ -576,9 +576,7 @@ export default function CasinoPage({
                     alt="5 Custom NFZs"
                     style={{ maxWidth: '144px' }}
                   />
-                  <p>
-                    {casinoPrizeCounts[prizes.generalPrizes[4]]} Custom NFZs
-                  </p>
+                  <p>5 Custom NFZs</p>
                   <span style={{ fontSize: '10px' }}>
                     (no utility, special commission)
                   </span>
