@@ -40,6 +40,8 @@ export default function Location() {
   const [userKeycards, setUserKeycards] = useState(0);
   const [userAccount, setUserAccount] = useState(account);
   const [userRewards, setUserRewards] = useState(null);
+  const [totalSchoolCount, setTotalSchoolCount] = useState(0);
+  const [totalCasinoCount, setTotalCasinoCount] = useState(0);
   const history = useHistory();
 
   useEffect(() => {
@@ -130,6 +132,9 @@ export default function Location() {
           params: { _locationId: 1 },
           ...gameMechanicsOptions,
         });
+
+        setTotalCasinoCount(casinoStruct[3]);
+        setTotalSchoolCount(schoolStruct[3]);
 
         const schoolPrizes = await Moralis.executeFunction({
           functionName: 'getLocationPrizeArray',
@@ -253,6 +258,9 @@ export default function Location() {
     });
   };
   const zombieSelect = (metadata, id) => {
+    console.log('zombie selet');
+    console.log('metadata', metadata);
+    console.log('id', id);
     if (selectedIds.includes(metadata.zombieId)) {
       const _ids = [...selectedIds].filter((z) => z != metadata.zombieId);
       const _selectedZombies = [...selectedZombies].filter((md) => {
