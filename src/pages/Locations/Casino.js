@@ -546,42 +546,42 @@ export default function CasinoPage({
               <TopRowSubheader>
                 What’s Hiding in the Casino (To be found by Searching)
               </TopRowSubheader>
-              <HiddenItemsRow>
-                {casinoPrizeCounts &&
-                  casinoPrizeCounts[prizes.generalPrizes[1]] && (
-                    <HiddenItems>
-                      <img src={placeholder} alt="NFZs" />
-                      <span>
-                        {casinoPrizeCounts[prizes.generalPrizes[1]]} NFZs
-                      </span>
-                    </HiddenItems>
-                  )}
-                {casinoPrizeCounts &&
-                  casinoPrizeCounts[prizes.generalPrizes[3]] && (
-                    <HiddenItems>
-                      <img
-                        src={Keycard}
-                        alt="Keycards"
-                        style={{ maxWidth: '106px' }}
-                      />
-                      <span>
-                        {casinoPrizeCounts[prizes.generalPrizes[3]]} Keycards
-                      </span>
-                    </HiddenItems>
-                  )}
+              {casinoPrizeCounts && (
+                <HiddenItemsRow>
+                  <HiddenItems>
+                    <img src={placeholder} alt="NFZs" />
+                    <span>
+                      {casinoPrizeCounts[prizes.generalPrizes[1]] || 0} NFZs
+                    </span>
+                  </HiddenItems>
 
-                <HiddenItems>
-                  <img
-                    src={shadow}
-                    alt="5 Custom NFZs"
-                    style={{ maxWidth: '144px' }}
-                  />
-                  <p>5 Custom NFZs</p>
-                  <span style={{ fontSize: '10px' }}>
-                    (no utility, special commission)
-                  </span>
-                </HiddenItems>
-              </HiddenItemsRow>
+                  <HiddenItems>
+                    <img
+                      src={Keycard}
+                      alt="Keycards"
+                      style={{ maxWidth: '106px' }}
+                    />
+                    <span>
+                      {casinoPrizeCounts[prizes.generalPrizes[3]] || 0} Keycards
+                    </span>
+                  </HiddenItems>
+
+                  <HiddenItems>
+                    <img
+                      src={shadow}
+                      alt="5 Custom NFZs"
+                      style={{ maxWidth: '144px' }}
+                    />
+                    <p>
+                      {casinoPrizeCounts[prizes.generalPrizes[4]] || 0} Custom
+                      NFZs
+                    </p>
+                    <span style={{ fontSize: '10px' }}>
+                      (no utility, special commission)
+                    </span>
+                  </HiddenItems>
+                </HiddenItemsRow>
+              )}
             </BenefitContainer>
           </TopContainer>
           <MidRowContainer>

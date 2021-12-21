@@ -526,41 +526,42 @@ export default function SchoolPage({
               <TopRowSubheader2>
                 What’s Hiding in the School (To be found by Searching)
               </TopRowSubheader2>
-              <HiddenItemsRow>
-                {schoolPrizeCounts &&
-                  schoolPrizeCounts[prizes.generalPrizes[1]] && (
-                    <HiddenItems>
-                      <img src={placeholder} alt="NFZs" />
-                      <span>{schoolPrizeCounts[prizes]} NFZs</span>
-                    </HiddenItems>
-                  )}
-                {schoolPrizeCounts &&
-                  schoolPrizeCounts[prizes.generalPrizes[2]] && (
-                    <HiddenItems>
-                      <img
-                        src={zeneca}
-                        alt="zeneca"
-                        style={{ maxWidth: '106px' }}
-                      />
-                      <span>
-                        {schoolPrizeCounts[prizes.generalPrizes[2]]} Zeneca
-                        Academy Tokens
-                      </span>
-                    </HiddenItems>
-                  )}
+              {schoolPrizeCounts && (
+                <HiddenItemsRow>
+                  <HiddenItems>
+                    <img src={placeholder} alt="NFZs" />
+                    <span>
+                      {schoolPrizeCounts[prizes.generalPrizes[1]] || 0} NFZs
+                    </span>
+                  </HiddenItems>
 
-                <HiddenItems>
-                  <img
-                    src={shadow}
-                    alt="5 Custom NFZs"
-                    style={{ maxWidth: '144px' }}
-                  />
-                  <p>5 Brain Upgrade Tokens</p>
-                  <span style={{ fontSize: '10px' }}>
-                    used for upgrading your NFZ
-                  </span>
-                </HiddenItems>
-              </HiddenItemsRow>
+                  <HiddenItems>
+                    <img
+                      src={zeneca}
+                      alt="zeneca"
+                      style={{ maxWidth: '106px' }}
+                    />
+                    <span>
+                      {schoolPrizeCounts[prizes.generalPrizes[2]] || 0} Zeneca
+                      Academy Tokens
+                    </span>
+                  </HiddenItems>
+                  <HiddenItems>
+                    <img
+                      src={shadow}
+                      alt="5 Custom NFZs"
+                      style={{ maxWidth: '144px' }}
+                    />
+                    <p>
+                      {schoolPrizeCounts[prizes.generalPrizes[4]] || 0} Custom
+                      NFZs
+                    </p>
+                    <span style={{ fontSize: '10px' }}>
+                      (no utility, special commission)
+                    </span>
+                  </HiddenItems>
+                </HiddenItemsRow>
+              )}
             </ProbabilityContainer>
             <ProbabilityContainer>
               <MidRowSubheader>
