@@ -479,6 +479,7 @@ export default function CasinoPage({
   useKeyCard,
   userKeyCards,
 }) {
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [betting, setBetting] = useState(false);
 
