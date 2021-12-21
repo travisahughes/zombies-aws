@@ -10,11 +10,13 @@ import Keycard from '../../assets/locations/keycard.png';
 import discord from '../../assets/icons/discord.png';
 import UserNFZ from '../../Components/userNFZ';
 import casino from '../../assets/locations/casino.png';
+import placeholder from '../../assets/locations/nfz-placeholder.png';
 import shadow from '../../assets/game/shadow.png';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router';
 import { keyframes } from '@emotion/react';
 import { isCompositeComponentWithType } from 'react-dom/cjs/react-dom-test-utils.production.min';
+import { prizes } from '../../constants/prizes';
 
 const CasinoPageContainer = styled.div`
   height: 100vh;
@@ -70,7 +72,7 @@ const HiddenItemsRow = styled.div`
 
   @media (min-width: 767px) {
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
 `;
 
@@ -478,6 +480,8 @@ export default function CasinoPage({
   userNfts,
   useKeyCard,
   userKeyCards,
+  totalCasinoCount,
+  casinoPrizeCounts,
 }) {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
@@ -520,7 +524,8 @@ export default function CasinoPage({
                 BET ON THE CASINO {betting && <Spinner />}
               </BetButton>
               <InventoryText>
-                There are 1234 other Zombies currently in the Casino
+                There are {totalCasinoCount} other Zombies currently in the
+                Casino
               </InventoryText>
               <InventoryText>
                 You have <YellowText>{userKeyCards}</YellowText> keycards to
@@ -542,25 +547,38 @@ export default function CasinoPage({
                 What’s Hiding in the Casino (To be found by Searching)
               </TopRowSubheader>
               <HiddenItemsRow>
-                <HiddenItems>
-                  <img src={NFZs} alt="300 NFZs" />
-                  <span>300 NFZs</span>
-                </HiddenItems>
-                <HiddenItems>
-                  <img
-                    src={Keycard}
-                    alt="150 Keycards"
-                    style={{ maxWidth: '106px' }}
-                  />
-                  <span>150 Keycards</span>
-                </HiddenItems>
+                {casinoPrizeCounts &&
+                  casinoPrizeCounts[prizes.generalPrizes[1]] && (
+                    <HiddenItems>
+                      <img src={placeholder} alt="NFZs" />
+                      <span>
+                        {casinoPrizeCounts[prizes.generalPrizes[1]]} NFZs
+                      </span>
+                    </HiddenItems>
+                  )}
+                {casinoPrizeCounts &&
+                  casinoPrizeCounts[prizes.generalPrizes[3]] && (
+                    <HiddenItems>
+                      <img
+                        src={Keycard}
+                        alt="Keycards"
+                        style={{ maxWidth: '106px' }}
+                      />
+                      <span>
+                        {casinoPrizeCounts[prizes.generalPrizes[3]]} Keycards
+                      </span>
+                    </HiddenItems>
+                  )}
+
                 <HiddenItems>
                   <img
                     src={shadow}
                     alt="5 Custom NFZs"
                     style={{ maxWidth: '144px' }}
                   />
-                  <p>5 Custom NFZs</p>
+                  <p>
+                    {casinoPrizeCounts[prizes.generalPrizes[4]]} Custom NFZs
+                  </p>
                   <span style={{ fontSize: '10px' }}>
                     (no utility, special commission)
                   </span>

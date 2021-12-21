@@ -4,7 +4,7 @@ import paperBg from '../../assets/locations/paperbg2.png';
 import chalkboard from '../../assets/locations/loading-school.gif';
 import chairs from '../../assets/locations/chairs.png';
 import hat from '../../assets/locations/hat.png';
-import NFZs from '../../assets/locations/2797.png';
+import zeneca from '../../assets/locations/zeneca-academy-token.png';
 import head from '../../assets/locations/head.png';
 import eth1 from '../../assets/locations/eth.png';
 import eth3 from '../../assets/locations/eth-3.png';
@@ -12,10 +12,12 @@ import Keycard from '../../assets/locations/keycard.png';
 import discord from '../../assets/icons/discord.png';
 import UserNFZ from '../../Components/userNFZ';
 import school from '../../assets/locations/school.png';
+import placeholder from '../../assets/locations/nfz-placeholder.png';
 import shadow from '../../assets/game/shadow.png';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
 import { keyframes } from '@emotion/react';
+import { prizes } from '../../constants/prizes';
 
 const SchoolPageContainer = styled.div`
   height: 100vh;
@@ -458,6 +460,8 @@ export default function SchoolPage({
   userNfts,
   useKeyCard,
   userKeyCards,
+  totalSchoolCount,
+  schoolPrizeCounts,
 }) {
   const [loading, setLoading] = useState(false);
   const [betting, setBetting] = useState(false);
@@ -508,7 +512,8 @@ export default function SchoolPage({
                 Hit the Books! {betting && <Spinner />}
               </BetButton>
               <InventoryText>
-                There are 1234 other Zombies currently in the School
+                There are {totalSchoolCount} other Zombies currently in the
+                School
               </InventoryText>
               <InventoryText>
                 You have <YellowText>{userKeyCards}</YellowText> keycards to
@@ -522,25 +527,38 @@ export default function SchoolPage({
                 What’s Hiding in the School (To be found by Searching)
               </TopRowSubheader2>
               <HiddenItemsRow>
-                <HiddenItems>
-                  <img src={NFZs} alt="300 NFZs" />
-                  <span>300 NFZs</span>
-                </HiddenItems>
-                <HiddenItems>
-                  <img
-                    src={Keycard}
-                    alt="150 Keycards"
-                    style={{ maxWidth: '106px' }}
-                  />
-                  <span>20 Zeneca Academy Tokens</span>
-                </HiddenItems>
+                {schoolPrizeCounts &&
+                  schoolPrizeCounts[prizes.generalPrizes[1]] && (
+                    <HiddenItems>
+                      <img src={placeholder} alt="NFZs" />
+                      <span>{schoolPrizeCounts[prizes]} NFZs</span>
+                    </HiddenItems>
+                  )}
+                {schoolPrizeCounts &&
+                  schoolPrizeCounts[prizes.generalPrizes[2]] && (
+                    <HiddenItems>
+                      <img
+                        src={zeneca}
+                        alt="zeneca"
+                        style={{ maxWidth: '106px' }}
+                      />
+                      <span>
+                        {schoolPrizeCounts[prizes.generalPrizes[2]]} Zeneca
+                        Academy Tokens
+                      </span>
+                    </HiddenItems>
+                  )}
+
                 <HiddenItems>
                   <img
                     src={shadow}
                     alt="5 Custom NFZs"
                     style={{ maxWidth: '144px' }}
                   />
-                  <p>5 Brain Upgrade Tokens</p>
+                  <p>
+                    {schoolPrizeCounts[prizes.generalPrizes[4]]} Brain Upgrade
+                    Tokens
+                  </p>
                   <span style={{ fontSize: '10px' }}>
                     used for upgrading your NFZ
                   </span>

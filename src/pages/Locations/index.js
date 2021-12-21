@@ -42,6 +42,8 @@ export default function Location() {
   const [userRewards, setUserRewards] = useState(null);
   const [totalSchoolCount, setTotalSchoolCount] = useState(0);
   const [totalCasinoCount, setTotalCasinoCount] = useState(0);
+  const [schoolPrizeCounts, setSchoolPrizeCounts] = useState(null);
+  const [casinoPrizeCounts, setCasinoPrizeCounts] = useState(null);
   const history = useHistory();
 
   useEffect(() => {
@@ -169,6 +171,8 @@ export default function Location() {
         });
         console.log('School Prize', schoolPrizeCounts);
         console.log('Casino Prizes', casinoPrizeCounts);
+        setSchoolPrizeCounts(schoolPrizeCounts);
+        setCasinoPrizeCounts(casinoPrizeCounts);
       };
 
       locationData();
@@ -311,6 +315,8 @@ export default function Location() {
               userNfts={userNfts}
               useKeyCard={useKeyCard}
               userKeyCards={userKeycards}
+              totalCasinoCount={totalCasinoCount}
+              casinoPrizeCounts={casinoPrizeCounts}
             />
           </Route>
           <Route path="/locations/school">
@@ -322,6 +328,8 @@ export default function Location() {
               userNfts={userNfts}
               useKeyCard={useKeyCard}
               userKeyCards={userKeycards}
+              totalSchoolCount={totalSchoolCount}
+              schoolPrizeCounts={schoolPrizeCounts}
             />
           </Route>
           <Route path="/locations/casino-result">
