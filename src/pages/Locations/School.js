@@ -567,34 +567,6 @@ export default function SchoolPage({
                   </HiddenItems>
                 </HiddenItemsRow>
               )}
-              {/* {schoolPrizeCounts && ( */}
-              <HiddenItemsRow>
-                <HiddenItems>
-                  <img src={placeholder} alt="NFZs" />
-                  <span>150 NFZs</span>
-                </HiddenItems>
-
-                <HiddenItems>
-                  <img
-                    src={zeneca}
-                    alt="zeneca"
-                    style={{ maxWidth: '106px' }}
-                  />
-                  <span>5 Zeneca Academy Tokens</span>
-                </HiddenItems>
-                <HiddenItems>
-                  <img
-                    src={shadow}
-                    alt="5 Custom NFZs"
-                    style={{ maxWidth: '144px' }}
-                  />
-                  <p>150 Custom NFZs</p>
-                  <span style={{ fontSize: '10px' }}>
-                    (no utility, special commission)
-                  </span>
-                </HiddenItems>
-              </HiddenItemsRow>
-              {/* )} */}
             </ProbabilityContainer>
             <ProbabilityContainer>
               <MidRowSubheader>
