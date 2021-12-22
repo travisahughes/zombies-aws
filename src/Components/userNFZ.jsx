@@ -69,9 +69,10 @@ const UserNFZ = (props) => {
   return (
     <div css={nfzCss}>
       <div
-        onClick={
-          props.onClick ? () => props.onClick(finalMetadata, props.id) : ''
-        }
+        onClick={() => {
+          if (location) return;
+          props.onClick ? props.onClick(finalMetadata, props.id) : '';
+        }}
         className={`nft-container ${
           finalMetadata?.attributes.find(
             (item) => item.trait_type === 'Group' && item.value === 'Genesis'

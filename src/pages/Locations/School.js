@@ -325,35 +325,40 @@ const BenefitList = [
     img: discord,
     alt: 'discord',
     listItem:
-      'The School is the home of the NFZ DAO (Decentralized Autonomous Organization). Access to special School DAO Discord channel',
+      'The School is the home of the NFZ DAO. Access to special School DAO Discord channel',
   },
   {
     img: chairs,
     alt: 'chairs',
-    listItem: '1,200 total spots maximum within the school',
+    listItem:
+      'Enrollment to the School closes at the end of Action Phase and afterwards the zombies in the School share the value of the DAO equally. (200 spots reserved for the NFZ team.)',
   },
   {
     img: head,
     alt: 'head',
-    listItem:
-      'Your zombies BECOME the DAO token. New trait added to your Nice Fun Zombie’s Metadata - Location: School',
+    listItem: (
+      <span>
+        Your zombies BECOME the DAO token. New trait added to your Nice Fun
+        Zombie’s Metadata - <YellowText>Location: School</YellowText>',
+      </span>
+    ),
   },
   {
     img: eth1,
     alt: 'eth1',
     listItem:
-      'Estimate starting value of approx. 24 ETH, meaning automatic value increase to your zombie of 0.02ETH to start',
+      'Estimate starting value of approx. 25 ETH, resulting in an estimate value increase to your zombie of 0.025ETH if 1,000 zombies end up in the School.',
   },
   {
     img: hat,
     alt: 'hat',
     listItem: 'Monthly AMAs and NFT education sessions with top NFT experts',
   },
-  {
-    img: eth3,
-    alt: 'eth3',
-    listItem: 'Percentage of NFZ secondary sales will be given to the DAO',
-  },
+  // {
+  //   img: eth3,
+  //   alt: 'eth3',
+  //   listItem: 'Percentage of NFZ secondary sales will be given to the DAO',
+  // },
 ];
 
 const MidRowContainer = styled.div`
@@ -368,7 +373,7 @@ const MidRowContainer = styled.div`
     justify-content: space-around;
     text-align: start;
     margin: 4rem 0 2rem 0;
-    width: 90%;
+    /* width: 90%; */
   }
 `;
 
@@ -480,6 +485,9 @@ export default function SchoolPage({
         setLoading(true);
         setBetting(false);
         console.log('keyCardBurn txn', receipt);
+      })
+      .on('error', (err) => {
+        setBetting(false);
       });
   };
 
@@ -578,7 +586,7 @@ export default function SchoolPage({
                     alignItems="center"
                   >
                     <ProbabilityLeftText>Send 1 NFZ</ProbabilityLeftText>{' '}
-                    <YellowText>0%</YellowText>
+                    <YellowText>10%</YellowText>
                   </ProbabilityItemRow>
                   <ProbabilityItemRow
                     justifyContent="space-between"
