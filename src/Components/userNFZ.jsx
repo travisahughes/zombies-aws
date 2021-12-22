@@ -17,7 +17,7 @@ const UserNFZ = (props) => {
     const token_uri = `https://api.nicefunzombies.io/metadata/${token_id}`;
     //const token_uri = `https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/metadata/${token_id}`;
     axios.get(token_uri).then((response) => {
-      const location = finalMetadata?.attributes.find(
+      const location = response.data?.attributes.find(
         (item) => item.trait_type === 'Location'
       )?.value;
 

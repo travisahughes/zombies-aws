@@ -135,8 +135,8 @@ export default function SplitPathPage({
 }) {
   const history = useHistory();
   // TODO: Change to '0x89' for prod!
-  const preferredChain = '0x13881'; // mumbai / staging
-  // const preferredChain = '0x89'; // prod polygon
+  //const preferredChain = '0x13881'; // mumbai / staging
+  const preferredChain = '0x89'; // prod polygon
 
   return (
     <SplitPathPageContainer>
@@ -148,6 +148,7 @@ export default function SplitPathPage({
             alt="casino"
             onClick={() => history.push('/locations/casino')}
           />
+
           <LocationImage
             src={school}
             alt="school"
