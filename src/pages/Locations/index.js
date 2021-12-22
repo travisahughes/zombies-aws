@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import { contract_data } from '../../constants/moralis_env';
 //IMPORT ABI
 import PolyTokensABI from '../../constants/abis/NFZMechanicTokens.json';
-import PolyGameMechanicsABI from '../../constants/abis/NFZGameMechanics.json';
+import PolyGameMechanicsABI from '../../constants/abis/NFZGameMechanicsV2.json';
 import contractAddress from '../../constants/contracts.json';
 import { prizes } from '../../constants/prizes';
 import SchoolPage from './School';
@@ -46,12 +46,17 @@ export default function Location() {
   const [casinoPrizeCounts, setCasinoPrizeCounts] = useState(null);
   const history = useHistory();
 
+  let POLY_TOKENS_ADDRESS = contractAddress.POLY_TOKENS;
+  let GAME_MECHANICS_ADDRESS = contractAddress.GAME_MECHANICS;
+  let POLY_TOKENS_CHAIN_ID = '0x89';
+  let WSS_EVENT = contractAddress.WSS_POLYGON;
+
   useEffect(() => {
     if (userAccount && Web3Api && chainId) {
       enableWeb3();
       console.log('chainId', chainId);
       console.log('userAccount', userAccount);
-      if (chainId === '0x1') {
+      if (chainId === '0x1' || chainId === '0x89') {
         CONTRACT_ID = contract_data.mainnet.contract_id;
         NETWORK = contract_data.mainnet.network_id;
       } else {
@@ -67,8 +72,8 @@ export default function Location() {
         });
         const tokens = await Web3Api.account.getNFTsForContract({
           address: userAccount,
-          token_address: contractAddress.POLY_TOKENS,
-          chain: 'mumbai',
+          token_address: POLY_TOKENS_ADDRESS,
+          chain: POLY_TOKENS_CHAIN_ID,
         });
         setUserNfts(nfts);
         keyCardParse(tokens);
@@ -109,17 +114,17 @@ export default function Location() {
 
       const polyTokensContract = new web3.eth.Contract(
         PolyTokensABI.abi,
-        contractAddress.POLY_TOKENS
+        POLY_TOKENS_ADDRESS
       );
 
       const gameMechanicsContract = new web3.eth.Contract(
         PolyGameMechanicsABI.abi,
-        contractAddress.GAME_MECHANICS
+        GAME_MECHANICS_ADDRESS
       );
 
       const locationData = async () => {
         const gameMechanicsOptions = {
-          contractAddress: contractAddress.GAME_MECHANICS,
+          contractAddress: GAME_MECHANICS_ADDRESS,
 
           abi: PolyGameMechanicsABI.abi,
         };
@@ -190,24 +195,21 @@ export default function Location() {
         },
       };
       const maticweb3 = new Web3(
-        new Web3.providers.WebsocketProvider(
-          'wss://speedy-nodes-nyc.moralis.io/2c972d75afae6cd6989c4928/polygon/mumbai/ws',
-          options
-        )
+        new Web3.providers.WebsocketProvider(WSS_EVENT, options)
       );
 
       const gameMechanicsWSS = new maticweb3.eth.Contract(
         PolyGameMechanicsABI.abi,
-        contractAddress.GAME_MECHANICS
+        GAME_MECHANICS_ADDRESS
       );
 
       gameMechanicsWSS.events
         .EPrizes()
         .on('data', function (event) {
-          const resultPages = { 1: 'school-result', 2: 'casino-result' };
           const { userPrizes, from, location } = event.returnValues;
-
           if (from.toLowerCase() != userAccount.toLowerCase()) return;
+          const resultPages = { 1: 'school-result', 2: 'casino-result' };
+
           var startDate = new Date();
           console.log('prize payload', event);
           console.log(
@@ -242,19 +244,19 @@ export default function Location() {
           // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
           console.log('event listener error', error);
         });
-      gameMechanicsWSS.events
-        .ELocationSet({})
-        .on('data', function (event) {
-          console.log(
-            `New Location Event: Send ${event?.returnValues?.tokenIds} to Location #${event?.returnValues?.location}\n\n`
-          );
-          // console.log('event data', event)
-          console.log('------------------------------');
-        })
-        .on('error', function (error, receipt) {
-          // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
-          console.log('event listener error', error);
-        });
+      // gameMechanicsWSS.events
+      //   .ELocationSet({})
+      //   .on('data', function (event) {
+      //     console.log(
+      //       `New Location Event: Send ${event?.returnValues?.tokenIds} to Location #${event?.returnValues?.location}\n\n`
+      //     );
+      //     // console.log('event data', event)
+      //     console.log('------------------------------');
+      //   })
+      //   .on('error', function (error, receipt) {
+      //     // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+      //     console.log('event listener error', error);
+      //   });
     }
   }, [isWeb3Enabled]);
 
@@ -273,9 +275,8 @@ export default function Location() {
     });
   };
   const zombieSelect = (metadata, id) => {
-    console.log('zombie selet');
-    console.log('metadata', metadata);
-    console.log('id', id);
+    if (metadata?.hasLocation) return;
+
     if (selectedIds.includes(metadata.zombieId)) {
       const _ids = [...selectedIds].filter((z) => z != metadata.zombieId);
       const _selectedZombies = [...selectedZombies].filter((md) => {

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useState, useEffect } from 'react';
 import { contract_data } from '../../constants/moralis_env';
 import background from '../../assets/locations/split-path-image.png';
 import textBg from '../../assets/locations/text-bg.png';
@@ -20,16 +21,34 @@ const SplitPathPageContainer = styled.div`
 `;
 
 const SplitPathHeader = styled.h1`
-  visibility: hidden;
-  display: none;
-  @media (min-width: 767px) {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 64px;
-    line-height: 175%;
-    visibility: visible;
-    display: block;
-    text-shadow: 0px 0px 4px #696647;
+  font-family: teko;
+  // visibility: hidden;
+  // display: none;
+
+  font-style: normal;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-size: 165px;
+  line-height: 288px;
+  margin: 20px 0 0;
+  visibility: visible;
+  display: block;
+
+  @media (max-width: 1640px) {
+    font-size: 100px;
+    line-height: 188px;
+  }
+  @media (max-width: 1000px) {
+    font-size: 80px;
+    line-height: 150px;
+  }
+  @media (max-width: 800px) {
+    font-size: 60px;
+    line-height: 150px;
+  }
+  @media (max-width: 500px) {
+    font-size: 40px;
+    line-height: 100px;
   }
 `;
 
@@ -101,7 +120,7 @@ const SplitPathContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   height: 100%;
 
   @media (min-width: 767px) {
@@ -129,6 +148,12 @@ const FunButton = styled.div`
   }
 `;
 
+const ErrorMessage = styled.div`
+  color: #63ffa9;
+  font-size: 18px;
+  padding: 10px 0;
+`;
+
 export default function SplitPathPage({
   authenticate,
   isAuthenticated,
@@ -137,8 +162,35 @@ export default function SplitPathPage({
 }) {
   const history = useHistory();
   // TODO: Change to '0x89' for prod!
-  const preferredChain = '0x13881'; // mumbai / staging
-  // const preferredChain = '0x89'; // prod polygon
+  //const preferredChain = '0x13881'; // mumbai / staging
+  const preferredChain = '0x89'; // prod polygon
+
+  const [errMessage, setErrMessage] = useState(null);
+
+  useEffect(() => {
+    console.log('authed/chain', isAuthenticated, chainId);
+    if (isAuthenticated && chainId == preferredChain) {
+      setErrMessage(null);
+    }
+  }, [isAuthenticated, chainId]);
+
+  const casinoClick = () => {
+    if (!isAuthenticated || chainId !== preferredChain) {
+      // show message
+      setErrMessage('Connect your wallet & switch to the Polygon network!');
+    } else {
+      history.push('/locations/casino');
+    }
+  };
+
+  const schoolClick = () => {
+    if (!isAuthenticated || chainId !== preferredChain) {
+      // show message
+      setErrMessage('Connect your wallet & switch to the Polygon network!');
+    } else {
+      history.push('/locations/school');
+    }
+  };
 
   return (
     <SplitPathPageContainer>
@@ -148,12 +200,13 @@ export default function SplitPathPage({
           <LocationImage
             src={casino}
             alt="casino"
-            onClick={() => history.push('/locations/casino')}
+            onClick={() => casinoClick()}
           />
+
           <LocationImage
             src={school}
             alt="school"
-            onClick={() => history.push('/locations/school')}
+            onClick={() => schoolClick()}
           />
         </LocationImageContainer>
         <SplitPathTextContainer>
@@ -174,6 +227,9 @@ export default function SplitPathPage({
               Switch to{' '}
               {contract_data[preferredChain]?.network_name || 'Unknown'}
             </FunButton>
+          )}
+          {errMessage && (
+            <ErrorMessage id="err-message">{errMessage}</ErrorMessage>
           )}
           <SplitPathTextMain>
             Two Locations have Emerged, Each with different Benefits

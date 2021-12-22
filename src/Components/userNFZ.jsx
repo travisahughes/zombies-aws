@@ -13,18 +13,23 @@ const UserNFZ = (props) => {
   useEffect(() => {
     const { token_id } = props.nfz;
     //console.log('use effect token id', token_id);
-    console.log('getting token id', token_id);
-    const token_uri = `https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/metadata/${token_id}`;
+
+    const token_uri = `https://api.nicefunzombies.io/metadata/${token_id}`;
+    //const token_uri = `https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/metadata/${token_id}`;
     axios.get(token_uri).then((response) => {
-      console.log('Manually setting NFZ metadata', response.data);
-      console.log('token id', token_id);
+      const location = response.data?.attributes.find(
+        (item) => item.trait_type === 'Location'
+      )?.value;
+
+      location ? (response.data.hasLocation = true) : '';
+
       setFinalMetadata(response.data);
     });
   }, [md]);
 
   // if (!finalMetadata && props.nfz?.token_id) {
   //   const { token_id } = props.nfz;
-  //   //const token_uri = `https://api.nicefunzombies.io/metadata/${token_id}`;
+  //const token_uri = `https://api.nicefunzombies.io/metadata/${token_id}`;
   //   const token_uri = `https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/metadata/${token_id}`;
   //   axios.get(token_uri).then((response) => {
   //     console.log('Manually setting NFZ metadata', response.data);
