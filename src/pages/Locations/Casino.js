@@ -210,7 +210,7 @@ const NFTsContainer = styled.div`
 
   .nft-container {
     width: 110px;
-    height: 110px;
+    min-height: 130px;
     margin: 3px;
     position: relative;
     cursor: pointer;
