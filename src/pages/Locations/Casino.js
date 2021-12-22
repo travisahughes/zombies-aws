@@ -51,9 +51,10 @@ const BenefitContainer = styled.div`
 
   @media (min-width: 767px) {
     align-items: flex-start;
-    max-width: 620px;
-    padding: 2rem 0 0 0rem;
-    margin-left: 0;
+    min-width: 610px;
+    max-width: 650px;
+    padding: 2rem 0 0 4rem;
+    margin-right: 2rem;
     width: 100%;
   }
 `;
@@ -104,9 +105,9 @@ const TopContainer = styled.div`
 
   @media (min-width: 767px) {
     flex-direction: row;
-    justify-content: space-evenly;
-    padding-left: 10%;
-    padding-right: 10%;
+    /* justify-content: center; */
+    /* padding-left: 10%; */
+    /* padding-right: 10%; */
   }
 `;
 
@@ -210,7 +211,7 @@ const NFTsContainer = styled.div`
 
   .nft-container {
     width: 110px;
-    height: 110px;
+    min-height: 130px;
     margin: 3px;
     position: relative;
     cursor: pointer;
@@ -274,6 +275,7 @@ const CasinoImage = styled.img`
     display: block;
     /* width: 571px; */
     width: 100%;
+    max-width: 571px;
     /* height: 583px; */
   }
 `;
@@ -472,6 +474,16 @@ const InventoryText = styled.b`
   }
 `;
 
+const TopLeftContainer = styled(Col)`
+  max-width: 620px;
+  /* padding: 2rem 0 0 4rem; */
+  /* width: 100%; */
+
+  @media (min-widht: 767px) {
+    min-width: 620px;
+  }
+`;
+
 function ListItemWithIcon({ img, alt, text }) {
   return (
     <BenefitRow>
@@ -516,12 +528,6 @@ export default function CasinoPage({
       });
   };
 
-  const TopLeftContainer = styled(Col)`
-    max-width: 620px;
-    /* padding: 2rem 0 0 4rem; */
-    width: 100%;
-  `;
-
   return (
     <CasinoPageContainer loading={loading}>
       {!loading && (
@@ -544,7 +550,7 @@ export default function CasinoPage({
               </InventoryText>
               <InventoryText>
                 You have <YellowText>{userKeyCards}</YellowText> keycards to
-                use. One will be burned to play.
+                use. One will be burned to Search & Assign.
               </InventoryText>
             </TopLeftContainer>
             <BenefitContainer>

@@ -174,7 +174,7 @@ const NFTsContainer = styled.div`
 
   .nft-container {
     width: 110px;
-    height: 110px;
+    min-height: 130px;
     margin: 3px;
     position: relative;
     cursor: pointer;
@@ -376,7 +376,7 @@ const ProbabilityContainer = styled.div`
   @media (min-width: 767px) {
     margin-right: 3rem;
     margin-left: 3rem;
-    min-width: 620px;
+    min-width: 630px;
   }
 `;
 
