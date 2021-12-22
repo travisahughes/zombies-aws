@@ -680,19 +680,19 @@ export default function CasinoPage({
                   </RewardRightText>
                 </Row>
                 <Row justifyContent="space-between" alignItems="center">
-                  <ZombieHeld>4 - 8 NFZs</ZombieHeld>
+                  <ZombieHeld>4 - 7 NFZs</ZombieHeld>
                   <RewardRightText>
                     Collect 3,000 Brain Fragments Daily
                   </RewardRightText>
                 </Row>
                 <Row justifyContent="space-between" alignItems="center">
-                  <ZombieHeld>9 - 14 NFZs</ZombieHeld>
+                  <ZombieHeld>8 - 12 NFZs</ZombieHeld>
                   <RewardRightText>
                     Collect 6,000 Brain Fragments Daily
                   </RewardRightText>
                 </Row>
                 <Row justifyContent="space-between" alignItems="center">
-                  <ZombieHeld>15+ NFZs</ZombieHeld>
+                  <ZombieHeld>13+ NFZs</ZombieHeld>
                   <RewardRightText>
                     Collect 10,000 Brain Fragments Daily
                   </RewardRightText>
