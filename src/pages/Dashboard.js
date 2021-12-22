@@ -11,13 +11,13 @@ import footerV2 from '../assets/footerV2.png';
 
 function Dashboard() {
   // TODO: setup env var
-  const prod = false;
+  const prod = true;
   let CONTRACT_ID;
   let NETWORK;
   let Web3Api;
   // TODO: Change to '0x1' for prod!
-  const preferredChain = '0x4'; // rinkeby / staging
-  // const preferredChain = '0x1'; // prod
+  // const preferredChain = '0x4'; // rinkeby / staging
+  const preferredChain = '0x1'; // prod
 
   const { Moralis, authenticate, isAuthenticated, user } = useMoralis();
   const { switchNetwork, chainId, chain, account } = useChain();
