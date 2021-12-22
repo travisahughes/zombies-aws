@@ -46,6 +46,10 @@ const SplitPathHeader = styled.h1`
     font-size: 60px;
     line-height: 150px;
   }
+  @media (max-width: 500px) {
+    font-size: 40px;
+    line-height: 100px;
+  }
 `;
 
 const SplitPathTextContainer = styled.div`
