@@ -485,6 +485,9 @@ export default function SchoolPage({
         setLoading(true);
         setBetting(false);
         console.log('keyCardBurn txn', receipt);
+      })
+      .on('error', (err) => {
+        setBetting(false);
       });
   };
 
