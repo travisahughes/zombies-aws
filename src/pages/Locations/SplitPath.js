@@ -29,6 +29,7 @@ const SplitPathHeader = styled.h1`
     line-height: 175%;
     visibility: visible;
     display: block;
+    text-shadow: 0px 0px 4px #696647;
   }
 `;
 

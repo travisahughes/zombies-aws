@@ -55,6 +55,13 @@ const UserNFZ = (props) => {
     .located {
       display: none;
     }
+    .zombie-id {
+      text-align: center;
+      margin: 0;
+      font-size: 14px;
+      font-weight: bold;
+      opacity: 0.8;
+    }
   `;
 
   const location = finalMetadata?.attributes.find(
@@ -79,7 +86,10 @@ const UserNFZ = (props) => {
         <img src={finalMetadata?.image} className="nft-img" />
         <img className={`${selected} checkbox`} src={checkbox} alt="" />
         {location && <div className="located">In {location}</div>}
-        <div className="genesis-text">Genesis</div>
+        <p className="zombie-id">
+          {'#'}
+          {props.nfz?.token_id}
+        </p>
       </div>
     </div>
   );

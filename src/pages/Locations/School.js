@@ -49,8 +49,7 @@ const BenefitContainer = styled.div`
   margin-top: 10%;
 
   @media (min-width: 767px) {
-    max-width: 620px;
-    padding: 2rem 0 0 4rem;
+    max-width: 650px;
   }
 `;
 
@@ -59,7 +58,7 @@ const BenefitRow = styled.div`
   align-items: center;
   margin: 1rem;
   @media (min-width: 767px) {
-    width: 80%;
+    width: 90%;
     margin: 0;
   }
 `;
@@ -93,13 +92,15 @@ const InstructionContainer = styled.div`
 
 const TopContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   justify-content: center;
   align-items: center;
   padding-top: 3.5rem;
 
   @media (min-width: 767px) {
     flex-direction: row;
+    justify-content: space-around;
+    padding: 0 5%;
   }
 `;
 
@@ -161,18 +162,6 @@ const HiddenItems = styled.div`
     justify-content: flex-start;
     min-height: 250px;
     min-width: 208px;
-  }
-`;
-
-const RewardRightText = styled.div`
-  margin-left: 3rem;
-  line-height: 175%;
-  font-size: 13px;
-  font-weight: bold;
-  margin-bottom: 1rem;
-
-  @media (mix-width: 767px) {
-    font-size: 14px;
   }
 `;
 
@@ -249,7 +238,6 @@ const SchoolImage = styled.img`
     display: block;
     /* width: 571px; */
     width: 100%;
-    /* height: 583px; */
   }
 `;
 
@@ -314,6 +302,7 @@ const SendTeamButton = styled.div`
   font-weight: 700;
   margin: auto;
   margin-top: 1rem;
+  z-index: 999;
 
   @media (min-width: 767px) {
     display: none;
@@ -339,7 +328,7 @@ const BenefitList = [
     listItem: (
       <span>
         Your zombies BECOME the DAO token. New trait added to your Nice Fun
-        Zombie’s Metadata - <YellowText>Location: School</YellowText>',
+        Zombie’s Metadata - <YellowText>Location: School</YellowText>
       </span>
     ),
   },
@@ -371,6 +360,7 @@ const MidRowContainer = styled.div`
   @media (min-width: 767px) {
     flex-direction: row;
     justify-content: space-around;
+    /* justify-content: center; */
     text-align: start;
     margin: 4rem 0 2rem 0;
     /* width: 90%; */
@@ -381,13 +371,19 @@ const ProbabilityContainer = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 14px;
+  max-width: 620px;
+  min-width: 200px;
+  @media (min-width: 767px) {
+    margin-right: 3rem;
+    margin-left: 3rem;
+    min-width: 620px;
+  }
 `;
 
 const ProbabilityLeftText = styled.span`
   font-size: 14px;
   font-weight: bold;
   line-height: 175%;
-
   @media (min-width: 767px) {
     margin-right: 3rem;
   }
@@ -414,6 +410,7 @@ const TopRowSubheader = styled.b`
   @media (min-width: 767px) {
     text-align: start;
     margin: 1rem 0;
+    padding: 0;
   }
 `;
 
@@ -525,7 +522,7 @@ export default function SchoolPage({
               </InventoryText>
               <InventoryText>
                 You have <YellowText>{userKeyCards}</YellowText> keycards to
-                use. One will be burned to play.
+                use. One will be burned to Search and Assign.
               </InventoryText>
             </Col>
           </TopContainer>
@@ -630,36 +627,6 @@ export default function SchoolPage({
                   </ProbabilityItemRow>
                 </Col>
               </Row>
-            </ProbabilityContainer>
-            <ProbabilityContainer>
-              {/* <MidRowSubheader>Zombies Held within Casino</MidRowSubheader>
-              <br />
-              <Col justifyContent="space-around" alignItems="space-around">
-                <Row justifyContent="space-between" alignItems="center">
-                  <ZombieHeld>1 - 3 NFZs</ZombieHeld>
-                  <RewardRightText>
-                    Collect 1,000 Brain Fragments Daily
-                  </RewardRightText>
-                </Row>
-                <Row justifyContent="space-between" alignItems="center">
-                  <ZombieHeld>4 - 8 NFZs</ZombieHeld>
-                  <RewardRightText>
-                    Collect 3,000 Brain Fragments Daily
-                  </RewardRightText>
-                </Row>
-                <Row justifyContent="space-between" alignItems="center">
-                  <ZombieHeld>9 - 14 NFZs</ZombieHeld>
-                  <RewardRightText>
-                    Collect 6,000 Brain Fragments Daily
-                  </RewardRightText>
-                </Row>
-                <Row justifyContent="space-between" alignItems="center">
-                  <ZombieHeld>15+ NFZs</ZombieHeld>
-                  <RewardRightText>
-                    Collect 10,000 Brain Fragments Daily
-                  </RewardRightText>
-                </Row>
-              </Col> */}
             </ProbabilityContainer>
           </MidRowContainer>
           <InstructionContainer>
