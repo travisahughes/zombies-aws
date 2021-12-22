@@ -600,14 +600,14 @@ export default function CasinoPage({
                     alignItems="center"
                   >
                     <ProbabilityLeftText>Send 1 NFZ</ProbabilityLeftText>{' '}
-                    <YellowText>0%</YellowText>
+                    <YellowText>20%</YellowText>
                   </ProbabilityItemRow>
                   <ProbabilityItemRow
                     justifyContent="space-between"
                     alignItems="center"
                   >
                     <ProbabilityLeftText>Send 2 NFZs</ProbabilityLeftText>{' '}
-                    <YellowText>25%</YellowText>
+                    <YellowText>30%</YellowText>
                   </ProbabilityItemRow>
 
                   <ProbabilityItemRow
@@ -615,7 +615,7 @@ export default function CasinoPage({
                     alignItems="center"
                   >
                     <ProbabilityLeftText>Send 3 NFZs</ProbabilityLeftText>{' '}
-                    <YellowText>35%</YellowText>
+                    <YellowText>40%</YellowText>
                   </ProbabilityItemRow>
                 </Col>
                 <Col justifyContent="start" alignItems="space-between">
@@ -632,7 +632,7 @@ export default function CasinoPage({
                     alignItems="center"
                   >
                     <ProbabilityLeftText>Send 5 NFZs</ProbabilityLeftText>{' '}
-                    <YellowText>70%</YellowText>
+                    <YellowText>75%</YellowText>
                   </ProbabilityItemRow>
 
                   <ProbabilityItemRow

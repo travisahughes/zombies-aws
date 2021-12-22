@@ -578,7 +578,7 @@ export default function SchoolPage({
                     alignItems="center"
                   >
                     <ProbabilityLeftText>Send 1 NFZ</ProbabilityLeftText>{' '}
-                    <YellowText>0%</YellowText>
+                    <YellowText>10%</YellowText>
                   </ProbabilityItemRow>
                   <ProbabilityItemRow
                     justifyContent="space-between"
