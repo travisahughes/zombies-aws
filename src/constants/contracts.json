@@ -1,5 +1,9 @@
 {
     "POLY_TOKENS": "0x62a24CF66417c62c4e03Bb78df67e1a7e707A926",
-    "GAME_MECHANICS": "0x1DA675bD34B4cbf2d7bE2a0b610e0B7aFb096196"
+    "POLY_TOKENS_MUMBAI": "0x32DaD962Ff074b15cC4a39cA29AEe164010F4241",
+    "GAME_MECHANICS": "0x1DA675bD34B4cbf2d7bE2a0b610e0B7aFb096196",
+    "GAME_MECHANICS_MUMBAI": "0xEFDaecf78D9740B15FA2EC55BFBec9825447e302",
+    "WSS_MUMBAI": "wss://speedy-nodes-nyc.moralis.io/2c972d75afae6cd6989c4928/polygon/mumbai/ws",
+    "WSS_POLYGON": "wss://speedy-nodes-nyc.moralis.io/2c972d75afae6cd6989c4928/polygon/mainnet/ws"
 
 }
