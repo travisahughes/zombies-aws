@@ -43,13 +43,18 @@ const CasinoPageContainer = styled.div`
 const BenefitContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   font-size: 14px;
   width: 100%;
   padding: 0;
+  margin-left: -1rem;
 
   @media (min-width: 767px) {
+    align-items: flex-start;
     max-width: 620px;
-    padding: 2rem 0 0 4rem;
+    padding: 2rem 0 0 0rem;
+    margin-left: 0;
+    width: 100%;
   }
 `;
 
@@ -99,6 +104,9 @@ const TopContainer = styled.div`
 
   @media (min-width: 767px) {
     flex-direction: row;
+    justify-content: space-evenly;
+    padding-left: 10%;
+    padding-right: 10%;
   }
 `;
 
@@ -358,6 +366,7 @@ const MidRowContainer = styled.div`
     justify-content: space-around;
     text-align: start;
     margin: 2rem 0 5rem 0;
+    margin-top: 3rem;
     width: 80%;
   }
 `;
@@ -394,7 +403,7 @@ const Col = styled.div`
 const TopRowSubheader = styled.b`
   text-align: center;
   font-size: 18px;
-  padding: 0 5%;
+  /* padding: 0 5%; */
 
   @media (min-width: 767px) {
     text-align: start;
@@ -507,6 +516,12 @@ export default function CasinoPage({
       });
   };
 
+  const TopLeftContainer = styled(Col)`
+    max-width: 620px;
+    /* padding: 2rem 0 0 4rem; */
+    width: 100%;
+  `;
+
   return (
     <CasinoPageContainer loading={loading}>
       {!loading && (
@@ -515,7 +530,7 @@ export default function CasinoPage({
             Back
           </BackButton>
           <TopContainer>
-            <Col justifyContent="center" alignItems="center">
+            <TopLeftContainer justifyContent="center" alignItems="center">
               <CasinoImage src={casino} alt="casino" />
               <BetButton
                 betting={selectedIds.length < 1 || betting}
@@ -531,7 +546,7 @@ export default function CasinoPage({
                 You have <YellowText>{userKeyCards}</YellowText> keycards to
                 use. One will be burned to play.
               </InventoryText>
-            </Col>
+            </TopLeftContainer>
             <BenefitContainer>
               <TopRowSubheader>Guaranteed Benefits</TopRowSubheader>
               {BenefitList.map((item, index) => (
@@ -543,44 +558,48 @@ export default function CasinoPage({
                 />
               ))}
               <br />
+
               <TopRowSubheader>
                 What’s Hiding in the Casino (To be found by Searching)
               </TopRowSubheader>
               {casinoPrizeCounts && (
-                <HiddenItemsRow>
-                  <HiddenItems>
-                    <img src={placeholder} alt="NFZs" />
-                    <span>
-                      {casinoPrizeCounts[prizes.generalPrizes[1]] || 0} NFZs
-                    </span>
-                  </HiddenItems>
+                <>
+                  <HiddenItemsRow>
+                    <HiddenItems>
+                      <img src={placeholder} alt="NFZs" />
+                      <span>
+                        {casinoPrizeCounts[prizes.generalPrizes[1]] || 0} NFZs
+                      </span>
+                    </HiddenItems>
 
-                  <HiddenItems>
-                    <img
-                      src={Keycard}
-                      alt="Keycards"
-                      style={{ maxWidth: '106px' }}
-                    />
-                    <span>
-                      {casinoPrizeCounts[prizes.generalPrizes[3]] || 0} Keycards
-                    </span>
-                  </HiddenItems>
+                    <HiddenItems>
+                      <img
+                        src={Keycard}
+                        alt="Keycards"
+                        style={{ maxWidth: '106px' }}
+                      />
+                      <span>
+                        {casinoPrizeCounts[prizes.generalPrizes[3]] || 0}{' '}
+                        Keycards
+                      </span>
+                    </HiddenItems>
 
-                  <HiddenItems>
-                    <img
-                      src={shadow}
-                      alt="5 Custom NFZs"
-                      style={{ maxWidth: '144px' }}
-                    />
-                    <p>
-                      {casinoPrizeCounts[prizes.generalPrizes[4]] || 0} Custom
-                      NFZs
-                    </p>
-                    <span style={{ fontSize: '10px' }}>
-                      (no utility, special commission)
-                    </span>
-                  </HiddenItems>
-                </HiddenItemsRow>
+                    <HiddenItems>
+                      <img
+                        src={shadow}
+                        alt="5 Custom NFZs"
+                        style={{ maxWidth: '144px' }}
+                      />
+                      <p>
+                        {casinoPrizeCounts[prizes.generalPrizes[4]] || 0} Custom
+                        NFZs
+                      </p>
+                      <span style={{ fontSize: '10px' }}>
+                        (no utility, special commission)
+                      </span>
+                    </HiddenItems>
+                  </HiddenItemsRow>
+                </>
               )}
             </BenefitContainer>
           </TopContainer>

@@ -108,6 +108,7 @@ const LocationImage = styled.img`
     cursor: pointer;
     margin: 0 1rem;
     transition: all 0.3s ease-in-out;
+    margin-left: 5rem;
 
     :hover {
       transform: scale(1.3);
