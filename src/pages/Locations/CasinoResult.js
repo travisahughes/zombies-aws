@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import background from '../../assets/locations/casino-interior-bg.png';
 import logo from '../../assets/locations/logo-result.png';
-import keycard from '../../assets/locations/keycard-lg.png';
+import casino from '../../assets/locations/casino.png';
 import rewardContainer from '../../assets/locations/casino-reward-container.png';
 import zombie1 from '../../assets/gallery/zombie1.png';
 import zombie2 from '../../assets/gallery/zombie2.png';
@@ -9,10 +9,11 @@ import zombie3 from '../../assets/gallery/zombie3.png';
 import zombie4 from '../../assets/gallery/zombie4.png';
 import zombie5 from '../../assets/gallery/zombie5.png';
 import zombie6 from '../../assets/gallery/zombie6.png';
+import { useEffect, useState } from 'react';
 
 const CasinoResultPageContainer = styled.div`
-  /* height: 100vh; */
-  min-height: 700px;
+  height: 100vh;
+  min-height: 900px;
   background-image: url(${background});
   background-repeat: no-repeat;
   background-position-x: center;
@@ -34,7 +35,7 @@ const LogoImg = styled.img`
 
   @media (min-width: 767px) {
     margin: 2rem 0;
-    max-width: 0px;
+    max-width: 306px;
   }
 `;
 
@@ -62,7 +63,7 @@ const RewardContainer = styled.div`
   @media (min-width: 767px) {
     height: 682;
     width: 850px;
-    padding: 6% 2% 6% 2%;
+    padding: 3% 4% 6% 2%;
   }
 `;
 
@@ -72,9 +73,9 @@ const ZombieImage = styled.img`
   width: 16.6%;
 
   @media (min-width: 767px) {
-    width: 120px;
-    height: 120px;
-    margin: 4px;
+    width: 146px;
+    height: 146px;
+    margin: 2px;
   }
 `;
 
@@ -91,7 +92,8 @@ const MobileZombies = styled.div`
 `;
 
 const ImageCol = styled(Col)`
-  min-width: 180px;
+  min-width: 160px;
+  max-width: 454px;
 `;
 
 const RewardHighlight = styled.p`
@@ -104,6 +106,7 @@ const RewardHighlight = styled.p`
 
   @media (min-width: 767px) {
     font-size: 20px;
+    margin-bottom: 0;
   }
 `;
 
@@ -118,6 +121,8 @@ const YellowText = styled.p`
 
   @media (min-width: 767px) {
     font-size: 14px;
+    max-width: 450px;
+    margin-bottom: 1.2rem;
   }
 `;
 
@@ -134,10 +139,11 @@ const RewardSubtext = styled.p`
   font-size: 12px;
   line-height: 175%;
   text-align: center;
-  margin-bottom: 0 0 1rem 0;
+  margin-bottom: 1.5rem;
 
   @media (min-width: 767px) {
     font-size: 14px;
+    margin-top: 0;
   }
 `;
 
@@ -152,6 +158,9 @@ const RewardParagraph = styled.p`
 
   @media (min-width: 767px) {
     font-size: 14px;
+    max-width: 680px;
+    line-height: 17.5px;
+    margin-bottom: 4px;
   }
 `;
 
@@ -162,63 +171,72 @@ const MobileKeycard = styled.img`
   }
 `;
 
-export default function CasinoResultPage() {
+const ImageRow = styled(Row)`
+  width: 100%;
+  flex-wrap: wrap;
+`;
+
+export default function CasinoResultPage({ selectedZombies, userRewards }) {
+  const [rewardStatement, setRewardStatement] = useState(null);
+  useEffect(() => {
+    const statement = userRewards?.generalReward
+      ? `Congraulations your zombies found a ${userRewards?.generalReward}`
+      : 'Unfortunately your horde did not find a Search reward';
+
+    setRewardStatement(statement);
+  }, [userRewards]);
   return (
     <CasinoResultPageContainer>
       <LogoImg src={logo} alt="reward-logo" />
-      <MobileKeycard src={keycard} alt="keycard" />
+      <MobileKeycard src={casino} alt="casino" />
 
       <RewardContainer>
-        <TopRow justifyContent="space-around" alignItems="center">
-          <ImageCol justifyContent="center" alignItems="">
-            <Row justifyContent="flex-end" alignItems="center">
-              <ZombieImage src={zombie1} alt="zombie" />
-            </Row>
-            <Row justifyContent="flex-start" alignItems="center">
-              <ZombieImage src={zombie2} alt="zombie" />
-            </Row>
-            <Row justifyContent="flex-end" alignItems="center">
-              <ZombieImage src={zombie3} alt="zombie" />
-            </Row>
+        <TopRow justifyContent="center" alignItems="center">
+          <ImageCol justifyContent="center" alignItems="center">
+            <img
+              src={casino}
+              alt="casino"
+              style={{ maxWidth: '363px', width: '100%' }}
+            />
           </ImageCol>
-          <img src={keycard} />
-          <ImageCol justifyContent="center" alignItems="">
-            <Row justifyContent="flex-start" alignItems="center">
+          <ImageCol justifyContent="center" alignItems="center">
+            <ImageRow>
+              {selectedZombies.map((zombie, index) => (
+                <ZombieImage src={zombie.image} key={index} />
+              ))}
+              {/* <ZombieImage src={zombie1} alt="zombie" /> */}
+              {/* <ZombieImage src={zombie2} alt="zombie" />
+              <ZombieImage src={zombie3} alt="zombie" />
               <ZombieImage src={zombie4} alt="zombie" />
-            </Row>
-            <Row justifyContent="flex-end" alignItems="center">
               <ZombieImage src={zombie5} alt="zombie" />
-            </Row>
-            <Row justifyContent="flex-start" alignItems="center">
-              <ZombieImage src={zombie6} alt="zombie" />
-            </Row>
+              <ZombieImage src={zombie6} alt="zombie" /> */}
+            </ImageRow>
           </ImageCol>
         </TopRow>
         <Col alignItems="center" justifyContent="center">
           <RewardHighlight>
-            Congratulations your zombies found X/Y/Z.
+            Welcome to the Nice Fun Zombies Casino!
           </RewardHighlight>
-          <RewardSubtext>
-            There are now only X number of Y in the Casino Copy
-          </RewardSubtext>
+          <RewardSubtext>{rewardStatement}</RewardSubtext>
           <YellowText>
-            Your zombies are now associated with the Casino
+            Your horde will now be associated with the Casino and receive the
+            Casino Location Benefits
           </YellowText>
           <RewardParagraph>
-            Please check your NFT wallet in a few minutes to see your rewards
+            Please head to our Discord to verify your status and join the Casino
+            channels{userRewards?.generalReward && ','}
           </RewardParagraph>
-          <RewardParagraph>
-            Our world is growing…what locations will open up next?
-          </RewardParagraph>
+          {userRewards?.generalReward && (
+            <RewardParagraph>
+              and for details on how to receive your reward.
+            </RewardParagraph>
+          )}
         </Col>
       </RewardContainer>
       <MobileZombies>
-        <ZombieImage src={zombie1} alt="zombie" />
-        <ZombieImage src={zombie2} alt="zombie" />
-        <ZombieImage src={zombie3} alt="zombie" />
-        <ZombieImage src={zombie4} alt="zombie" />
-        <ZombieImage src={zombie5} alt="zombie" />
-        <ZombieImage src={zombie6} alt="zombie" />
+        {selectedZombies.map((zombie, index) => (
+          <ZombieImage src={zombie.image} key={index} />
+        ))}
       </MobileZombies>
     </CasinoResultPageContainer>
   );

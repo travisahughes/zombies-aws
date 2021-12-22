@@ -40,6 +40,9 @@ let Header = (props) => {
       background-color: #000000;
       float: right;
       padding-left: 50px;
+      @media (max-width: 960px) {
+        padding-left: 10px;
+      }
     }
 
     .toggle-false {
@@ -101,7 +104,7 @@ let Header = (props) => {
     li {
       float: left;
       padding: 7px 12px;
-      @media (max-width: 960px) {
+      @media (max-width: 1050px) {
         font-size: 12px;
         padding: 10px 8px;
       }
@@ -130,8 +133,11 @@ let Header = (props) => {
           color: #aff038;
           border-bottom: #aff038 4px solid;
           padding-bottom: 17px;
-          @media (max-width: 960px) {
-            padding-bottom: 20px;
+          @media (max-width: 1050px) {
+            padding-bottom: 13px;
+          }
+          @media (max-width: 860px) {
+            padding-bottom: 8px;
           }
         }
 
@@ -159,7 +165,11 @@ let Header = (props) => {
 
     li.icon {
       padding: 0 10x;
+      @media (max-width: 860px) {
+        display: none;
+      }
       @media (max-width: 640px) {
+        display: inline;
         background: none;
         width: 70px;
         float: left;
@@ -173,8 +183,8 @@ let Header = (props) => {
       }
 
       img {
-        @media (max-width: 960px) {
-          width: 32px;
+        @media (max-width: 1050px) {
+          width: 25px;
         }
       }
     }
@@ -182,7 +192,7 @@ let Header = (props) => {
     li#twitter {
       padding-top: 5px;
 
-      @media (max-width: 960px) {
+      @media (max-width: 1050px) {
         padding-top: 3px;
       }
     }
@@ -224,6 +234,11 @@ let Header = (props) => {
       </div>
       <div className={`header-right toggle-${toggleState}`}>
         <ul css={navmenu}>
+          <li className="text">
+            <a href="/dashboard" onClick={toggleMenu}>
+              Dashboard
+            </a>
+          </li>
           <li className="text">
             <a href="#mission" onClick={toggleMenu}>
               Mission & Goals

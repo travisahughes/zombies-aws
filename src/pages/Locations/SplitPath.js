@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import { useState, useEffect } from 'react';
+import { contract_data } from '../../constants/moralis_env';
 import background from '../../assets/locations/split-path-image.png';
 import textBg from '../../assets/locations/text-bg.png';
 import casino from '../../assets/locations/casino.png';
@@ -19,15 +21,34 @@ const SplitPathPageContainer = styled.div`
 `;
 
 const SplitPathHeader = styled.h1`
-  visibility: hidden;
-  display: none;
-  @media (min-width: 767px) {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 64px;
-    line-height: 175%;
-    visibility: visible;
-    display: block;
+  font-family: teko;
+  // visibility: hidden;
+  // display: none;
+
+  font-style: normal;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-size: 165px;
+  line-height: 288px;
+  margin: 20px 0 0;
+  visibility: visible;
+  display: block;
+
+  @media (max-width: 1640px) {
+    font-size: 100px;
+    line-height: 188px;
+  }
+  @media (max-width: 1000px) {
+    font-size: 80px;
+    line-height: 150px;
+  }
+  @media (max-width: 800px) {
+    font-size: 60px;
+    line-height: 150px;
+  }
+  @media (max-width: 500px) {
+    font-size: 40px;
+    line-height: 100px;
   }
 `;
 
@@ -87,6 +108,7 @@ const LocationImage = styled.img`
     cursor: pointer;
     margin: 0 1rem;
     transition: all 0.3s ease-in-out;
+    margin-left: 5rem;
 
     :hover {
       transform: scale(1.3);
@@ -98,7 +120,7 @@ const SplitPathContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   height: 100%;
 
   @media (min-width: 767px) {
@@ -107,8 +129,68 @@ const SplitPathContent = styled.div`
   }
 `;
 
-export default function SplitPathPage() {
+const FunButton = styled.div`
+  display: inline-flex;
+  border: 3px solid #ab19ef;
+  padding: 20px;
+  cursor: pointer;
+  margin: 8px;
+  -webkit-transition: border 500ms ease-out;
+  -moz-transition: border 500ms ease-out;
+  -o-transition: border 500ms ease-out;
+  transition: border 500ms ease-out;
+  z-index: 99;
+
+  &:hover {
+    border: 3px solid #ccee25;
+    box-sizing: border-box;
+    filter: drop-shadow(0px 0px 4px #ccee25);
+  }
+`;
+
+const ErrorMessage = styled.div`
+  color: #63ffa9;
+  font-size: 18px;
+  padding: 10px 0;
+`;
+
+export default function SplitPathPage({
+  authenticate,
+  isAuthenticated,
+  chainId,
+  switchNetwork,
+}) {
   const history = useHistory();
+  // TODO: Change to '0x89' for prod!
+  //const preferredChain = '0x13881'; // mumbai / staging
+  const preferredChain = '0x89'; // prod polygon
+
+  const [errMessage, setErrMessage] = useState(null);
+
+  useEffect(() => {
+    console.log('authed/chain', isAuthenticated, chainId);
+    if (isAuthenticated && chainId == preferredChain) {
+      setErrMessage(null);
+    }
+  }, [isAuthenticated, chainId]);
+
+  const casinoClick = () => {
+    if (!isAuthenticated || chainId !== preferredChain) {
+      // show message
+      setErrMessage('Connect your wallet & switch to the Polygon network!');
+    } else {
+      history.push('/locations/casino');
+    }
+  };
+
+  const schoolClick = () => {
+    if (!isAuthenticated || chainId !== preferredChain) {
+      // show message
+      setErrMessage('Connect your wallet & switch to the Polygon network!');
+    } else {
+      history.push('/locations/school');
+    }
+  };
 
   return (
     <SplitPathPageContainer>
@@ -118,11 +200,37 @@ export default function SplitPathPage() {
           <LocationImage
             src={casino}
             alt="casino"
-            onClick={() => history.push('/locations/casino')}
+            onClick={() => casinoClick()}
           />
-          <LocationImage src={school} alt="school" />
+
+          <LocationImage
+            src={school}
+            alt="school"
+            onClick={() => schoolClick()}
+          />
         </LocationImageContainer>
         <SplitPathTextContainer>
+          {!isAuthenticated && (
+            <FunButton
+              id="login"
+              className="btn"
+              onClick={() => authenticate()}
+            >
+              Connect Your Wallet
+            </FunButton>
+          )}
+          {isAuthenticated && chainId !== preferredChain && (
+            <FunButton
+              className="btn"
+              onClick={() => switchNetwork(preferredChain)}
+            >
+              Switch to{' '}
+              {contract_data[preferredChain]?.network_name || 'Unknown'}
+            </FunButton>
+          )}
+          {errMessage && (
+            <ErrorMessage id="err-message">{errMessage}</ErrorMessage>
+          )}
           <SplitPathTextMain>
             Two Locations have Emerged, Each with different Benefits
           </SplitPathTextMain>
