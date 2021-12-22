@@ -106,7 +106,7 @@ export default function Location() {
   }, [account]);
 
   useEffect(() => {
-    if (isWeb3Enabled) {
+    if (isWeb3Enabled && chainId === POLY_TOKENS_CHAIN_ID) {
       console.log('enabling events');
       const Web3 = require('web3');
 
@@ -258,7 +258,7 @@ export default function Location() {
       //     console.log('event listener error', error);
       //   });
     }
-  }, [isWeb3Enabled]);
+  }, [isWeb3Enabled, chainId]);
 
   const useKeyCard = () => {
     let keyCardAmount = userKeycards;
