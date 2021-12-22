@@ -105,9 +105,8 @@ const TopContainer = styled.div`
 
   @media (min-width: 767px) {
     flex-direction: row;
-    /* justify-content: center; */
-    /* padding-left: 10%; */
-    /* padding-right: 10%; */
+    justify-content: space-around;
+    padding: 0 5%;
   }
 `;
 
