@@ -590,7 +590,7 @@ export default function SchoolPage({
                     alignItems="center"
                   >
                     <ProbabilityLeftText>Send 2 NFZs</ProbabilityLeftText>{' '}
-                    <YellowText>25%</YellowText>
+                    <YellowText>20%</YellowText>
                   </ProbabilityItemRow>
 
                   <ProbabilityItemRow
