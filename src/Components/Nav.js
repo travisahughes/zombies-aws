@@ -234,11 +234,11 @@ let Header = (props) => {
       </div>
       <div className={`header-right toggle-${toggleState}`}>
         <ul css={navmenu}>
-          {/* <li className="text">
+          <li className="text">
             <a href="/dashboard" onClick={toggleMenu}>
               Dashboard
             </a>
-          </li> */}
+          </li>
           <li className="text">
             <a href="#mission" onClick={toggleMenu}>
               Mission & Goals

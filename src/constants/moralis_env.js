@@ -25,11 +25,13 @@ export const contract_data = {
   polygon: {
     contract_id: '0x4e68891b8b491dd128981ed14fb0a1eee59012b4',
     network_id: 'polygon',
+    chain_id: '0x89',
     network_name: 'Polygon',
   },
   mumbai: {
     contract_id: '0x4e68891b8b491dd128981ed14fb0a1eee59012b4',
     network_id: 'mumbai',
+    chain_id: '0x13881',
     network_name: 'Mumbai',
   },
   '0x1': {
@@ -47,11 +49,13 @@ export const contract_data = {
   '0x89': {
     contract_id: '0x4e68891b8b491dd128981ed14fb0a1eee59012b4',
     network_id: 'polygon',
+    chain_id: '0x89',
     network_name: 'Polygon',
   },
   '0x13881': {
     contract_id: '0x4e68891b8b491dd128981ed14fb0a1eee59012b4',
     network_id: 'mumbai',
+    chain_id: '0x13881',
     network_name: 'Mumbai',
   },
 };
