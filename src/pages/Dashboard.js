@@ -1,18 +1,26 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
+import ReactModal from 'react-modal';
 import axios from 'axios';
 import { useMoralis, useMoralisWeb3Api, useChain } from 'react-moralis';
 import { contract_data } from '../constants/moralis_env';
+import contractAddress from '../constants/contracts.json';
 import NavV2 from '../Components/NavV2';
 import TraitChecker from '../Components/TraitChecker';
-import ReactModal from 'react-modal';
+import PolyGameMechanicsABI from '../constants/abis/NFZGameMechanicsV2.json';
+import { prizes } from '../constants/prizes';
 import footerV2 from '../assets/footerV2.png';
+import keycard_icon from '../assets/icons/keycard_icon.png';
+import keycard_reward from '../assets/dashboard/keycard_reward.png';
+import nfz_reward from '../assets/dashboard/nfz_reward.png';
+import silhouette_reward from '../assets/dashboard/silhouette_reward.png';
 
 function Dashboard() {
   // TODO: setup env var
   const prod = true;
-  let CONTRACT_ID;
+  let NFZ_CONTRACT_ID;
+  let KEYCARD_CONTRACT_ID;
   let NETWORK;
   let Web3Api;
   // TODO: Change to '0x1' for prod!
@@ -31,10 +39,20 @@ function Dashboard() {
   const year = date.getFullYear();
 
   const [userNfts, setUserNfts] = useState(null);
+  const [userKeycards, setUserKeycards] = useState(0);
   const [processedNfzs, setProcessedNfzs] = useState(null);
   const [userAccount, setUserAccount] = useState(account);
   const [showModal, setShowModal] = useState(false);
   const [shortAddress, setShortAddress] = useState(null);
+  const [showPrizesRemaining, setShowPrizesRemaining] = useState(false);
+  const [schoolPrizeCounts, setSchoolPrizeCounts] = useState({});
+  const [casinoPrizeCounts, setCasinoPrizeCounts] = useState({});
+  const [userTotalRewards, setUserTotalRewards] = useState(0);
+  const [userRewards, setUserRewards] = useState({
+    1: 0, // NFZ
+    2: 0, // Zeneca token
+    3: 0, // Custom NFZ
+  });
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -54,24 +72,93 @@ function Dashboard() {
         );
       }
 
-      if (chainId === '0x1') {
-        CONTRACT_ID = contract_data.mainnet.contract_id;
-        NETWORK = contract_data.mainnet.network_id;
-      } else {
-        CONTRACT_ID = contract_data.rinkeby.contract_id;
-        NETWORK = contract_data.rinkeby.network_id;
-      }
-      // console.log('CONTRACT_ID', CONTRACT_ID);
+      // if (chainId === '0x1') {
+      //   NFZ_CONTRACT_ID = contract_data.mainnet.contract_id;
+      //   NETWORK = contract_data.mainnet.network_id;
+      // } else {
+      //   NFZ_CONTRACT_ID = contract_data.rinkeby.contract_id;
+      //   NETWORK = contract_data.rinkeby.network_id;
+      // }
+      // console.log('NFZ_CONTRACT_ID', NFZ_CONTRACT_ID);
       // console.log('NETWORK', NETWORK);
+
+      // Always pull mainnet info. If you need to test with test nets, use above logic
+      NFZ_CONTRACT_ID = contract_data.mainnet.contract_id;
+      KEYCARD_CONTRACT_ID = contractAddress.POLY_TOKENS;
+      NETWORK = contract_data.mainnet.network_id;
+
       const fetchNfts = async () => {
+        const gameMechanicsOptions = {
+          contractAddress: contractAddress.GAME_MECHANICS,
+          abi: PolyGameMechanicsABI.abi,
+        };
         const nfts = await Web3Api.account.getNFTsForContract({
           address: userAccount,
-          token_address: CONTRACT_ID,
+          token_address: NFZ_CONTRACT_ID,
           chain: NETWORK,
         });
         setUserNfts(nfts);
         console.log('nfts', nfts);
+
+        const keycards = await Web3Api.account.getNFTsForContract({
+          address: userAccount,
+          token_address: KEYCARD_CONTRACT_ID,
+          chain: contract_data.polygon.chain_id,
+        });
+        console.log('keycards', keycards);
+        setUserKeycards(keycards?.total || 0);
+
+        const schoolPrizes = await Moralis.executeFunction({
+          functionName: 'getLocationPrizeArray',
+          params: { _locationId: 1 },
+          ...gameMechanicsOptions,
+        });
+        const casinoPrizes = await Moralis.executeFunction({
+          functionName: 'getLocationPrizeArray',
+          params: { _locationId: 2 },
+          ...gameMechanicsOptions,
+        });
+        const rewards = await Moralis.executeFunction({
+          functionName: 'getUserRewards',
+          params: { account: userAccount },
+          ...gameMechanicsOptions,
+        });
+
+        const schoolPrizeCounts = {};
+        const casinoPrizeCounts = {};
+        schoolPrizes.prizes.forEach((el) => {
+          schoolPrizeCounts[prizes.generalPrizes[el]] = schoolPrizeCounts[
+            prizes.generalPrizes[el]
+          ]
+            ? (schoolPrizeCounts[prizes.generalPrizes[el]] += 1)
+            : 1;
+        });
+        casinoPrizes.prizes.forEach((el) => {
+          casinoPrizeCounts[prizes.generalPrizes[el]] = casinoPrizeCounts[
+            prizes.generalPrizes[el]
+          ]
+            ? (casinoPrizeCounts[prizes.generalPrizes[el]] += 1)
+            : 1;
+        });
+
+        let tmpRewards = {};
+        rewards.forEach((rewardId) => {
+          if (tmpRewards[rewardId]) {
+            tmpRewards[rewardId]++;
+          } else {
+            tmpRewards[rewardId] = 1;
+          }
+        });
+
+        console.log('School Prize', schoolPrizeCounts);
+        console.log('Casino Prizes', casinoPrizeCounts);
+        console.log('rewards', rewards);
+        setSchoolPrizeCounts(schoolPrizeCounts);
+        setCasinoPrizeCounts(casinoPrizeCounts);
+        setUserRewards(tmpRewards);
+        setUserTotalRewards(rewards?.length || 0);
       };
+
       fetchNfts();
     }
   }, [userAccount, chainId]);
@@ -146,6 +233,10 @@ function Dashboard() {
     return null;
   };
 
+  const toggleRemainingPrizes = () => {
+    setShowPrizesRemaining(!showPrizesRemaining);
+  };
+
   const dashboardCss = css`
     display: flex;
     flex-direction: column;
@@ -175,9 +266,93 @@ function Dashboard() {
       }
     }
 
+    #current-events {
+      display: flex;
+      flex-direction: column;
+      background-color: #151515;
+      border-radius: 4px;
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin: 10px 0;
+      @media (max-width: 960px) {
+        flex-direction: column;
+        width: calc(100% - 20px);
+        align-items: center;
+        font-size: 12px;
+      }
+
+      #top-row {
+        display: flex;
+        flex-direction: row;
+        font-size: 14px;
+        @media (max-width: 960px) {
+          font-size: 12px;
+          width: 100%;
+          flex-direction: column;
+        }
+
+        .event-item {
+          width: 33%;
+          @media (max-width: 960px) {
+            width: calc(100% - 20px);
+            text-align: left;
+            margin-bottom: 5px;
+          }
+        }
+
+        #header {
+          font-size: 14px;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+
+        #time-remaining {
+          text-transform: uppercase;
+          text-align: center;
+          @media (max-width: 960px) {
+            text-align: left;
+          }
+
+          a {
+            color: #fff;
+          }
+        }
+
+        #prizes-remaining {
+          text-align: right;
+          cursor: pointer;
+          -webkit-transition: color 500ms ease-out;
+          -moz-transition: color 500ms ease-out;
+          -o-transition: color 500ms ease-out;
+          transition: color 500ms ease-out;
+          &:hover {
+            color: #ccee25;
+          }
+          @media (max-width: 960px) {
+            text-align: left;
+          }
+        }
+      }
+
+      #bottom-row {
+        margin: 20px 0 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-size: 14px;
+        @media (max-width: 960px) {
+          flex-direction: column;
+          width: 100%;
+        }
+      }
+      #bottom-row.hidden {
+        display: none;
+      }
+    }
+
     .dashboard-info {
       width: 100%;
-      margin-top: 40px;
+      margin: 10px 0;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -207,6 +382,19 @@ function Dashboard() {
       #chain-info {
         font-size: 14px;
         line-height: 40px;
+
+        .keycards {
+          display: flex;
+          flex-direction: row;
+          align-items: flex-start;
+          align-content: center;
+
+          #keycard-icon {
+            width: 32px;
+            height: auto;
+            margin: 0 10px 0 0;
+          }
+        }
       }
     }
 
@@ -252,6 +440,41 @@ function Dashboard() {
       }
     }
 
+    .your-rewards {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin: 20px 0 10px 0;
+
+      .rewards {
+        display: flex;
+        flex-direction: row;
+        margin-top: 10px;
+        @media (max-width: 960px) {
+          justify-content: center;
+        }
+        .reward-box {
+          text-align: center;
+          padding: 0 20px 0 0;
+          @media (max-width: 960px) {
+            font-size: 14px;
+          }
+
+          img {
+            height: 175px;
+            width: auto;
+            @media (max-width: 960px) {
+              height: 100px;
+            }
+          }
+        }
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+    }
+
     .your-horde {
       display: flex;
       flex-direction: column;
@@ -264,46 +487,10 @@ function Dashboard() {
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-end;
-        margin-top: 20px;
       }
 
-      #current-events {
-        display: flex;
-        flex-direction: row;
-        font-size: 14px;
-        background-color: #151515;
-        border-radius: 4px;
-        width: calc(100% - 20px);
-        padding: 10px;
-        margin: 10px 0;
-        @media (max-width: 960px) {
-          flex-direction: column;
-          width: calc(100% - 20px);
-          align-items: center;
-        }
-
-        .event-item {
-          width: 33%;
-          @media (max-width: 960px) {
-            width: calc(100% - 20px);
-            text-align: center;
-          }
-        }
-
-        #header {
-          font-size: 14px;
-          font-weight: 700;
-          text-transform: uppercase;
-        }
-
-        #time-remaining {
-          text-transform: uppercase;
-          text-align: center;
-
-          a {
-            color: #fff;
-          }
-        }
+      h2 {
+        font-size: 18px;
       }
     }
 
@@ -462,6 +649,53 @@ function Dashboard() {
             </button>
           </div>
         </div>
+        <div id="current-events">
+          <div id="top-row">
+            <div id="header" className="event-item green-highlight">
+              Active Events
+            </div>
+            <div id="time-remaining" className="event-item">
+              <a href="/locations">
+                Casino vs School&nbsp;&nbsp;&nbsp;Ends Jan. 15
+              </a>
+            </div>
+            <div
+              id="prizes-remaining"
+              className="event-item"
+              onClick={toggleRemainingPrizes}
+            >
+              + Show remaining prizes
+            </div>
+          </div>
+          <div id="bottom-row" className={showPrizesRemaining ? '' : 'hidden'}>
+            <div>
+              <h3>School</h3>
+              <div>All prizes have been claimed</div>
+            </div>
+            <div>
+              <h3>Casino</h3>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Custom Nice Fun Zombie:</td>
+                    <td>{casinoPrizeCounts['Custom Nice Fun Zombie'] || 0}</td>
+                  </tr>
+                  <tr>
+                    <td>Generation 1 Keycard:</td>
+                    <td>{casinoPrizeCounts['Generation 1 Keycard'] || 0}</td>
+                  </tr>
+                  <tr>
+                    <td>Nice Fun Zombie NFT (unrevealed):</td>
+                    <td>
+                      {casinoPrizeCounts['Nice Fun Zombie NFT (unrevealed)'] ||
+                        0}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
         <div className="dashboard-info">
           <div id="chain-info" className="dashboard-item">
             <h2>Account</h2>
@@ -487,22 +721,12 @@ function Dashboard() {
                       Switch to {contract_data[preferredChain]?.network_name}
                     </button>
                   )}
-                  {/* {chainId === '0x1' && chainId !== preferredChain && (
-                    <button
-                      className="network-switch"
-                      onClick={() => switchNetwork('0x4')}
-                    >
-                      Switch to Rinkeby
-                    </button>
-                  )}
-                  {chainId === '0x4' && chainId !== preferredChain && (
-                    <button
-                      className="network-switch"
-                      onClick={() => switchNetwork('0x1')}
-                    >
-                      Switch to Ethereum
-                    </button>
-                  )} */}
+                </div>
+                <div className="keycards">
+                  <img id="keycard-icon" src={keycard_icon} alt="Keycard" />
+                  <div>
+                    Keycards: <b>{userKeycards}</b>
+                  </div>
                 </div>
               </div>
             )}
@@ -534,21 +758,47 @@ function Dashboard() {
           </div>
         </div>
 
+        {isAuthenticated && userTotalRewards > 0 && (
+          <div className="your-rewards">
+            <h2>Rewards</h2>
+            <div className="rewards">
+              {userTotalRewards > 0 && userRewards[1] > 0 && (
+                <div className="reward-box">
+                  <img
+                    src={nfz_reward}
+                    alt="NFZ Reward"
+                    className="reward-image"
+                  />
+                  <div className="reward-text">{userRewards[1]} NFZs</div>
+                </div>
+              )}
+              {userTotalRewards > 0 && userRewards[2] > 0 && (
+                <div className="reward-box">
+                  <img
+                    src={keycard_reward}
+                    alt="Keycard Reward"
+                    className="reward-image"
+                  />
+                  <div className="reward-text">{userRewards[2]} Keycards</div>
+                </div>
+              )}
+              {userTotalRewards > 0 && userRewards[3] > 0 && (
+                <div className="reward-box">
+                  <img
+                    src={silhouette_reward}
+                    alt="Silhouette Reward"
+                    className="reward-image"
+                  />
+                  <div className="reward-text">
+                    {userRewards[3]} Custom NFZs
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
         {isAuthenticated && (
           <div className="your-horde">
-            <div id="current-events">
-              <div id="header" className="event-item green-highlight">
-                Active Events
-              </div>
-              <div id="time-remaining" className="event-item">
-                <a href="/locations">
-                  Casino vs School&nbsp;&nbsp;&nbsp;Ends Jan. 15
-                </a>
-              </div>
-              <div id="prizes-remaining" className="event-item">
-                &nbsp;
-              </div>
-            </div>
             <div className="horde-header">
               <h2>Your horde</h2>
             </div>

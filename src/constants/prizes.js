@@ -1,7 +1,7 @@
 export const prizes = {
   generalPrizes: {
     1: 'Nice Fun Zombie NFT (unrevealed)',
-    2: 'Zenica Academy Token',
+    2: 'Zeneca Academy Token',
     3: 'Generation 1 Keycard',
     4: 'Custom Nice Fun Zombie',
     9999: 'None',

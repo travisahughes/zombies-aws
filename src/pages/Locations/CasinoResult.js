@@ -180,7 +180,7 @@ export default function CasinoResultPage({ selectedZombies, userRewards }) {
   const [rewardStatement, setRewardStatement] = useState(null);
   useEffect(() => {
     const statement = userRewards?.generalReward
-      ? `Congraulations your zombies found a ${userRewards?.generalReward}`
+      ? `Congratulations your zombies found a ${userRewards?.generalReward}`
       : 'Unfortunately your horde did not find a Search reward';
 
     setRewardStatement(statement);
