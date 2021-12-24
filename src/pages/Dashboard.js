@@ -89,7 +89,8 @@ function Dashboard() {
 
       const fetchNfts = async () => {
         const gameMechanicsOptions = {
-          contractAddress: contractAddress.GAME_MECHANICS,
+          chain: contract_data.polygon.chain_id,
+          address: contractAddress.GAME_MECHANICS,
           abi: PolyGameMechanicsABI.abi,
         };
         const nfts = await Web3Api.account.getNFTsForContract({
@@ -108,20 +109,22 @@ function Dashboard() {
         console.log('keycards', keycards);
         setUserKeycards(keycards?.total || 0);
 
-        const schoolPrizes = await Moralis.executeFunction({
-          functionName: 'getLocationPrizeArray',
+        const schoolPrizes = await Moralis.Web3API.native.runContractFunction({
+          ...gameMechanicsOptions,
+          function_name: 'getLocationPrizeArray',
           params: { _locationId: 1 },
-          ...gameMechanicsOptions,
         });
-        const casinoPrizes = await Moralis.executeFunction({
-          functionName: 'getLocationPrizeArray',
+
+        const casinoPrizes = await Moralis.Web3API.native.runContractFunction({
+          ...gameMechanicsOptions,
+          function_name: 'getLocationPrizeArray',
           params: { _locationId: 2 },
-          ...gameMechanicsOptions,
         });
-        const rewards = await Moralis.executeFunction({
-          functionName: 'getUserRewards',
-          params: { account: userAccount },
+
+        const rewards = await Moralis.Web3API.native.runContractFunction({
           ...gameMechanicsOptions,
+          function_name: 'getUserRewards',
+          params: { account: userAccount },
         });
 
         const schoolPrizeCounts = {};
