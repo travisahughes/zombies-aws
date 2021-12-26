@@ -15,6 +15,7 @@ import keycard_icon from '../assets/icons/keycard_icon.png';
 import keycard_reward from '../assets/dashboard/keycard_reward.png';
 import nfz_reward from '../assets/dashboard/nfz_reward.png';
 import silhouette_reward from '../assets/dashboard/silhouette_reward.png';
+import zeneca_reward from '../assets/dashboard/zeneca_reward.png';
 
 function Dashboard() {
   // TODO: setup env var
@@ -452,6 +453,7 @@ function Dashboard() {
       .rewards {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
         margin-top: 10px;
         @media (max-width: 960px) {
           justify-content: center;
@@ -778,14 +780,26 @@ function Dashboard() {
               {userTotalRewards > 0 && userRewards[2] > 0 && (
                 <div className="reward-box">
                   <img
+                    src={zeneca_reward}
+                    alt="Zeneca Reward"
+                    className="reward-image"
+                  />
+                  <div className="reward-text">
+                    {userRewards[2]} Zeneca Tokens
+                  </div>
+                </div>
+              )}
+              {userTotalRewards > 0 && userRewards[3] > 0 && (
+                <div className="reward-box">
+                  <img
                     src={keycard_reward}
                     alt="Keycard Reward"
                     className="reward-image"
                   />
-                  <div className="reward-text">{userRewards[2]} Keycards</div>
+                  <div className="reward-text">{userRewards[3]} Keycards</div>
                 </div>
               )}
-              {userTotalRewards > 0 && userRewards[3] > 0 && (
+              {userTotalRewards > 0 && userRewards[4] > 0 && (
                 <div className="reward-box">
                   <img
                     src={silhouette_reward}
@@ -793,7 +807,7 @@ function Dashboard() {
                     className="reward-image"
                   />
                   <div className="reward-text">
-                    {userRewards[3]} Custom NFZs
+                    {userRewards[4]} Custom NFZs
                   </div>
                 </div>
               )}
