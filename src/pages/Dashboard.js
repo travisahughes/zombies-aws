@@ -108,7 +108,6 @@ function Dashboard() {
           chain: contract_data.polygon.chain_id,
         });
         console.log('keycards', keycards);
-        setUserKeycards(keycards?.total || 0);
 
         const schoolPrizes = await Moralis.Web3API.native.runContractFunction({
           ...gameMechanicsOptions,
@@ -152,6 +151,14 @@ function Dashboard() {
           } else {
             tmpRewards[rewardId] = 1;
           }
+        });
+
+        keycards.result?.forEach((token) => {
+          const { amount, token_id } = token;
+          if (token_id === '0') {
+            setUserKeycards(amount);
+          }
+          console.log('userKeycards', amount);
         });
 
         console.log('School Prize', schoolPrizeCounts);
