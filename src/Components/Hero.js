@@ -105,7 +105,15 @@ const RarityTool = styled.div`
   justify-content: center;
   align-items: center;
   height: 80px;
-  width: 368px;
+  max-width: 368px;
+
+  @media (min-width: 768px) {
+    /* max-width: 242px;
+     */
+    width: 320px;
+
+    width: 100%;
+  }
 
   a {
     text-decoration: none;

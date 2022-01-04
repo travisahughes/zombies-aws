@@ -41,6 +41,8 @@ let Header = (props) => {
       background-color: #000000;
       float: right;
       padding-left: 50px;
+      padding-top: 8px;
+      height: 64px;
       @media (max-width: 960px) {
         padding-left: 10px;
       }
@@ -85,7 +87,7 @@ let Header = (props) => {
       margin: 4px 0 0 15px;
       @media (max-width: 640px) {
         position: absolute;
-        top: 15px;
+        top: 2px;
         left: 31%;
       }
     }

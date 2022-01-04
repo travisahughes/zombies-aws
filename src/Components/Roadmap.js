@@ -61,7 +61,7 @@ let Roadmap = (props) => {
       img {
         /* width: 100%; */
         /* max-width: 100%; */
-        padding: 5%;
+        /* padding: 5%; */
         width: 90%;
         height: auto;
       }
@@ -282,7 +282,7 @@ let Roadmap = (props) => {
         width: 100%;
         /* width: calc(33% - 20px); */
         @media (max-width: 960px) {
-          width: 100%;
+          width: 100%;~
           margin-right: 0;
           flex-direction: column;
 
@@ -318,7 +318,11 @@ let Roadmap = (props) => {
           }
 
           img {
-            width: 100%;
+            width: 90%;
+
+            @media (min-width: 768px){
+              width: 100%;
+            }
           }
         }
 
