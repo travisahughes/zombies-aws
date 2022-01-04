@@ -6,6 +6,7 @@ import twitterLogo from '../assets/icons/twitter.png';
 import openseaLogo from '../assets/icons/opensea.png';
 import etherscanLogo from '../assets/icons/etherscan.png';
 import burger from '../assets/icons/burger.png';
+import logo from '../assets/logo.png';
 
 let Header = (props) => {
   const header = css`
@@ -16,7 +17,7 @@ let Header = (props) => {
     padding: 0 0;
     font-size: 14px;
     @media (max-width: 640px) {
-      position: fixed;
+      position: sticky;
       top: 0;
       left: 0;
       background-color: #000000;
@@ -228,7 +229,8 @@ let Header = (props) => {
         </div>
         <div id="logo">
           <a href="/">
-            Nice Fun <span className="green-highlight">Zombies</span>
+            {/* Nice Fun <span className="green-highlight">Zombies</span> */}
+            <img src={logo} alt="logo" height={48} />
           </a>
         </div>
       </div>
