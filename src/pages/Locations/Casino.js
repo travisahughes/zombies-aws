@@ -5,7 +5,6 @@ import slotMachine from '../../assets/locations/loading-casino-2.gif';
 import brain from '../../assets/locations/brain.png';
 import chip from '../../assets/locations/chip.png';
 import card from '../../assets/locations/cards.png';
-import NFZs from '../../assets/locations/2797.png';
 import Keycard from '../../assets/locations/keycard.png';
 import discord from '../../assets/icons/discord.png';
 import UserNFZ from '../../Components/userNFZ';
@@ -15,7 +14,6 @@ import shadow from '../../assets/game/shadow.png';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
 import { keyframes } from '@emotion/react';
-import { isCompositeComponentWithType } from 'react-dom/cjs/react-dom-test-utils.production.min';
 import { prizes } from '../../constants/prizes';
 
 const CasinoPageContainer = styled.div`

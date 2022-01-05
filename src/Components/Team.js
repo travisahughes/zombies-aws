@@ -2,22 +2,148 @@
 import { css } from '@emotion/react';
 import teambg from '../assets/team_bg.jpg';
 import twitter from '../assets/icons/twitter.png';
-import ray from '../assets/bios/ray.png';
-import andy from '../assets/bios/andy.png';
-import bearheart from '../assets/bios/bearheart.png';
-import bloodline from '../assets/bios/bloodline.png';
-import eggbolt from '../assets/bios/eggbolt.png';
-import firestarter from '../assets/bios/firestarter.png';
-import tdubs from '../assets/bios/tdubs.png';
-import tert from '../assets/bios/tert.png';
-import yauuay from '../assets/bios/yauuay.png';
+import ray from '../assets/team/ray.png';
+import taylor from '../assets/team/taylor.png';
+import sarah from '../assets/team/sarah.png';
+import travis from '../assets/team/travis.png';
+import ben from '../assets/team/ben.png';
+import anna from '../assets/team/anna.png';
+import jian from '../assets/team/jian.png';
+import ed from '../assets/team/ed.png';
+import boyscout from '../assets/team/boyscout.png';
+import tylerhealmonger from '../assets/team/tyler-healmonger.png';
+import andywmi from '../assets/team/andywmi.png';
+import zeneca from '../assets/team/zeneca.png';
+import styled from '@emotion/styled';
+
+const MemberList = [
+  {
+    name: '@rayminbi | Raymond',
+    image: ray,
+    role: 'Founder, Strategy, Brand, Marketing, Partnerships',
+  },
+  {
+    name: '@tdubs | Taylor',
+    image: taylor,
+    role: 'Founder, Tech',
+  },
+  {
+    name: '@firestarteronibi | Sarah',
+    image: sarah,
+    role: 'Artist, Illustrator, Toy Designer',
+  },
+  {
+    name: '@blood1n3 | Travis',
+    image: travis,
+    role: 'Development Lead',
+  },
+  {
+    name: '@bibi | Ben',
+    image: ben,
+    role: 'Community Manager',
+  },
+  {
+    name: '@bearheart | Anna',
+    image: anna,
+    role: 'UI / UX Designer',
+  },
+  {
+    name: '@jianesis | Jian',
+    image: jian,
+    role: 'Frontend Developer',
+  },
+];
+
+const ModList = [
+  {
+    name: '@eggbolt | Ed',
+    image: ed,
+    role: 'Discord Moderator & Community Development',
+  },
+  {
+    name: '@Boyscout',
+    image: boyscout,
+    role: 'Discord Moderator & Community Development',
+  },
+  {
+    name: '@Tyler',
+    image: tylerhealmonger,
+    role: 'Discord Moderator & Community Development',
+  },
+  {
+    name: '@Healmonger',
+    image: tylerhealmonger,
+    role: 'Discord Moderator & Community Development',
+  },
+];
+
+const AdvisorList = [
+  {
+    name: '@andywmi',
+    image: andywmi,
+    role: 'Research Advisor',
+  },
+  {
+    name: '@Zeneca',
+    image: zeneca,
+    role: 'Advisor as part of Zeneca’s 333 Club',
+  },
+];
+
+const MemberContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 160px;
+  min-height: 260px;
+`;
+
+const Avatar = styled.img`
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+
+  @media (min-width: 768px) {
+    width: 160px;
+    height: 160px;
+  }
+`;
+
+const MemberName = styled.span`
+  font-size: 20px;
+  font-family: Teko;
+  font-style: normal;
+  font-weight: normal;
+  margin: 0.5rem 0;
+`;
+const MemberRole = styled.span`
+  font-size: 11px;
+  line-height: 125%;
+  text-align: center;
+  color: #aff038;
+`;
+
+const Member = ({ name, image, role }) => {
+  return (
+    <MemberContainer>
+      <Avatar src={image} alt="zombie" />
+      <MemberName>{name}</MemberName>
+      <MemberRole>{role}</MemberRole>
+    </MemberContainer>
+  );
+};
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+`;
 
 let Team = (props) => {
   const teamwrap = css`
-    background-image: url(${teambg});
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: #151515;
 
     .green-highlight {
       color: #aff038;
@@ -40,11 +166,11 @@ let Team = (props) => {
       margin: 20px 0 0 0;
     }
 
-    p {
+    /* p {
       font-size: 14px;
       line-height: 24.5px;
       color: #b1b1b1;
-    }
+    } */
   `;
 
   const members = css`
@@ -52,157 +178,61 @@ let Team = (props) => {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: stretch;
     font-size: 14px;
+    flex: 1;
     color: #ffffff;
-    @media (max-width: 640px) {
+    /* @media (max-width: 640px) {
       flex-direction: column;
       align-items: center;
-    }
-
-    .member {
-      width: 21%;
-      background-color: #000000;
-      padding: 16px 16px;
-      margin: 20px 0 0 0;
-      color: #b1b1b1;
-      @media (max-width: 960px) {
-        width: 27%;
-        margin: 20px 0;
-      }
-      @media (max-width: 640px) {
-        width: 310px;
-        margin: 20px 0;
-      }
-
-      img {
-        width: 100%;
-      }
-
-      h3 {
-        font-family: teko;
-        color: #ffffff;
-        font-size: 32px;
-        line-height: 32px;
-        font-weight: 400;
-        margin: 10px 0 0 0;
-
-        img {
-          width: 27px;
-          height: auto;
-          float: right;
-        }
-      }
-
-      h4 {
-        color: #aff038;
-        font-size: 14px;
-        line-height: 24.5px;
-        margin-top: 0px;
-        font-weight: 400;
-      }
-    }
+    } */
   `;
 
   return (
     <div css={teamwrap}>
       <div className="common-padding" id="team" css={team}>
         <h1>THE TEAM</h1>
-        <p>
-          This project is{' '}
-          <span className="green-highlight">NOT AFFILIATED</span> with any
-          companies listed in our backgrounds -<br />
-          this is a separate passion project!
-        </p>
         <div css={members}>
-          <div className="member" id="rayminbi">
-            <img src={ray} alt="bio" />
-            <h3>
-              @rayminbi | Raymond{' '}
-              <a
-                href="https://twitter.com/rayminbi"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <img src={twitter} alt="twitter" />
-              </a>
-            </h3>
-            <h4>Founder, Strategy, Brand, Marketing, Partnerships</h4>
-            <p>Marketing & Business lead for ESPN in Asia, NFT Enthusiast</p>
-            <p>Thinks twice about visiting Korea after watching Kingdom</p>
-          </div>
-          <div className="member" id="tdubs">
-            <img src={tdubs} alt="bio" />
-            <h3>@tdubs1 | Taylor</h3>
-            <h4>Founder, Tech</h4>
-            <p>Background in Tech for Disney+, Activision Blizzard</p>
-            <p>Sees red whenever Shaun of the Dead is on</p>
-          </div>
-          <div className="member" id="firestarteronibi">
-            <img src={firestarter} alt="bio" />
-            <h3>@firestarteronibi | Sarah</h3>
-            <h4>Artist, Illustrator, Toy Designer</h4>
-            <p>Art contributor for Disney</p>
-            <p>Creatively building our new Zombieland</p>
-          </div>
-          <div className="member" id="bloodline">
-            <img src={bloodline} alt="bio" />
-            <h3>@bloodl1n3 | Travis</h3>
-            <h4>Development Lead</h4>
-            <p>Software Engineer for FuboTV</p>
-            <p>Just wait 28 Days Later to see all the magic he can build</p>
-          </div>
-          <div className="member" id="yauuay">
-            <img src={yauuay} alt="bio" />
-            <h3>@yauuay | Hannah</h3>
-            <h4>Marketing</h4>
-            <p>Background with Apple, Spotify, ESPN</p>
-            <p>Keeping checks on all the Warm Bodies yet to get bit</p>
-          </div>
-          <div className="member" id="andywmi">
-            <img src={andy} alt="bio" />
-            <h3>@andywmi | Andy</h3>
-            <h4>Research Advisor</h4>
-            <p>Blockchain Maxi / Red Pill Guy</p>
-            <p>Goes to bed early so he doesn’t miss the Dawn of the Dead</p>
-          </div>
-          <div className="member" id="bearheart">
-            <img src={bearheart} alt="bio" />
-            <h3>@bearheart | Anna</h3>
-            <h4>UI / UX Designer</h4>
-            <p>Background as Sr. Product Designer for Activision Blizzard</p>
-            <p>Quickly answered the Call of Duty when Zombies got involved</p>
-          </div>
-          <div className="member" id="eggbolt">
-            <img src={eggbolt} alt="bio" />
-            <h3>@eggbolt | Ed</h3>
-            <h4>Discord Moderator & Community Development</h4>
-            <p>Lead Discord Moderator for The Asian Mint</p>
-            <p>
-              Definitely getting on the Train to BUsan when the world opens up
-              again
-            </p>
-          </div>
+          {MemberList.map((member, index) => (
+            <Member
+              name={member.name}
+              image={member.image}
+              role={member.role}
+              key={index}
+            />
+          ))}
         </div>
+        <Row>
+          <div
+            style={{ width: '100%', maxWidth: '736px', marginRight: '32px' }}
+          >
+            <h1>MODS</h1>
+            <div css={members}>
+              {ModList.map((member, index) => (
+                <Member
+                  name={member.name}
+                  image={member.image}
+                  role={member.role}
+                  key={index}
+                />
+              ))}
+            </div>
+          </div>
 
-        <h1>Special Advisor</h1>
-        <div css={members}>
-          <div className="member" id="tert">
-            <img src={tert} alt="bio" />
-            <h3>
-              @TerT | Terence{' '}
-              <a
-                href="https://twitter.com/Uni_Tert/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <img src={twitter} alt="twitter" />
-              </a>
-            </h3>
-            <h4>Strategic Advisor</h4>
-            <p>Founder, Uninterested Unicorns</p>
-            <p>Ensuring no Resident Evil falls upon this project</p>
+          <div style={{ width: '100%', maxWidth: '352px' }}>
+            <h1>Advisors</h1>
+            <div css={members}>
+              {AdvisorList.map((member, index) => (
+                <Member
+                  name={member.name}
+                  image={member.image}
+                  role={member.role}
+                  key={index}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        </Row>
       </div>
     </div>
   );
