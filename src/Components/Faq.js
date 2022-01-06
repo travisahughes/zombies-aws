@@ -53,8 +53,8 @@ let Faq = (props) => {
   return (
     <>
       <div id="faq" className="centered-content" css={faq}>
-        <h1>FAQ</h1>
         <div className="common-padding">
+          <h1>FAQ</h1>
           <div id="faq-list">
             <FaqItem
               title="When do Nice Fun Zombies go on sale?"
