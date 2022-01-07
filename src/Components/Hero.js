@@ -8,8 +8,8 @@ import styled from '@emotion/styled';
 import openseaLogo from '../assets/icons/opensea.png';
 
 const HeroSection = styled.section`
-  height: 90vh;
-  min-height: 700px;
+  /* height: 90vh; */
+  /* min-height: 700px; */
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -121,156 +121,72 @@ const RarityTool = styled.div`
   }
 `;
 
+const FlexBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+  align-items: center;
+
+  margin: 60px auto 20px auto;
+  padding: 0 20px;
+  max-width: 1310px;
+
+  @media (max-width: 960px) {
+    max-width: 940px;
+    padding: 0 20px;
+    margin: 60px auto 20px auto;
+  }
+  @media (max-width: 640px) {
+    max-width: 620px;
+    padding: 0 10px;
+    margin: 60px auto 20px auto;
+  }
+`;
+
 let Hero = (props) => {
-  // const hero = css`
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: center;
-  //   align-items: center;
-  //   color: white;
-  //   @media (max-width: 640px) {
-  //     margin-top: 64px;
-  //   }
-
-  //   p {
-  //     font-weight: 700;
-  //     font-size: 24px;
-  //   }
-
-  //   #header {
-  //     /* z-index: 10; */
-  //     /* width: 753px; */
-  //     width: 100%;
-  //     /* margin-top: 340px; */
-  //     flex-direction: row;
-  //     display: flex;
-  //     align-items: center;
-  //     justify-content: center;
-  //     @media (max-width: 960px) {
-  //       margin-top: 180px;
-  //       width: 640px;
-  //     }
-  //     @media (max-width: 640px) {
-  //       margin-top: 360px;
-  //       width: 360px;
-  //     }
-  //   }
-
-  //   #top-text {
-  //     font-family: teko;
-  //     width: 450px;
-  //     align-self: flex-start;
-  //     font-weight: 400;
-  //     font-size: 40px;
-  //     @media (max-width: 960px) {
-  //       width: 350px;
-  //       font-size: 30px;
-  //     }
-  //     @media (max-width: 640px) {
-  //       width: 300px;
-  //       padding-left: 0;
-  //       font-size: 24px;
-  //       font-weight: 500;
-  //       align-self: center;
-  //     }
-  //   }
-
-  //   #main-text {
-  //     font-family: teko;
-  //     width: 625px;
-  //     align-self: flex-end;
-  //     font-weight: 400;
-  //     font-size: 116px;
-  //     margin-top: -35px;
-  //     @media (max-width: 960px) {
-  //       width: 525px;
-  //       font-size: 96px;
-  //     }
-  //     @media (max-width: 640px) {
-  //       width: 300px;
-  //       align-self: center;
-  //       font-size: 48px;
-  //       font-weight: 500;
-  //       margin-top: -10px;
-  //     }
-  //   }
-
-  //   #sub-text {
-  //     width: 630px;
-  //     align-self: flex-end;
-  //     font-weight: 400;
-  //     font-size: 18px;
-  //     text-align: center;
-  //     margin-top: -35px;
-
-  //     @media (max-width: 960px) {
-  //       width: 550px;
-  //       font-size: 14px;
-  //     }
-  //     @media (max-width: 640px) {
-  //       width: 300px;
-  //       align-self: center;
-  //       font-size: 14px;
-  //       margin-top: 10px;
-  //       text-align: center;
-  //     }
-  //   }
-
-  //   .clip-text {
-  //     font-size: 116px;
-  //     -webkit-background-clip: text;
-  //     -webkit-text-fill-color: transparent;
-  //     background-image: url(${textmask});
-  //     @media (max-width: 960px) {
-  //       font-size: 96px;
-  //     }
-  //     @media (max-width: 640px) {
-  //       font-size: 48px;
-  //       -webkit-background-clip: unset;
-  //       -webkit-text-fill-color: white;
-  //       background-image: none;
-  //       color: #ffffff;
-  //     }
-  //   }
-  // `;
-
   return (
     <>
       <Nav />
       <HeroSection>
-        <BannerImg src={bannerImg} alt="banner" />
-        <RightContainer>
-          <TitleText>An undying NFT Art Project & Community</TitleText>
-          <DescriptionText>
-            Note: There are approximately{' '}
-            <GreenText>2,000 NFZs still to be found in locations</GreenText> -
-            NFZ holders can send their zombies to SEARCH locations for hidden
-            ones in the collection. (Coming Soon)
-          </DescriptionText>
+        <FlexBox>
+          <BannerImg src={bannerImg} alt="banner" />
+          <RightContainer>
+            <TitleText>An undying NFT Art Project & Community</TitleText>
+            <DescriptionText>
+              Note: There are approximately{' '}
+              <GreenText>2,000 NFZs still to be found in locations</GreenText> -
+              NFZ holders can send their zombies to SEARCH locations for hidden
+              ones in the collection. (Coming Soon)
+            </DescriptionText>
 
-          <OpenseaButton
-            onClick={() =>
-              window
-                .open('https://opensea.io/collection/nicefunzombies', '_blank')
-                .focus()
-            }
-          >
-            <img src={openseaLogo} alt="opensea" />
-            <ButtonTextContainer>
-              <SoldOutText>The Mint is SOLD OUT!</SoldOutText>
-              <CheckOpenseaText>Check OpenSea to Purchase</CheckOpenseaText>
-            </ButtonTextContainer>
-          </OpenseaButton>
-          <RarityTool>
-            <a
-              href="https://rarity.tools/nicefunzombies"
-              target="_blank"
-              rel="noreferrer"
+            <OpenseaButton
+              onClick={() =>
+                window
+                  .open(
+                    'https://opensea.io/collection/nicefunzombies',
+                    '_blank'
+                  )
+                  .focus()
+              }
             >
-              Check us out on Rarity Tools
-            </a>
-          </RarityTool>
-        </RightContainer>
+              <img src={openseaLogo} alt="opensea" />
+              <ButtonTextContainer>
+                <SoldOutText>The Mint is SOLD OUT!</SoldOutText>
+                <CheckOpenseaText>Check OpenSea to Purchase</CheckOpenseaText>
+              </ButtonTextContainer>
+            </OpenseaButton>
+            <RarityTool>
+              <a
+                href="https://rarity.tools/nicefunzombies"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Check us out on Rarity Tools
+              </a>
+            </RarityTool>
+          </RightContainer>
+        </FlexBox>
       </HeroSection>
     </>
   );

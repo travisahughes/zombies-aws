@@ -14,9 +14,24 @@ let Footer = (props) => {
     display: flex;
     align-items: end;
 
+    margin: 0px auto;
+    max-width: 1310px;
+
     @media (max-width: 960px) {
+      max-width: 940px;
+      margin: 0 auto;
       height: 100px;
+      width: 100%;
     }
+    @media (max-width: 640px) {
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* @media (max-width: 960px) { */
+    /* height: 100px;
+      width: 100%; */
+    /* } */
 
     #footerleft {
       margin: 0 3rem;
@@ -40,7 +55,6 @@ let Footer = (props) => {
         margin: 0 auto;
         width: 100%;
         font-size: 14px;
-        /* min-width: 230px; */
       }
 
       #footer-copyright {

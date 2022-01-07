@@ -12,6 +12,7 @@ import leftArrow from '../assets/left-arrow.svg';
 import rightArrow from '../assets/right-arrow.svg';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+import styled from '@emotion/styled';
 
 let Roadmap = (props) => {
   const [showModal, setShowModal] = useState(false);
@@ -37,6 +38,7 @@ let Roadmap = (props) => {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
     width: 100%;
     background: white;
     /* padding: 0 5%; */
@@ -70,27 +72,18 @@ let Roadmap = (props) => {
     .grungebox {
       background: white;
       font-size: 18px;
-      min-width: 400px;
       max-width: 440px;
-      /* padding: 2rem 8%; */
-      /* margin: auto; */
-      /* margin: 2rem 8%; */
-      max-width: 90%;
-
-      /* padding: 20px 5%; */
-      /* padding: auto; */
-      /* display: flex; */
-      /* flex-direction: column; */
-      /* justify-content: space-around; */
-      /* align-items: center; */
-      width: 90%;
+      width: 100%;
       height: 100%;
+      margin-right: 60px;
       /* flex: 1; */
-      @media (max-width: 640px) {
+
+      @media (max-width: 1023px) {
         margin-top: 0;
-        min-width: 0;
+        margin-right: 0;
         padding: 0;
         width: 90%;
+        max-width: 800px;
       }
 
       .bold {
@@ -141,6 +134,10 @@ let Roadmap = (props) => {
         :hover {
           background: #ab19ef;
           color: white;
+        }
+
+        @media (max-width: 1023px) {
+          margin-bottom: 2rem;
         }
       }
     }
@@ -436,6 +433,28 @@ let Roadmap = (props) => {
     clear: both;
   `;
 
+  const FlexBox = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    margin: 0px auto;
+    padding: 0 20px;
+    max-width: 1310px;
+
+    @media (max-width: 960px) {
+      max-width: 940px;
+      padding: 0 20px;
+      margin: 0 auto;
+    }
+    @media (max-width: 640px) {
+      max-width: 620px;
+      padding: 0 10px;
+      margin: 0 auto;
+    }
+  `;
+
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const updateCurrentSlide = (index) => {
@@ -445,82 +464,56 @@ let Roadmap = (props) => {
   };
 
   return (
-    <div css={roadmap}>
+    <div className="" css={roadmap}>
       <div css={topText}>
-        <div className="grungebox">
-          <h1>Every Decision Matters</h1>
-          <p>
-            With different decision paths, Nice Fun Zombies will create a world
-            that allows the holder to decide how they want their NFZ experience
-            to be. You can decide on the prizes you want to aim for, your level
-            of risk, and how active you want to be. Utilizing some supply and
-            demand dynamics, each decision you make also has an impact on other
-            holders. Even not making a decision is a choice that has impact.
-          </p>
-          <p className="bold">
-            Read our full game theory guide here:{' '}
-            <a
-              href="https://medium.com/@nicefunzombies/nice-fun-zombies-every-decision-matters-8ee3b90517a4"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Every Decision Matters
-            </a>
-          </p>
-          <div className="game-theory-button">Game Theory Guide</div>
-        </div>
-        <ReactModal
-          isOpen={showModal}
-          contentLabel="Every Decision Matters"
-          onRequestClose={handleCloseModal}
-          shouldCloseOnOverlayClick={true}
-          className="Modal"
-          overlayClassName="Overlay"
-        >
-          <img src={edm} alt="Every Decision Matters" />
-          <br />
-          <div className="ModalClose" onClick={handleCloseModal}>
-            Close
+        <FlexBox>
+          <div className="grungebox">
+            <h1>Every Decision Matters</h1>
+            <p>
+              With different decision paths, Nice Fun Zombies will create a
+              world that allows the holder to decide how they want their NFZ
+              experience to be. You can decide on the prizes you want to aim
+              for, your level of risk, and how active you want to be. Utilizing
+              some supply and demand dynamics, each decision you make also has
+              an impact on other holders. Even not making a decision is a choice
+              that has impact.
+            </p>
+            <p className="bold">
+              Read our full game theory guide here:{' '}
+              <a
+                href="https://medium.com/@nicefunzombies/nice-fun-zombies-every-decision-matters-8ee3b90517a4"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Every Decision Matters
+              </a>
+            </p>
+            <div className="game-theory-button">Game Theory Guide</div>
           </div>
-        </ReactModal>
-        <img
-          src={edmsmall}
-          onClick={handleOpenModal}
-          alt="Every Decision Matters"
-          style={{ width: '100%' }}
-        />
+          <ReactModal
+            isOpen={showModal}
+            contentLabel="Every Decision Matters"
+            onRequestClose={handleCloseModal}
+            shouldCloseOnOverlayClick={true}
+            className="Modal"
+            overlayClassName="Overlay"
+          >
+            <img src={edm} alt="Every Decision Matters" />
+            <br />
+            <div className="ModalClose" onClick={handleCloseModal}>
+              Close
+            </div>
+          </ReactModal>
+          <img
+            src={edmsmall}
+            onClick={handleOpenModal}
+            alt="Every Decision Matters"
+            style={{ width: '100%', maxWidth: '800px' }}
+          />
+        </FlexBox>
       </div>
 
       <div className="common-padding" css={bottomText}>
-        {/* <div id="timeline-wrapper">
-          <div id="timeline-section">
-            <div className="timeline-item">
-              <h2>Generation 1</h2>
-              <h3>Initial Launch Genesis</h3>
-              <p>The spread begins.</p>
-            </div>
-            <div className="timeline-item">
-              <h2>MILESTONE 1</h2>
-              <h3>Keycard Airdrop</h3>
-              <p>
-                All Nice Fun Zombie owners will receive a free airdrop for an
-                access card that allows them to search. Will you use it, sell
-                it, or wait for a new location and items?
-              </p>
-            </div>
-            <div className="timeline-item">
-              <h2>Phase 1</h2>
-              <h3>Locations Open</h3>
-              <p>
-                We will reveal the first two locations for Nice Fun Zombies to
-                go searching. Each location will have different probability on
-                certain items. You decide where to send your zombie! More
-                details to come
-              </p>
-            </div>
-          </div>
-        </div> */}
-
         <h1 id="roadmap">Project Roadmap</h1>
         <div id="roadmap-section">
           <img

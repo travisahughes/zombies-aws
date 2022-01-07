@@ -16,11 +16,25 @@ let Header = (props) => {
     color: white;
     padding: 0 0;
     font-size: 14px;
+
+    margin: 0px auto;
+    /* padding: 0 20px; */
+    max-width: 1310px;
+
+    @media (max-width: 960px) {
+      max-width: 940px;
+      /* padding: 0 20px; */
+      margin: 0 auto;
+    }
+
     @media (max-width: 640px) {
       position: sticky;
       top: 0;
       left: 0;
       background-color: #000000;
+      max-width: 620px;
+      /* padding: 0 10px; */
+      margin: 0 auto;
     }
 
     .green-highlight {
