@@ -77,7 +77,6 @@ const UserNFZ = (props) => {
     <div css={nfzCss}>
       <div
         onClick={() => {
-          if (location) return;
           props.onClick ? props.onClick(finalMetadata, props.id) : '';
         }}
         className={`nft-container ${

@@ -275,8 +275,6 @@ export default function Location() {
     });
   };
   const zombieSelect = (metadata, id) => {
-    if (metadata?.hasLocation) return;
-
     if (selectedIds.includes(metadata.zombieId)) {
       const _ids = [...selectedIds].filter((z) => z != metadata.zombieId);
       const _selectedZombies = [...selectedZombies].filter((md) => {
