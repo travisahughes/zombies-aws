@@ -240,7 +240,6 @@ const NFTsContainer = styled.div`
       align-items: center;
       background: black;
       opacity: 0.7;
-      cursor: auto;
       font-weight: bold;
       font-size: 1.2rem;
       z-index: 999;
