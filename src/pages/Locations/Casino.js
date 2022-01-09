@@ -31,7 +31,8 @@ const CasinoPageContainer = styled.div`
   position: relative;
   display: ${(props) => (props.loading ? 'flex' : 'block')};
   justify-content: center;
-  align-items: flex-end;
+  align-items: ${(props) => (props.loading ? 'center' : 'flex-end')};
+  flex-direction: ${(props) => (props.loading ? 'column' : 'row')};
 
   @media (min-width: 767px) {
     background-size: 100% 100vh;
@@ -490,6 +491,12 @@ function ListItemWithIcon({ img, alt, text }) {
   );
 }
 
+const LoadingHint = styled.p`
+  font-weight: bold;
+  color: #000000;
+  font-size: 1.2rem;
+`;
+
 export default function CasinoPage({
   tokensContract,
   userAccount,
@@ -719,6 +726,11 @@ export default function CasinoPage({
         </>
       )}
       {loading && <SlotMachineImage src={slotMachine} alt="slot-machine" />}
+      {loading && (
+        <LoadingHint>
+          Don't close this page until you see the result screen!
+        </LoadingHint>
+      )}
       <SendTeamButton
         betting={selectedIds.length < 1 || betting}
         onClick={casinoClick}
