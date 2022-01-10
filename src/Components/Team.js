@@ -12,6 +12,7 @@ import jian from '../assets/team/jian.png';
 import ed from '../assets/team/ed.png';
 import boyscout from '../assets/team/boyscout.png';
 import tylerhealmonger from '../assets/team/tyler-healmonger.png';
+import healmonger from '../assets/team/healmonger.png';
 import andywmi from '../assets/team/andywmi.png';
 import zeneca from '../assets/team/zeneca.png';
 import styled from '@emotion/styled';
@@ -44,6 +45,7 @@ const MemberList = [
     name: '@bibi | Ben',
     image: ben,
     role: 'Partnerships and Community Manager',
+    link: 'https://twitter.com/bltwzzz',
   },
   {
     name: '@bearheart | Anna',
@@ -54,13 +56,14 @@ const MemberList = [
     name: '@jianesis | Jian',
     image: jian,
     role: 'Frontend Developer',
+    link: 'https://twitter.com/jianesis',
   },
 ];
 
 const ModList = [
   {
     name: '@Healmonger',
-    image: tylerhealmonger,
+    image: healmonger,
     role: 'Discord Moderator & Community Development',
     link: 'https://twitter.com/NFTGibby',
   },
@@ -104,7 +107,7 @@ const MemberContainer = styled.div`
   flex-direction: column;
   align-items: center;
   max-width: 160px;
-  min-height: 280px;
+  min-height: 260px;
 `;
 
 const Avatar = styled.img`
@@ -145,20 +148,20 @@ const Member = ({ name, image, role, link }) => {
         }}
         cursor={link ? 'pointer' : 'auto'}
       >
-        {name}
+        {name}{' '}
+        {link && (
+          <>
+            <img
+              src={twitter}
+              alt="twitter"
+              onClick={() => window.open(link, '_blank')}
+              width={16}
+              style={{ marginTop: '5px', cursor: 'pointer' }}
+            />
+          </>
+        )}
       </MemberName>
       <MemberRole>{role}</MemberRole>
-      {name.includes('rayminbi') && (
-        <>
-          <img
-            src={twitter}
-            alt="twitter"
-            onClick={() => window.open(link, '_blank')}
-            width={20}
-            style={{ marginTop: '5px', cursor: 'pointer' }}
-          />
-        </>
-      )}
     </MemberContainer>
   );
 };
