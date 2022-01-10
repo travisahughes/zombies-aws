@@ -86,40 +86,9 @@ const ButtonTextContainer = styled.div`
   margin-left: 1rem;
 `;
 
-const SoldOutText = styled.span`
-  font-weight: bold;
-  font-size: 20px;
-  line-height: 150%;
-`;
-
 const CheckOpenseaText = styled.span`
   /* font-weight: bold; */
   font-size: 16px;
-`;
-
-const RarityTool = styled.div`
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 150%;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80px;
-  max-width: 368px;
-
-  @media (min-width: 768px) {
-    /* max-width: 242px;
-     */
-    width: 320px;
-
-    width: 100%;
-  }
-
-  a {
-    text-decoration: none;
-    color: #50e6ff;
-  }
 `;
 
 const FlexBox = styled.div`
@@ -162,6 +131,7 @@ const Link = styled.div`
   font-size: 11px;
   font-weight: bold;
   line-height: 150%;
+  cursor: pointer;
   img {
     margin-right: 16px;
   }
@@ -204,13 +174,28 @@ let Hero = (props) => {
             </DescriptionText>
 
             <LinksContainer>
-              <Link>
+              <Link
+                onClick={() =>
+                  window.open('https://rarity.tools/nicefunzombies', '_blank')
+                }
+              >
                 <img src={star} alt="rarity" /> Rarity Tools
               </Link>
-              <Link>
+              <Link
+                onClick={() =>
+                  window.open('https://discord.gg/77VswFkcuY', '_blank')
+                }
+              >
                 <img src={discord} alt="discord" height="18" /> Discord
               </Link>
-              <Link>
+              <Link
+                onClick={() =>
+                  window.open(
+                    'https://www.twitter.com/nicefunzombies',
+                    '_blank'
+                  )
+                }
+              >
                 <img src={twitter} alt="twitter" height="17" /> Twitter
               </Link>
             </LinksContainer>
@@ -227,19 +212,9 @@ let Hero = (props) => {
             >
               <img src={openseaLogo} alt="opensea" />
               <ButtonTextContainer>
-                {/* <SoldOutText>The Mint is SOLD OUT!</SoldOutText> */}
                 <CheckOpenseaText>Purchase on OpenSea</CheckOpenseaText>
               </ButtonTextContainer>
             </OpenseaButton>
-            {/* <RarityTool>
-              <a
-                href="https://rarity.tools/nicefunzombies"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Check us out on Rarity Tools
-              </a>
-            </RarityTool> */}
           </RightContainer>
         </FlexBox>
       </HeroSection>

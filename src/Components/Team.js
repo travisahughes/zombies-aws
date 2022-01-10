@@ -6,7 +6,7 @@ import ray from '../assets/team/ray.png';
 import taylor from '../assets/team/taylor.png';
 import sarah from '../assets/team/sarah.png';
 import travis from '../assets/team/travis.png';
-import ben from '../assets/team/ben.jpeg';
+import ben from '../assets/team/ben.jpg';
 import anna from '../assets/team/anna.png';
 import jian from '../assets/team/jian.png';
 import ed from '../assets/team/ed.png';
@@ -244,6 +244,7 @@ let Team = (props) => {
                   name={member.name}
                   image={member.image}
                   role={member.role}
+                  link={member.link}
                   key={index}
                 />
               ))}
@@ -258,6 +259,7 @@ let Team = (props) => {
                   name={member.name}
                   image={member.image}
                   role={member.role}
+                  link={member.link}
                   key={index}
                 />
               ))}
