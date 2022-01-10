@@ -3,9 +3,10 @@ import casino from '../assets/locations/casino.png';
 import school from '../assets/locations/school.png';
 import keycard from '../assets/locations/keycard.png';
 // import dashboard from '../assets/dashboard.png';
-import graveBg from '../assets/grave-bg.png';
-import splitBg from '../assets/split-path-bg.jpeg';
+import graveBg from '../assets/bg-grave.jpg';
+import splitBg from '../assets/bg-splitpath.jpg';
 import styled from '@emotion/styled';
+import { useHistory } from 'react-router-dom';
 
 const QuickAccessSection = styled.section`
   display: flex;
@@ -29,6 +30,7 @@ const DashboardAccess = styled.div`
   background-repeat: no-repeat;
   background-position-x: center;
   background-size: cover;
+  cursor: pointer;
 `;
 
 const LocationAccess = styled.div`
@@ -45,6 +47,7 @@ const LocationAccess = styled.div`
   background-position-x: center;
   background-size: cover;
   padding: 16px;
+  cursor: pointer;
 `;
 
 const TextContainer = styled.div`
@@ -89,9 +92,10 @@ const SchoolImage = styled.img`
 `;
 
 export default function QuickAccess() {
+  const history = useHistory();
   return (
     <QuickAccessSection>
-      <DashboardAccess>
+      <DashboardAccess onClick={() => history.push('/dashboard')}>
         <KeycardImage src={keycard} alt="keycard" />
         <TextContainer>
           <Title>OWNER DASHBOARD</Title>
@@ -101,7 +105,7 @@ export default function QuickAccess() {
           </p>
         </TextContainer>
       </DashboardAccess>
-      <LocationAccess>
+      <LocationAccess onClick={() => history.push('/locations')}>
         <CasinoImage src={casino} alt="casino" />
         <SchoolImage src={school} alt="school" height={196} />
         <TextContainer>

@@ -121,6 +121,7 @@ let Roadmap = () => {
         font-weight: bold;
         font-size: 14px;
         line-height: 150%;
+        cursor: pointer;
 
         :hover {
           background: #ab19ef;
@@ -479,7 +480,17 @@ let Roadmap = () => {
                 Every Decision Matters
               </a>
             </p>
-            <div className="game-theory-button">Game Theory Guide</div>
+            <div
+              className="game-theory-button"
+              onClick={() =>
+                window.open(
+                  'https://nice-fun-zombies.gitbook.io/game-theory/',
+                  '_blank'
+                )
+              }
+            >
+              Game Theory Guide
+            </div>
           </div>
           <ReactModal
             isOpen={showModal}
