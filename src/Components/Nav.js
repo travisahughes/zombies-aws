@@ -6,6 +6,7 @@ import twitterLogo from '../assets/icons/twitter.png';
 import openseaLogo from '../assets/icons/opensea.png';
 import etherscanLogo from '../assets/icons/etherscan.png';
 import burger from '../assets/icons/burger.png';
+import logo from '../assets/logo.png';
 
 let Header = (props) => {
   const header = css`
@@ -15,11 +16,25 @@ let Header = (props) => {
     color: white;
     padding: 0 0;
     font-size: 14px;
+
+    margin: 0px auto;
+    /* padding: 0 20px; */
+    max-width: 1310px;
+
+    @media (max-width: 960px) {
+      max-width: 940px;
+      /* padding: 0 20px; */
+      margin: 0 auto;
+    }
+
     @media (max-width: 640px) {
-      position: fixed;
+      position: sticky;
       top: 0;
       left: 0;
       background-color: #000000;
+      max-width: 620px;
+      /* padding: 0 10px; */
+      margin: 0 auto;
     }
 
     .green-highlight {
@@ -40,6 +55,8 @@ let Header = (props) => {
       background-color: #000000;
       float: right;
       padding-left: 50px;
+      padding-top: 8px;
+      height: 64px;
       @media (max-width: 960px) {
         padding-left: 10px;
       }
@@ -84,7 +101,7 @@ let Header = (props) => {
       margin: 4px 0 0 15px;
       @media (max-width: 640px) {
         position: absolute;
-        top: 15px;
+        top: 2px;
         left: 31%;
       }
     }
@@ -228,7 +245,8 @@ let Header = (props) => {
         </div>
         <div id="logo">
           <a href="/">
-            Nice Fun <span className="green-highlight">Zombies</span>
+            {/* Nice Fun <span className="green-highlight">Zombies</span> */}
+            <img src={logo} alt="logo" height={48} />
           </a>
         </div>
       </div>
@@ -240,11 +258,6 @@ let Header = (props) => {
             </a>
           </li>
           <li className="text">
-            <a href="#mission" onClick={toggleMenu}>
-              Mission & Goals
-            </a>
-          </li>
-          <li className="text">
             <a href="#roadmap" onClick={toggleMenu}>
               Roadmap
             </a>
@@ -252,11 +265,6 @@ let Header = (props) => {
           <li className="text">
             <a href="#team" onClick={toggleMenu}>
               Team
-            </a>
-          </li>
-          <li className="text">
-            <a href="#howto" onClick={toggleMenu}>
-              How to Mint
             </a>
           </li>
           <li className="text">

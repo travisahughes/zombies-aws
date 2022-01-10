@@ -1,13 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import zombie1 from '../assets/gallery/zombie1.png';
-import zombie2 from '../assets/gallery/zombie2.png';
-import zombie3 from '../assets/gallery/zombie3.png';
-import zombie4 from '../assets/gallery/zombie4.png';
-import zombie5 from '../assets/gallery/zombie5.png';
-import zombie6 from '../assets/gallery/zombie6.png';
-import zombie7 from '../assets/gallery/zombie7.png';
-import zombie8 from '../assets/gallery/zombie8.png';
+import zombie1 from '../assets/gallery/521.png';
+import zombie2 from '../assets/gallery/1244.png';
+import zombie3 from '../assets/gallery/1871.png';
+import zombie4 from '../assets/gallery/2184.png';
+import zombie5 from '../assets/gallery/2267.png';
+import zombie6 from '../assets/gallery/2829.png';
+import zombie7 from '../assets/gallery/3119.png';
+import zombie8 from '../assets/gallery/3622.png';
+import zombie9 from '../assets/gallery/4190.png';
+import zombie10 from '../assets/gallery/4323.png';
 
 let Gallery = (props) => {
   const gallery = css`
@@ -59,6 +61,8 @@ let Gallery = (props) => {
           <img className="zombie" src={zombie6} alt="zombie!" />
           <img className="zombie" src={zombie7} alt="zombie!" />
           <img className="zombie" src={zombie8} alt="zombie!" />
+          <img className="zombie" src={zombie9} alt="zombie!" />
+          <img className="zombie" src={zombie10} alt="zombie!" />
 
           <img className="zombie" src={zombie1} alt="zombie!" />
           <img className="zombie" src={zombie2} alt="zombie!" />
@@ -68,6 +72,8 @@ let Gallery = (props) => {
           <img className="zombie" src={zombie6} alt="zombie!" />
           <img className="zombie" src={zombie7} alt="zombie!" />
           <img className="zombie" src={zombie8} alt="zombie!" />
+          <img className="zombie" src={zombie9} alt="zombie!" />
+          <img className="zombie" src={zombie10} alt="zombie!" />
         </div>
       </div>
     </div>

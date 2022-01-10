@@ -14,7 +14,8 @@ import HowTo from './Components/HowTo';
 import Faq from './Components/Faq';
 import Footer from './Components/Footer';
 
-import headerimg from './assets/bg.jpg';
+import headerimg from './assets/trees-bg.png';
+import QuickAccess from './Components/QuickAccess';
 
 // Update with the contract address logged out to the CLI when it was deployed
 // const greeterAddress = "your-contract-address"
@@ -23,24 +24,31 @@ ReactModal.setAppElement('#root');
 function App() {
   const herobg = css`
     width: 100%;
-    background-image: url('${headerimg}');
-    background-position: center;
+    /* background-image: url('${headerimg}'); */
+    /* background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) 38.27%,
+        rgba(0, 0, 0, 0.75) 77.47%
+      ),
+      url('${headerimg}'); */
   `;
 
   return (
     <div className="App">
       <div className="body">
-        <div className="content-section" css={herobg}>
-          <Hero />
-        </div>
-        <Info />
+        {/* <div className="content-section" css={herobg}> */}
+        {/* </div> */}
+        <Hero />
+        {/* <Info /> */}
+        <QuickAccess />
         <Gallery />
         <Roadmap />
         <Team />
-        <Mission />
-        <HowTo />
+        {/* <Mission /> */}
+        {/* <HowTo /> */}
         <Faq />
         <Footer />
       </div>

@@ -33,6 +33,7 @@ const SplitPathHeader = styled.h1`
   margin: 20px 0 0;
   visibility: visible;
   display: block;
+  text-shadow: 0px 0px 4px #696647;
 
   @media (max-width: 1640px) {
     font-size: 100px;

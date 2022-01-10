@@ -7,9 +7,9 @@ import zombie from '../assets/gallery/mint.jpg';
 
 let Info = (props) => {
   const info = css`
-    background-image: url(${grungebg});
-    background-position: 60px 10px;
-    background-repeat: no-repeat;
+    /* background-image: url(${grungebg}); */
+    /* background-position: 60px 10px; */
+    /* background-repeat: no-repeat; */
     color: white;
 
     .green-highlight {
@@ -27,7 +27,7 @@ let Info = (props) => {
   `;
   const topText = css`
     font-size: 18px;
-    padding: 150px 0 0 0;
+    padding: 20px 0 0 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -35,7 +35,7 @@ let Info = (props) => {
       flex-direction: column;
     }
     @media (max-width: 640px) {
-      padding: 80px 0 0 0;
+      padding: 0px 5%;
     }
 
     .description {
@@ -260,15 +260,11 @@ let Info = (props) => {
       <div css={topText}>
         <div className="description">
           <span className="green-highlight">Nice Fun Zombies</span> (NFZs) is a
-          collection of unique zombie NFT characters on the Ethereum blockchain
-          in search of BRAINS. Nice Fun Zombie owners will get access to a world
-          where Every Decision Matters – holders will be faced with several
-          choices, and they will be able to create a tailored NFT experience.
-          Game theory mechanics such as searching locations, hording, and
-          holding will reward different benefits. Additionally, NFZ holders will
-          have access to a community of zombie loving fans, real life rewards,
-          and be at the start of the development of a new IP. Come join the NFZ
-          horde... we're definitely nice and fun.
+          collection of 6,666 unique zombie NFT characters on the Ethereum
+          blockchain in search of BRAINS. Nice Fun Zombie owners will get access
+          to game mechanics such as searching, holding, and hording for
+          benefits, a community of zombie loving fans, and digital and real
+          world perks. Come join the NFZ horde, we're definitely nice and fun
         </div>
         <div id="links">
           Join the Horde!
@@ -292,7 +288,7 @@ let Info = (props) => {
           </a>
         </div>
       </div>
-      <div id="mint" css={bottomText}>
+      {/* <div id="mint" css={bottomText}>
         <h1>
           MINT - <span className="green-highlight">LIVE NOW</span>
         </h1>
@@ -331,7 +327,7 @@ let Info = (props) => {
             <div className="mint-numbers zombie-bg end"></div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="clear"></div>
     </div>
   );

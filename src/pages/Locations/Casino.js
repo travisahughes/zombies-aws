@@ -5,7 +5,6 @@ import slotMachine from '../../assets/locations/loading-casino-2.gif';
 import brain from '../../assets/locations/brain.png';
 import chip from '../../assets/locations/chip.png';
 import card from '../../assets/locations/cards.png';
-import NFZs from '../../assets/locations/2797.png';
 import Keycard from '../../assets/locations/keycard.png';
 import discord from '../../assets/icons/discord.png';
 import UserNFZ from '../../Components/userNFZ';
@@ -15,7 +14,6 @@ import shadow from '../../assets/game/shadow.png';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
 import { keyframes } from '@emotion/react';
-import { isCompositeComponentWithType } from 'react-dom/cjs/react-dom-test-utils.production.min';
 import { prizes } from '../../constants/prizes';
 
 const CasinoPageContainer = styled.div`
@@ -33,7 +31,8 @@ const CasinoPageContainer = styled.div`
   position: relative;
   display: ${(props) => (props.loading ? 'flex' : 'block')};
   justify-content: center;
-  align-items: flex-end;
+  align-items: ${(props) => (props.loading ? 'center' : 'flex-end')};
+  flex-direction: ${(props) => (props.loading ? 'column' : 'row')};
 
   @media (min-width: 767px) {
     background-size: 100% 100vh;
@@ -491,6 +490,12 @@ function ListItemWithIcon({ img, alt, text }) {
   );
 }
 
+const LoadingHint = styled.p`
+  font-weight: bold;
+  color: #000000;
+  font-size: 1.2rem;
+`;
+
 export default function CasinoPage({
   tokensContract,
   userAccount,
@@ -720,6 +725,11 @@ export default function CasinoPage({
         </>
       )}
       {loading && <SlotMachineImage src={slotMachine} alt="slot-machine" />}
+      {loading && (
+        <LoadingHint>
+          Don't close this page until you see the result screen!
+        </LoadingHint>
+      )}
       <SendTeamButton
         betting={selectedIds.length < 1 || betting}
         onClick={casinoClick}
