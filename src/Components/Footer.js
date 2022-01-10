@@ -28,11 +28,6 @@ let Footer = (props) => {
       margin: 0 auto;
     }
 
-    /* @media (max-width: 960px) { */
-    /* height: 100px;
-      width: 100%; */
-    /* } */
-
     #footerleft {
       margin: 0 3rem;
       @media (max-width: 960px) {

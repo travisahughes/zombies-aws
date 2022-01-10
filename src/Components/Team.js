@@ -6,7 +6,7 @@ import ray from '../assets/team/ray.png';
 import taylor from '../assets/team/taylor.png';
 import sarah from '../assets/team/sarah.png';
 import travis from '../assets/team/travis.png';
-import ben from '../assets/team/ben.png';
+import ben from '../assets/team/ben.jpeg';
 import anna from '../assets/team/anna.png';
 import jian from '../assets/team/jian.png';
 import ed from '../assets/team/ed.png';
@@ -21,11 +21,13 @@ const MemberList = [
     name: '@rayminbi | Raymond',
     image: ray,
     role: 'Founder, Strategy, Brand, Marketing, Partnerships',
+    link: 'https://twitter.com/rayminbi',
   },
   {
     name: '@tdubs | Taylor',
     image: taylor,
     role: 'Founder, Tech',
+    link: 'https://twitter.com/septof84',
   },
   {
     name: '@firestarteronibi | Sarah',
@@ -36,11 +38,12 @@ const MemberList = [
     name: '@blood1n3 | Travis',
     image: travis,
     role: 'Development Lead',
+    link: 'https://twitter.com/travisahughes',
   },
   {
     name: '@bibi | Ben',
     image: ben,
-    role: 'Community Manager',
+    role: 'Partnerships and Community Manager',
   },
   {
     name: '@bearheart | Anna',
@@ -56,24 +59,28 @@ const MemberList = [
 
 const ModList = [
   {
+    name: '@Healmonger',
+    image: tylerhealmonger,
+    role: 'Discord Moderator & Community Development',
+    link: 'https://twitter.com/NFTGibby',
+  },
+  {
     name: '@eggbolt | Ed',
     image: ed,
     role: 'Discord Moderator & Community Development',
+    link: 'https://twitter.com/edlovesmax',
   },
   {
     name: '@Boyscout',
     image: boyscout,
     role: 'Discord Moderator & Community Development',
+    link: 'https://twitter.com/itsmeboyscout',
   },
   {
     name: '@Tyler',
     image: tylerhealmonger,
     role: 'Discord Moderator & Community Development',
-  },
-  {
-    name: '@Healmonger',
-    image: tylerhealmonger,
-    role: 'Discord Moderator & Community Development',
+    link: 'https://twitter.com/tyler_empey555',
   },
 ];
 
@@ -82,11 +89,13 @@ const AdvisorList = [
     name: '@andywmi',
     image: andywmi,
     role: 'Research Advisor',
+    link: 'https://twitter.com/andywmi',
   },
   {
-    name: '@Zeneca',
+    name: '@zeneca_33',
     image: zeneca,
     role: 'Advisor as part of Zeneca’s 333 Club',
+    link: 'https://twitter.com/Zeneca_33',
   },
 ];
 
@@ -95,7 +104,7 @@ const MemberContainer = styled.div`
   flex-direction: column;
   align-items: center;
   max-width: 160px;
-  min-height: 260px;
+  min-height: 280px;
 `;
 
 const Avatar = styled.img`
@@ -115,6 +124,7 @@ const MemberName = styled.span`
   font-style: normal;
   font-weight: normal;
   margin: 0.5rem 0;
+  cursor: ${(props) => props.cursor};
 `;
 const MemberRole = styled.span`
   font-size: 11px;
@@ -123,12 +133,32 @@ const MemberRole = styled.span`
   color: #aff038;
 `;
 
-const Member = ({ name, image, role }) => {
+const Member = ({ name, image, role, link }) => {
   return (
     <MemberContainer>
       <Avatar src={image} alt="zombie" />
-      <MemberName>{name}</MemberName>
+      <MemberName
+        onClick={() => {
+          if (link) {
+            window.open(link, '_blank');
+          }
+        }}
+        cursor={link ? 'pointer' : 'auto'}
+      >
+        {name}
+      </MemberName>
       <MemberRole>{role}</MemberRole>
+      {name.includes('rayminbi') && (
+        <>
+          <img
+            src={twitter}
+            alt="twitter"
+            onClick={() => window.open(link, '_blank')}
+            width={20}
+            style={{ marginTop: '5px', cursor: 'pointer' }}
+          />
+        </>
+      )}
     </MemberContainer>
   );
 };
@@ -198,6 +228,7 @@ let Team = (props) => {
               name={member.name}
               image={member.image}
               role={member.role}
+              link={member.link}
               key={index}
             />
           ))}

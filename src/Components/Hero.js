@@ -3,6 +3,9 @@ import { css } from '@emotion/react';
 import textmask from '../assets/textmask.jpg';
 import bannerImg from '../assets/banner-image.png';
 import treeBg from '../assets/trees-bg.png';
+import star from '../assets/star.svg';
+import twitter from '../assets/icons/twitter.png';
+import discord from '../assets/icons/discord.png';
 import Nav from './Nav';
 import styled from '@emotion/styled';
 import openseaLogo from '../assets/icons/opensea.png';
@@ -51,8 +54,8 @@ const TitleText = styled.p`
   font-family: Teko;
   font-style: normal;
   font-weight: normal;
-  font-size: 40px;
-  line-height: 57px;
+  font-size: 36px;
+
   text-transform: uppercase;
   margin: 0;
 `;
@@ -65,17 +68,15 @@ const GreenText = styled.span`
 `;
 
 const OpenseaButton = styled.div`
-  height: 80px;
-  width: 368px;
+  height: 50px;
   border: 3px solid #bad14d;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-
-  width: 320px;
+  width: 300px;
   @media (min-width: 768px) {
-    width: 368px;
+    width: 300px;
   }
 `;
 
@@ -144,6 +145,44 @@ const FlexBox = styled.div`
   }
 `;
 
+const LinksContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background: #000000;
+  margin-bottom: 1rem;
+  height: 40px;
+`;
+
+const Link = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 150%;
+  img {
+    margin-right: 16px;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 14px;
+
+    img {
+      margin-right: 8px;
+    }
+  }
+`;
+
+const JoinHordeText = styled.p`
+  color: #aff038;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 150%;
+`;
+
 let Hero = (props) => {
   return (
     <>
@@ -152,14 +191,30 @@ let Hero = (props) => {
         <FlexBox>
           <BannerImg src={bannerImg} alt="banner" />
           <RightContainer>
-            <TitleText>An undying NFT Art Project & Community</TitleText>
+            <TitleText>
+              An undying GAME THEORY NFT Project & Community
+            </TitleText>
             <DescriptionText>
-              Note: There are approximately{' '}
-              <GreenText>2,000 NFZs still to be found in locations</GreenText> -
-              NFZ holders can send their zombies to SEARCH locations for hidden
-              ones in the collection. (Coming Soon)
+              <GreenText> Nice Fun Zombies</GreenText> (NFZs) is a collection of
+              6,666 unique zombie NFT characters on the Ethereum blockchain in
+              search of BRAINS. Nice Fun Zombie owners will get access to game
+              mechanics such as searching, holding, and hording for benefits, a
+              community of zombie loving fans, and digital and real world perks.{' '}
+              <b>Come join the NFZ horde, we're definitely nice and fun.</b>
             </DescriptionText>
 
+            <LinksContainer>
+              <Link>
+                <img src={star} alt="rarity" /> Rarity Tools
+              </Link>
+              <Link>
+                <img src={discord} alt="discord" height="18" /> Discord
+              </Link>
+              <Link>
+                <img src={twitter} alt="twitter" height="17" /> Twitter
+              </Link>
+            </LinksContainer>
+            <JoinHordeText>Join the horde!</JoinHordeText>
             <OpenseaButton
               onClick={() =>
                 window
@@ -172,11 +227,11 @@ let Hero = (props) => {
             >
               <img src={openseaLogo} alt="opensea" />
               <ButtonTextContainer>
-                <SoldOutText>The Mint is SOLD OUT!</SoldOutText>
-                <CheckOpenseaText>Check OpenSea to Purchase</CheckOpenseaText>
+                {/* <SoldOutText>The Mint is SOLD OUT!</SoldOutText> */}
+                <CheckOpenseaText>Purchase on OpenSea</CheckOpenseaText>
               </ButtonTextContainer>
             </OpenseaButton>
-            <RarityTool>
+            {/* <RarityTool>
               <a
                 href="https://rarity.tools/nicefunzombies"
                 target="_blank"
@@ -184,7 +239,7 @@ let Hero = (props) => {
               >
                 Check us out on Rarity Tools
               </a>
-            </RarityTool>
+            </RarityTool> */}
           </RightContainer>
         </FlexBox>
       </HeroSection>
