@@ -3,8 +3,8 @@ import casino from '../assets/locations/casino.png';
 import school from '../assets/locations/school.png';
 import keycard from '../assets/locations/keycard.png';
 // import dashboard from '../assets/dashboard.png';
-import graveBg from '../assets/grave-bg.png';
-import splitBg from '../assets/split-path-bg.jpeg';
+import graveBg from '../assets/bg-grave.jpg';
+import splitBg from '../assets/bg-splitpath.jpg';
 import styled from '@emotion/styled';
 
 const QuickAccessSection = styled.section`

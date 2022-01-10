@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 import textmask from '../assets/textmask.jpg';
 import bannerImg from '../assets/banner-image.png';
-import treeBg from '../assets/trees-bg.png';
+import treeBg from '../assets/hero_bg.jpg';
 import star from '../assets/star.svg';
 import twitter from '../assets/icons/twitter.png';
 import discord from '../assets/icons/discord.png';
@@ -30,7 +30,7 @@ const HeroSection = styled.section`
   background-size: cover;
 
   @media (min-width: 768px) {
-    /* background-size: 100% 100%; */
+    background-size: 100% 140%;
   }
 `;
 
