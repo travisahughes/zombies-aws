@@ -107,7 +107,7 @@ const MemberContainer = styled.div`
   flex-direction: column;
   align-items: center;
   max-width: 160px;
-  min-height: 280px;
+  min-height: 260px;
 `;
 
 const Avatar = styled.img`
@@ -148,20 +148,20 @@ const Member = ({ name, image, role, link }) => {
         }}
         cursor={link ? 'pointer' : 'auto'}
       >
-        {name}
+        {name}{' '}
+        {link && (
+          <>
+            <img
+              src={twitter}
+              alt="twitter"
+              onClick={() => window.open(link, '_blank')}
+              width={16}
+              style={{ marginTop: '5px', cursor: 'pointer' }}
+            />
+          </>
+        )}
       </MemberName>
       <MemberRole>{role}</MemberRole>
-      {name.includes('rayminbi') && (
-        <>
-          <img
-            src={twitter}
-            alt="twitter"
-            onClick={() => window.open(link, '_blank')}
-            width={20}
-            style={{ marginTop: '5px', cursor: 'pointer' }}
-          />
-        </>
-      )}
     </MemberContainer>
   );
 };
