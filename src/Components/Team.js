@@ -12,6 +12,7 @@ import jian from '../assets/team/jian.png';
 import ed from '../assets/team/ed.png';
 import boyscout from '../assets/team/boyscout.png';
 import tylerhealmonger from '../assets/team/tyler-healmonger.png';
+import healmonger from '../assets/team/healmonger.png';
 import andywmi from '../assets/team/andywmi.png';
 import zeneca from '../assets/team/zeneca.png';
 import styled from '@emotion/styled';
@@ -44,6 +45,7 @@ const MemberList = [
     name: '@bibi | Ben',
     image: ben,
     role: 'Partnerships and Community Manager',
+    link: 'https://twitter.com/bltwzzz',
   },
   {
     name: '@bearheart | Anna',
@@ -54,13 +56,14 @@ const MemberList = [
     name: '@jianesis | Jian',
     image: jian,
     role: 'Frontend Developer',
+    link: 'https://twitter.com/jianesis',
   },
 ];
 
 const ModList = [
   {
     name: '@Healmonger',
-    image: tylerhealmonger,
+    image: healmonger,
     role: 'Discord Moderator & Community Development',
     link: 'https://twitter.com/NFTGibby',
   },
