@@ -144,7 +144,8 @@ function Dashboard() {
             : 1;
         });
 
-        let tmpRewards = {};
+        console.log('zzz rewards', userRewards);
+        let tmpRewards = { 1: 1 };
         rewards.forEach((rewardId) => {
           if (tmpRewards[rewardId]) {
             tmpRewards[rewardId]++;
@@ -152,6 +153,7 @@ function Dashboard() {
             tmpRewards[rewardId] = 1;
           }
         });
+        console.log('zzz rewards', tmpRewards);
 
         keycards.result?.forEach((token) => {
           const { amount, token_id } = token;
@@ -163,11 +165,12 @@ function Dashboard() {
 
         console.log('School Prize', schoolPrizeCounts);
         console.log('Casino Prizes', casinoPrizeCounts);
-        console.log('rewards', rewards);
+        console.log('tmpRewards', tmpRewards);
         setSchoolPrizeCounts(schoolPrizeCounts);
         setCasinoPrizeCounts(casinoPrizeCounts);
         setUserRewards(tmpRewards);
-        setUserTotalRewards(rewards?.length || 0);
+        // setUserTotalRewards(rewards?.length || 0);
+        setUserTotalRewards(1);
       };
 
       fetchNfts();
@@ -263,6 +266,23 @@ function Dashboard() {
 
     .green-highlight {
       color: #aff038;
+    }
+
+    .glow-button {
+      border: 3px solid #ab19ef;
+      background: black;
+      color: white;
+      padding: 5px 15px;
+      cursor: pointer;
+      -webkit-transition: border 500ms ease-out;
+      -moz-transition: border 500ms ease-out;
+      -o-transition: border 500ms ease-out;
+      transition: border 500ms ease-out;
+      &:hover {
+        border: 3px solid #ccee25;
+        box-sizing: border-box;
+        filter: drop-shadow(0px 0px 4px #ccee25);
+      }
     }
 
     .dashboard-header {
@@ -480,6 +500,15 @@ function Dashboard() {
             }
           }
         }
+        .reward-claim {
+          margin-left: 10px;
+          padding: 10px 10px 10px 25px;
+          border-left: 1px solid #4c4c4c;
+
+          .claim-button {
+            font-size: 14px;
+          }
+        }
       }
 
       h2 {
@@ -668,7 +697,7 @@ function Dashboard() {
             </div>
             <div id="time-remaining" className="event-item">
               <a href="/locations">
-                Casino vs School&nbsp;&nbsp;&nbsp;Ends Jan. 15
+                Casino vs School&nbsp;&nbsp;&nbsp;Ends Jan. 22
               </a>
             </div>
             <div
@@ -816,6 +845,11 @@ function Dashboard() {
                   <div className="reward-text">
                     {userRewards[4]} Custom NFZs
                   </div>
+                </div>
+              )}
+              {userTotalRewards > 0 && userRewards[1] > 0 && (
+                <div className="reward-claim">
+                  <div className="claim-button glow-button">Claim #9999</div>
                 </div>
               )}
             </div>
