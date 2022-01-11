@@ -42,7 +42,7 @@ function App() {
         {/* <div className="content-section" css={herobg}> */}
         {/* </div> */}
         <Hero />
-        <Info />
+        {/* <Info /> */}
         <QuickAccess />
         <Gallery />
         <Roadmap />

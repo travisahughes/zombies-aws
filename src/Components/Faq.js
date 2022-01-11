@@ -57,21 +57,8 @@ let Faq = (props) => {
           <h1>FAQ</h1>
           <div id="faq-list">
             <FaqItem
-              title="When do Nice Fun Zombies go on sale?"
-              content="Pre-Sale Begins Thurs Oct 21, Public Sale Begins Fri Oct 22."
-            />
-            <FaqItem
               title="How many NFZs are available?"
-              content={
-                <ul>
-                  <li>
-                    There will be only 6,666 Nice Fun Zombies ever available
-                    however they have not all been released yet. The remaining
-                    quantity will gradually be made available via location
-                    Searching by existing NFZ holders.
-                  </li>
-                </ul>
-              }
+              content="There will be only 6,666 Nice Fun Zombies ever available however they have not all been released yet. The remaining quantity will gradually be made available via location Searching by existing NFZ holders."
             />
             <FaqItem
               title="How do I buy Nice Fun Zombies?"

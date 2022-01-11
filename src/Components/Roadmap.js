@@ -2,7 +2,6 @@
 import { css } from '@emotion/react';
 import ReactModal from 'react-modal';
 import { useState } from 'react';
-import grungewhite from '../assets/grunge_white.png';
 import edmsmall from '../assets/edm_small.jpg';
 import edm from '../assets/edm.jpg';
 import roadmap1 from '../assets/roadmap/roadmap1.png';
@@ -14,7 +13,7 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import styled from '@emotion/styled';
 
-let Roadmap = (props) => {
+let Roadmap = () => {
   const [showModal, setShowModal] = useState(false);
 
   const handleOpenModal = () => {
@@ -41,15 +40,11 @@ let Roadmap = (props) => {
     flex-wrap: wrap;
     width: 100%;
     background: white;
-    /* padding: 0 5%; */
 
     img {
       width: auto;
-      /* max-width: 500px; */
       height: 90%;
       cursor: pointer;
-      /* width: 100%; */
-      /* padding: 0 5%; */
     }
     @media (max-width: 960px) {
       margin: 30px 0 20px;
@@ -61,9 +56,6 @@ let Roadmap = (props) => {
       padding: 0;
 
       img {
-        /* width: 100%; */
-        /* max-width: 100%; */
-        /* padding: 5%; */
         width: 90%;
         height: auto;
       }
@@ -76,7 +68,6 @@ let Roadmap = (props) => {
       width: 100%;
       height: 100%;
       margin-right: 60px;
-      /* flex: 1; */
 
       @media (max-width: 1023px) {
         margin-top: 0;
@@ -130,6 +121,7 @@ let Roadmap = (props) => {
         font-weight: bold;
         font-size: 14px;
         line-height: 150%;
+        cursor: pointer;
 
         :hover {
           background: #ab19ef;
@@ -277,7 +269,7 @@ let Roadmap = (props) => {
         background-color: #000000;
         margin: 0 20px 20px 0;
         width: 100%;
-        /* width: calc(33% - 20px); */
+
         @media (max-width: 960px) {
           width: 100%;~
           margin-right: 0;
@@ -488,7 +480,17 @@ let Roadmap = (props) => {
                 Every Decision Matters
               </a>
             </p>
-            <div className="game-theory-button">Game Theory Guide</div>
+            <div
+              className="game-theory-button"
+              onClick={() =>
+                window.open(
+                  'https://nice-fun-zombies.gitbook.io/game-theory/',
+                  '_blank'
+                )
+              }
+            >
+              Game Theory Guide
+            </div>
           </div>
           <ReactModal
             isOpen={showModal}
@@ -652,16 +654,6 @@ let Roadmap = (props) => {
         </div>
       </div>
       <div css={clear}></div>
-      {/* <div css={footer}>
-        MORE DETAILS OF OUR ROADMAP FOUND ON{' '}
-        <a
-          href="https://discord.gg/77VswFkcuY"
-          target="_blank"
-          rel="noreferrer"
-        >
-          DISCORD
-        </a>
-      </div> */}
     </div>
   );
 };

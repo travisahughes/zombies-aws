@@ -258,11 +258,6 @@ let Header = (props) => {
             </a>
           </li>
           <li className="text">
-            <a href="#mission" onClick={toggleMenu}>
-              Mission & Goals
-            </a>
-          </li>
-          <li className="text">
             <a href="#roadmap" onClick={toggleMenu}>
               Roadmap
             </a>
@@ -270,11 +265,6 @@ let Header = (props) => {
           <li className="text">
             <a href="#team" onClick={toggleMenu}>
               Team
-            </a>
-          </li>
-          <li className="text">
-            <a href="#howto" onClick={toggleMenu}>
-              How to Mint
             </a>
           </li>
           <li className="text">
