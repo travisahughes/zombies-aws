@@ -10,6 +10,15 @@ const validateMerkle = (leaves, userAddress) => {
   return { proof: proof, valid: tree.verify(proof, leaf, root) };
 };
 
+const hashToken = (tokenId, account) => {
+  return Buffer.from(
+    ethers.utils
+      .solidityKeccak256(['uint256', 'address'], [tokenId, account])
+      .slice(2),
+    'hex'
+  );
+};
+
 export const getPresaleProof = (userAddress) => {
   const leaves = presaleWhitelist.map((address) => keccak256(address));
   return validateMerkle(leaves, userAddress);
