@@ -668,7 +668,7 @@ function Dashboard() {
             </div>
             <div id="time-remaining" className="event-item">
               <a href="/locations">
-                Casino vs School&nbsp;&nbsp;&nbsp;Ends Jan. 15
+                Casino vs School&nbsp;&nbsp;&nbsp;Ends Jan. 22
               </a>
             </div>
             <div
