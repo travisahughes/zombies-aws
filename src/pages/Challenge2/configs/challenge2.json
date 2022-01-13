@@ -1,0 +1,8 @@
+{   "challenge_length": 3,
+    "boxes": [
+        {"_id": 1, "category": ["Location"], "requirements": ["School", "Casino"], "divClassName": "shadow preview-section", "headerText": "In A Location", "subHeaderText": "(School or Casino)", "defaultImage": "shadow", "zombie": {}},
+
+        {"_id": 2, "category": ["Location"], "requirements": [null], "divClassName": "preview-section theif", "headerText": "The Explorer", "subHeaderText": "(No Location)", "defaultImage": "theif", "zombie": {}},
+        {"_id": 3, "category": ["NA"], "requirements": [], "wildcard": true, "divClassName": "preview-section wildcard", "headerText": "The Companion", "subHeaderText": "(Your Favorite NFZ)","defaultImage": "wildcard", "zombie": {}}
+    ]
+}
