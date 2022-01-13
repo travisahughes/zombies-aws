@@ -7,4 +7,9 @@ const freeClaims = {
   4598: '0x61a9e38515e371956f07883c7a4bc27a72385a80',
   4599: '0xfd9a34318bf5b88a335880bf052f9643bb9c7e52',
 };
+
+export const walletToClaims = {
+  '0xaf6c30065a5bc2593c5a640d1d8e080039082ba0': [],
+  '0x356fe56Ce5C4B16E73AB0E2f711195dEeA50dFdd': [4789, 4901, 5123],
+};
 export default freeClaims;

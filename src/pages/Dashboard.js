@@ -4,12 +4,16 @@ import { useState, useEffect } from 'react';
 import ReactModal from 'react-modal';
 import axios from 'axios';
 import { useMoralis, useMoralisWeb3Api, useChain } from 'react-moralis';
-import { contract_data } from '../constants/moralis_env';
-import contractAddress from '../constants/contracts.json';
+
 import NavV2 from '../Components/NavV2';
 import TraitChecker from '../Components/TraitChecker';
+import NFZPrizeClaim from '../Components/NFZPrizeClaim';
+
+import { contract_data } from '../constants/moralis_env';
+import contractAddress from '../constants/contracts.json';
 import PolyGameMechanicsABI from '../constants/abis/NFZGameMechanicsV2.json';
 import { prizes } from '../constants/prizes';
+
 import footerV2 from '../assets/footerV2.png';
 import keycard_icon from '../assets/icons/keycard_icon.png';
 import keycard_reward from '../assets/dashboard/keycard_reward.png';
@@ -848,9 +852,7 @@ function Dashboard() {
                 </div>
               )}
               {userTotalRewards > 0 && userRewards[1] > 0 && (
-                <div className="reward-claim">
-                  <div className="claim-button glow-button">Claim #9999</div>
-                </div>
+                <NFZPrizeClaim userAccount={userAccount} />
               )}
             </div>
           </div>
