@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
+import { contract_data } from '../constants/moralis_env';
 import freeClaims, { walletToClaims } from '../constants/free_claims';
 
-let NFZPrizeClaim = ({ userAccount }) => {
+let NFZPrizeClaim = ({ userAccount, Web3Api }) => {
   const [claimIds, setClaimIds] = useState([]);
 
   useEffect(() => {
@@ -21,6 +22,20 @@ let NFZPrizeClaim = ({ userAccount }) => {
       }
     }
   }, [userAccount]);
+
+  useEffect(async () => {
+    if (Web3Api) {
+      const options = {
+        address: contract_data.mainnet.contract_id,
+        token_id: '1',
+        chain: 'eth',
+      };
+      // TODO: Loop through claim ids and see if they have an owner
+      //       If they do, then it's already claimed, so don't show button
+      const tokenIdOwners = await Web3Api.token.getTokenIdOwners(options);
+      console.log('tokenIdOwners', tokenIdOwners);
+    }
+  }, [Web3Api]);
 
   const handleClaim = (id) => {
     console.log(`web3.freeClaim(${id})`);

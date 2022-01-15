@@ -666,6 +666,8 @@ function Dashboard() {
 
   const herobg = css`
     width: 100%;
+    background-color: #151515;
+    margin: 0 auto;
   `;
 
   return (
@@ -852,7 +854,7 @@ function Dashboard() {
                 </div>
               )}
               {userTotalRewards > 0 && userRewards[1] > 0 && (
-                <NFZPrizeClaim userAccount={userAccount} />
+                <NFZPrizeClaim userAccount={userAccount} Web3Api={Web3Api} />
               )}
             </div>
           </div>
