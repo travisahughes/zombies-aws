@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import bgimg from '../../assets/challenge/challengebg.jpg';
+import bgimg from '../../assets/challenge/challenge2bg.jpg';
 import rainingeth from '../../assets/challenge/rainingeth.png';
 import fox from '../../assets/challenge/metamaskfox.png';
 import './Welcome.css';
@@ -34,7 +34,7 @@ function Welcome({
         );
       }
       axios
-        .get(`https://api.nicefunzombies.io/challenge/${account}`)
+        .get(`https://api.nicefunzombies.io/challenge2/${account}`)
         .then((response) => {
           setChallengeCompleted(true);
         })
@@ -72,6 +72,7 @@ function Welcome({
     }
 
     h1 {
+      text-shadow: #000000 1px 0 5px;
       @media (max-width: 640px) {
         font-size: 24px;
       }
@@ -81,6 +82,10 @@ function Welcome({
       @media (max-width: 640px) {
         font-size: 14px;
       }
+    }
+
+    .caps {
+      text-transform: uppercase;
     }
 
     #ethrain {
@@ -158,20 +163,22 @@ function Welcome({
     <div css={challengeCss}>
       <div id="ethrain"></div>
       <div className="content-section">
-        <h1>Welcome to the nice fun Challenge!</h1>
+        <h1>
+          Welcome to the
+          <br />
+          Nice Fun Rescue Challenge!
+        </h1>
       </div>
       <div className="content-section">
         <p>
-          The key to any great team is to build one that works great together.
-          So we're challenging you to assemble a horde with a very particular
-          set of skills.
+          A member of the horde has gone missing! Build a team of NFZs with a
+          very particular set of skills to track them down, and rescue our
+          friend!
         </p>
       </div>
       <div className="content-section">
-        <p>
-          Rise to the challenge to win something cool! Finish before:
-          <br />
-          December 14th 10AM ET/ 4PM CET / 11PM SG/Asia
+        <p className="caps">
+          The clock runs out at: Jan 23th 10AM ET/ 4PM CET / 11PM SG/Asia
         </p>
         {challengeCompleted && (
           <p className="challenge-complete">
@@ -187,7 +194,7 @@ function Welcome({
         )}
         {isAuthenticated && chainId === preferredChain && !challengeCompleted && (
           <div className="btn" onClick={() => history.push('/challenge2/info')}>
-            Face Your Challenge
+            Help is on the way!
           </div>
         )}
         {isAuthenticated && chainId !== preferredChain && (

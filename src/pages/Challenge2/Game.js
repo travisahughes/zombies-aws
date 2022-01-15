@@ -392,7 +392,7 @@ function Game({ userNfts, user }) {
     //fire off payload
     if (!user) return;
     const userAdress = user.get('ethAddress');
-    const challengId = `0_${userAdress.substring(6, 10)}`;
+    const challengeId = `1_${userAdress.substring(6, 10)}`;
 
     const _ids = challengeBoxes.map((box) => {
       const { zombie } = box;
@@ -400,7 +400,7 @@ function Game({ userNfts, user }) {
     });
 
     const payload = {
-      challengeKey: challengId,
+      challengeKey: challengeId,
       userWallet: userAdress,
       nfzIds: _ids,
     };
@@ -409,10 +409,10 @@ function Game({ userNfts, user }) {
       body: JSON.stringify(payload),
       mode: 'no-cors',
     };
-    fetch('https://api.nicefunzombies.io/challenge', options);
+    fetch('https://api.nicefunzombies.io/challenge2', options);
     console.log(payload);
     console.log(userAdress);
-    console.log(challengId);
+    console.log(challengeId);
 
     gsap.to('#collection', {
       duration: 0.5,
@@ -747,28 +747,26 @@ function Game({ userNfts, user }) {
         <div className="shadow preview-section alone">
           <img src={shadowImage} alt="" />
           <div className="preview-section-text">
-            <div className="preview-section-text-header">The Shadow</div>
+            <div className="preview-section-text-header">The Student</div>
             <div className="preview-section-text-sub-header">
-              (Charcoal Background)
+              (School Location)
             </div>
           </div>
         </div>
         <div className="preview-section theif alone">
           <img src={theifImage} alt="" />
           <div className="preview-section-text">
-            <div className="preview-section-text-header">The Thief</div>
+            <div className="preview-section-text-header">The Gambler</div>
             <div className="preview-section-text-sub-header">
-              (Bulletproof Vest or Burglar Eye Wear)
+              (Casino Location)
             </div>
           </div>
         </div>
         <div className="preview-section wildcard alone">
           <img src={wildcardImage} alt="" />
           <div className="preview-section-text">
-            <div className="preview-section-text-header">The Star</div>
-            <div className="preview-section-text-sub-header">
-              (Your favorite NFZ)
-            </div>
+            <div className="preview-section-text-header">The Wanderer</div>
+            <div className="preview-section-text-sub-header">(No Location)</div>
           </div>
         </div>
       </div>
