@@ -15,6 +15,11 @@ const QuickAccessSection = styled.section`
   width: 100%;
   max-width: 1440px;
   margin: auto;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
 
 const DashboardAccess = styled.div`
@@ -78,6 +83,7 @@ const Title = styled.span`
 
 const KeycardImage = styled.img`
   height: 220px;
+  margin-right: 1rem;
 `;
 
 const CasinoImage = styled.img`

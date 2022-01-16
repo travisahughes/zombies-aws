@@ -9,6 +9,7 @@ import discord from '../assets/icons/discord.png';
 import Nav from './Nav';
 import styled from '@emotion/styled';
 import openseaLogo from '../assets/icons/opensea.png';
+import looksrareLogo from '../assets/icons/looksrare.png';
 
 const HeroSection = styled.section`
   /* height: 90vh; */
@@ -74,9 +75,10 @@ const OpenseaButton = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  width: 300px;
+  width: 150px;
+  margin-right: 1rem;
   @media (min-width: 768px) {
-    width: 300px;
+    /* width: 300px; */
   }
 `;
 
@@ -146,11 +148,15 @@ const Link = styled.div`
 `;
 
 const JoinHordeText = styled.p`
-  color: #aff038;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 20px;
   line-height: 150%;
+`;
+
+const MarketplaceButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 let Hero = (props) => {
@@ -199,22 +205,41 @@ let Hero = (props) => {
                 <img src={twitter} alt="twitter" height="17" /> Twitter
               </Link>
             </LinksContainer>
-            <JoinHordeText>Join the horde!</JoinHordeText>
-            <OpenseaButton
-              onClick={() =>
-                window
-                  .open(
-                    'https://opensea.io/collection/nicefunzombies',
-                    '_blank'
-                  )
-                  .focus()
-              }
-            >
-              <img src={openseaLogo} alt="opensea" />
-              <ButtonTextContainer>
-                <CheckOpenseaText>Purchase on OpenSea</CheckOpenseaText>
-              </ButtonTextContainer>
-            </OpenseaButton>
+            <JoinHordeText>
+              <GreenText>Join the horde!</GreenText> Purchase On:
+            </JoinHordeText>
+            <MarketplaceButtonsContainer>
+              <OpenseaButton
+                onClick={() =>
+                  window
+                    .open(
+                      'https://opensea.io/collection/nicefunzombies',
+                      '_blank'
+                    )
+                    .focus()
+                }
+              >
+                <img src={openseaLogo} alt="opensea" />
+                <ButtonTextContainer>
+                  <CheckOpenseaText>OpenSea</CheckOpenseaText>
+                </ButtonTextContainer>
+              </OpenseaButton>
+              <OpenseaButton
+                onClick={() =>
+                  window
+                    .open(
+                      'https://looksrare.org/collections/0x65273D9be210e10be64D7E122387cc85857F92FD',
+                      '_blank'
+                    )
+                    .focus()
+                }
+              >
+                <img src={looksrareLogo} alt="looksrare" />
+                <ButtonTextContainer>
+                  <CheckOpenseaText>Looksrare</CheckOpenseaText>
+                </ButtonTextContainer>
+              </OpenseaButton>
+            </MarketplaceButtonsContainer>
           </RightContainer>
         </FlexBox>
       </HeroSection>
