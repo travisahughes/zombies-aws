@@ -3,42 +3,76 @@ import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
 import { contract_data } from '../constants/moralis_env';
 import freeClaims, { walletToClaims } from '../constants/free_claims';
+import NFZABI from '../constants/abis/NFZv2.json';
 
-let NFZPrizeClaim = ({ userAccount, Web3Api }) => {
+let NFZPrizeClaim = ({ userAccount, Web3Api, Moralis }) => {
   const [claimIds, setClaimIds] = useState([]);
 
-  useEffect(() => {
-    if (userAccount) {
+  useEffect(async () => {
+    if (Web3Api && userAccount) {
+      console.log('userAccount & web3api ready');
+
+      let unclaimedNFZs = [];
       let claims =
         walletToClaims[
           Object.keys(walletToClaims).filter(function (k) {
             return k.toLowerCase() === userAccount.toLowerCase();
           })[0]
         ];
-      console.log(`[claim] userAccount: ${userAccount}`, claims);
-      if (claimIds && claims.length > 0) {
-        console.log('setclaimids....', claims);
-        setClaimIds(claims);
+      console.log(`[claims] userAccount: ${userAccount}`, claims);
+
+      for (let x = 0; x < claims.length; x++) {
+        const nfzContractOptions = {
+          chain: contract_data.mainnet.chain_id,
+          address: contract_data.mainnet.contract_id,
+          abi: NFZABI.abi,
+        };
+
+        let ownerOf = null;
+        // We expect ownerOf to throw an error on an unclaimed token id
+        // Moralis doesn't provide a good way to catch errors though
+        try {
+          ownerOf = await Web3Api.native.runContractFunction({
+            ...nfzContractOptions,
+            function_name: 'ownerOf',
+            params: { tokenId: claims[x] },
+          });
+        } catch (e) {
+          // Unclaimed ids are available to claim, so add them to array
+          console.log(`NFZ #${claims[x]} is unclaimed`);
+          unclaimedNFZs.push(claims[x]);
+        }
+
+        console.log(`${claims[x]} owner`, ownerOf);
+      }
+
+      if (unclaimedNFZs && unclaimedNFZs.length > 0) {
+        console.log('setclaimids....', unclaimedNFZs);
+        setClaimIds(unclaimedNFZs);
       }
     }
-  }, [userAccount]);
+  }, [userAccount, Web3Api]);
 
-  useEffect(async () => {
-    if (Web3Api) {
-      const options = {
-        address: contract_data.mainnet.contract_id,
-        token_id: '1',
-        chain: 'eth',
-      };
-      // TODO: Loop through claim ids and see if they have an owner
-      //       If they do, then it's already claimed, so don't show button
-      const tokenIdOwners = await Web3Api.token.getTokenIdOwners(options);
-      console.log('tokenIdOwners', tokenIdOwners);
-    }
-  }, [Web3Api]);
+  useEffect(() => {
+    console.log('zzz Moralis?', Moralis);
+  }, [Moralis]);
 
-  const handleClaim = (id) => {
+  const handleClaim = async (id) => {
     console.log(`web3.freeClaim(${id})`);
+    // TODO: Figure out proof logic
+    const options = {
+      contractAddress: contract_data.mainnet.contract_id,
+      functionName: 'freeClaiim',
+      abi: NFZABI.abi,
+      params: {
+        account: userAccount,
+        proof: '',
+        tokenId: id,
+      },
+    };
+
+    const receipt = await Moralis.executeFunction(options);
+    console.log(`freeClaim complete`, receipt);
   };
 
   const prizeclaim = css`
@@ -81,10 +115,10 @@ let NFZPrizeClaim = ({ userAccount, Web3Api }) => {
     <div css={prizeclaim}>
       {claimIds.length > 0 &&
         claimIds.map(function (id) {
-          // returns Nathan, then John, then Jane
           return (
             <div
               className="claim-button glow-button"
+              id={'claim-' + id}
               key={id}
               onClick={() => handleClaim(id)}
             >

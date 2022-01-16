@@ -1,5 +1,6 @@
 import { MerkleTree } from 'merkletreejs';
 import keccak256 from 'keccak256';
+import ethers from 'ethers';
 import presaleWhitelist from './constants/presale_whitelist';
 
 const validateMerkle = (leaves, userAddress) => {

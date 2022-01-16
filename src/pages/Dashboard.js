@@ -854,7 +854,11 @@ function Dashboard() {
                 </div>
               )}
               {userTotalRewards > 0 && userRewards[1] > 0 && (
-                <NFZPrizeClaim userAccount={userAccount} Web3Api={Web3Api} />
+                <NFZPrizeClaim
+                  userAccount={userAccount}
+                  Web3Api={Web3Api}
+                  Moralis={Moralis}
+                />
               )}
             </div>
           </div>
