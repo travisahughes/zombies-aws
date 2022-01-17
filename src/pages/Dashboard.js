@@ -757,8 +757,8 @@ function Dashboard() {
                   Wallet connected: <b>{shortAddress}</b>
                 </div>
                 <div>
-                  Chain: ({contract_data[chainId]?.network_name || 'Unknown'})
-                  {chainId !== preferredChain && (
+                  Network: {contract_data[chainId]?.network_name || 'Unknown'}
+                  {/* {chainId !== preferredChain && (
                     <button
                       className="network-switch"
                       onClick={() =>
@@ -767,7 +767,7 @@ function Dashboard() {
                     >
                       Switch to {contract_data[preferredChain]?.network_name}
                     </button>
-                  )}
+                  )} */}
                 </div>
                 <div className="keycards">
                   <img id="keycard-icon" src={keycard_icon} alt="Keycard" />
@@ -858,6 +858,8 @@ function Dashboard() {
                   userAccount={userAccount}
                   Web3Api={Web3Api}
                   Moralis={Moralis}
+                  chainId={chainId}
+                  switchNetwork={switchNetwork}
                 />
               )}
             </div>

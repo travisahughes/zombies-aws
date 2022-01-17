@@ -14,7 +14,10 @@ const freeClaims = {
 };
 
 export const walletToClaims = {
-  '0xaf6c30065a5bc2593c5a640d1d8e080039082ba0': [],
-  '0x356fe56Ce5C4B16E73AB0E2f711195dEeA50dFdd': [40, 41, 50, 51, 5111],
+  '0xaf6c30065a5bc2593c5a640d1d8e080039082ba0': [35, 37, 38],
+  '0x32faaF85304aF038016C229a6fC816D35c63f9d0': [36],
+  '0x356fe56Ce5C4B16E73AB0E2f711195dEeA50dFdd': [40, 41, 50, 51],
+  '0x03766E2CABaa26324C10120Ede914f9C1Ca49861': [39, 146],
+  '0x2AA3499CB8dE173Af7fd5EA3c65c30580CaF1ac4': [52, 60],
 };
 export default freeClaims;

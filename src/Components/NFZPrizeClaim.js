@@ -1,30 +1,52 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
+import { getFreeClaimProof } from '../utils';
 import { contract_data } from '../constants/moralis_env';
 import freeClaims, { walletToClaims } from '../constants/free_claims';
-import NFZABI from '../constants/abis/NFZv2.json';
+import NFZABI from '../constants/abis/NFZv3.json';
 
-let NFZPrizeClaim = ({ userAccount, Web3Api, Moralis }) => {
+let NFZPrizeClaim = ({
+  userAccount,
+  Web3Api,
+  Moralis,
+  chainId,
+  switchNetwork,
+}) => {
+  let CONTRACT_CHAIN;
+  let CONTRACT_ADDRESS;
+
+  // TODO: MAKE SURE prod = true BEFORE DEPLOYING!
+  let prod = false;
+  if (prod) {
+    CONTRACT_CHAIN = contract_data.mainnet.chain_id;
+    CONTRACT_ADDRESS = contract_data.mainnet.contract_id;
+  } else {
+    CONTRACT_CHAIN = contract_data.rinkeby.chain_id;
+    CONTRACT_ADDRESS = contract_data.rinkeby.contract_id;
+  }
+
   const [claimIds, setClaimIds] = useState([]);
+  const [loadedData, setLoadedData] = useState(false);
+  const [curUserAccount, setCurUserAccount] = useState(null);
 
   useEffect(async () => {
-    if (Web3Api && userAccount) {
-      console.log('userAccount & web3api ready');
-
+    if (Web3Api && userAccount && loadedData === false) {
+      console.log('web3api/useraccount', userAccount, Web3Api);
+      setLoadedData(true);
       let unclaimedNFZs = [];
       let claims =
         walletToClaims[
           Object.keys(walletToClaims).filter(function (k) {
             return k.toLowerCase() === userAccount.toLowerCase();
           })[0]
-        ];
+        ] || [];
       console.log(`[claims] userAccount: ${userAccount}`, claims);
 
       for (let x = 0; x < claims.length; x++) {
         const nfzContractOptions = {
-          chain: contract_data.mainnet.chain_id,
-          address: contract_data.mainnet.contract_id,
+          chain: CONTRACT_CHAIN,
+          address: CONTRACT_ADDRESS,
           abi: NFZABI.abi,
         };
 
@@ -42,37 +64,51 @@ let NFZPrizeClaim = ({ userAccount, Web3Api, Moralis }) => {
           console.log(`NFZ #${claims[x]} is unclaimed`);
           unclaimedNFZs.push(claims[x]);
         }
-
-        console.log(`${claims[x]} owner`, ownerOf);
       }
 
-      if (unclaimedNFZs && unclaimedNFZs.length > 0) {
-        console.log('setclaimids....', unclaimedNFZs);
-        setClaimIds(unclaimedNFZs);
-      }
+      console.log('setClaimIds', unclaimedNFZs);
+      setClaimIds(unclaimedNFZs);
     }
   }, [userAccount, Web3Api]);
 
   useEffect(() => {
-    console.log('zzz Moralis?', Moralis);
+    // console.log('zzz Moralis?', Moralis);
   }, [Moralis]);
 
-  const handleClaim = async (id) => {
-    console.log(`web3.freeClaim(${id})`);
-    // TODO: Figure out proof logic
-    const options = {
-      contractAddress: contract_data.mainnet.contract_id,
-      functionName: 'freeClaiim',
-      abi: NFZABI.abi,
-      params: {
-        account: userAccount,
-        proof: '',
-        tokenId: id,
-      },
-    };
+  useEffect(() => {
+    if (userAccount && userAccount !== curUserAccount) {
+      console.log('updating curUserAccount to: ', userAccount);
+      setLoadedData(false);
+      setCurUserAccount(userAccount);
+    }
+  }, [userAccount]);
 
-    const receipt = await Moralis.executeFunction(options);
-    console.log(`freeClaim complete`, receipt);
+  const handleClaim = async (event, id) => {
+    event.target.innerHTML = 'Claiming!';
+    const proofData = getFreeClaimProof(userAccount, id);
+    if (proofData.valid) {
+      const options = {
+        contractAddress: CONTRACT_ADDRESS,
+        functionName: 'freeClaim',
+        abi: NFZABI.abi,
+        awaitReceipt: false,
+        params: {
+          account: userAccount,
+          proof: proofData.proof,
+          tokenId: id,
+        },
+      };
+
+      const tx = await Moralis.executeFunction(options);
+
+      tx.on('receipt', (receipt) => {
+        console.log('receipt', receipt);
+        event.target.className += ' hidden';
+      }).on('error', (error) => {
+        console.log('error', error);
+        event.target.innerHTML = 'Claim #' + id;
+      });
+    }
   };
 
   const prizeclaim = css`
@@ -80,17 +116,32 @@ let NFZPrizeClaim = ({ userAccount, Web3Api, Moralis }) => {
     color: white;
     background-color: #000000;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    align-content: flex-start;
+    flex-direction: column;
     margin-left: 10px;
     padding: 10px 10px 10px 25px;
     border-left: 1px solid #4c4c4c;
 
-    .claim-button {
-      font-size: 14px;
+    #claim-header {
       margin: 0 10px;
+      font-size: 14px;
+
+      button {
+        font-size: 12px;
+        margin: 10px 0 20px;
+      }
+    }
+
+    #claim-row {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      align-content: flex-start;
+
+      .claim-button {
+        font-size: 14px;
+        margin: 0 10px;
+      }
     }
 
     .glow-button {
@@ -109,23 +160,46 @@ let NFZPrizeClaim = ({ userAccount, Web3Api, Moralis }) => {
         filter: drop-shadow(0px 0px 4px #ccee25);
       }
     }
+
+    .hidden {
+      display: none;
+    }
   `;
 
   return (
     <div css={prizeclaim}>
-      {claimIds.length > 0 &&
-        claimIds.map(function (id) {
-          return (
-            <div
-              className="claim-button glow-button"
-              id={'claim-' + id}
-              key={id}
-              onClick={() => handleClaim(id)}
+      <div id="claim-header">
+        {chainId !== CONTRACT_CHAIN && (
+          <div id="header-text">
+            To claim your NFZs, you must be on{' '}
+            {contract_data[CONTRACT_CHAIN]?.network_name}
+            <br />
+            <button
+              className="network-switch"
+              onClick={() =>
+                switchNetwork(contract_data[CONTRACT_CHAIN]?.chain_id)
+              }
             >
-              Claim #{id}
-            </div>
-          );
-        })}
+              Switch to {contract_data[CONTRACT_CHAIN]?.network_name}
+            </button>
+          </div>
+        )}
+      </div>
+      <div id="claim-row">
+        {claimIds.length > 0 &&
+          claimIds.map(function (id) {
+            return (
+              <div
+                className="claim-button glow-button"
+                id={'claim-' + id}
+                key={id}
+                onClick={(e) => handleClaim(e, id)}
+              >
+                Claim #{id}
+              </div>
+            );
+          })}
+      </div>
     </div>
   );
 };
