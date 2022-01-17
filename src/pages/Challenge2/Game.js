@@ -287,7 +287,7 @@ function Game({ userNfts, user }) {
     //     return obj.zombie;
     //   })
     //   .filter((zombie) => getTrait('Group', zombie.attributes) == 'Genesis');
-
+    console.log(metadata);
     const isGenesis = getTrait('Group', attributes) ? true : false;
     const available = challengeBoxes.filter(
       (b) => Object.keys(b.zombie).length === 0
