@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import gsap from 'gsap';
 import zombie from '../../assets/challenge/info-zombie.png';
-import background from '../../assets/challenge/info-background.png';
+import background from '../../assets/challenge/info-background2.jpg';
 import comic from '../../assets/challenge/comic.png';
 
 import './Info.css';
@@ -118,23 +118,23 @@ function Info() {
       <div className="pigeon-image">
         <img src={comic} alt="" />
         <div className="pigeon-image-text">
-          Get your team together to pull off the heist and obtain the first ever
-          Horde Challenge reward before time runs out!
+          Get your exploring team together to find and obtain a Generation 2
+          Keycard and a new NFT comic art before time runs out!
         </div>
       </div>
       <div className="info-page-background">
         <img src={background} alt="" />
       </div>
       <div className="your-challenge-text">
-        Your challenge (should you choose to accept it) is to assemble a team of
-        <br />
-        Nice Fun Zombies with a very particular set of skills.
+        The Nice Fun Zombies have been unleashed into the world, and are
+        settling down into locations. Your challenge now is to assemble a team
+        of explorers to see what else is out there!
       </div>
       <div className="pigeon-final">
         <img src={zombie} alt="" />
         <div className="pigeon-final-text">
-          To pull off this heist, you will need three NFZs with the following
-          skills.
+          To pull off this challenge, you wil need three Nice Fun Zombies who
+          know the territory so far:
         </div>
       </div>
       <button className="next-step-button" onClick={() => handleNext()}>

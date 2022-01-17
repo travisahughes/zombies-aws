@@ -671,7 +671,7 @@ function Game({ userNfts, user }) {
         <div className="game-preview-header preview">
           <div className="game-preview-header-title">Recruit your team</div>
           <div className="game-preview-header-desc">
-            Glad we can count on you! To pull off this heist, you’ll need to
+            Glad we can count on you! To pull off this challenge, you'll need to
             build a team with these traits. Any NFZ with the Genesis trait can
             be used as a wildcard (only once)
           </div>
@@ -681,7 +681,7 @@ function Game({ userNfts, user }) {
             Your NFZ Crew Requirements
           </div>
           <div className="game-preview-header-desc">
-            Glad we can count on you! To pull off this heist, you’ll need to
+            Glad we can count on you! To pull off this challenge, you'll need to
             build a team with these traits. Any NFZ with the Genesis trait can
             be used as a wildcard (only once)
           </div>
@@ -747,26 +747,28 @@ function Game({ userNfts, user }) {
         <div className="shadow preview-section alone">
           <img src={shadowImage} alt="" />
           <div className="preview-section-text">
-            <div className="preview-section-text-header">The Student</div>
+            <div className="preview-section-text-header">Casino Veteran</div>
             <div className="preview-section-text-sub-header">
-              (School Location)
+              (Casino Location Zombie)
             </div>
           </div>
         </div>
         <div className="preview-section theif alone">
           <img src={theifImage} alt="" />
           <div className="preview-section-text">
-            <div className="preview-section-text-header">The Gambler</div>
+            <div className="preview-section-text-header">Scholar</div>
             <div className="preview-section-text-sub-header">
-              (Casino Location)
+              (School Location Zombie)
             </div>
           </div>
         </div>
         <div className="preview-section wildcard alone">
           <img src={wildcardImage} alt="" />
           <div className="preview-section-text">
-            <div className="preview-section-text-header">The Wanderer</div>
-            <div className="preview-section-text-sub-header">(No Location)</div>
+            <div className="preview-section-text-header">The Explorer</div>
+            <div className="preview-section-text-sub-header">
+              (Unassigned Location Zombie)
+            </div>
           </div>
         </div>
       </div>
