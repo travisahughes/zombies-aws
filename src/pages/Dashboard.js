@@ -4,12 +4,16 @@ import { useState, useEffect } from 'react';
 import ReactModal from 'react-modal';
 import axios from 'axios';
 import { useMoralis, useMoralisWeb3Api, useChain } from 'react-moralis';
-import { contract_data } from '../constants/moralis_env';
-import contractAddress from '../constants/contracts.json';
+
 import NavV2 from '../Components/NavV2';
 import TraitChecker from '../Components/TraitChecker';
+import NFZPrizeClaim from '../Components/NFZPrizeClaim';
+
+import { contract_data } from '../constants/moralis_env';
+import contractAddress from '../constants/contracts.json';
 import PolyGameMechanicsABI from '../constants/abis/NFZGameMechanicsV2.json';
 import { prizes } from '../constants/prizes';
+
 import footerV2 from '../assets/footerV2.png';
 import keycard_icon from '../assets/icons/keycard_icon.png';
 import keycard_reward from '../assets/dashboard/keycard_reward.png';
@@ -144,7 +148,8 @@ function Dashboard() {
             : 1;
         });
 
-        let tmpRewards = {};
+        console.log('zzz rewards', userRewards);
+        let tmpRewards = { 1: 1 };
         rewards.forEach((rewardId) => {
           if (tmpRewards[rewardId]) {
             tmpRewards[rewardId]++;
@@ -152,6 +157,7 @@ function Dashboard() {
             tmpRewards[rewardId] = 1;
           }
         });
+        console.log('zzz rewards', tmpRewards);
 
         keycards.result?.forEach((token) => {
           const { amount, token_id } = token;
@@ -163,11 +169,12 @@ function Dashboard() {
 
         console.log('School Prize', schoolPrizeCounts);
         console.log('Casino Prizes', casinoPrizeCounts);
-        console.log('rewards', rewards);
+        console.log('tmpRewards', tmpRewards);
         setSchoolPrizeCounts(schoolPrizeCounts);
         setCasinoPrizeCounts(casinoPrizeCounts);
         setUserRewards(tmpRewards);
-        setUserTotalRewards(rewards?.length || 0);
+        // setUserTotalRewards(rewards?.length || 0);
+        setUserTotalRewards(1);
       };
 
       fetchNfts();
@@ -263,6 +270,23 @@ function Dashboard() {
 
     .green-highlight {
       color: #aff038;
+    }
+
+    .glow-button {
+      border: 3px solid #ab19ef;
+      background: black;
+      color: white;
+      padding: 5px 15px;
+      cursor: pointer;
+      -webkit-transition: border 500ms ease-out;
+      -moz-transition: border 500ms ease-out;
+      -o-transition: border 500ms ease-out;
+      transition: border 500ms ease-out;
+      &:hover {
+        border: 3px solid #ccee25;
+        box-sizing: border-box;
+        filter: drop-shadow(0px 0px 4px #ccee25);
+      }
     }
 
     .dashboard-header {
@@ -480,6 +504,15 @@ function Dashboard() {
             }
           }
         }
+        .reward-claim {
+          margin-left: 10px;
+          padding: 10px 10px 10px 25px;
+          border-left: 1px solid #4c4c4c;
+
+          .claim-button {
+            font-size: 14px;
+          }
+        }
       }
 
       h2 {
@@ -633,6 +666,8 @@ function Dashboard() {
 
   const herobg = css`
     width: 100%;
+    background-color: #151515;
+    margin: 0 auto;
   `;
 
   return (
@@ -722,8 +757,8 @@ function Dashboard() {
                   Wallet connected: <b>{shortAddress}</b>
                 </div>
                 <div>
-                  Chain: ({contract_data[chainId]?.network_name || 'Unknown'})
-                  {chainId !== preferredChain && (
+                  Network: {contract_data[chainId]?.network_name || 'Unknown'}
+                  {/* {chainId !== preferredChain && (
                     <button
                       className="network-switch"
                       onClick={() =>
@@ -732,7 +767,7 @@ function Dashboard() {
                     >
                       Switch to {contract_data[preferredChain]?.network_name}
                     </button>
-                  )}
+                  )} */}
                 </div>
                 <div className="keycards">
                   <img id="keycard-icon" src={keycard_icon} alt="Keycard" />
@@ -817,6 +852,15 @@ function Dashboard() {
                     {userRewards[4]} Custom NFZs
                   </div>
                 </div>
+              )}
+              {userTotalRewards > 0 && userRewards[1] > 0 && (
+                <NFZPrizeClaim
+                  userAccount={userAccount}
+                  Web3Api={Web3Api}
+                  Moralis={Moralis}
+                  chainId={chainId}
+                  switchNetwork={switchNetwork}
+                />
               )}
             </div>
           </div>

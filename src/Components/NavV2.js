@@ -17,6 +17,8 @@ let Header = (props) => {
     background-color: #151515;
     padding: 8px 0 10px;
     font-size: 14px;
+    max-width: 1350px;
+    margin: 0 auto;
     @media (max-width: 700px) {
       position: fixed;
       top: 0;
@@ -107,7 +109,7 @@ let Header = (props) => {
     li {
       float: left;
       padding: 7px 12px;
-      @media (max-width: 1020px) {
+      @media (max-width: 900px) {
         font-size: 12px;
         padding: 10px 8px;
       }
@@ -136,9 +138,6 @@ let Header = (props) => {
           color: #aff038;
           border-bottom: #aff038 4px solid;
           padding-bottom: 26px;
-          @media (max-width: 1020px) {
-            padding-bottom: 27px;
-          }
         }
 
         @media (max-width: 700px) {
@@ -165,9 +164,6 @@ let Header = (props) => {
 
     li.icon {
       padding: 0 10x;
-      @media (max-width: 880px) {
-        display: none;
-      }
       @media (max-width: 700px) {
         display: block;
         background: none;
@@ -183,7 +179,7 @@ let Header = (props) => {
       }
 
       img {
-        @media (max-width: 1020px) {
+        @media (max-width: 900px) {
           width: 25px;
         }
       }
@@ -191,15 +187,14 @@ let Header = (props) => {
 
     li#twitter {
       padding-top: 5px;
-
-      @media (max-width: 1020px) {
+      @media (max-width: 900px) {
         padding-top: 6px;
       }
     }
 
     li#discord {
       padding-top: 3px;
-      @media (max-width: 1020px) {
+      @media (max-width: 900px) {
         padding-top: 6px;
       }
       @media (max-width: 700px) {
@@ -209,14 +204,14 @@ let Header = (props) => {
 
     li#opensea {
       padding-top: 0;
-      @media (max-width: 1020px) {
+      @media (max-width: 900px) {
         padding-top: 3px;
       }
     }
 
     li#etherscan {
       padding-top: 0;
-      @media (max-width: 1020px) {
+      @media (max-width: 900px) {
         padding-top: 3px;
       }
     }
@@ -249,11 +244,6 @@ let Header = (props) => {
             </a>
           </li>
           <li className="text">
-            <a href="/#mission" onClick={toggleMenu}>
-              Mission & Goals
-            </a>
-          </li>
-          <li className="text">
             <a href="/#roadmap" onClick={toggleMenu}>
               Roadmap
             </a>
@@ -261,11 +251,6 @@ let Header = (props) => {
           <li className="text">
             <a href="/#team" onClick={toggleMenu}>
               Team
-            </a>
-          </li>
-          <li className="text">
-            <a href="/#howto" onClick={toggleMenu}>
-              How to Mint
             </a>
           </li>
           <li className="text">
