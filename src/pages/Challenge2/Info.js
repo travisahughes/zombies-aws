@@ -133,7 +133,7 @@ function Info() {
       <div className="pigeon-final">
         <img src={zombie} alt="" />
         <div className="pigeon-final-text">
-          To pull off this challenge, you wil need three Nice Fun Zombies who
+          To pull off this challenge, you will need three Nice Fun Zombies who
           know the territory so far:
         </div>
       </div>

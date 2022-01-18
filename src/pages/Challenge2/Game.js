@@ -112,7 +112,7 @@ function Game({ userNfts, user }) {
 
         .nft-container {
           width: 200px;
-          height: 200px;
+          height: auto;
           margin: 0 10px 10px;
           cursor: pointer;
           position: relative;

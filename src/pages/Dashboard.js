@@ -783,7 +783,7 @@ function Dashboard() {
             <h2>NFZ School DAO</h2>
             <div id="dao-value">
               Current Estimate Value:{' '}
-              <span className="green-highlight">44ETH</span>
+              <span className="green-highlight">52ETH</span>
               <br />
               <span className="subtext">(Updated weekly)</span>
             </div>

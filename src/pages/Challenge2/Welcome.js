@@ -60,7 +60,7 @@ function Welcome({
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    padding: 67vh 20px 20px;
+    padding: 76vh 20px 20px;
     @media (max-width: 1300px) {
       padding-top: 55vh;
     }
@@ -162,23 +162,17 @@ function Welcome({
   return (
     <div css={challengeCss}>
       <div id="ethrain"></div>
-      <div className="content-section">
-        <h1>
-          Welcome to the
-          <br />
-          Nice Fun Rescue Challenge!
-        </h1>
-      </div>
+
       <div className="content-section">
         <p>
-          A member of the horde has gone missing! Build a team of NFZs with a
-          very particular set of skills to track them down, and rescue our
-          friend!
+          The zombies have found locations but now it's time to explore what
+          else is out there and recover some prizes! Build a team of NFZs that
+          love exploring and know the territory to win a reward!
         </p>
       </div>
       <div className="content-section">
         <p className="caps">
-          The clock runs out at: Jan 23th 10AM ET/ 4PM CET / 11PM SG/Asia
+          THE CLOCK RUNS OUT AT: JAN 31 10am ET / 4pm CET / 11PM SG/ASIA
         </p>
         {challengeCompleted && (
           <p className="challenge-complete">
