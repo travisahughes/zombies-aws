@@ -704,7 +704,7 @@ function Dashboard() {
               </a>
               <br />
               <a href="/locations">
-                Casino vs School&nbsp;&nbsp;&nbsp;Ends Jan. 22
+                Casino vs School&nbsp;&nbsp;&nbsp;Ends Jan. 31
               </a>
             </div>
             <div
