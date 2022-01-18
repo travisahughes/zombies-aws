@@ -106,8 +106,8 @@ export default function QuickAccess() {
         <TextContainer>
           <Title>OWNER DASHBOARD</Title>
           <p>
-            View details on your NFZs, the state of the DAO, and the Trait
-            Checker.
+            View details on your NFZs, the state of the DAO, the Trait Checker,
+            and complete Horde Challenges (if active).
           </p>
         </TextContainer>
       </DashboardAccess>
