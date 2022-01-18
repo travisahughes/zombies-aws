@@ -13,6 +13,7 @@ import { contract_data } from '../constants/moralis_env';
 import contractAddress from '../constants/contracts.json';
 import PolyGameMechanicsABI from '../constants/abis/NFZGameMechanicsV2.json';
 import { prizes } from '../constants/prizes';
+import { getFreeClaimProof } from '../utils';
 
 import footerV2 from '../assets/footerV2.png';
 import keycard_icon from '../assets/icons/keycard_icon.png';
@@ -148,8 +149,7 @@ function Dashboard() {
             : 1;
         });
 
-        console.log('zzz rewards', userRewards);
-        let tmpRewards = { 1: 1 };
+        let tmpRewards = {};
         rewards.forEach((rewardId) => {
           if (tmpRewards[rewardId]) {
             tmpRewards[rewardId]++;
@@ -157,7 +157,6 @@ function Dashboard() {
             tmpRewards[rewardId] = 1;
           }
         });
-        console.log('zzz rewards', tmpRewards);
 
         keycards.result?.forEach((token) => {
           const { amount, token_id } = token;
@@ -172,9 +171,7 @@ function Dashboard() {
         console.log('tmpRewards', tmpRewards);
         setSchoolPrizeCounts(schoolPrizeCounts);
         setCasinoPrizeCounts(casinoPrizeCounts);
-        setUserRewards(tmpRewards);
-        // setUserTotalRewards(rewards?.length || 0);
-        setUserTotalRewards(1);
+        setUserTotalRewards(rewards?.length || 0);
       };
 
       fetchNfts();

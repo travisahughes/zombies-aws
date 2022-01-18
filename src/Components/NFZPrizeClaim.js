@@ -15,9 +15,7 @@ let NFZPrizeClaim = ({
 }) => {
   let CONTRACT_CHAIN;
   let CONTRACT_ADDRESS;
-
-  // TODO: MAKE SURE prod = true BEFORE DEPLOYING!
-  let prod = false;
+  let prod = true;
   if (prod) {
     CONTRACT_CHAIN = contract_data.mainnet.chain_id;
     CONTRACT_ADDRESS = contract_data.mainnet.contract_id;
@@ -71,9 +69,9 @@ let NFZPrizeClaim = ({
     }
   }, [userAccount, Web3Api]);
 
-  useEffect(() => {
-    // console.log('zzz Moralis?', Moralis);
-  }, [Moralis]);
+  // useEffect(() => {
+  //   // console.log('zzz Moralis?', Moralis);
+  // }, [Moralis]);
 
   useEffect(() => {
     if (userAccount && userAccount !== curUserAccount) {
