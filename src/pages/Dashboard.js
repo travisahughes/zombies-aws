@@ -700,11 +700,11 @@ function Dashboard() {
             </div>
             <div id="time-remaining" className="event-item">
               <a href="/challenge2">
-                Challenge #2&nbsp;&nbsp;&nbsp;Ends Jan. 23
+                Challenge #2&nbsp;&nbsp;&nbsp;Ends Jan. 31
               </a>
               <br />
               <a href="/locations">
-                Casino vs School&nbsp;&nbsp;&nbsp;Ends Jan. 31
+                Casino vs School&nbsp;&nbsp;&nbsp;Ends Jan. 22
               </a>
             </div>
             <div
