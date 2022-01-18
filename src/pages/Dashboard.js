@@ -171,6 +171,7 @@ function Dashboard() {
         console.log('tmpRewards', tmpRewards);
         setSchoolPrizeCounts(schoolPrizeCounts);
         setCasinoPrizeCounts(casinoPrizeCounts);
+        setUserRewards(tmpRewards);
         setUserTotalRewards(rewards?.length || 0);
       };
 
