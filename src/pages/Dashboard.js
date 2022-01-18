@@ -700,6 +700,10 @@ function Dashboard() {
               Active Events
             </div>
             <div id="time-remaining" className="event-item">
+              <a href="/challenge2">
+                Challenge #2&nbsp;&nbsp;&nbsp;Ends Jan. 23
+              </a>
+              <br />
               <a href="/locations">
                 Casino vs School&nbsp;&nbsp;&nbsp;Ends Jan. 22
               </a>
@@ -780,7 +784,7 @@ function Dashboard() {
             <h2>NFZ School DAO</h2>
             <div id="dao-value">
               Current Estimate Value:{' '}
-              <span className="green-highlight">44ETH</span>
+              <span className="green-highlight">52ETH</span>
               <br />
               <span className="subtext">(Updated weekly)</span>
             </div>

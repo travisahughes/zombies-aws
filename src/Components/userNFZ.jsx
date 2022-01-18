@@ -22,7 +22,6 @@ const UserNFZ = (props) => {
       )?.value;
 
       location ? (response.data.hasLocation = true) : '';
-
       setFinalMetadata(response.data);
     });
   }, [md]);
@@ -93,6 +92,7 @@ const UserNFZ = (props) => {
         <p className="zombie-id">
           {'#'}
           {props.nfz?.token_id}
+          {location ? ' - ' + location : ' - No Location'}
         </p>
       </div>
     </div>
