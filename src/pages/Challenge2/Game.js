@@ -125,7 +125,7 @@ function Game({ userNfts, user }) {
             opacity: 0;
             position: absolute;
             left: 50%;
-            top: 50%;
+            top: 55%;
             transform: translate(-50%);
           }
 

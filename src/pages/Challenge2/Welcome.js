@@ -188,7 +188,7 @@ function Welcome({
         )}
         {isAuthenticated && chainId === preferredChain && !challengeCompleted && (
           <div className="btn" onClick={() => history.push('/challenge2/info')}>
-            Help is on the way!
+            Let's Explore!
           </div>
         )}
         {isAuthenticated && chainId !== preferredChain && (

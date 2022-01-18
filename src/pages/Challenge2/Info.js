@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import gsap from 'gsap';
-import zombie from '../../assets/challenge/info-zombie.png';
+import zombie from '../../assets/challenge/info-zombie2.png';
 import background from '../../assets/challenge/info-background2.jpg';
 import comic from '../../assets/challenge/comic.png';
 
