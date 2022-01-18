@@ -49,7 +49,7 @@ const UserNFZ = (props) => {
       opacity: 0;
       position: absolute;
       left: 50%;
-      top: 50%;
+      top: 35%;
       transform: translate(-50%);
     }
     .selected.checkbox {
@@ -88,6 +88,7 @@ const UserNFZ = (props) => {
       >
         <img src={finalMetadata?.image} className="nft-img" />
         <img className={`${selected} checkbox`} src={checkbox} alt="" />
+        <div className="genesis-text">Genesis</div>
         {location && <div className="located">In {location}</div>}
         <p className="zombie-id">
           {'#'}
