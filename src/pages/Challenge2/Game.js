@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import gsap from 'gsap';
 
-import shadowImage from '../../assets/game/shadow.png';
-import theifImage from '../../assets/game/theif.png';
-import wildcardImage from '../../assets/game/wildcard.png';
+import casinoImage from '../../assets/game/casino.png';
+import schoolImage from '../../assets/game/school.png';
+import nolocationImage from '../../assets/game/nolocation.png';
 import checkbox from '../../assets/game/check.png';
 import comic from '../../assets/challenge/comic.png';
 import discord from '../../assets/icons/discord.png';
@@ -745,7 +745,7 @@ function Game({ userNfts, user }) {
         </div>
 
         <div className="shadow preview-section alone">
-          <img src={shadowImage} alt="" />
+          <img src={casinoImage} alt="" />
           <div className="preview-section-text">
             <div className="preview-section-text-header">Casino Veteran</div>
             <div className="preview-section-text-sub-header">
@@ -754,7 +754,7 @@ function Game({ userNfts, user }) {
           </div>
         </div>
         <div className="preview-section theif alone">
-          <img src={theifImage} alt="" />
+          <img src={schoolImage} alt="" />
           <div className="preview-section-text">
             <div className="preview-section-text-header">Scholar</div>
             <div className="preview-section-text-sub-header">
@@ -763,7 +763,7 @@ function Game({ userNfts, user }) {
           </div>
         </div>
         <div className="preview-section wildcard alone">
-          <img src={wildcardImage} alt="" />
+          <img src={nolocationImage} alt="" />
           <div className="preview-section-text">
             <div className="preview-section-text-header">The Explorer</div>
             <div className="preview-section-text-sub-header">

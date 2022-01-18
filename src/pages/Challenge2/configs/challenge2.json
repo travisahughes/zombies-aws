@@ -1,7 +1,7 @@
 {   "challenge_length": 3,
     "boxes": [
-        {"_id": 1, "category": ["Location"], "requirements": ["School"], "divClassName": "shadow preview-section", "headerText": "Scholar", "subHeaderText": "(School Location Zombie)", "defaultImage": "shadow", "zombie": {}},
-        {"_id": 2, "category": ["Location"], "requirements": ["Casino"], "divClassName": "preview-section theif", "headerText": "Casino Veteran", "subHeaderText": "(Casino Location Zombie)", "defaultImage": "theif", "zombie": {}},
-        {"_id": 3, "category": ["Location"], "requirements": [null], "wildcard": false, "divClassName": "preview-section wildcard", "headerText": "The Explorer", "subHeaderText": "(Unassigned Location Zombie)","defaultImage": "wildcard", "zombie": {}}
+        {"_id": 1, "category": ["Location"], "requirements": ["School"], "divClassName": "shadow preview-section", "headerText": "Scholar", "subHeaderText": "(School Location Zombie)", "defaultImage": "school", "zombie": {}},
+        {"_id": 2, "category": ["Location"], "requirements": ["Casino"], "divClassName": "preview-section theif", "headerText": "Casino Veteran", "subHeaderText": "(Casino Location Zombie)", "defaultImage": "casino", "zombie": {}},
+        {"_id": 3, "category": ["Location"], "requirements": [null], "wildcard": false, "divClassName": "preview-section wildcard", "headerText": "The Explorer", "subHeaderText": "(Unassigned Location Zombie)","defaultImage": "nolocation", "zombie": {}}
     ]
 }
