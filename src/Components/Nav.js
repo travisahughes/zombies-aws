@@ -149,13 +149,7 @@ let Header = (props) => {
         &:active {
           color: #aff038;
           border-bottom: #aff038 4px solid;
-          padding-bottom: 17px;
-          @media (max-width: 1050px) {
-            padding-bottom: 13px;
-          }
-          @media (max-width: 860px) {
-            padding-bottom: 8px;
-          }
+          padding-bottom: 26px;
         }
 
         @media (max-width: 640px) {
@@ -245,7 +239,6 @@ let Header = (props) => {
         </div>
         <div id="logo">
           <a href="/">
-            {/* Nice Fun <span className="green-highlight">Zombies</span> */}
             <img src={logo} alt="logo" height={48} />
           </a>
         </div>
