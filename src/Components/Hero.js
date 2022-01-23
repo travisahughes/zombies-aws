@@ -134,8 +134,9 @@ const Link = styled.div`
   font-weight: bold;
   line-height: 150%;
   cursor: pointer;
+  padding-top: 2px;
   img {
-    margin-right: 16px;
+    margin: -3px 16px 0 0;
   }
 
   @media (min-width: 768px) {
