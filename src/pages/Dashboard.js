@@ -703,10 +703,6 @@ function Dashboard() {
               <a href="/challenge2">
                 Challenge #2&nbsp;&nbsp;&nbsp;Ends Jan. 31
               </a>
-              <br />
-              <a href="/locations">
-                Casino vs School&nbsp;&nbsp;&nbsp;Ends Jan. 23
-              </a>
             </div>
             <div
               id="prizes-remaining"
