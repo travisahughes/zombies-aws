@@ -111,19 +111,6 @@ export default function QuickAccess() {
           </p>
         </TextContainer>
       </DashboardAccess>
-      <LocationAccess onClick={() => history.push('/locations')}>
-        <CasinoImage src={casino} alt="casino" />
-        <SchoolImage src={school} alt="school" height={196} />
-        <TextContainer>
-          <span>Action Phase 1</span>
-          <Title>LOCATIONS ARE NOW OPEN</Title>
-          <p>
-            Go to school, take your chances at the casino, or hold for something
-            undiscovered...{' '}
-          </p>
-          <BlueText>which will you choose?</BlueText>
-        </TextContainer>
-      </LocationAccess>
     </QuickAccessSection>
   );
 }
