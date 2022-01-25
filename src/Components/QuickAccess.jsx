@@ -52,7 +52,7 @@ const LocationAccess = styled.div`
   background-position-x: center;
   background-size: cover;
   padding: 16px;
-  cursor: pointer;
+  cursor: initial;
 `;
 
 const TextContainer = styled.div`
@@ -111,6 +111,18 @@ export default function QuickAccess() {
           </p>
         </TextContainer>
       </DashboardAccess>
+      <LocationAccess>
+        <CasinoImage src={casino} alt="casino" />
+        <SchoolImage src={school} alt="school" height={196} />
+        <TextContainer>
+          <span>Build Phase 1</span>
+          <Title>MOVEMENT IS PAUSED</Title>
+          <p>
+            Our zombies have found their new homes and are now settling in.
+            Movement in the NFZ world will resume later...stay tuned!{' '}
+          </p>
+        </TextContainer>
+      </LocationAccess>
     </QuickAccessSection>
   );
 }
