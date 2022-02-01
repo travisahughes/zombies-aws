@@ -694,7 +694,6 @@ function Dashboard() {
             </button>
           </div>
         </div>
-
         <div className="dashboard-info">
           <div id="chain-info" className="dashboard-item">
             <h2>Account</h2>
