@@ -694,53 +694,7 @@ function Dashboard() {
             </button>
           </div>
         </div>
-        <div id="current-events">
-          <div id="top-row">
-            <div id="header" className="event-item green-highlight">
-              Active Events
-            </div>
-            <div id="time-remaining" className="event-item">
-              <a href="/challenge2">
-                Challenge #2&nbsp;&nbsp;&nbsp;Ends Jan. 31
-              </a>
-            </div>
-            <div
-              id="prizes-remaining"
-              className="event-item"
-              onClick={toggleRemainingPrizes}
-            >
-              + Show remaining prizes
-            </div>
-          </div>
-          <div id="bottom-row" className={showPrizesRemaining ? '' : 'hidden'}>
-            <div>
-              <h3>School</h3>
-              <div>All prizes have been claimed</div>
-            </div>
-            <div>
-              <h3>Casino</h3>
-              <table>
-                <tbody>
-                  <tr>
-                    <td>Custom Nice Fun Zombie:</td>
-                    <td>{casinoPrizeCounts['Custom Nice Fun Zombie'] || 0}</td>
-                  </tr>
-                  <tr>
-                    <td>Generation 1 Keycard:</td>
-                    <td>{casinoPrizeCounts['Generation 1 Keycard'] || 0}</td>
-                  </tr>
-                  <tr>
-                    <td>Nice Fun Zombie NFT (unrevealed):</td>
-                    <td>
-                      {casinoPrizeCounts['Nice Fun Zombie NFT (unrevealed)'] ||
-                        0}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+
         <div className="dashboard-info">
           <div id="chain-info" className="dashboard-item">
             <h2>Account</h2>
@@ -780,7 +734,7 @@ function Dashboard() {
             <h2>NFZ School DAO</h2>
             <div id="dao-value">
               Current Estimate Value:{' '}
-              <span className="green-highlight">52ETH</span>
+              <span className="green-highlight">80ETH</span>
               <br />
               <span className="subtext">(Updated weekly)</span>
             </div>
