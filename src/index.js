@@ -15,9 +15,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
-import Challenge from './pages/Challenge';
-import Challenge2 from './pages/Challenge2';
-import Locations from './pages/Locations';
+import Verify from './pages/Verify';
 import spacemono from './assets/fonts/SpaceMono-Regular.ttf';
 import overpassmono from './assets/fonts/OverpassMono-Regular.ttf';
 import teko from './assets/fonts/Teko-Regular.ttf';
@@ -73,6 +71,7 @@ const Routing = () => {
         <Switch>
           <Route exact path="/" component={App} />
           <Route path="/dashboard" component={Dashboard} />
+          <Route path="/verify" component={Verify} />
           {/* <Route path="/challenge" component={Challenge} /> */}
           {/* <Route path="/challenge2" component={Challenge2} /> */}
           {/* <Route path="/locations" component={Locations} /> */}
