@@ -173,7 +173,7 @@ let Hero = (props) => {
             </TitleText>
             <DescriptionText>
               <GreenText> Nice Fun Zombies</GreenText> (NFZs) is a collection of
-              6,666 unique zombie NFT characters on the Ethereum blockchain in
+              5,000 unique zombie NFT characters on the Ethereum blockchain in
               search of BRAINS. Nice Fun Zombie owners will get access to game
               mechanics such as searching, holding, and hording for benefits, a
               community of zombie loving fans, and digital and real world perks.{' '}

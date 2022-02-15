@@ -58,7 +58,7 @@ let Faq = (props) => {
           <div id="faq-list">
             <FaqItem
               title="How many NFZs are available?"
-              content="There will be only 6,666 Nice Fun Zombies ever available however they have not all been released yet. The remaining quantity will gradually be made available via location Searching by existing NFZ holders."
+              content="There will be only 5,000 Nice Fun Zombies ever available however they have not all been released yet. The remaining quantity will gradually be made available via location Searching by existing NFZ holders."
             />
             <FaqItem
               title="How do I buy Nice Fun Zombies?"
