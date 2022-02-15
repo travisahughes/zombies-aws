@@ -260,7 +260,7 @@ let Info = (props) => {
       <div css={topText}>
         <div className="description">
           <span className="green-highlight">Nice Fun Zombies</span> (NFZs) is a
-          collection of 6,666 unique zombie NFT characters on the Ethereum
+          collection of 5,000 unique zombie NFT characters on the Ethereum
           blockchain in search of BRAINS. Nice Fun Zombie owners will get access
           to game mechanics such as searching, holding, and hording for
           benefits, a community of zombie loving fans, and digital and real
@@ -312,7 +312,7 @@ let Info = (props) => {
               <p className="green-highlight">
                 Reserved to be found by NFZ Holders
                 <br />
-                (Only 6,666 Gen 1 NFZs will ever exist)
+                (Only 5,000 Gen 1 NFZs will ever exist)
               </p>
               <p className="leftalign">
                 Reserved NFZs will be available in the future{' '}
