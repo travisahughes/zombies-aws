@@ -2,8 +2,8 @@
 import { css } from '@emotion/react';
 import ReactModal from 'react-modal';
 import { useState } from 'react';
-import edmsmall from '../assets/edm_small.jpg';
-import edm from '../assets/edm.jpg';
+import edmsmall from '../assets/edm2_small.png';
+import edm from '../assets/edm2.png';
 import roadmap1 from '../assets/roadmap/roadmap1.png';
 import roadmap2 from '../assets/roadmap/roadmap2.png';
 import roadmap3 from '../assets/roadmap/roadmap3.png';
@@ -510,7 +510,7 @@ let Roadmap = () => {
             src={edmsmall}
             onClick={handleOpenModal}
             alt="Every Decision Matters"
-            style={{ width: '100%', maxWidth: '800px' }}
+            style={{ width: '100%', maxWidth: '363px' }}
           />
         </FlexBox>
       </div>
