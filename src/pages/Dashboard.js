@@ -7,20 +7,13 @@ import { useMoralis, useMoralisWeb3Api, useChain } from 'react-moralis';
 
 import NavV2 from '../Components/NavV2';
 import TraitChecker from '../Components/TraitChecker';
-import NFZPrizeClaim from '../Components/NFZPrizeClaim';
 
 import { contract_data } from '../constants/moralis_env';
 import contractAddress from '../constants/contracts.json';
 import PolyGameMechanicsABI from '../constants/abis/NFZGameMechanicsV2.json';
-import { prizes } from '../constants/prizes';
-import { getFreeClaimProof } from '../utils';
 
 import footerV2 from '../assets/footerV2.png';
 import keycard_icon from '../assets/icons/keycard_icon.png';
-import keycard_reward from '../assets/dashboard/keycard_reward.png';
-import nfz_reward from '../assets/dashboard/nfz_reward.png';
-import silhouette_reward from '../assets/dashboard/silhouette_reward.png';
-import zeneca_reward from '../assets/dashboard/zeneca_reward.png';
 
 function Dashboard() {
   // TODO: setup env var
@@ -51,14 +44,6 @@ function Dashboard() {
   const [showModal, setShowModal] = useState(false);
   const [shortAddress, setShortAddress] = useState(null);
   const [showPrizesRemaining, setShowPrizesRemaining] = useState(false);
-  const [schoolPrizeCounts, setSchoolPrizeCounts] = useState({});
-  const [casinoPrizeCounts, setCasinoPrizeCounts] = useState({});
-  const [userTotalRewards, setUserTotalRewards] = useState(0);
-  const [userRewards, setUserRewards] = useState({
-    1: 0, // NFZ
-    2: 0, // Zeneca token
-    3: 0, // Custom NFZ
-  });
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -114,50 +99,6 @@ function Dashboard() {
         });
         console.log('keycards', keycards);
 
-        const schoolPrizes = await Moralis.Web3API.native.runContractFunction({
-          ...gameMechanicsOptions,
-          function_name: 'getLocationPrizeArray',
-          params: { _locationId: 1 },
-        });
-
-        const casinoPrizes = await Moralis.Web3API.native.runContractFunction({
-          ...gameMechanicsOptions,
-          function_name: 'getLocationPrizeArray',
-          params: { _locationId: 2 },
-        });
-
-        const rewards = await Moralis.Web3API.native.runContractFunction({
-          ...gameMechanicsOptions,
-          function_name: 'getUserRewards',
-          params: { account: userAccount },
-        });
-
-        const schoolPrizeCounts = {};
-        const casinoPrizeCounts = {};
-        schoolPrizes.prizes.forEach((el) => {
-          schoolPrizeCounts[prizes.generalPrizes[el]] = schoolPrizeCounts[
-            prizes.generalPrizes[el]
-          ]
-            ? (schoolPrizeCounts[prizes.generalPrizes[el]] += 1)
-            : 1;
-        });
-        casinoPrizes.prizes.forEach((el) => {
-          casinoPrizeCounts[prizes.generalPrizes[el]] = casinoPrizeCounts[
-            prizes.generalPrizes[el]
-          ]
-            ? (casinoPrizeCounts[prizes.generalPrizes[el]] += 1)
-            : 1;
-        });
-
-        let tmpRewards = {};
-        rewards.forEach((rewardId) => {
-          if (tmpRewards[rewardId]) {
-            tmpRewards[rewardId]++;
-          } else {
-            tmpRewards[rewardId] = 1;
-          }
-        });
-
         keycards.result?.forEach((token) => {
           const { amount, token_id } = token;
           if (token_id === '0') {
@@ -165,14 +106,6 @@ function Dashboard() {
           }
           console.log('userKeycards', amount);
         });
-
-        console.log('School Prize', schoolPrizeCounts);
-        console.log('Casino Prizes', casinoPrizeCounts);
-        console.log('tmpRewards', tmpRewards);
-        setSchoolPrizeCounts(schoolPrizeCounts);
-        setCasinoPrizeCounts(casinoPrizeCounts);
-        setUserRewards(tmpRewards);
-        setUserTotalRewards(rewards?.length || 0);
       };
 
       fetchNfts();
@@ -247,10 +180,6 @@ function Dashboard() {
       return axios.get(token_uri);
     }
     return null;
-  };
-
-  const toggleRemainingPrizes = () => {
-    setShowPrizesRemaining(!showPrizesRemaining);
   };
 
   const dashboardCss = css`
@@ -470,51 +399,6 @@ function Dashboard() {
             filter: drop-shadow(0px 0px 4px #ccee25);
           }
         }
-      }
-    }
-
-    .your-rewards {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      margin: 20px 0 10px 0;
-
-      .rewards {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin-top: 10px;
-        @media (max-width: 960px) {
-          justify-content: center;
-        }
-        .reward-box {
-          text-align: center;
-          padding: 0 20px 0 0;
-          @media (max-width: 960px) {
-            font-size: 14px;
-          }
-
-          img {
-            height: 175px;
-            width: auto;
-            @media (max-width: 960px) {
-              height: 100px;
-            }
-          }
-        }
-        .reward-claim {
-          margin-left: 10px;
-          padding: 10px 10px 10px 25px;
-          border-left: 1px solid #4c4c4c;
-
-          .claim-button {
-            font-size: 14px;
-          }
-        }
-      }
-
-      h2 {
-        font-size: 18px;
       }
     }
 
@@ -756,66 +640,6 @@ function Dashboard() {
           </div>
         </div>
 
-        {isAuthenticated && userTotalRewards > 0 && (
-          <div className="your-rewards">
-            <h2>Rewards</h2>
-            <div className="rewards">
-              {userTotalRewards > 0 && userRewards[1] > 0 && (
-                <div className="reward-box">
-                  <img
-                    src={nfz_reward}
-                    alt="NFZ Reward"
-                    className="reward-image"
-                  />
-                  <div className="reward-text">{userRewards[1]} NFZs</div>
-                </div>
-              )}
-              {userTotalRewards > 0 && userRewards[2] > 0 && (
-                <div className="reward-box">
-                  <img
-                    src={zeneca_reward}
-                    alt="Zeneca Reward"
-                    className="reward-image"
-                  />
-                  <div className="reward-text">
-                    {userRewards[2]} Zeneca Tokens
-                  </div>
-                </div>
-              )}
-              {userTotalRewards > 0 && userRewards[3] > 0 && (
-                <div className="reward-box">
-                  <img
-                    src={keycard_reward}
-                    alt="Keycard Reward"
-                    className="reward-image"
-                  />
-                  <div className="reward-text">{userRewards[3]} Keycards</div>
-                </div>
-              )}
-              {userTotalRewards > 0 && userRewards[4] > 0 && (
-                <div className="reward-box">
-                  <img
-                    src={silhouette_reward}
-                    alt="Silhouette Reward"
-                    className="reward-image"
-                  />
-                  <div className="reward-text">
-                    {userRewards[4]} Custom NFZs
-                  </div>
-                </div>
-              )}
-              {userTotalRewards > 0 && userRewards[1] > 0 && (
-                <NFZPrizeClaim
-                  userAccount={userAccount}
-                  Web3Api={Web3Api}
-                  Moralis={Moralis}
-                  chainId={chainId}
-                  switchNetwork={switchNetwork}
-                />
-              )}
-            </div>
-          </div>
-        )}
         {isAuthenticated && (
           <div className="your-horde">
             <div className="horde-header">
