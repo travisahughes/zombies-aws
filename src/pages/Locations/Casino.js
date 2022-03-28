@@ -15,6 +15,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router';
 import { keyframes } from '@emotion/react';
 import { prizes } from '../../constants/prizes';
+import axios from 'axios';
 
 const CasinoPageContainer = styled.div`
   height: 100vh;
@@ -511,7 +512,7 @@ export default function CasinoPage({
   const [loading, setLoading] = useState(false);
   const [betting, setBetting] = useState(false);
 
-  const casinoClick = () => {
+  const casinoClick = async () => {
     if (betting || selectedIds.length < 1) return;
     useKeyCard();
     setBetting(true);
@@ -522,10 +523,27 @@ export default function CasinoPage({
       .burnKeycard(userAccount, _ids, 2, 1)
       .send({ from: userAccount })
       .on('receipt', (receipt) => {
+        console.log('receipt');
         setLoading(true);
         setBetting(false);
+        setTimeout(async () => {
+          //TODO: Check endpoint to see if IDs are properly in place
+        }, 5000);
+        setTimeout(async () => {
+          const idsCheck = await axios.get(
+            `https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/locationconfirm?ids=${_ids.join(
+              ','
+            )}&location=${2}`
+          );
+          const { allInLocation } = idsCheck.data;
+          if (allInLocation) {
+            history.push(`/locations/casino-result`);
+          }
+        }, 15000);
+
         //console.log('keyCardBurn txn', receipt);
       })
+
       .on('error', (err) => {
         setBetting(false);
       });

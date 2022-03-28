@@ -17,6 +17,7 @@ import {
 import Dashboard from './pages/Dashboard';
 import Locations from './pages/Locations';
 import Verify from './pages/Verify';
+
 import spacemono from './assets/fonts/SpaceMono-Regular.ttf';
 import overpassmono from './assets/fonts/OverpassMono-Regular.ttf';
 import teko from './assets/fonts/Teko-Regular.ttf';
