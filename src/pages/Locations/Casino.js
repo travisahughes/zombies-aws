@@ -612,7 +612,7 @@ export default function CasinoPage({
               )}
             </BenefitContainer>
           </TopContainer>
-          <MidRowContainer>
+          {/* <MidRowContainer>
             <ProbabilityContainer>
               <MidRowSubheader>
                 Horde Size Search Prize Probabilities
@@ -703,7 +703,10 @@ export default function CasinoPage({
                 </Row>
               </Col>
             </ProbabilityContainer>
-          </MidRowContainer>
+          </MidRowContainer> */}
+          <br />
+          <br />
+          <br />
           <InstructionContainer>
             <b style={{ fontSize: '18px' }}>
               CHOOSE THE ZOMBIES YOU WANT TO SEARCH WITH (MAX 6)

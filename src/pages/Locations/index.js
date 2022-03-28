@@ -13,6 +13,7 @@ import contractAddress from '../../constants/contracts.json';
 import { prizes } from '../../constants/prizes';
 import SchoolPage from './School';
 import SchoolResultPage from './SchoolResult';
+import ErrorPage from './Error';
 export default function Location() {
   const [polyTokensContract, setPolyTokensContract] = useState(null);
 
@@ -342,6 +343,9 @@ export default function Location() {
               selectedZombies={selectedZombies}
               userRewards={userRewards}
             />
+          </Route>
+          <Route path="/locations/error">
+            <ErrorPage />
           </Route>
           <Route path="/">
             <SplitPathPage
