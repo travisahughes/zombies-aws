@@ -217,11 +217,7 @@ export default function SplitPathPage({
             onClick={() => casinoClick()}
           />
 
-          <LocationImageDisabled
-            src={school}
-            alt="school"
-            onClick={() => schoolClick()}
-          />
+          <LocationImageDisabled src={school} alt="school" />
         </LocationImageContainer>
         <SplitPathTextContainer>
           {!isAuthenticated && (
