@@ -575,7 +575,7 @@ export default function CasinoPage({
               </InventoryText>
             </TopLeftContainer>
             <BenefitContainer>
-              <TopRowSubheader>Guaranteed Benefits</TopRowSubheader>
+              <TopRowSubheader>Benefits</TopRowSubheader>
               {BenefitList.map((item, index) => (
                 <ListItemWithIcon
                   img={item.img}
@@ -585,7 +585,7 @@ export default function CasinoPage({
                 />
               ))}
               <br />
-
+              {/* 
               <TopRowSubheader>
                 What’s Hiding in the Casino (To be found by Searching)
               </TopRowSubheader>
@@ -627,7 +627,7 @@ export default function CasinoPage({
                     </HiddenItems>
                   </HiddenItemsRow>
                 </>
-              )}
+              )} */}
             </BenefitContainer>
           </TopContainer>
           {/* <MidRowContainer>
