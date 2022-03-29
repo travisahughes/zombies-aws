@@ -570,7 +570,7 @@ export default function CasinoPage({
               </InventoryText>
               <InventoryText>
                 You have <YellowText>{userKeyCards}</YellowText> keycards to
-                use. One will be burned to Search & Assign.
+                use. One will be burned to Assign.
               </InventoryText>
             </TopLeftContainer>
             <BenefitContainer>
