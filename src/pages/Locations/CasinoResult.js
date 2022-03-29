@@ -217,7 +217,7 @@ export default function CasinoResultPage({ selectedZombies, userRewards }) {
           <RewardHighlight>
             Welcome to the Nice Fun Zombies Casino!
           </RewardHighlight>
-          <RewardSubtext>{rewardStatement}</RewardSubtext>
+          {/* <RewardSubtext>{rewardStatement}</RewardSubtext> */}
           <YellowText>
             Your horde will now be associated with the Casino and receive the
             Casino Location Benefits

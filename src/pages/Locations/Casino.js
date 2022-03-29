@@ -526,12 +526,11 @@ export default function CasinoPage({
         console.log('receipt');
         setLoading(true);
         setBetting(false);
+
         setTimeout(async () => {
-          //TODO: Check endpoint to see if IDs are properly in place
-        }, 5000);
-        setTimeout(async () => {
+          //https://api.nicefunzombies.io/locationconfirm?ids=2464,4369&location=2
           const idsCheck = await axios.get(
-            `https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/locationconfirm?ids=${_ids.join(
+            `https://api.nicefunzombies.io/locationconfirm?ids=${_ids.join(
               ','
             )}&location=${2}`
           );
@@ -539,7 +538,7 @@ export default function CasinoPage({
           if (allInLocation) {
             history.push(`/locations/casino-result`);
           }
-        }, 15000);
+        }, 10000);
 
         //console.log('keyCardBurn txn', receipt);
       })
