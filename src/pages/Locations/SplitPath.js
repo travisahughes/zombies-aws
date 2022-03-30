@@ -117,6 +117,19 @@ const LocationImage = styled.img`
   }
 `;
 
+const LocationImageDisabled = styled.img`
+  margin: 0;
+  width: 50%;
+  filter: grayscale(100%);
+
+  @media (min-width: 767px) {
+    max-height: 50vh;
+    max-width: 50%;
+    margin: 0 1rem;
+    margin-left: 5rem;
+  }
+`;
+
 const SplitPathContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -204,11 +217,7 @@ export default function SplitPathPage({
             onClick={() => casinoClick()}
           />
 
-          <LocationImage
-            src={school}
-            alt="school"
-            onClick={() => schoolClick()}
-          />
+          <LocationImageDisabled src={school} alt="school" />
         </LocationImageContainer>
         <SplitPathTextContainer>
           {!isAuthenticated && (

@@ -15,6 +15,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router';
 import { keyframes } from '@emotion/react';
 import { prizes } from '../../constants/prizes';
+import axios from 'axios';
 
 const CasinoPageContainer = styled.div`
   height: 100vh;
@@ -189,6 +190,7 @@ const HiddenItems = styled.div`
 `;
 
 const RewardRightText = styled.div`
+  width: 300px;
   margin-left: 3rem;
   line-height: 175%;
   font-size: 13px;
@@ -412,11 +414,11 @@ const TopRowSubheader = styled.b`
 
 const MidRowSubheader = styled.b`
   font-size: 18px;
-  margin: 1rem;
+  margin: 2rem 1rem 1rem 1rem;
 
   @media (min-width: 767px) {
     text-align: start;
-    margin: 0;
+    margin: 2rem 0 0 0;
   }
 `;
 
@@ -511,7 +513,7 @@ export default function CasinoPage({
   const [loading, setLoading] = useState(false);
   const [betting, setBetting] = useState(false);
 
-  const casinoClick = () => {
+  const casinoClick = async () => {
     if (betting || selectedIds.length < 1) return;
     useKeyCard();
     setBetting(true);
@@ -522,10 +524,26 @@ export default function CasinoPage({
       .burnKeycard(userAccount, _ids, 2, 1)
       .send({ from: userAccount })
       .on('receipt', (receipt) => {
+        console.log('receipt');
         setLoading(true);
         setBetting(false);
+
+        setTimeout(async () => {
+          //https://api.nicefunzombies.io/locationconfirm?ids=2464,4369&location=2
+          const idsCheck = await axios.get(
+            `https://api.nicefunzombies.io/locationconfirm?ids=${_ids.join(
+              ','
+            )}&location=${2}`
+          );
+          const { allInLocation } = idsCheck.data;
+          if (allInLocation) {
+            history.push(`/locations/casino-result`);
+          }
+        }, 10000);
+
         //console.log('keyCardBurn txn', receipt);
       })
+
       .on('error', (err) => {
         setBetting(false);
       });
@@ -553,11 +571,11 @@ export default function CasinoPage({
               </InventoryText>
               <InventoryText>
                 You have <YellowText>{userKeyCards}</YellowText> keycards to
-                use. One will be burned to Search & Assign.
+                use. One will be burned to Assign.
               </InventoryText>
             </TopLeftContainer>
             <BenefitContainer>
-              <TopRowSubheader>Guaranteed Benefits</TopRowSubheader>
+              <TopRowSubheader>Benefits</TopRowSubheader>
               {BenefitList.map((item, index) => (
                 <ListItemWithIcon
                   img={item.img}
@@ -567,7 +585,35 @@ export default function CasinoPage({
                 />
               ))}
               <br />
-
+              <MidRowSubheader>Zombies Held within Casino</MidRowSubheader>
+              <br />
+              <Col justifyContent="space-around" alignItems="space-around">
+                <Row justifyContent="space-between" alignItems="center">
+                  <ZombieHeld>1 - 3 NFZs</ZombieHeld>
+                  <RewardRightText>
+                    Collect 1,000 Brain Fragments Daily
+                  </RewardRightText>
+                </Row>
+                <Row justifyContent="space-between" alignItems="center">
+                  <ZombieHeld>4 - 7 NFZs</ZombieHeld>
+                  <RewardRightText>
+                    Collect 3,000 Brain Fragments Daily
+                  </RewardRightText>
+                </Row>
+                <Row justifyContent="space-between" alignItems="center">
+                  <ZombieHeld>8 - 12 NFZs</ZombieHeld>
+                  <RewardRightText>
+                    Collect 6,000 Brain Fragments Daily
+                  </RewardRightText>
+                </Row>
+                <Row justifyContent="space-between" alignItems="center">
+                  <ZombieHeld>13+ NFZs</ZombieHeld>
+                  <RewardRightText>
+                    Collect 10,000 Brain Fragments Daily
+                  </RewardRightText>
+                </Row>
+              </Col>
+              {/* 
               <TopRowSubheader>
                 What’s Hiding in the Casino (To be found by Searching)
               </TopRowSubheader>
@@ -609,10 +655,10 @@ export default function CasinoPage({
                     </HiddenItems>
                   </HiddenItemsRow>
                 </>
-              )}
+              )} */}
             </BenefitContainer>
           </TopContainer>
-          <MidRowContainer>
+          {/* <MidRowContainer>
             <ProbabilityContainer>
               <MidRowSubheader>
                 Horde Size Search Prize Probabilities
@@ -703,7 +749,10 @@ export default function CasinoPage({
                 </Row>
               </Col>
             </ProbabilityContainer>
-          </MidRowContainer>
+          </MidRowContainer> */}
+          <br />
+          <br />
+          <br />
           <InstructionContainer>
             <b style={{ fontSize: '18px' }}>
               CHOOSE THE ZOMBIES YOU WANT TO SEARCH WITH (MAX 6)

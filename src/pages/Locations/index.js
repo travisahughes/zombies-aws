@@ -13,6 +13,7 @@ import contractAddress from '../../constants/contracts.json';
 import { prizes } from '../../constants/prizes';
 import SchoolPage from './School';
 import SchoolResultPage from './SchoolResult';
+import ErrorPage from './Error';
 export default function Location() {
   const [polyTokensContract, setPolyTokensContract] = useState(null);
 
@@ -203,47 +204,47 @@ export default function Location() {
         GAME_MECHANICS_ADDRESS
       );
 
-      gameMechanicsWSS.events
-        .EPrizes()
-        .on('data', function (event) {
-          const { userPrizes, from, location } = event.returnValues;
-          if (from.toLowerCase() != userAccount.toLowerCase()) return;
-          const resultPages = { 1: 'school-result', 2: 'casino-result' };
+      // gameMechanicsWSS.events
+      //   .EPrizes()
+      //   .on('data', function (event) {
+      //     const { userPrizes, from, location } = event.returnValues;
+      //     if (from.toLowerCase() != userAccount.toLowerCase()) return;
+      //     const resultPages = { 1: 'school-result', 2: 'casino-result' };
 
-          var startDate = new Date();
-          console.log('prize payload', event);
-          console.log(
-            `user prizes - ${userPrizes}, from - ${from}, location - ${location}`
-          );
-          const prizeIds = userPrizes.map(Number);
-          const userRewards = {
-            generalReward: prizes.generalPrizes[prizeIds[0]],
-            specialReward: prizes.specialPrizes[prizeIds[1]],
-          };
-          function sleep(time) {
-            return new Promise((resolve) => setTimeout(resolve, time));
-          }
+      //     var startDate = new Date();
+      //     console.log('prize payload', event);
+      //     console.log(
+      //       `user prizes - ${userPrizes}, from - ${from}, location - ${location}`
+      //     );
+      //     const prizeIds = userPrizes.map(Number);
+      //     const userRewards = {
+      //       generalReward: prizes.generalPrizes[prizeIds[0]],
+      //       specialReward: prizes.specialPrizes[prizeIds[1]],
+      //     };
+      //     function sleep(time) {
+      //       return new Promise((resolve) => setTimeout(resolve, time));
+      //     }
 
-          const waitForPrizes = async () => {
-            if (userRewards.generalReward === 'None') {
-              await sleep(25000);
-              var endDate = new Date();
-              var seconds = (endDate.getTime() - startDate.getTime()) / 1000;
-              console.log('total time', seconds);
-              userRewards.generalReward = false;
-              console.log('waiting sleep');
-            }
-            console.log('after 5 seconds');
-            setUserRewards(userRewards);
-            history.push(`/locations/${resultPages[parseInt(location)]}`);
-          };
-          waitForPrizes();
-          console.log('------------------------------');
-        })
-        .on('error', function (error, receipt) {
-          // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
-          console.log('event listener error', error);
-        });
+      //     const waitForPrizes = async () => {
+      //       if (userRewards.generalReward === 'None') {
+      //         await sleep(25000);
+      //         var endDate = new Date();
+      //         var seconds = (endDate.getTime() - startDate.getTime()) / 1000;
+      //         console.log('total time', seconds);
+      //         userRewards.generalReward = false;
+      //         console.log('waiting sleep');
+      //       }
+      //       console.log('after 5 seconds');
+      //       setUserRewards(userRewards);
+      //       history.push(`/locations/${resultPages[parseInt(location)]}`);
+      //     };
+      //     waitForPrizes();
+      //     console.log('------------------------------');
+      //   })
+      //   .on('error', function (error, receipt) {
+      //     // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+      //     console.log('event listener error', error);
+      //   });
       // gameMechanicsWSS.events
       //   .ELocationSet({})
       //   .on('data', function (event) {
@@ -342,6 +343,9 @@ export default function Location() {
               selectedZombies={selectedZombies}
               userRewards={userRewards}
             />
+          </Route>
+          <Route path="/locations/error">
+            <ErrorPage />
           </Route>
           <Route path="/">
             <SplitPathPage
