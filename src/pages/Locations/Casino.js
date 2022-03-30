@@ -413,11 +413,11 @@ const TopRowSubheader = styled.b`
 
 const MidRowSubheader = styled.b`
   font-size: 18px;
-  margin: 1rem;
+  margin: 2rem 1rem 1rem 1rem;
 
   @media (min-width: 767px) {
     text-align: start;
-    margin: 0;
+    margin: 2rem 0 0 0;
   }
 `;
 
@@ -584,6 +584,34 @@ export default function CasinoPage({
                 />
               ))}
               <br />
+              <MidRowSubheader>Zombies Held within Casino</MidRowSubheader>
+              <br />
+              <Col justifyContent="space-around" alignItems="space-around">
+                <Row justifyContent="space-between" alignItems="center">
+                  <ZombieHeld>1 - 3 NFZs</ZombieHeld>
+                  <RewardRightText>
+                    Collect 1,000 Brain Fragments Daily
+                  </RewardRightText>
+                </Row>
+                <Row justifyContent="space-between" alignItems="center">
+                  <ZombieHeld>4 - 7 NFZs</ZombieHeld>
+                  <RewardRightText>
+                    Collect 3,000 Brain Fragments Daily
+                  </RewardRightText>
+                </Row>
+                <Row justifyContent="space-between" alignItems="center">
+                  <ZombieHeld>8 - 12 NFZs</ZombieHeld>
+                  <RewardRightText>
+                    Collect 6,000 Brain Fragments Daily
+                  </RewardRightText>
+                </Row>
+                <Row justifyContent="space-between" alignItems="center">
+                  <ZombieHeld>13+ NFZs</ZombieHeld>
+                  <RewardRightText>
+                    Collect 10,000 Brain Fragments Daily
+                  </RewardRightText>
+                </Row>
+              </Col>
               {/* 
               <TopRowSubheader>
                 What’s Hiding in the Casino (To be found by Searching)
