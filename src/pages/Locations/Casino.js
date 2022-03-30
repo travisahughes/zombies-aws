@@ -190,6 +190,7 @@ const HiddenItems = styled.div`
 `;
 
 const RewardRightText = styled.div`
+  width: 300px;
   margin-left: 3rem;
   line-height: 175%;
   font-size: 13px;
