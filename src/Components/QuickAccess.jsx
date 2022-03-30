@@ -52,7 +52,7 @@ const LocationAccess = styled.div`
   background-position-x: center;
   background-size: cover;
   padding: 16px;
-  cursor: initial;
+  cursor: pointer;
 `;
 
 const TextContainer = styled.div`
@@ -95,6 +95,7 @@ const SchoolImage = styled.img`
   height: 196px;
   margin-bottom: 2rem;
   margin-left: -30px;
+  filter: grayscale(100%);
 `;
 
 export default function QuickAccess() {
@@ -111,15 +112,15 @@ export default function QuickAccess() {
           </p>
         </TextContainer>
       </DashboardAccess>
-      <LocationAccess>
+      <LocationAccess onClick={() => history.push('/locations')}>
         <CasinoImage src={casino} alt="casino" />
         <SchoolImage src={school} alt="school" height={196} />
         <TextContainer>
           <span>Build Phase 1</span>
-          <Title>MOVEMENT IS PAUSED</Title>
+          <Title>CASINO NOW OPEN</Title>
           <p>
-            Our zombies have found their new homes and are now settling in.
-            Movement in the NFZ world will resume later...stay tuned!{' '}
+            Movement to the Casino has re-opened while admission to the School
+            is currently full. Stay tuned for a new location in the next phase!{' '}
           </p>
         </TextContainer>
       </LocationAccess>
