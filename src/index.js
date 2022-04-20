@@ -21,6 +21,8 @@ import Verify from './pages/Verify';
 import spacemono from './assets/fonts/SpaceMono-Regular.ttf';
 import overpassmono from './assets/fonts/OverpassMono-Regular.ttf';
 import teko from './assets/fonts/Teko-Regular.ttf';
+import hyperwave from './assets/fonts/Hyperwave-Two.ttf';
+import Arena from './pages/Arena';
 
 // TODO: Setup env variable to switch between testnet/mainnet
 const MORALIS_CONFIG = {
@@ -42,6 +44,11 @@ const appStyles = css`
   @font-face {
     font-family: teko;
     src: url(${teko});
+  }
+
+  @font-face {
+    font-family: Hyperwave Two;
+    src: url(${hyperwave});
   }
 
   font-family: overpassmono;
@@ -77,6 +84,7 @@ const Routing = () => {
           {/* <Route path="/challenge" component={Challenge} /> */}
           {/* <Route path="/challenge2" component={Challenge2} /> */}
           <Route path="/locations" component={Locations} />
+          <Route path="/arena" component={Arena} />
           <Redirect to="/" />
         </Switch>
       </div>
