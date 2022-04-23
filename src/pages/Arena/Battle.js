@@ -6,16 +6,28 @@ import logo from '../../assets/logo.png';
 import lfg from '../../assets/arena/lfg.png';
 import sample from '../../assets/arena/sample-zombie-card.png';
 import splatter from '../../assets/arena/splatter.png';
+import winner from '../../assets/arena/winner.png';
+import placeholder from '../../assets/arena/zombies/4100.png';
+import battleBg from '../../assets/arena/battle-bg.png';
+import opponentCards from '../../assets/arena/opponent-cards.png';
+import cleave from '../../assets/arena/icons/cleave.svg';
+import brain from '../../assets/arena/icons/brain-nom.png';
 import { useState, useEffect } from 'react';
+
+const FlexRow = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
 const BattlePageContainer = styled.div`
   height: 100vh;
   min-height: 700px;
-  /* background-image: url(${background}); */
+  background-image: url(${battleBg});
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
+  background-position: center;
   margin: auto;
-  max-width: 1440px;
+  /* max-width: 1440px; */
 `;
 
 const BattlePageContent = styled.div`
@@ -26,6 +38,7 @@ const BattlePageContent = styled.div`
   justify-content: center;
   max-width: 1440px;
   position: relative;
+  margin: auto;
 `;
 
 const HandImage = styled.img`
@@ -53,9 +66,11 @@ const Logo = styled.img`
 
 const ZombiesContainer = styled.div`
   /* position: relative; */
-  width: 603px;
+  /* width: 603px; */
   display: flex;
-  align-items: baseline;
+  align-items: end;
+  min-height: 300px;
+  margin-bottom: 50px;
 `;
 
 const Zombie1 = styled.img`
@@ -107,6 +122,22 @@ const RoundsContainer = styled.div`
 const ZombieImage = styled.img`
   height: 262px;
   width: 180px;
+  margin: 0 8px;
+  /* transition: transform 2s; */
+  -webkit-transition: all 300ms ease;
+  cursor: pointer;
+
+  /* padding-top: 33px; */
+
+  :hover {
+    padding-bottom: 33px;
+  }
+`;
+
+const BattleZombieImage = styled.img`
+  margin: 0 50px;
+
+  filter: ${(props) => (props.hit ? 'brightness(60%) opacity(60%)' : 'none')};
 `;
 
 const ZombieImageOverlay = styled.div`
@@ -128,14 +159,24 @@ const RoundText = styled.span`
   font-size: 80px;
   line-height: 75%;
   margin-bottom: 16px;
+  margin-top: 50px;
 `;
 
-const VSText = styled.span`
-  font-family: 'Hyperwave Three';
-  font-weight: 400;
-  font-size: 96px;
+const InstructionsText = styled.span`
+  font-size: 14px;
   line-height: 150%;
-  margin: 0 32px;
+  margin: 32px 0;
+  font-weight: 700;
+  display: flex;
+  margin-right: 17px;
+  img {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+`;
+const GreenHighlight = styled.span`
+  color: #ccee25;
+  margin-right: 5px;
 `;
 
 const Splatter = styled.div`
@@ -151,56 +192,141 @@ const Splatter = styled.div`
   background-repeat: no-repeat;
 `;
 
-function sleep(time) {
-  return new Promise((resolve) => setTimeout(resolve, time));
-}
+const SpectatorContainer = styled(FlexRow)`
+  position: fixed;
+  bottom: 15px;
+`;
+const SpectatorZombieImg = styled.img`
+  border-radius: 8px;
+  width: 106px;
+  margin: 0px 4px;
+
+  @media (min-width: 1441px) {
+    width: 130px;
+  }
+`;
+
+const WinnerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const RoundDetailContainer = styled(FlexRow)`
+  align-items: center;
+`;
+
+const WinnderZombieImg = styled.img`
+  border-radius: 14px;
+  margin: 0 8px;
+`;
+
+const OpoonentCardsImg = styled.img`
+  position: fixed;
+  top: 10px;
+`;
+
+const EmptyScore = styled.div`
+  background: #c4c4c4;
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+  margin: 0 5px;
+`;
+
+const OpponentScore = styled(FlexRow)`
+  align-items: center;
+  justify-content: space-evenly;
+  position: fixed;
+  left: 25%;
+  top: 20px;
+`;
+const YourScore = styled(FlexRow)`
+  align-items: center;
+  justify-content: space-evenly;
+  position: fixed;
+  right: 25%;
+  bottom: 20px;
+`;
 
 export default function BattlePage() {
-  const [display, setDisplay] = useState('found');
-
-  useEffect(async () => {
-    // await sleep(5000);
-    // setDisplay('found');
-  }, []);
+  const [display, setDisplay] = useState('fight');
 
   return (
     <BattlePageContainer>
       <BattlePageContent>
-        {display === 'initial' && (
-          <>
-            <Logo src={logo} alt="logo" />
-            <HandImage src={hand} alt="searching" />
-            <Subtitle>Searching for opponent</Subtitle>
-          </>
-        )}
-        {display === 'found' && (
-          <>
-            <Logo src={logo} alt="logo" />
+        {display === 'selection' && (
+          <RoundsContainer>
+            <img src={opponentCards} />
+            <RoundText>Round 1</RoundText>
             <ZombiesContainer>
-              <Zombie1 src={zombies} />
-              <Zombie2 src={zombies} />
-              <Zombie3 src={zombies} />
+              <ZombieImage src={sample} />
+              <ZombieImage src={sample} />
+              <ZombieImage src={sample} />
+              <ZombieImage src={sample} />
+              <ZombieImage src={sample} />
             </ZombiesContainer>
-            <Subtitle>Opponent Found!</Subtitle>
-            <LFGButton onClick={() => history.push('/arena/battle')}>
-              Fight!
-            </LFGButton>
-          </>
+            <FlexRow>
+              <InstructionsText>
+                Attack mode! Choose the fighter with the best{' '}
+                <img src={cleave} />
+                <GreenHighlight>ATTACK</GreenHighlight> for round 1.
+              </InstructionsText>
+              <LFGButton>Fight!</LFGButton>
+            </FlexRow>
+          </RoundsContainer>
         )}
-        {display === 'round' && (
+        {display === 'fight' && (
           <>
-            <Logo src={logo} alt="logo" />
             <RoundsContainer>
-              <RoundText>Round 2</RoundText>
+              <OpponentScore>
+                <img src={brain} alt="brain" />
+                <EmptyScore />
+                <EmptyScore />
+              </OpponentScore>
+              <YourScore>
+                <img src={brain} alt="brain" />
+                <EmptyScore />
+                <EmptyScore />
+              </YourScore>
+              <OpoonentCardsImg src={opponentCards} />
+
               <ThisRoundZombiesContainer>
                 <div style={{ position: 'relative' }}>
-                  <ZombieImageOverlay />
+                  {/* <ZombieImageOverlay /> */}
                   <Splatter />
-                  <ZombieImage src={sample} alt="figher" />
+                  <BattleZombieImage src={sample} alt="figher" hit={true} />
                 </div>
-                <VSText>vs</VSText>
-                <ZombieImage src={sample} alt="figher" />
+                <div style={{ position: 'relative' }}>
+                  <BattleZombieImage src={sample} alt="figher" hit={false} />
+                </div>
               </ThisRoundZombiesContainer>
+              <SpectatorContainer>
+                <SpectatorZombieImg src={placeholder} />
+                <SpectatorZombieImg src={placeholder} />
+                <SpectatorZombieImg src={placeholder} />
+                <SpectatorZombieImg src={placeholder} />
+              </SpectatorContainer>
+            </RoundsContainer>
+          </>
+        )}
+
+        {display === 'winner' && (
+          <>
+            {/* <Logo src={logo} alt="logo" /> */}
+            <RoundsContainer>
+              <WinnerContainer>
+                <img src={winner} />
+                <RoundDetailContainer>
+                  <WinnderZombieImg src={placeholder} />
+                  <WinnderZombieImg src={placeholder} />
+                  <WinnderZombieImg src={placeholder} />
+                  <div>
+                    <LFGButton>Find a new fight!</LFGButton>
+                    <LFGButton>rest up (quit)</LFGButton>
+                  </div>
+                </RoundDetailContainer>
+              </WinnerContainer>
             </RoundsContainer>
           </>
         )}
