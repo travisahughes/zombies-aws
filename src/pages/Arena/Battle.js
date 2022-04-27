@@ -12,7 +12,9 @@ import battleBg from '../../assets/arena/battle-bg.png';
 import opponentCards from '../../assets/arena/opponent-cards.png';
 import cleave from '../../assets/arena/icons/cleave.svg';
 import brain from '../../assets/arena/icons/brain-nom.png';
+import bite from '../../assets/arena/bite.png';
 import { useState, useEffect } from 'react';
+import { keyframes } from '@emotion/react';
 
 const FlexRow = styled.div`
   display: flex;
@@ -28,7 +30,7 @@ const BattlePageContainer = styled.div`
   margin: auto;
 
   @media (min-width: 768px) {
-    background-size: 100% 100%;
+    background-size: cover;
   }
 `;
 
@@ -38,14 +40,9 @@ const BattlePageContent = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 1440px;
   position: relative;
+  max-width: 1440px;
   margin: auto;
-`;
-
-const HandImage = styled.img`
-  height: 300px;
-  width: 249px;
 `;
 
 const Subtitle = styled.span`
@@ -194,6 +191,38 @@ const Splatter = styled.div`
   background-repeat: no-repeat;
 `;
 
+const fadeInOut = keyframes`
+  0%,100% { opacity: 0 }
+  10% { opacity: 1 }
+`;
+
+const Bite = styled.img`
+  /* background: url(${bite}); */
+  /* mix-blend-mode: hard-light; */
+  width: 564px;
+  height: 486px;
+  position: absolute;
+  left: -50%;
+  bottom: -50%;
+  z-index: 1;
+  opacity: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: ${fadeInOut} 1s linear;
+`;
+
+// const Bite = styled.div`
+//   background: url(${bite});
+//   mix-blend-mode: hard-light;
+//   width: 564px;
+//   height: 486px;
+//   position: absolute;
+//   left: -50%;
+//   z-index: 1;
+//   background-size: contain;
+//   background-repeat: no-repeat;
+// `;
+
 const SpectatorContainer = styled(FlexRow)`
   position: fixed;
   bottom: 15px;
@@ -252,7 +281,7 @@ const YourScore = styled(FlexRow)`
 `;
 
 export default function BattlePage() {
-  const [display, setDisplay] = useState('selection');
+  const [display, setDisplay] = useState('fight');
 
   return (
     <BattlePageContainer>
@@ -296,10 +325,13 @@ export default function BattlePage() {
               <ThisRoundZombiesContainer>
                 <div style={{ position: 'relative' }}>
                   {/* <ZombieImageOverlay /> */}
-                  <Splatter />
+                  {false && <Splatter />}
+                  {true && <Bite src={bite} />}
                   <BattleZombieImage src={sample} alt="figher" hit={true} />
                 </div>
                 <div style={{ position: 'relative' }}>
+                  {false && <Splatter />}
+                  {true && <Bite src={bite} />}
                   <BattleZombieImage src={sample} alt="figher" hit={false} />
                 </div>
               </ThisRoundZombiesContainer>

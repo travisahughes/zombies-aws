@@ -20,7 +20,7 @@ const FlexRow = styled.div`
 
 const SelectionPageContainer = styled.div`
   width: 100vw;
-  height: 100vh;
+  /* height: 100vh;
   /* background: linear-gradient(0deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), */
   /* url(${background}); */
   background-size: 100% 100%;
@@ -29,6 +29,7 @@ const SelectionPageContainer = styled.div`
 const ContentContainer = styled.div`
   padding: 8% 5%;
   max-width: 1440px;
+  min-height: 700px;
   margin: auto;
 
   @media (min-width: 768px) {
@@ -241,7 +242,7 @@ const SendMyTeam = styled.div`
   }
 `;
 
-export default function SelectionPage() {
+export default function SelectionPage({ userNfts }) {
   const [tab, setTab] = useState(1);
   const [slot1, setSlot1] = useState(null);
   const [slot2, setSlot2] = useState(null);
@@ -266,6 +267,7 @@ export default function SelectionPage() {
     }
   };
 
+  console.log(userNfts);
   const isReady = () => {
     return slot1 && slot2 && slot3 && slot4 && slot5;
   };
@@ -288,6 +290,14 @@ export default function SelectionPage() {
           </Tab>
         </TabContainer>
         <CardContainer>
+          {/* {userNfts &&
+            userNfts.result.map((item, index) => (
+              <Card
+                key={index}
+                src={`https://images.nicefunzombies.io/${item.token_id}.png`}
+                onClick={() => assignSlot(placeholder)}
+              />
+            ))} */}
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, index) => (
             <Card
               key={index}
