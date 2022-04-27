@@ -17,7 +17,7 @@ const ArenaPageContainer = styled.div`
   @media (min-width: 767px) {
     height: 100vh;
     min-height: 700px;
-    background-size: 100% 100%;
+    background-size: cover;
   }
 `;
 

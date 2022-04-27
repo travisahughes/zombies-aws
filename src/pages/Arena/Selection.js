@@ -8,6 +8,7 @@ import grave from '../../assets/arena/grave.png';
 import placeholder from '../../assets/arena/zombies/4100.png';
 import lfg from '../../assets/arena/lfg.png';
 import lfgMobile from '../../assets/arena/lfg-mobile.png';
+import lfgMobileDisabled from '../../assets/arena/lfg-mobile-disabled.png';
 
 import { useState } from 'react';
 import { useHistory } from 'react-router';
@@ -20,13 +21,19 @@ const FlexRow = styled.div`
 const SelectionPageContainer = styled.div`
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
-    url(${background});
+  /* background: linear-gradient(0deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), */
+  /* url(${background}); */
   background-size: 100% 100%;
 `;
 
 const ContentContainer = styled.div`
-  padding: 8% 10%;
+  padding: 8% 5%;
+  max-width: 1440px;
+  margin: auto;
+
+  @media (min-width: 768px) {
+    padding: 8% 10%;
+  }
 `;
 const TopContainer = styled.div`
   display: flex;
@@ -94,6 +101,8 @@ const BottomDeckContainer = styled.div`
   @media (min-width: 768px) {
     flex-direction: row;
     height: 237px;
+    /* max-width: 1440px; */
+    /* margin: auto; */
   }
 `;
 
@@ -168,8 +177,13 @@ const CardContainer = styled.div`
 
 const Card = styled.img`
   width: 106px;
-  border-radius: 14px;
+  border-radius: 9px;
   cursor: pointer;
+
+  @media (min-width: 768px) {
+    width: 180px;
+    border-radius: 14px;
+  }
 `;
 
 const TabContainer = styled.div`
@@ -196,7 +210,8 @@ const Tab = styled.div`
 `;
 
 const SendMyTeam = styled.div`
-  background-image: url(${lfgMobile});
+  background-image: url(${(props) =>
+    props.ready ? lfgMobile : lfgMobileDisabled});
   background-repeat: no-repeat;
   background-size: 100%;
   color: #000000;
@@ -210,6 +225,7 @@ const SendMyTeam = styled.div`
   margin-top: 1rem;
 
   @media (min-width: 768px) {
+    display: ${(props) => (props.ready ? 'flex' : 'none')};
     background-image: url(${lfg});
     width: 181px;
     height: 48px;
@@ -217,7 +233,6 @@ const SendMyTeam = styled.div`
     line-height: 150%;
     margin-top: 24px;
     cursor: pointer;
-    display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
@@ -244,7 +259,15 @@ export default function SelectionPage() {
       setSlot3(image);
     } else if (!slot4) {
       setSlot4(image);
-    } else setSlot5(image);
+    } else if (!slot5) {
+      setSlot5(image);
+    } else {
+      console.log('No more slot available!');
+    }
+  };
+
+  const isReady = () => {
+    return slot1 && slot2 && slot3 && slot4 && slot5;
   };
   return (
     <SelectionPageContainer>
@@ -298,11 +321,13 @@ export default function SelectionPage() {
         <GraveImage src={grave} />
         <DeckDivider src={deckBorder} />
         <DeckDividerMobile src={deckBorderMobile} />
-        {slot1 && slot2 && slot3 && slot4 && slot5 && (
-          <SendMyTeam onClick={() => history.push('/arena/search')}>
-            Send my team!
-          </SendMyTeam>
-        )}
+
+        <SendMyTeam
+          ready={isReady()}
+          onClick={() => history.push('/arena/search')}
+        >
+          Send my team!
+        </SendMyTeam>
       </BottomDeckContainer>
       {/* <FrontCover /> */}
     </SelectionPageContainer>

@@ -4,9 +4,9 @@ import background from '../../assets/arena/arena-bg.png';
 import zombies from '../../assets/arena/zombies/glad_breakfast.png';
 import logo from '../../assets/logo.png';
 import lfg from '../../assets/arena/lfg.png';
-import sample from '../../assets/arena/sample-zombie-card.png';
-import splatter from '../../assets/arena/splatter.png';
+import placeholder from '../../assets/arena/zombies/4100.png';
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const SearchPageContainer = styled.div`
   height: 100vh;
@@ -42,6 +42,10 @@ const Subtitle = styled.span`
   color: #ffffff;
   margin: 2rem 0;
   margin-bottom: 0;
+
+  @media (max-width: 767px) {
+    font-size: 18px;
+  }
 `;
 
 const Logo = styled.img`
@@ -53,9 +57,12 @@ const Logo = styled.img`
 
 const ZombiesContainer = styled.div`
   /* position: relative; */
-  width: 603px;
-  display: flex;
-  align-items: baseline;
+  display: none;
+  @media (min-width: 768px) {
+    width: 603px;
+    display: flex;
+    align-items: baseline;
+  }
 `;
 
 const Zombie1 = styled.img`
@@ -98,8 +105,28 @@ const LFGButton = styled.div`
   cursor: pointer;
 `;
 
+const MobileDisplay = styled.div`
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;
+
+const FlexRow = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 1rem;
+`;
+
+const MobileZombie = styled.img`
+  width: 106px;
+  border-radius: 9px;
+  margin: 0 2.5px;
+`;
+
 export default function SearchPage() {
-  const [display, setDisplay] = useState('initial');
+  const [display, setDisplay] = useState('found');
+  const history = useHistory();
 
   useEffect(async () => {
     // await sleep(5000);
@@ -119,12 +146,25 @@ export default function SearchPage() {
         {display === 'found' && (
           <>
             <ZombiesContainer>
-              <Zombie1 src={zombies} />
-              <Zombie2 src={zombies} />
-              <Zombie3 src={zombies} />
+              <Zombie1 src={zombies} alt="zombie" />
+              <Zombie2 src={zombies} alt="zombie" />
+              <Zombie3 src={zombies} alt="zombie" />
             </ZombiesContainer>
+            <MobileDisplay>
+              <FlexRow>
+                <MobileZombie src={placeholder} alt="zombie" />
+                <MobileZombie src={placeholder} alt="zombie" />
+                <MobileZombie src={placeholder} alt="zombie" />
+              </FlexRow>
+              <FlexRow>
+                <MobileZombie src={placeholder} alt="zombie" />
+                <MobileZombie src={placeholder} alt="zombie" />
+              </FlexRow>
+            </MobileDisplay>
             <Subtitle>Opponent Found!</Subtitle>
-            <LFGButton onClick={() => setDisplay('round')}>Fight!</LFGButton>
+            <LFGButton onClick={() => history.push('/arena/battle')}>
+              Fight!
+            </LFGButton>
           </>
         )}
       </SearchPageContent>

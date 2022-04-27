@@ -24,10 +24,12 @@ const BattlePageContainer = styled.div`
   min-height: 700px;
   background-image: url(${battleBg});
   background-repeat: no-repeat;
-  background-size: 100% 100%;
   background-position: center;
   margin: auto;
-  /* max-width: 1440px; */
+
+  @media (min-width: 768px) {
+    background-size: 100% 100%;
+  }
 `;
 
 const BattlePageContent = styled.div`
@@ -250,7 +252,7 @@ const YourScore = styled(FlexRow)`
 `;
 
 export default function BattlePage() {
-  const [display, setDisplay] = useState('fight');
+  const [display, setDisplay] = useState('selection');
 
   return (
     <BattlePageContainer>
