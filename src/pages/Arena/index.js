@@ -37,8 +37,8 @@ export default function Arena() {
   useEffect(() => {
     if (userAccount && Web3Api && chainId) {
       enableWeb3();
-      console.log('chainId', chainId);
-      console.log('userAccount', userAccount);
+      // console.log('chainId', chainId);
+      // console.log('userAccount', userAccount);
       if (chainId === '0x1' || chainId === '0x89') {
         CONTRACT_ID = contract_data.mainnet.contract_id;
         NETWORK = contract_data.mainnet.network_id;

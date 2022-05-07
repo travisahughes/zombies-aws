@@ -28,6 +28,7 @@ const BattlePageContainer = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   margin: auto;
+  overflow: hidden;
 
   @media (min-width: 768px) {
     background-size: cover;
@@ -137,6 +138,10 @@ const BattleZombieImage = styled.img`
   margin: 0 50px;
 
   filter: ${(props) => (props.hit ? 'brightness(60%) opacity(60%)' : 'none')};
+
+  @media (max-width: 768px) {
+    width: 128px;
+  }
 `;
 
 const ZombieImageOverlay = styled.div`
@@ -181,14 +186,15 @@ const GreenHighlight = styled.span`
 const Splatter = styled.div`
   background: url(${splatter});
   mix-blend-mode: hard-light;
-  height: 325px;
-  width: 521px;
   position: absolute;
-  /* left: 0; */
   z-index: 1;
-  /* left: 50%; */
   background-size: contain;
   background-repeat: no-repeat;
+  width: 200px;
+  @media (min-width: 768px) {
+    height: 325px;
+    width: 521px;
+  }
 `;
 
 const fadeInOut = keyframes`
@@ -199,8 +205,7 @@ const fadeInOut = keyframes`
 const Bite = styled.img`
   /* background: url(${bite}); */
   /* mix-blend-mode: hard-light; */
-  width: 564px;
-  height: 486px;
+  width: 200px;
   position: absolute;
   left: -50%;
   bottom: -50%;
@@ -209,6 +214,11 @@ const Bite = styled.img`
   background-size: contain;
   background-repeat: no-repeat;
   animation: ${fadeInOut} 1s linear;
+
+  @media (min-width: 768px) {
+    width: 564px;
+    height: 486px;
+  }
 `;
 
 // const Bite = styled.div`
@@ -226,10 +236,14 @@ const Bite = styled.img`
 const SpectatorContainer = styled(FlexRow)`
   position: fixed;
   bottom: 15px;
+
+  @media (max-width: 767px) {
+    bottom: 50px;
+  }
 `;
 const SpectatorZombieImg = styled.img`
   border-radius: 8px;
-  width: 106px;
+  width: 84px;
   margin: 0px 4px;
 
   @media (min-width: 1441px) {
@@ -252,13 +266,19 @@ const WinnderZombieImg = styled.img`
   margin: 0 8px;
 `;
 
-const OpoonentCardsImg = styled.img`
+const OpponentCardsImg = styled.img`
   position: fixed;
   top: 10px;
+  @media (max-width: 767px) {
+    /* position: relative; */
+    top: 5%;
+    max-width: 245px;
+  }
 `;
 
 const EmptyScore = styled.div`
-  background: #c4c4c4;
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   height: 22px;
   width: 22px;
   border-radius: 50%;
@@ -269,15 +289,29 @@ const OpponentScore = styled(FlexRow)`
   align-items: center;
   justify-content: space-evenly;
   position: fixed;
-  left: 25%;
+  left: 3%;
   top: 20px;
+
+  @media (min-width: 768px) {
+    left: 20%;
+    top: 20px;
+  }
 `;
 const YourScore = styled(FlexRow)`
   align-items: center;
   justify-content: space-evenly;
   position: fixed;
-  right: 25%;
+  right: 3%;
   bottom: 20px;
+
+  @media (min-width: 768px) {
+    right: 20%;
+    bottom: 20px;
+  }
+`;
+
+const BrainImage = styled.img`
+  max-width: 32px;
 `;
 
 export default function BattlePage() {
@@ -311,16 +345,20 @@ export default function BattlePage() {
           <>
             <RoundsContainer>
               <OpponentScore>
-                <img src={brain} alt="brain" />
+                <BrainImage src={brain} alt="brain" />
+                <EmptyScore />
+                <EmptyScore />
                 <EmptyScore />
                 <EmptyScore />
               </OpponentScore>
               <YourScore>
-                <img src={brain} alt="brain" />
+                <BrainImage src={brain} alt="brain" />
+                <EmptyScore />
+                <EmptyScore />
                 <EmptyScore />
                 <EmptyScore />
               </YourScore>
-              <OpoonentCardsImg src={opponentCards} />
+              <OpponentCardsImg src={opponentCards} alt="opponent-card" />
 
               <ThisRoundZombiesContainer>
                 <div style={{ position: 'relative' }}>

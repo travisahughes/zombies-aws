@@ -122,6 +122,7 @@ const Slot = styled.div`
     width: 120px;
     height: 174.67px;
     margin: 0 2px;
+    object-fit: cover;
   }
 `;
 
@@ -180,10 +181,14 @@ const Card = styled.img`
   width: 106px;
   border-radius: 9px;
   cursor: pointer;
-
+  filter: ${(props) =>
+    props.selected ? 'brightness(60%) opacity(60%)' : 'none'};
   @media (min-width: 768px) {
-    width: 180px;
+    width: 160px;
+    height: 254px;
     border-radius: 14px;
+    object-fit: cover;
+    object-position: -50px 3px;
   }
 `;
 
@@ -249,6 +254,7 @@ export default function SelectionPage({ userNfts }) {
   const [slot3, setSlot3] = useState(null);
   const [slot4, setSlot4] = useState(null);
   const [slot5, setSlot5] = useState(null);
+
   const history = useHistory();
 
   const assignSlot = (image) => {
@@ -267,9 +273,26 @@ export default function SelectionPage({ userNfts }) {
     }
   };
 
-  console.log(userNfts);
+  const unAssignSlot = (image) => {
+    if (slot1 === image) {
+      setSlot1(null);
+    } else if (slot2 === image) {
+      setSlot2(null);
+    } else if (slot3 === image) {
+      setSlot3(null);
+    } else if (slot4 === image) {
+      setSlot4(null);
+    } else if (slot5 === image) {
+      setSlot5(null);
+    }
+  };
+
   const isReady = () => {
     return slot1 && slot2 && slot3 && slot4 && slot5;
+  };
+
+  const selected = (image) => {
+    return [slot1, slot2, slot3, slot4, slot5].includes(image);
   };
   return (
     <SelectionPageContainer>
@@ -290,40 +313,77 @@ export default function SelectionPage({ userNfts }) {
           </Tab>
         </TabContainer>
         <CardContainer>
-          {/* {userNfts &&
+          {userNfts &&
             userNfts.result.map((item, index) => (
               <Card
                 key={index}
-                src={`https://images.nicefunzombies.io/${item.token_id}.png`}
-                onClick={() => assignSlot(placeholder)}
+                // selected={() => {
+                //   console.log(selected);
+                //   selected(item.token_id);
+                // }}
+                selected={selected(item.token_id)}
+                src={`https://images.nicefunzombies.io/card/${item.token_id}.png`}
+                onClick={() => {
+                  const id = item.token_id;
+                  if (!selected(id)) {
+                    assignSlot(id);
+                  } else {
+                    unAssignSlot(id);
+                  }
+                }}
               />
-            ))} */}
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, index) => (
+            ))}
+          {/* {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, index) => (
             <Card
               key={index}
               src={placeholder}
               onClick={() => assignSlot(placeholder)}
             />
-          ))}
+          ))} */}
         </CardContainer>
       </ContentContainer>
 
       <BottomDeckContainer>
         <SlotsContainer>
           <Slot>
-            {slot1 && <SlotImage src={slot1} onClick={() => setSlot1(null)} />}
+            {slot1 && (
+              <SlotImage
+                src={`https://images.nicefunzombies.io/card/${slot1}.png`}
+                onClick={() => setSlot1(null)}
+              />
+            )}
           </Slot>
           <Slot>
-            {slot2 && <SlotImage src={slot2} onClick={() => setSlot2(null)} />}
+            {slot2 && (
+              <SlotImage
+                src={`https://images.nicefunzombies.io/card/${slot2}.png`}
+                onClick={() => setSlot2(null)}
+              />
+            )}
           </Slot>
           <Slot>
-            {slot3 && <SlotImage src={slot3} onClick={() => setSlot3(null)} />}
+            {slot3 && (
+              <SlotImage
+                src={`https://images.nicefunzombies.io/card/${slot3}.png`}
+                onClick={() => setSlot3(null)}
+              />
+            )}
           </Slot>
           <Slot>
-            {slot4 && <SlotImage src={slot4} onClick={() => setSlot4(null)} />}
+            {slot4 && (
+              <SlotImage
+                src={`https://images.nicefunzombies.io/card/${slot4}.png`}
+                onClick={() => setSlot4(null)}
+              />
+            )}
           </Slot>
           <Slot>
-            {slot5 && <SlotImage src={slot5} onClick={() => setSlot5(null)} />}
+            {slot5 && (
+              <SlotImage
+                src={`https://images.nicefunzombies.io/card/${slot5}.png`}
+                onClick={() => setSlot5(null)}
+              />
+            )}
           </Slot>
         </SlotsContainer>
 
