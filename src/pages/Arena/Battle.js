@@ -15,6 +15,7 @@ import brain from '../../assets/arena/icons/brain-nom.png';
 import bite from '../../assets/arena/bite.png';
 import { useState, useEffect } from 'react';
 import { keyframes } from '@emotion/react';
+import { imageUrl } from './Selection';
 
 const FlexRow = styled.div`
   display: flex;
@@ -314,8 +315,8 @@ const BrainImage = styled.img`
   max-width: 32px;
 `;
 
-export default function BattlePage() {
-  const [display, setDisplay] = useState('fight');
+export default function BattlePage({ slots }) {
+  const [display, setDisplay] = useState('selection');
 
   return (
     <BattlePageContainer>
@@ -325,11 +326,13 @@ export default function BattlePage() {
             <img src={opponentCards} />
             <RoundText>Round 1</RoundText>
             <ZombiesContainer>
-              <ZombieImage src={sample} />
-              <ZombieImage src={sample} />
-              <ZombieImage src={sample} />
-              <ZombieImage src={sample} />
-              <ZombieImage src={sample} />
+              {slots.slot1
+                ? Object.values(slots).map((id, index) => (
+                    <ZombieImage src={imageUrl(id)} alt="zombie" key={index} />
+                  ))
+                : [1, 2, 3, 4, 5].map((id, index) => (
+                    <ZombieImage src={imageUrl(id)} alt="zombie" key={index} />
+                  ))}
             </ZombiesContainer>
             <FlexRow>
               <InstructionsText>

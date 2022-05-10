@@ -14,6 +14,13 @@ export default function Arena() {
 
   const [userAccount, setUserAccount] = useState(account);
   const [userNfts, setUserNfts] = useState(null);
+  const [slots, setSlots] = useState({
+    slot1: null,
+    slot2: null,
+    slot3: null,
+    slot4: null,
+    slot5: null,
+  });
 
   let CONTRACT_ID;
   let NETWORK;
@@ -38,7 +45,7 @@ export default function Arena() {
     if (userAccount && Web3Api && chainId) {
       enableWeb3();
       // console.log('chainId', chainId);
-      // console.log('userAccount', userAccount);
+      console.log('userAccount', userAccount);
       if (chainId === '0x1' || chainId === '0x89') {
         CONTRACT_ID = contract_data.mainnet.contract_id;
         NETWORK = contract_data.mainnet.network_id;
@@ -84,21 +91,32 @@ export default function Arena() {
     }
   }, [account]);
 
+  const initGame = async () => {
+    // TODO add web3 interaction here
+
+    history.push('/arena/search');
+  };
+
   return (
     <div>
       <Router history={history}>
         <Switch>
           <Route path="/arena/battle">
-            <BattlePage />
+            <BattlePage slots={slots} />
           </Route>
           <Route path="/arena/search">
             <SearchPage />
           </Route>
           <Route path="/arena/selection">
-            <SelectionPage userNfts={userNfts} />
+            <SelectionPage
+              userNfts={userNfts}
+              slots={slots}
+              setSlots={setSlots}
+              initGame={initGame}
+            />
           </Route>
           <Route path="/">
-            <ArenaPage />
+            <ArenaPage initGame={initGame} />
           </Route>
         </Switch>
       </Router>

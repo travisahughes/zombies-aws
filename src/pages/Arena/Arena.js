@@ -108,7 +108,7 @@ const Mobile = styled.div`
   }
 `;
 
-export default function ArenaPage(props) {
+export default function ArenaPage({ initGame }) {
   const history = useHistory();
   return (
     <ArenaPageContainer>
@@ -126,7 +126,10 @@ export default function ArenaPage(props) {
           <EnterArenaDesc style={{ fontWeight: 'bold' }}>
             You have x battle tokens. Burn one to play!
           </EnterArenaDesc>
-          <LFGButton onClick={() => history.push('/arena/selection')}>
+          <LFGButton
+            // onClick={() => history.push('/arena/selection')}
+            onClick={initGame}
+          >
             LFG!
           </LFGButton>
         </BlackContainer>

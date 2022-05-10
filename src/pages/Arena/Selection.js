@@ -247,52 +247,66 @@ const SendMyTeam = styled.div`
   }
 `;
 
-export default function SelectionPage({ userNfts }) {
+export const imageUrl = (id) => {
+  return `https://images.nicefunzombies.io/card/${id}.png`;
+};
+
+export default function SelectionPage({ userNfts, slots, setSlots, initGame }) {
   const [tab, setTab] = useState(1);
-  const [slot1, setSlot1] = useState(null);
-  const [slot2, setSlot2] = useState(null);
-  const [slot3, setSlot3] = useState(null);
-  const [slot4, setSlot4] = useState(null);
-  const [slot5, setSlot5] = useState(null);
+  // const [slot1, setSlot1] = useState(null);
+  // const [slot2, setSlot2] = useState(null);
+  // const [slot3, setSlot3] = useState(null);
+  // const [slot4, setSlot4] = useState(null);
+  // const [slot5, setSlot5] = useState(null);
 
   const history = useHistory();
 
   const assignSlot = (image) => {
-    if (!slot1) {
-      setSlot1(image);
-    } else if (!slot2) {
-      setSlot2(image);
-    } else if (!slot3) {
-      setSlot3(image);
-    } else if (!slot4) {
-      setSlot4(image);
-    } else if (!slot5) {
-      setSlot5(image);
+    if (!slots.slot1) {
+      setSlots({ ...slots, ...{ slot1: image } });
+    } else if (!slots.slot2) {
+      setSlots({ ...slots, ...{ slot2: image } });
+    } else if (!slots.slot3) {
+      setSlots({ ...slots, ...{ slot3: image } });
+    } else if (!slots.slot4) {
+      setSlots({ ...slots, ...{ slot4: image } });
+    } else if (!slots.slot5) {
+      setSlots({ ...slots, ...{ slot5: image } });
     } else {
       console.log('No more slot available!');
     }
   };
 
   const unAssignSlot = (image) => {
-    if (slot1 === image) {
-      setSlot1(null);
-    } else if (slot2 === image) {
-      setSlot2(null);
-    } else if (slot3 === image) {
-      setSlot3(null);
-    } else if (slot4 === image) {
-      setSlot4(null);
-    } else if (slot5 === image) {
-      setSlot5(null);
+    const updated = {};
+    if (slots.slot1 === image) {
+      updated['slot1'] = null;
+    } else if (slots.slot2 === image) {
+      updated['slot2'] = null;
+    } else if (slots.slot3 === image) {
+      updated['slot3'] = null;
+    } else if (slots.slot4 === image) {
+      updated['slot4'] = null;
+    } else if (slots.slot5 === image) {
+      updated['slot5'] = null;
     }
+    setSlots({ ...slots, ...updated });
   };
 
   const isReady = () => {
-    return slot1 && slot2 && slot3 && slot4 && slot5;
+    return (
+      slots.slot1 && slots.slot2 && slots.slot3 && slots.slot4 && slots.slot5
+    );
   };
 
   const selected = (image) => {
-    return [slot1, slot2, slot3, slot4, slot5].includes(image);
+    return [
+      slots.slot1,
+      slots.slot2,
+      slots.slot3,
+      slots.slot4,
+      slots.slot5,
+    ].includes(image);
   };
   return (
     <SelectionPageContainer>
@@ -322,7 +336,7 @@ export default function SelectionPage({ userNfts }) {
                 //   selected(item.token_id);
                 // }}
                 selected={selected(item.token_id)}
-                src={`https://images.nicefunzombies.io/card/${item.token_id}.png`}
+                src={imageUrl(item.token_id)}
                 onClick={() => {
                   const id = item.token_id;
                   if (!selected(id)) {
@@ -346,42 +360,42 @@ export default function SelectionPage({ userNfts }) {
       <BottomDeckContainer>
         <SlotsContainer>
           <Slot>
-            {slot1 && (
+            {slots.slot1 && (
               <SlotImage
-                src={`https://images.nicefunzombies.io/card/${slot1}.png`}
-                onClick={() => setSlot1(null)}
+                src={imageUrl(slots.slot1)}
+                onClick={() => unAssignSlot(slots.slot1)}
               />
             )}
           </Slot>
           <Slot>
-            {slot2 && (
+            {slots.slot2 && (
               <SlotImage
-                src={`https://images.nicefunzombies.io/card/${slot2}.png`}
-                onClick={() => setSlot2(null)}
+                src={imageUrl(slots.slot2)}
+                onClick={() => unAssignSlot(slots.slot2)}
               />
             )}
           </Slot>
           <Slot>
-            {slot3 && (
+            {slots.slot3 && (
               <SlotImage
-                src={`https://images.nicefunzombies.io/card/${slot3}.png`}
-                onClick={() => setSlot3(null)}
+                src={imageUrl(slots.slot3)}
+                onClick={() => unAssignSlot(slots.slot3)}
               />
             )}
           </Slot>
           <Slot>
-            {slot4 && (
+            {slots.slot4 && (
               <SlotImage
-                src={`https://images.nicefunzombies.io/card/${slot4}.png`}
-                onClick={() => setSlot4(null)}
+                src={imageUrl(slots.slot4)}
+                onClick={() => unAssignSlot(slots.slot4)}
               />
             )}
           </Slot>
           <Slot>
-            {slot5 && (
+            {slots.slot5 && (
               <SlotImage
-                src={`https://images.nicefunzombies.io/card/${slot5}.png`}
-                onClick={() => setSlot5(null)}
+                src={imageUrl(slots.slot5)}
+                onClick={() => unAssignSlot(slots.slot5)}
               />
             )}
           </Slot>
@@ -394,7 +408,8 @@ export default function SelectionPage({ userNfts }) {
 
         <SendMyTeam
           ready={isReady()}
-          onClick={() => history.push('/arena/search')}
+          // onClick={() => history.push('/arena/search')}
+          onClick={initGame}
         >
           Send my team!
         </SendMyTeam>

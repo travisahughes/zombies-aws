@@ -125,12 +125,19 @@ const MobileZombie = styled.img`
 `;
 
 export default function SearchPage() {
-  const [display, setDisplay] = useState('found');
+  const [display, setDisplay] = useState('initial');
   const history = useHistory();
 
+  const sleep = (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
+
   useEffect(async () => {
-    // await sleep(5000);
-    // setDisplay('found');
+    // Add the loading logic here.
+    await sleep(5000);
+    setDisplay('found');
+    await sleep(5000);
+    history.push('/arena/battle');
   }, []);
 
   return (
