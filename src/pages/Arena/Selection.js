@@ -9,8 +9,9 @@ import placeholder from '../../assets/arena/zombies/4100.png';
 import lfg from '../../assets/arena/lfg.png';
 import lfgMobile from '../../assets/arena/lfg-mobile.png';
 import lfgMobileDisabled from '../../assets/arena/lfg-mobile-disabled.png';
-
-import { useState } from 'react';
+import axios from 'axios';
+import { Spinner } from '../../Components/Spinner';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 
 const FlexRow = styled.div`
@@ -248,16 +249,22 @@ const SendMyTeam = styled.div`
 `;
 
 export const imageUrl = (id) => {
-  return `https://images.nicefunzombies.io/card/${id}.png`;
+  if (parseInt(id) < 10000) {
+    return `https://images.nicefunzombies.io/card/${id}.png`;
+  } else {
+    return placeholder;
+  }
 };
 
-export default function SelectionPage({ userNfts, slots, setSlots, initGame }) {
+export default function SelectionPage({
+  userNfts,
+  slots,
+  setSlots,
+  initGame,
+  loading,
+}) {
   const [tab, setTab] = useState(1);
-  // const [slot1, setSlot1] = useState(null);
-  // const [slot2, setSlot2] = useState(null);
-  // const [slot3, setSlot3] = useState(null);
-  // const [slot4, setSlot4] = useState(null);
-  // const [slot5, setSlot5] = useState(null);
+  const [gruntsData, setGruntsData] = useState(null);
 
   const history = useHistory();
 
@@ -308,6 +315,20 @@ export default function SelectionPage({ userNfts, slots, setSlots, initGame }) {
       slots.slot5,
     ].includes(image);
   };
+
+  const loadGrunts = async () => {
+    const grunts = await axios
+      .get('https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/grunts')
+      .then((res) => res.data);
+
+    setGruntsData(grunts);
+    console.log(grunts);
+  };
+
+  useEffect(() => {
+    loadGrunts();
+  }, []);
+
   return (
     <SelectionPageContainer>
       <ContentContainer>
@@ -328,13 +349,10 @@ export default function SelectionPage({ userNfts, slots, setSlots, initGame }) {
         </TabContainer>
         <CardContainer>
           {userNfts &&
+            tab === 1 &&
             userNfts.result.map((item, index) => (
               <Card
                 key={index}
-                // selected={() => {
-                //   console.log(selected);
-                //   selected(item.token_id);
-                // }}
                 selected={selected(item.token_id)}
                 src={imageUrl(item.token_id)}
                 onClick={() => {
@@ -347,13 +365,23 @@ export default function SelectionPage({ userNfts, slots, setSlots, initGame }) {
                 }}
               />
             ))}
-          {/* {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, index) => (
-            <Card
-              key={index}
-              src={placeholder}
-              onClick={() => assignSlot(placeholder)}
-            />
-          ))} */}
+
+          {tab === 2 &&
+            gruntsData.map((item, index) => (
+              <Card
+                key={index}
+                selected={selected(item.zombieId)}
+                src={item.image}
+                onClick={() => {
+                  const id = item.zombieId;
+                  if (!selected(id)) {
+                    assignSlot(id);
+                  } else {
+                    unAssignSlot(id);
+                  }
+                }}
+              />
+            ))}
         </CardContainer>
       </ContentContainer>
 
@@ -411,7 +439,7 @@ export default function SelectionPage({ userNfts, slots, setSlots, initGame }) {
           // onClick={() => history.push('/arena/search')}
           onClick={initGame}
         >
-          Send my team!
+          {loading ? <Spinner /> : 'Send my team!'}
         </SendMyTeam>
       </BottomDeckContainer>
       {/* <FrontCover /> */}

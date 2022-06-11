@@ -108,7 +108,7 @@ const Mobile = styled.div`
   }
 `;
 
-export default function ArenaPage({ initGame }) {
+export default function ArenaPage({ enqueue }) {
   const history = useHistory();
   return (
     <ArenaPageContainer>
@@ -128,7 +128,7 @@ export default function ArenaPage({ initGame }) {
           </EnterArenaDesc>
           <LFGButton
             // onClick={() => history.push('/arena/selection')}
-            onClick={initGame}
+            onClick={enqueue}
           >
             LFG!
           </LFGButton>

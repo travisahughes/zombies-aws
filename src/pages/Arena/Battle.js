@@ -16,6 +16,8 @@ import bite from '../../assets/arena/bite.png';
 import { useState, useEffect } from 'react';
 import { keyframes } from '@emotion/react';
 import { imageUrl } from './Selection';
+import axios from 'axios';
+import { Spinner } from '../../Components/Spinner';
 
 const FlexRow = styled.div`
   display: flex;
@@ -124,12 +126,13 @@ const ZombieImage = styled.img`
   height: 262px;
   width: 180px;
   margin: 0 8px;
-  /* transition: transform 2s; */
+  border-radius: 15px;
   -webkit-transition: all 300ms ease;
   cursor: pointer;
+  /* filter: ${({ isUnavailable }) =>
+    isUnavailable ? 'grayscale(1)' : 'unset'}; */
 
-  /* padding-top: 33px; */
-
+  padding-bottom: ${({ isSelected }) => (isSelected ? '33px' : '0')};
   :hover {
     padding-bottom: 33px;
   }
@@ -137,11 +140,12 @@ const ZombieImage = styled.img`
 
 const BattleZombieImage = styled.img`
   margin: 0 50px;
+  width: 128px;
 
   filter: ${(props) => (props.hit ? 'brightness(60%) opacity(60%)' : 'none')};
 
-  @media (max-width: 768px) {
-    width: 128px;
+  @media (min-width: 768px) {
+    width: 180px;
   }
 `;
 
@@ -150,6 +154,7 @@ const ZombieImageOverlay = styled.div`
   height: 262px;
   width: 180px;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+  z-index: 9;
 `;
 
 const ThisRoundZombiesContainer = styled.div`
@@ -315,8 +320,49 @@ const BrainImage = styled.img`
   max-width: 32px;
 `;
 
-export default function BattlePage({ slots }) {
-  const [display, setDisplay] = useState('selection');
+const UnavailableZombieOverlay = styled.div`
+  position: absolute;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+    url(cards-color.png);
+  border-radius: 15px;
+  top: 0;
+  width: 180px;
+  height: 262px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 8px;
+`;
+
+export default function BattlePage({
+  slots,
+  nextRound,
+  account,
+  roundInfo,
+  display,
+  loading,
+  attacking,
+}) {
+  const [selectedChampion, setSelectedChampion] = useState(null);
+
+  const unavailableZombies = roundInfo?.roster?.player?.unavailableZombies;
+  const loser = roundInfo?.lastRoundResult?.loser;
+  const playerChampion = roundInfo?.roster?.player?.champion;
+
+  // const getGameStage = async () => {
+  //   const endpointUrl = `https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/game?walletId=${account}`;
+  //   const response = await axios.get(endpointUrl);
+  //   console.log('getGameStage');
+  //   console.log(response);
+  // };
+  // useEffect(() => {
+  //   if (account) {
+  //     getGameStage();
+  //   }
+  // }, [account]);
+
+  console.log('Roundinfo');
+  console.log(roundInfo);
 
   return (
     <BattlePageContainer>
@@ -324,23 +370,53 @@ export default function BattlePage({ slots }) {
         {display === 'selection' && (
           <RoundsContainer>
             <img src={opponentCards} />
-            <RoundText>Round 1</RoundText>
+            <RoundText>Round {roundInfo?.currentRound?.round}</RoundText>
             <ZombiesContainer>
-              {slots.slot1
-                ? Object.values(slots).map((id, index) => (
-                    <ZombieImage src={imageUrl(id)} alt="zombie" key={index} />
-                  ))
-                : [1, 2, 3, 4, 5].map((id, index) => (
-                    <ZombieImage src={imageUrl(id)} alt="zombie" key={index} />
-                  ))}
+              {roundInfo?.roster?.player?.availableZombies
+                .concat(roundInfo?.roster?.player?.unavailableZombies)
+                .map((id, index) => (
+                  <div style={{ position: 'relative' }}>
+                    <ZombieImage
+                      isSelected={selectedChampion === id}
+                      isUnavailable={unavailableZombies.includes(id)}
+                      src={imageUrl(id)}
+                      alt="zombie"
+                      key={index}
+                      onClick={() => {
+                        if (unavailableZombies.includes(parseInt(id))) return;
+                        setSelectedChampion(id);
+                      }}
+                    />
+                    {unavailableZombies.includes(parseInt(id)) && (
+                      <UnavailableZombieOverlay>
+                        round {unavailableZombies.indexOf(parseInt(id)) + 1}
+                      </UnavailableZombieOverlay>
+                    )}
+                    {unavailableZombies.includes(id) && (
+                      <ZombieImageOverlay>used</ZombieImageOverlay>
+                    )}
+                  </div>
+                ))}
             </ZombiesContainer>
             <FlexRow>
               <InstructionsText>
-                Attack mode! Choose the fighter with the best{' '}
-                <img src={cleave} />
-                <GreenHighlight>ATTACK</GreenHighlight> for round 1.
+                Attack mode! &nbsp;
+                <GreenHighlight>{roundInfo?.currentRound?.text}</GreenHighlight>
+                {/* Choose the fighter with the best{' '} */}
+                {/* <img src={cleave} /> */}
+                {/* <GreenHighlight>ATTACK</GreenHighlight> for round 1. */}
               </InstructionsText>
-              <LFGButton>Fight!</LFGButton>
+              {selectedChampion && (
+                <LFGButton
+                  onClick={() => {
+                    if (loading) return;
+                    nextRound(selectedChampion);
+                    setSelectedChampion(null);
+                  }}
+                >
+                  {loading ? <Spinner /> : 'Fight!'}
+                </LFGButton>
+              )}
             </FlexRow>
           </RoundsContainer>
         )}
@@ -348,39 +424,60 @@ export default function BattlePage({ slots }) {
           <>
             <RoundsContainer>
               <OpponentScore>
-                <BrainImage src={brain} alt="brain" />
-                <EmptyScore />
-                <EmptyScore />
-                <EmptyScore />
-                <EmptyScore />
+                {Array.apply(null, { length: roundInfo.scores.opponent }).map(
+                  (i) => (
+                    <BrainImage src={brain} alt="brain" key={i} />
+                  )
+                )}
+                {Array.apply(null, {
+                  length: 5 - roundInfo.scores.opponent,
+                }).map((i) => (
+                  <EmptyScore />
+                ))}
               </OpponentScore>
               <YourScore>
-                <BrainImage src={brain} alt="brain" />
-                <EmptyScore />
-                <EmptyScore />
-                <EmptyScore />
-                <EmptyScore />
+                {Array.apply(null, { length: roundInfo.scores.player }).map(
+                  (i) => (
+                    <BrainImage src={brain} alt="brain" key={i} />
+                  )
+                )}
+                {Array.apply(null, {
+                  length: 5 - roundInfo.scores.player,
+                }).map((i) => (
+                  <EmptyScore />
+                ))}
               </YourScore>
               <OpponentCardsImg src={opponentCards} alt="opponent-card" />
 
               <ThisRoundZombiesContainer>
                 <div style={{ position: 'relative' }}>
-                  {/* <ZombieImageOverlay /> */}
-                  {false && <Splatter />}
-                  {true && <Bite src={bite} />}
-                  <BattleZombieImage src={sample} alt="figher" hit={true} />
+                  {/* {false && <Splatter />} */}
+                  {loser === playerChampion && attacking && <Bite src={bite} />}
+                  <BattleZombieImage
+                    src={imageUrl(playerChampion)}
+                    alt="figher"
+                    hit={loser === playerChampion}
+                  />
                 </div>
                 <div style={{ position: 'relative' }}>
-                  {false && <Splatter />}
-                  {true && <Bite src={bite} />}
-                  <BattleZombieImage src={sample} alt="figher" hit={false} />
+                  {/* {false && <Splatter />} */}
+                  {loser === roundInfo.roster.opponent.champion &&
+                    attacking && <Bite src={bite} />}
+                  <BattleZombieImage
+                    src={imageUrl(roundInfo.roster.opponent.champion)}
+                    alt="figher"
+                    hit={loser === roundInfo.roster.opponent.champion}
+                  />
                 </div>
               </ThisRoundZombiesContainer>
+
               <SpectatorContainer>
-                <SpectatorZombieImg src={placeholder} />
-                <SpectatorZombieImg src={placeholder} />
-                <SpectatorZombieImg src={placeholder} />
-                <SpectatorZombieImg src={placeholder} />
+                {roundInfo.roster.player.availableZombies
+                  .concat(unavailableZombies)
+                  .filter((item) => item !== playerChampion)
+                  .map((id) => (
+                    <SpectatorZombieImg src={imageUrl(id)} alt={id} key={id} />
+                  ))}
               </SpectatorContainer>
             </RoundsContainer>
           </>
@@ -388,17 +485,34 @@ export default function BattlePage({ slots }) {
 
         {display === 'winner' && (
           <>
-            {/* <Logo src={logo} alt="logo" /> */}
             <RoundsContainer>
               <WinnerContainer>
                 <img src={winner} />
                 <RoundDetailContainer>
-                  <WinnderZombieImg src={placeholder} />
-                  <WinnderZombieImg src={placeholder} />
-                  <WinnderZombieImg src={placeholder} />
+                  {roundInfo.scores.player > roundInfo.scores.opponent ? (
+                    unavailableZombies
+                      .slice(0, 3)
+                      .map((id) => (
+                        <WinnderZombieImg
+                          src={imageUrl(id)}
+                          key={id}
+                          alt="zombies"
+                        />
+                      ))
+                  ) : (
+                    <>
+                      <WinnderZombieImg src={placeholder} alt="zombies" />
+                      <WinnderZombieImg src={placeholder} alt="zombies" />
+                      <WinnderZombieImg src={placeholder} alt="zombies" />
+                    </>
+                  )}
                   <div>
-                    <LFGButton>Find a new fight!</LFGButton>
-                    <LFGButton>rest up (quit)</LFGButton>
+                    <a href="/arena" style={{ textDecoration: 'none' }}>
+                      <LFGButton>Find a new fight!</LFGButton>
+                    </a>
+                    <a href="/" style={{ textDecoration: 'none' }}>
+                      <LFGButton>rest up (quit)</LFGButton>
+                    </a>
                   </div>
                 </RoundDetailContainer>
               </WinnerContainer>

@@ -4,15 +4,20 @@ import { useState, useEffect } from 'react';
 import ArenaPage from './Arena';
 import BattlePage from './Battle';
 import SelectionPage from './Selection';
-import SearchPage from './Search';
+import SearchPage, { sleep } from './Search';
 import { useChain, useMoralis, useMoralisWeb3Api } from 'react-moralis';
 import { contract_data } from '../../constants/moralis_env';
+import axios from 'axios';
 
 export default function Arena() {
   const history = useHistory();
   const { switchNetwork, chainId, account } = useChain();
 
+  const [roundDisplay, setRoundDisplay] = useState('selection');
+  const [roundInfo, setRoundInfo] = useState(null);
+  const [loading, setLoading] = useState(null);
   const [userAccount, setUserAccount] = useState(account);
+  const [attacking, setAttacking] = useState(account);
   const [userNfts, setUserNfts] = useState(null);
   const [slots, setSlots] = useState({
     slot1: null,
@@ -91,18 +96,98 @@ export default function Arena() {
     }
   }, [account]);
 
-  const initGame = async () => {
-    // TODO add web3 interaction here
-
-    history.push('/arena/search');
+  const headers = {
+    'Content-Type': 'application/json',
   };
+
+  const setAttackAnimation = async () => {
+    await sleep(2000);
+    setAttacking(true);
+  };
+
+  const initGame = async () => {
+    setLoading(true);
+    const endpointUrl =
+      'https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/game-init';
+    const payload = {
+      walletId: account,
+      zombies: Object.values(slots),
+    };
+    const response = await axios.post(endpointUrl, payload, headers);
+    console.log('---------initGameResponse---------');
+    console.log(response.data);
+
+    setRoundDisplay('selection');
+    setRoundInfo(response.data.body);
+    setLoading(false);
+    history.push('/arena/battle');
+  };
+
+  const nextRound = async (champion) => {
+    const endpointUrl =
+      'https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/game';
+    const payload = {
+      walletId: account,
+      champion,
+    };
+
+    const response = await axios.post(endpointUrl, payload, headers);
+    console.log(response);
+    setRoundInfo(response.data);
+    setRoundDisplay('fight');
+    await setAttackAnimation();
+    await sleep(3000);
+
+    if (response.data.isConcluded === 0) {
+      setRoundDisplay('selection');
+      console.log('fightround');
+    } else {
+      console.log('winner');
+      setRoundDisplay('winner');
+    }
+    setAttacking(false);
+  };
+
+  const enqueue = async () => {
+    const endpointUrl =
+      'https://8dxqvg8gf9.execute-api.us-west-2.amazonaws.com/prod/v1/enqueue';
+    const payload = {
+      from: account,
+      eventType: 'EBattle',
+    };
+    const response = await axios.post(endpointUrl, payload, headers);
+    console.log(response);
+    history.push('/arena/selection');
+  };
+
+  // const getGameStage = async () => {
+  //   const endpointUrl = `https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/game?walletId=${account}`;
+  //   const response = await axios.get(endpointUrl);
+  //   setRoundInfo(response.data.body);
+  //   console.log('getGameStage');
+  //   console.log(response);
+  // };
+
+  // useEffect(() => {
+  //   if (account) {
+  //     getGameStage();
+  //   }
+  // }, [account]);
 
   return (
     <div>
       <Router history={history}>
         <Switch>
           <Route path="/arena/battle">
-            <BattlePage slots={slots} />
+            <BattlePage
+              slots={slots}
+              nextRound={nextRound}
+              roundInfo={roundInfo}
+              account={account}
+              display={roundDisplay}
+              loading={loading}
+              attacking={attacking}
+            />
           </Route>
           <Route path="/arena/search">
             <SearchPage />
@@ -113,10 +198,11 @@ export default function Arena() {
               slots={slots}
               setSlots={setSlots}
               initGame={initGame}
+              loading={loading}
             />
           </Route>
           <Route path="/">
-            <ArenaPage initGame={initGame} />
+            <ArenaPage enqueue={enqueue} />
           </Route>
         </Switch>
       </Router>
