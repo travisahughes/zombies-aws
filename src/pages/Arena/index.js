@@ -110,7 +110,7 @@ export default function Arena() {
     const endpointUrl =
       'https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/game-init';
     const payload = {
-      walletId: account,
+      walletId: userAccount,
       zombies: Object.values(slots),
     };
     const response = await axios.post(endpointUrl, payload, headers);
@@ -127,7 +127,7 @@ export default function Arena() {
     const endpointUrl =
       'https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/game';
     const payload = {
-      walletId: account,
+      walletId: userAccount,
       champion,
     };
 
@@ -152,7 +152,7 @@ export default function Arena() {
     const endpointUrl =
       'https://8dxqvg8gf9.execute-api.us-west-2.amazonaws.com/prod/v1/enqueue';
     const payload = {
-      from: account,
+      from: userAccount,
       eventType: 'EBattle',
     };
     const response = await axios.post(endpointUrl, payload, headers);
