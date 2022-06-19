@@ -160,19 +160,34 @@ export default function Arena() {
     history.push('/arena/selection');
   };
 
-  // const getGameStage = async () => {
-  //   const endpointUrl = `https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/game?walletId=${account}`;
-  //   const response = await axios.get(endpointUrl);
-  //   setRoundInfo(response.data.body);
-  //   console.log('getGameStage');
-  //   console.log(response);
-  // };
+  const getGameStage = async () => {
+    const endpointUrl = `https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/game/${account}`;
+    const response = await axios.get(endpointUrl, headers);
+    setRoundInfo(response.data);
+    return response.data;
+  };
 
-  // useEffect(() => {
-  //   if (account) {
-  //     getGameStage();
-  //   }
-  // }, [account]);
+  useEffect(() => {
+    if (account) {
+      getGameStage();
+    }
+  }, [account]);
+
+  const continueOrStartNewRound = async () => {
+    setLoading(true);
+
+    const gameStage = await getGameStage();
+
+    const { currentRound } = gameStage;
+
+    if (currentRound && currentRound.round && currentRound.round !== 3) {
+      setRoundInfo(gameStage);
+      history.push('/arena/battle');
+    } else {
+      enqueue();
+    }
+    setLoading(false);
+  };
 
   return (
     <div>
@@ -202,7 +217,7 @@ export default function Arena() {
             />
           </Route>
           <Route path="/">
-            <ArenaPage enqueue={enqueue} />
+            <ArenaPage enqueue={continueOrStartNewRound} loading={loading} />
           </Route>
         </Switch>
       </Router>

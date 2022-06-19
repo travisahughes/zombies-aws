@@ -392,9 +392,6 @@ export default function BattlePage({
                         round {unavailableZombies.indexOf(parseInt(id)) + 1}
                       </UnavailableZombieOverlay>
                     )}
-                    {unavailableZombies.includes(id) && (
-                      <ZombieImageOverlay>used</ZombieImageOverlay>
-                    )}
                   </div>
                 ))}
             </ZombiesContainer>

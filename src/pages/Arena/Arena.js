@@ -5,6 +5,7 @@ import leftImg from '../../assets/arena/arena-left.png';
 import rightImg from '../../assets/arena/arena-right.png';
 import lfg from '../../assets/arena/lfg.png';
 import lfgMobile from '../../assets/arena/lfg-mobile.png';
+import { Spinner } from '../../Components/Spinner';
 
 const ArenaPageContainer = styled.div`
   background-image: url(${background});
@@ -108,7 +109,7 @@ const Mobile = styled.div`
   }
 `;
 
-export default function ArenaPage({ enqueue }) {
+export default function ArenaPage({ enqueue, loading }) {
   const history = useHistory();
   return (
     <ArenaPageContainer>
@@ -126,11 +127,8 @@ export default function ArenaPage({ enqueue }) {
           <EnterArenaDesc style={{ fontWeight: 'bold' }}>
             You have x battle tokens. Burn one to play!
           </EnterArenaDesc>
-          <LFGButton
-            // onClick={() => history.push('/arena/selection')}
-            onClick={enqueue}
-          >
-            LFG!
+          <LFGButton onClick={enqueue}>
+            {loading ? <Spinner /> : 'LFG!'}
           </LFGButton>
         </BlackContainer>
       </ArenaPageContent>
