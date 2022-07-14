@@ -267,7 +267,7 @@ const RoundDetailContainer = styled(FlexRow)`
   align-items: center;
 `;
 
-const WinnderZombieImg = styled.img`
+const WinnerZombieImg = styled.img`
   border-radius: 14px;
   margin: 0 8px;
 `;
@@ -490,7 +490,7 @@ export default function BattlePage({
                     unavailableZombies
                       .slice(0, 3)
                       .map((id) => (
-                        <WinnderZombieImg
+                        <WinnerZombieImg
                           src={imageUrl(id)}
                           key={id}
                           alt="zombies"
@@ -498,9 +498,9 @@ export default function BattlePage({
                       ))
                   ) : (
                     <>
-                      <WinnderZombieImg src={placeholder} alt="zombies" />
-                      <WinnderZombieImg src={placeholder} alt="zombies" />
-                      <WinnderZombieImg src={placeholder} alt="zombies" />
+                      <WinnerZombieImg src={placeholder} alt="zombies" />
+                      <WinnerZombieImg src={placeholder} alt="zombies" />
+                      <WinnerZombieImg src={placeholder} alt="zombies" />
                     </>
                   )}
                   <div>

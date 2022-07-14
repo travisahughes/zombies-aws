@@ -186,10 +186,8 @@ const Card = styled.img`
     props.selected ? 'brightness(60%) opacity(60%)' : 'none'};
   @media (min-width: 768px) {
     width: 160px;
-    height: 254px;
     border-radius: 14px;
     object-fit: cover;
-    object-position: -50px 3px;
   }
 `;
 
@@ -250,9 +248,11 @@ const SendMyTeam = styled.div`
 
 export const imageUrl = (id) => {
   if (parseInt(id) < 10000) {
-    return `https://images.nicefunzombies.io/card/${id}.png`;
+    return `https://images.nicefunzombies.io/card-nobg/${id}.png`;
   } else {
-    return placeholder;
+    // temp... use id - 9999
+    const tmpId = id - 9999;
+    return `https://images.nicefunzombies.io/card-nobg/${tmpId}.png`;
   }
 };
 
@@ -322,7 +322,7 @@ export default function SelectionPage({
       .then((res) => res.data);
 
     setGruntsData(grunts);
-    console.log(grunts);
+    console.log('grunts', grunts);
   };
 
   useEffect(() => {

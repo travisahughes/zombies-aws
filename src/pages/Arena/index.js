@@ -14,6 +14,7 @@ export default function Arena() {
   const { switchNetwork, chainId, account } = useChain();
 
   const [roundDisplay, setRoundDisplay] = useState('selection');
+  const [currentGame, setCurrentGame] = useState(null);
   const [roundInfo, setRoundInfo] = useState(null);
   const [loading, setLoading] = useState(null);
   const [userAccount, setUserAccount] = useState(account);
@@ -74,6 +75,12 @@ export default function Arena() {
         console.log('nfts', nfts);
       };
       fetchNfts();
+
+      const getCurGame = async () => {
+        const data = await getGameStage();
+        setCurrentGame(data);
+      };
+      getCurGame();
     }
   }, [userAccount, chainId]);
 
@@ -95,6 +102,25 @@ export default function Arena() {
       setUserAccount(account);
     }
   }, [account]);
+
+  useEffect(() => {
+    if (currentGame) {
+      console.log(
+        '[cur] currentGame... decide what stage were on',
+        currentGame
+      );
+      if (
+        currentGame?.currentRound?.round > 0 &&
+        (currentGame.isConcluded === false || currentGame.isConcluded === 0)
+      ) {
+        console.log('[cur] were in a round');
+        setRoundInfo(currentGame);
+        history.push('/arena/battle');
+      } else {
+        console.log('[cur] no current game... start one!');
+      }
+    }
+  }, [currentGame]);
 
   const headers = {
     'Content-Type': 'application/json',
@@ -148,30 +174,36 @@ export default function Arena() {
     setAttacking(false);
   };
 
-  const enqueue = async () => {
+  const gameInit = async () => {
     const endpointUrl =
-      'https://8dxqvg8gf9.execute-api.us-west-2.amazonaws.com/prod/v1/enqueue';
+      'https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/game-init';
     const payload = {
-      from: userAccount,
-      eventType: 'EBattle',
+      walletId: userAccount,
+      zombies: Object.values(slots),
     };
     const response = await axios.post(endpointUrl, payload, headers);
-    console.log(response);
+    // history.push('/arena/selection');
+
+    console.log('---------gameInit---------');
+    console.log(response.data);
+
+    setRoundDisplay('selection');
+    setRoundInfo(response.data.body);
+    setLoading(false);
+    history.push('/arena/battle');
+  };
+
+  const start = () => {
+    console.log('start');
     history.push('/arena/selection');
   };
 
   const getGameStage = async () => {
-    const endpointUrl = `https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/game/${account}`;
+    const endpointUrl = `https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/game/${userAccount}`;
     const response = await axios.get(endpointUrl, headers);
     setRoundInfo(response.data);
     return response.data;
   };
-
-  useEffect(() => {
-    if (account) {
-      getGameStage();
-    }
-  }, [account]);
 
   const continueOrStartNewRound = async () => {
     setLoading(true);
@@ -217,7 +249,11 @@ export default function Arena() {
             />
           </Route>
           <Route path="/">
-            <ArenaPage enqueue={continueOrStartNewRound} loading={loading} />
+            <ArenaPage
+              start={start}
+              loading={loading}
+              userAccount={userAccount}
+            />
           </Route>
         </Switch>
       </Router>

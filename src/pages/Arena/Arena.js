@@ -109,7 +109,7 @@ const Mobile = styled.div`
   }
 `;
 
-export default function ArenaPage({ enqueue, loading }) {
+export default function ArenaPage({ start, loading, userAccount }) {
   const history = useHistory();
   return (
     <ArenaPageContainer>
@@ -121,15 +121,18 @@ export default function ArenaPage({ enqueue, loading }) {
           <Mobile>
             <EnterArenaText>ENTER THE ARENA</EnterArenaText>
           </Mobile>
-          <EnterArenaDesc>
-            Battle your best NFZs for clout and prizes
-          </EnterArenaDesc>
-          <EnterArenaDesc style={{ fontWeight: 'bold' }}>
-            You have x battle tokens. Burn one to play!
-          </EnterArenaDesc>
-          <LFGButton onClick={enqueue}>
-            {loading ? <Spinner /> : 'LFG!'}
-          </LFGButton>
+          {userAccount !== null ? (
+            <>
+              <EnterArenaDesc>
+                Battle your best NFZs for clout and prizes
+              </EnterArenaDesc>
+              <LFGButton onClick={start}>
+                {loading ? <Spinner /> : 'LFG!'}
+              </LFGButton>
+            </>
+          ) : (
+            <EnterArenaDesc>Connect your wallet to play!</EnterArenaDesc>
+          )}
         </BlackContainer>
       </ArenaPageContent>
     </ArenaPageContainer>
