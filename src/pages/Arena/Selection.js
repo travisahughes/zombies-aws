@@ -301,8 +301,16 @@ export default function SelectionPage({
   };
 
   const isReady = () => {
+    const hasNFZs =
+      Object.values(slots).filter((id) => parseInt(id) <= 5000).length > 0;
+
     return (
-      slots.slot1 && slots.slot2 && slots.slot3 && slots.slot4 && slots.slot5
+      hasNFZs &&
+      slots.slot1 &&
+      slots.slot2 &&
+      slots.slot3 &&
+      slots.slot4 &&
+      slots.slot5
     );
   };
 
@@ -336,7 +344,11 @@ export default function SelectionPage({
           <MainText>CHOOSE YOUR CHAMPIONS</MainText>
           <SubText>
             Recruit NFZs with the best stats to battle it out in the arena!{' '}
-            <GreenHighlight>{'{stats info}'}</GreenHighlight>
+          </SubText>
+          <SubText>
+            <GreenHighlight>
+              You must select at least one NFZ from Your Collection to play
+            </GreenHighlight>
           </SubText>
         </TopContainer>
         <TabContainer>
@@ -356,7 +368,7 @@ export default function SelectionPage({
                 selected={selected(item.token_id)}
                 src={imageUrl(item.token_id)}
                 onClick={() => {
-                  const id = item.token_id;
+                  const id = parseInt(item.token_id);
                   if (!selected(id)) {
                     assignSlot(id);
                   } else {
@@ -373,7 +385,7 @@ export default function SelectionPage({
                 selected={selected(item.zombieId)}
                 src={item.image}
                 onClick={() => {
-                  const id = item.zombieId;
+                  const id = parseInt(item.zombieId);
                   if (!selected(id)) {
                     assignSlot(id);
                   } else {
