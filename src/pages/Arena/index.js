@@ -16,6 +16,7 @@ export default function Arena() {
   const [roundDisplay, setRoundDisplay] = useState('selection');
   const [currentGame, setCurrentGame] = useState(null);
   const [roundInfo, setRoundInfo] = useState(null);
+  const [gruntsData, setGruntsData] = useState(null);
   const [loading, setLoading] = useState(null);
   const [userAccount, setUserAccount] = useState(account);
   const [attacking, setAttacking] = useState(account);
@@ -81,6 +82,12 @@ export default function Arena() {
         setCurrentGame(data);
       };
       getCurGame();
+
+      const getAvailableGame = async () => {
+        const data = await getGrunts();
+        setGruntsData(data);
+      };
+      getAvailableGame();
     }
   }, [userAccount, chainId]);
 
@@ -205,6 +212,13 @@ export default function Arena() {
     return response.data;
   };
 
+  const getGrunts = async () => {
+    const grunts = await axios
+      .get('https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/grunts')
+      .then((res) => res.data);
+    return grunts;
+  };
+
   const continueOrStartNewRound = async () => {
     setLoading(true);
 
@@ -221,6 +235,14 @@ export default function Arena() {
     setLoading(false);
   };
 
+  const getImageUrl = (id) => {
+    if (parseInt(id) < 10000) {
+      return `https://images.nicefunzombies.io/card-nobg/${id}.png`;
+    } else {
+      return gruntsData.filter((grunt) => grunt.zombieId === id)[0].image;
+    }
+  };
+
   return (
     <div>
       <Router history={history}>
@@ -234,6 +256,8 @@ export default function Arena() {
               display={roundDisplay}
               loading={loading}
               attacking={attacking}
+              gruntsData={gruntsData}
+              getImageUrl={getImageUrl}
             />
           </Route>
           <Route path="/arena/search">
@@ -242,10 +266,12 @@ export default function Arena() {
           <Route path="/arena/selection">
             <SelectionPage
               userNfts={userNfts}
+              gruntsData={gruntsData}
               slots={slots}
               setSlots={setSlots}
               initGame={initGame}
               loading={loading}
+              getImageUrl={getImageUrl}
             />
           </Route>
           <Route path="/">
