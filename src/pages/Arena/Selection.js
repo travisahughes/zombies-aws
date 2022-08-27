@@ -246,26 +246,16 @@ const SendMyTeam = styled.div`
   }
 `;
 
-export const imageUrl = (id) => {
-  if (parseInt(id) < 10000) {
-    return `https://images.nicefunzombies.io/card-nobg/${id}.png`;
-  } else {
-    // temp... use id - 9999
-    const tmpId = id - 9999;
-    return `https://images.nicefunzombies.io/card-nobg/${tmpId}.png`;
-  }
-};
-
 export default function SelectionPage({
   userNfts,
+  gruntsData = null,
   slots,
   setSlots,
   initGame,
   loading,
+  getImageUrl,
 }) {
   const [tab, setTab] = useState(1);
-  const [gruntsData, setGruntsData] = useState(null);
-
   const history = useHistory();
 
   const assignSlot = (image) => {
@@ -324,19 +314,6 @@ export default function SelectionPage({
     ].includes(image);
   };
 
-  const loadGrunts = async () => {
-    const grunts = await axios
-      .get('https://bnpoulp3kk.execute-api.us-west-2.amazonaws.com/main/grunts')
-      .then((res) => res.data);
-
-    setGruntsData(grunts);
-    console.log('grunts', grunts);
-  };
-
-  useEffect(() => {
-    loadGrunts();
-  }, []);
-
   return (
     <SelectionPageContainer>
       <ContentContainer>
@@ -366,7 +343,7 @@ export default function SelectionPage({
               <Card
                 key={index}
                 selected={selected(item.token_id)}
-                src={imageUrl(item.token_id)}
+                src={getImageUrl(item.token_id)}
                 onClick={() => {
                   const id = parseInt(item.token_id);
                   if (!selected(id)) {
@@ -402,7 +379,7 @@ export default function SelectionPage({
           <Slot>
             {slots.slot1 && (
               <SlotImage
-                src={imageUrl(slots.slot1)}
+                src={getImageUrl(slots.slot1)}
                 onClick={() => unAssignSlot(slots.slot1)}
               />
             )}
@@ -410,7 +387,7 @@ export default function SelectionPage({
           <Slot>
             {slots.slot2 && (
               <SlotImage
-                src={imageUrl(slots.slot2)}
+                src={getImageUrl(slots.slot2)}
                 onClick={() => unAssignSlot(slots.slot2)}
               />
             )}
@@ -418,7 +395,7 @@ export default function SelectionPage({
           <Slot>
             {slots.slot3 && (
               <SlotImage
-                src={imageUrl(slots.slot3)}
+                src={getImageUrl(slots.slot3)}
                 onClick={() => unAssignSlot(slots.slot3)}
               />
             )}
@@ -426,7 +403,7 @@ export default function SelectionPage({
           <Slot>
             {slots.slot4 && (
               <SlotImage
-                src={imageUrl(slots.slot4)}
+                src={getImageUrl(slots.slot4)}
                 onClick={() => unAssignSlot(slots.slot4)}
               />
             )}
@@ -434,7 +411,7 @@ export default function SelectionPage({
           <Slot>
             {slots.slot5 && (
               <SlotImage
-                src={imageUrl(slots.slot5)}
+                src={getImageUrl(slots.slot5)}
                 onClick={() => unAssignSlot(slots.slot5)}
               />
             )}

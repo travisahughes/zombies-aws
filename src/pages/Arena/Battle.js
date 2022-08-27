@@ -15,7 +15,6 @@ import brain from '../../assets/arena/icons/brain-nom.png';
 import bite from '../../assets/arena/bite.png';
 import { useState, useEffect } from 'react';
 import { keyframes } from '@emotion/react';
-import { imageUrl } from './Selection';
 import axios from 'axios';
 import { Spinner } from '../../Components/Spinner';
 
@@ -270,6 +269,7 @@ const RoundDetailContainer = styled(FlexRow)`
 const WinnerZombieImg = styled.img`
   border-radius: 14px;
   margin: 0 8px;
+  height: 300px;
 `;
 
 const OpponentCardsImg = styled.img`
@@ -334,6 +334,12 @@ const UnavailableZombieOverlay = styled.div`
   margin: 0 8px;
 `;
 
+const LostText = styled.div`
+  padding: 20px;
+  font-size: 20px;
+  text-align: center;
+`;
+
 export default function BattlePage({
   slots,
   nextRound,
@@ -342,6 +348,8 @@ export default function BattlePage({
   display,
   loading,
   attacking,
+  gruntsData,
+  getImageUrl,
 }) {
   const [selectedChampion, setSelectedChampion] = useState(null);
 
@@ -379,7 +387,7 @@ export default function BattlePage({
                     <ZombieImage
                       isSelected={selectedChampion === id}
                       isUnavailable={unavailableZombies.includes(id)}
-                      src={imageUrl(id)}
+                      src={getImageUrl(id)}
                       alt="zombie"
                       key={index}
                       onClick={() => {
@@ -451,7 +459,7 @@ export default function BattlePage({
                   {/* {false && <Splatter />} */}
                   {loser === playerChampion && attacking && <Bite src={bite} />}
                   <BattleZombieImage
-                    src={imageUrl(playerChampion)}
+                    src={getImageUrl(playerChampion)}
                     alt="figher"
                     hit={loser === playerChampion}
                   />
@@ -461,7 +469,7 @@ export default function BattlePage({
                   {loser === roundInfo.roster.opponent.champion &&
                     attacking && <Bite src={bite} />}
                   <BattleZombieImage
-                    src={imageUrl(roundInfo.roster.opponent.champion)}
+                    src={getImageUrl(roundInfo.roster.opponent.champion)}
                     alt="figher"
                     hit={loser === roundInfo.roster.opponent.champion}
                   />
@@ -473,7 +481,11 @@ export default function BattlePage({
                   .concat(unavailableZombies)
                   .filter((item) => item !== playerChampion)
                   .map((id) => (
-                    <SpectatorZombieImg src={imageUrl(id)} alt={id} key={id} />
+                    <SpectatorZombieImg
+                      src={getImageUrl(id)}
+                      alt={id}
+                      key={id}
+                    />
                   ))}
               </SpectatorContainer>
             </RoundsContainer>
@@ -484,24 +496,26 @@ export default function BattlePage({
           <>
             <RoundsContainer>
               <WinnerContainer>
-                <img src={winner} />
+                {roundInfo.scores.player > roundInfo.scores.opponent && (
+                  <img src={winner} />
+                )}
                 <RoundDetailContainer>
                   {roundInfo.scores.player > roundInfo.scores.opponent ? (
                     unavailableZombies
                       .slice(0, 3)
                       .map((id) => (
                         <WinnerZombieImg
-                          src={imageUrl(id)}
+                          src={getImageUrl(id)}
                           key={id}
                           alt="zombies"
                         />
                       ))
                   ) : (
-                    <>
-                      <WinnerZombieImg src={placeholder} alt="zombies" />
-                      <WinnerZombieImg src={placeholder} alt="zombies" />
-                      <WinnerZombieImg src={placeholder} alt="zombies" />
-                    </>
+                    <LostText>
+                      You lost this battle
+                      <br />
+                      Build another roster and take on a new team!
+                    </LostText>
                   )}
                   <div>
                     <a href="/arena" style={{ textDecoration: 'none' }}>
